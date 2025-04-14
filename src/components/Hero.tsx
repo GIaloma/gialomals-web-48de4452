@@ -18,12 +18,12 @@ const Hero = () => {
       <div className="container mx-auto px-4 z-10 pt-20">
         <div className="max-w-3xl flex items-center relative">
           
-          <div className="relative w-full">
+          <div className="relative">
             {/* Transparent squared logo as background */}
             <img 
               src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
               alt="Gialoma Life Solutions Logo" 
-              className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in" 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in" 
               style={{
                 animationDelay: "0.6s"
               }}
@@ -58,4 +58,3 @@ const Hero = () => {
     </section>;
 };
 export default Hero;
-
