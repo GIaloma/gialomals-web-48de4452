@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-
 const CTA = () => {
-  return (
-    <section className="py-16 relative overflow-hidden">
+  return <section className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 gold-gradient opacity-90 z-0"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -19,14 +16,12 @@ const CTA = () => {
             <Button className="bg-gialoma-black hover:bg-gialoma-darkgray text-white text-lg px-8 py-6">
               Schedule a Demo
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-6">
+            <Button variant="outline" className="border-transparent text-black hover:bg-white/10 text-lg px-8 py-6">
               Contact Sales
             </Button>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTA;
