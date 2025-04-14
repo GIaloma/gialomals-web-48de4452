@@ -29,7 +29,7 @@ const Navbar = () => {
           <a href="#solutions" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium">Solutions</a>
           <a href="#services" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium">Services</a>
           <a href="#about" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium">About</a>
-          <a href="#contact" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium">Contact</a>
+          <a href="#contact" className="text-gialoma-white hover:text-gialoma-gold transition-colors font-medium">Contact</a>
         </nav>
 
         <div className="hidden md:block">
