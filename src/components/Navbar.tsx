@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,8 +25,15 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <a href="/" className="text-2xl font-bold text-gialoma-gold">
-            Gialoma<span className="text-gialoma-black"> Life Solutions</span>
+          <a href="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png" 
+              alt="Gialoma Life Solutions Logo" 
+              className="h-10 mr-3"
+            />
+            <span className="text-2xl font-bold text-gialoma-gold">
+              Gialoma<span className="text-gialoma-black"> Life Solutions</span>
+            </span>
           </a>
         </div>
 
