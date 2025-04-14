@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
 const Hero = () => {
   return <section className="relative min-h-screen flex items-center">
       {/* Background image */}
@@ -40,9 +42,21 @@ const Hero = () => {
                 Contact Us
               </Button>
             </div>
+
+            {/* Add transparent squared logo */}
+            <div className="mt-8 flex justify-center animate-fade-in" style={{
+              animationDelay: "0.8s"
+            }}>
+              <img 
+                src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
+                alt="Gialoma Life Solutions Squared Logo" 
+                className="w-24 h-24 object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>;
 };
 export default Hero;
+
