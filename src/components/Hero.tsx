@@ -41,7 +41,7 @@ const Hero = () => {
                 Our Solutions
                 <ArrowRight className="ml-2" size={18} />
               </Button>
-              <Button variant="outline" className="border-white px-8 py-6 text-[b99a45] text-slate-950 bg-gialoma-gold rounded-full">
+              <Button variant="outline" className="border-white px-8 py-6 bg-gialoma-gold rounded-full text-lg text-black">
                 Contact Us
               </Button>
             </div>
