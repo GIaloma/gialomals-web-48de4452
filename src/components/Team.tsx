@@ -18,13 +18,13 @@ const teamMembers: TeamMember[] = [
     name: "Paloma Firgaira",
     position: "Co-Founder & CEO",
     image: "/team-member-image.jpg",
-    bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her MBA in Business Administration and training as an AI Expert strengthen her leadership and strategic thinking. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
+    bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her MBA in Business Administration and expertise as an AI Expert strengthen her leadership and strategic thinking. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
     linkedin: "https://www.linkedin.com/in/paloma-firgaira-840b50a3",
     email: "palomafirgaira@gmail.com"
   },
   {
     id: 2,
-    name: "Giovanni \"Gianro\" Compagno",
+    name: "Gianro Compagno",
     position: "Co-Founder & CTO",
     image: "/team-member-image.jpg",
     bio: "Gianro brings a wealth of experience in technology project management, with a background in multinational companies and multicultural environments. Specialized in broadcast technology and IT systems, he combines technical expertise with strong leadership skills. Holding an MBA and a master's in Investigative Psychology, his detail-oriented approach and positive mindset ensure our solutions are innovative and reliable.",
