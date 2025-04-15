@@ -1,12 +1,15 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import LanguageSelector from './LanguageSelector';
+
 const Hero = () => {
   return <section className="relative min-h-screen flex items-center">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <div className="" style={{
-        backgroundImage: "url()",
+        backgroundImage: "url('')",
         backgroundColor: "#1a1a1a"
       }}>
           <div className="absolute inset-0 hero-gradient"></div>
@@ -14,14 +17,21 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 z-10 pt-20">
+        {/* Language Selector - positioned at top right */}
+        <div className="absolute top-28 right-6 md:right-10 z-20">
+          <LanguageSelector />
+        </div>
+        
         <div className="max-w-3xl flex items-center relative">
+          {/* Logo as background - positioned far right */}
+          <img 
+            src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+            alt="Gialoma Life Solutions Logo" 
+            className="absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
+            style={{ animationDelay: "0.6s" }}
+          />
           
           <div className="relative w-full">
-            {/* Transparent squared logo as background - positioned far right */}
-            <img src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" alt="Gialoma Life Solutions Logo" style={{
-            animationDelay: "0.6s"
-          }} className="absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" />
-            
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in relative z-10" style={{
             animationDelay: "0.2s"
           }}>
