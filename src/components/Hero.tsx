@@ -32,12 +32,12 @@ const Hero = () => {
           {/* Mobile text content with background logo */}
           <div className="relative md:static">
             {/* Logo as background - mobile version (sized to fit text only) */}
-            <div className="md:hidden absolute top-0 left-0 right-0 overflow-hidden pointer-events-none h-44 z-0">
+            <div className="md:hidden absolute top-0 left-0 right-0 overflow-visible pointer-events-none h-auto z-0">
               <div className="flex justify-center">
                 <img 
                   src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
                   alt="Gialoma Life Solutions Logo" 
-                  className="opacity-10 w-48 h-48 object-contain animate-pulse animate-fade-in" 
+                  className="opacity-10 w-52 h-52 object-contain animate-pulse animate-fade-in -mt-4" 
                   style={{ animationDelay: "0.2s" }}
                 />
               </div>
@@ -59,7 +59,7 @@ const Hero = () => {
               </p>
               
               <div 
-                className="flex flex-col sm:flex-row gap-4 animate-fade-in mt-12 md:mt-8" 
+                className="flex flex-col sm:flex-row gap-4 animate-fade-in mt-20 md:mt-8" 
                 style={{ animationDelay: "0.6s" }}
               >
                 <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
