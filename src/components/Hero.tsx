@@ -29,42 +29,47 @@ const Hero = () => {
             style={{ animationDelay: "0.6s" }}
           />
           
-          {/* Logo as background - mobile version (positioned much higher) */}
-          <div className="md:hidden absolute inset-0 flex justify-center items-start pt-8 z-0 overflow-hidden pointer-events-none">
-            <img 
-              src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
-              alt="Gialoma Life Solutions Logo" 
-              className="opacity-10 w-64 h-64 object-contain animate-pulse animate-fade-in" 
-              style={{ animationDelay: "0.2s" }}
-            />
-          </div>
-          
-          <div className="relative w-full z-10">
-            <h1 
-              className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in" 
-              style={{ animationDelay: "0.2s" }}
-            >
-              <span className="text-gialoma-gold">Technology</span> that frees up your time
-            </h1>
+          {/* Mobile text content with background logo */}
+          <div className="relative md:static">
+            {/* Logo as background - mobile version (sized to fit text only) */}
+            <div className="md:hidden absolute top-0 left-0 right-0 overflow-hidden pointer-events-none h-44 z-0">
+              <div className="flex justify-center">
+                <img 
+                  src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+                  alt="Gialoma Life Solutions Logo" 
+                  className="opacity-10 w-48 h-48 object-contain animate-pulse animate-fade-in" 
+                  style={{ animationDelay: "0.2s" }}
+                />
+              </div>
+            </div>
             
-            <p 
-              className="text-xl md:text-2xl mb-8 text-gray-100 animate-fade-in" 
-              style={{ animationDelay: "0.4s" }}
-            >
-              We design and develop innovative technology solutions that streamline your processes and give you back valuable time.
-            </p>
-            
-            <div 
-              className="flex flex-col sm:flex-row gap-4 animate-fade-in" 
-              style={{ animationDelay: "0.6s" }}
-            >
-              <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
-                Our Solutions
-                <ArrowRight className="ml-2" size={18} />
-              </Button>
-              <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
-                Contact Us
-              </Button>
+            <div className="relative w-full z-10">
+              <h1 
+                className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in" 
+                style={{ animationDelay: "0.2s" }}
+              >
+                <span className="text-gialoma-gold">Technology</span> that frees up your time
+              </h1>
+              
+              <p 
+                className="text-xl md:text-2xl mb-8 text-gray-100 animate-fade-in" 
+                style={{ animationDelay: "0.4s" }}
+              >
+                We design and develop innovative technology solutions that streamline your processes and give you back valuable time.
+              </p>
+              
+              <div 
+                className="flex flex-col sm:flex-row gap-4 animate-fade-in mt-12 md:mt-8" 
+                style={{ animationDelay: "0.6s" }}
+              >
+                <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
+                  Our Solutions
+                  <ArrowRight className="ml-2" size={18} />
+                </Button>
+                <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
+                  Contact Us
+                </Button>
+              </div>
             </div>
           </div>
         </div>
