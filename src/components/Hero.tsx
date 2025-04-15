@@ -5,8 +5,8 @@ const Hero = () => {
   return <section className="relative min-h-screen flex items-center">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-cover bg-center" style={{
-        backgroundImage: "url('/placeholder.svg')",
+        <div className="" style={{
+        backgroundImage: "url('')",
         backgroundColor: "#1a1a1a"
       }}>
           <div className="absolute inset-0 hero-gradient"></div>
