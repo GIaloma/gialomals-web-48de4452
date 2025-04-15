@@ -1,7 +1,10 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
+
 const CTA = () => {
-  return <section className="py-16 relative overflow-hidden">
+  return (
+    <section id="get-started" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 gold-gradient opacity-90 z-0"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -22,6 +25,8 @@ const CTA = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default CTA;
