@@ -21,11 +21,11 @@ const Hero = () => {
         
       <div className="container mx-auto px-4">
         <div className="max-w-3xl relative">
-          {/* Logo as background - positioned far right */}
+          {/* Logo as background - positioned far right on desktop, below content on mobile */}
           <img 
             src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
             alt="Gialoma Life Solutions Logo" 
-            className="absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
+            className="hidden md:block absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
             style={{ animationDelay: "0.6s" }}
           />
           
@@ -56,6 +56,15 @@ const Hero = () => {
                 Contact Us
               </Button>
             </div>
+          </div>
+          
+          {/* Mobile logo - appears below content */}
+          <div className="md:hidden flex justify-center mt-16 animate-fade-in" style={{ animationDelay: "0.8s" }}>
+            <img 
+              src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+              alt="Gialoma Life Solutions Logo" 
+              className="opacity-20 w-64 h-64 object-contain animate-pulse" 
+            />
           </div>
         </div>
       </div>
