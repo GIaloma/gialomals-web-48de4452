@@ -41,21 +41,23 @@ const Navbar = () => {
           <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contact</a>
         </nav>
 
-        {/* Language Selector - positioned at top right */}
-        <div className="absolute top-5 right-6 md:right-10 z-20">
-          <LanguageSelector />
-        </div>
-          
-        <div className="hidden md:block">
-          <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
-            Get Started
-          </Button>
-        </div>
+        <div className="flex items-center gap-4">
+          {/* Language Selector */}
+          <div className="hidden md:block">
+            <LanguageSelector />
+          </div>
+            
+          <div className="hidden md:block">
+            <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
+              Get Started
+            </Button>
+          </div>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-gialoma-black" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-gialoma-black" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -90,6 +92,12 @@ const Navbar = () => {
             >
               Contact
             </a>
+            
+            {/* Mobile Language Selector */}
+            <div className="py-2">
+              <LanguageSelector />
+            </div>
+            
             <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
               Get Started
             </Button>
