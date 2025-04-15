@@ -38,6 +38,7 @@ const Navbar = () => {
           <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
           <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
           <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
+          <a href="#team" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Team</a>
           <a href="#testimonials" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Clients</a>
           <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacts</a>
         </nav>
@@ -90,6 +91,13 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               About
+            </a>
+            <a 
+              href="#team" 
+              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Team
             </a>
             <a 
               href="#testimonials" 
