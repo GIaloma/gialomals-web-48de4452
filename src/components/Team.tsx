@@ -24,11 +24,11 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: "Giovanni \"Gianro\" Compagno",
+    name: "Gianro Compagno",
     position: "Co-Founder & CTO",
     image: "/team-member-image.jpg",
-    bio: "Gianro brings a wealth of experience in technology project management, with a background in multinational companies and multicultural environments. Specialized in broadcast technology and IT systems, he combines technical expertise with strong leadership skills. Holding an MBA and a master's in Investigative Psychology, his detail-oriented approach and positive mindset ensure our solutions are innovative and reliable.",
-    linkedin: "https://linkedin.com/in/gianro-compagno",
+    bio: "Gianro brings a wealth of experience in technology project management, with a background in multinational companies and multicultural environments. He combines technical expertise with strong leadership skills. Holding an MBA and a master's in Investigative Psychology and an AI Expert course, his detail-oriented approach and positive mindset ensure our solutions are innovative and reliable.",
+    linkedin: "https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110",
     email: "gianrocompagno@gmail.com"
   }
 ];
