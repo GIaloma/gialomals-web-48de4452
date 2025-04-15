@@ -42,7 +42,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          {/* Language Selector */}
+          {/* Desktop Language Selector */}
           <div className="hidden md:block">
             <LanguageSelector />
           </div>
@@ -95,7 +95,7 @@ const Navbar = () => {
             
             {/* Mobile Language Selector */}
             <div className="py-2">
-              <LanguageSelector />
+              <LanguageSelector isMobile={true} />
             </div>
             
             <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
