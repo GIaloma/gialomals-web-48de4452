@@ -24,7 +24,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section-padding bg-gialoma-beige">
+    <section id="testimonials" className="section-padding bg-gialoma-beige">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">What Our Clients Say</h2>
