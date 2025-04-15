@@ -29,12 +29,12 @@ const Hero = () => {
             style={{ animationDelay: "0.6s" }}
           />
           
-          {/* Logo as background - mobile version (centered behind content) */}
-          <div className="md:hidden absolute inset-0 flex items-center justify-center z-0 overflow-hidden">
+          {/* Logo as background - mobile version (positioned higher behind content) */}
+          <div className="md:hidden absolute inset-0 flex justify-center z-0 overflow-hidden">
             <img 
               src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
               alt="Gialoma Life Solutions Logo" 
-              className="opacity-10 w-80 h-80 object-contain animate-pulse animate-fade-in" 
+              className="opacity-10 w-80 h-80 object-contain animate-pulse animate-fade-in mt-[-80px]" 
               style={{ animationDelay: "0.2s" }}
             />
           </div>
