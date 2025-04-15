@@ -24,7 +24,7 @@ const Hero = () => {
               src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
               alt="Gialoma Life Solutions Logo" 
               style={{ animationDelay: "0.6s" }} 
-              className="absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
+              className="absolute top-1/2 right-[-10%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
             />
             
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in relative z-10" style={{
