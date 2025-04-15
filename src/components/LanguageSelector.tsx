@@ -42,6 +42,9 @@ export default function LanguageSelector() {
     // This might involve using a context or i18n library in a real implementation
   };
 
+  // Get current language data
+  const currentLanguage = languages.find(lang => lang.code === language);
+
   return (
     <div className="language-selector">
       <Select value={language} onValueChange={handleLanguageChange}>
@@ -53,10 +56,8 @@ export default function LanguageSelector() {
           }`}
         >
           <div className="flex items-center gap-2">
-            <span className="text-lg">
-              {languages.find(lang => lang.code === language)?.flag}
-            </span>
-            <SelectValue />
+            <span className="text-lg">{currentLanguage?.flag}</span>
+            <span>{currentLanguage?.code.toUpperCase()}</span>
           </div>
         </SelectTrigger>
         <SelectContent className="bg-white/90 backdrop-blur-sm">
