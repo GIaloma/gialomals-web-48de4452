@@ -62,13 +62,17 @@ const Hero = () => {
                 className="flex flex-col sm:flex-row gap-4 animate-fade-in mt-20 md:mt-8" 
                 style={{ animationDelay: "0.6s" }}
               >
-                <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
-                  Our Solutions
-                  <ArrowRight className="ml-2" size={18} />
-                </Button>
-                <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6">
-                  Contact Us
-                </Button>
+                <a href="#solutions">
+                  <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6 w-full">
+                    Our Solutions
+                    <ArrowRight className="ml-2" size={18} />
+                  </Button>
+                </a>
+                <a href="#contact">
+                  <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6 w-full">
+                    Contact Us
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
