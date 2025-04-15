@@ -4,13 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
-  return <section className="relative min-h-screen flex items-center">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-cover bg-center" style={{
-        backgroundImage: "url('/placeholder.svg')",
-        backgroundColor: "#1a1a1a"
-      }}>
+  return 
           <div className="absolute inset-0 hero-gradient"></div>
         </div>
       </div>
