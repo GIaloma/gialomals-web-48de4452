@@ -28,7 +28,7 @@ const teamMembers: TeamMember[] = [
     position: "Co-Founder & CTO",
     image: "/team-member-image.jpg",
     bio: "Gianro brings a wealth of experience in technology project management from multinational environments. His technical expertise combined with an MBA and a master's in Investigative Psychology creates a unique approach to technology solutions. As an AI and Automation Expert, he applies psychological insights to design more intuitive and human-centered systems. His detail-oriented approach and positive mindset ensure our solutions are not only innovative and reliable but also align with how people naturally think and work.",
-    linkedin: "https://linkedin.com/in/gianro-compagno",
+    linkedin: "https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110",
     email: "gianrocompagno@gmail.com"
   }
 ];
