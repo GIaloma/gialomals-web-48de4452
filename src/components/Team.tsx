@@ -37,7 +37,7 @@ const Team = () => {
   return (
     <section id="team" className="section-padding bg-gray-50">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">Our Leadership Team</span>
           </h2>
@@ -46,20 +46,20 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="aspect-w-3 aspect-h-4 relative">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-sm md:max-w-none">
+              <div className="aspect-w-3 aspect-h-3 md:aspect-h-4 relative">
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gialoma-black">{member.name}</h3>
-                <p className="text-gialoma-lightgold font-medium mb-4">{member.position}</p>
-                <p className="text-gialoma-darkgray mb-6">{member.bio}</p>
+              <div className="p-4 md:p-6">
+                <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
+                <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
+                <p className="text-gialoma-darkgray mb-4 text-sm md:text-base">{member.bio}</p>
                 <div className="flex space-x-4">
                   {member.linkedin && (
                     <a 
@@ -68,7 +68,7 @@ const Team = () => {
                       rel="noopener noreferrer"
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
-                      <Linkedin size={20} />
+                      <Linkedin size={18} />
                     </a>
                   )}
                   {member.email && (
@@ -76,7 +76,7 @@ const Team = () => {
                       href={`mailto:${member.email}`}
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
-                      <Mail size={20} />
+                      <Mail size={18} />
                     </a>
                   )}
                 </div>
