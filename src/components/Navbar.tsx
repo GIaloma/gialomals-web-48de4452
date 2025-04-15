@@ -29,9 +29,15 @@ const Navbar = () => {
           <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
           <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
           <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
-          <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contact</a>
+          <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacts</a>
         </nav>
 
+        <div className="container mx-auto px-4 z-10 pt-20">
+        {/* Language Selector - positioned at top right */}
+        <div className="absolute top-28 right-6 md:right-10 z-20">
+          <LanguageSelector />
+        </div>
+          
         <div className="hidden md:block">
           <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
             Get Started
