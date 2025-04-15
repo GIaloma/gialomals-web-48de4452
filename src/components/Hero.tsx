@@ -2,6 +2,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
 const Hero = () => {
   return <section className="relative min-h-screen flex items-center">
       {/* Background image */}
@@ -18,10 +19,13 @@ const Hero = () => {
         <div className="max-w-3xl flex items-center relative">
           
           <div className="relative w-full">
-            {/* Transparent squared logo as background - adjusted position and size */}
-            <img src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" alt="Gialoma Life Solutions Logo" style={{
-            animationDelay: "0.6s"
-          }} className="absolute top-1/2 right-[-20%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-[105%] h-[105%] z-0 animate-pulse animate-fade-in object-fill" />
+            {/* Transparent squared logo as background - positioned far right */}
+            <img 
+              src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+              alt="Gialoma Life Solutions Logo" 
+              style={{ animationDelay: "0.6s" }} 
+              className="absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
+            />
             
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in relative z-10" style={{
             animationDelay: "0.2s"
@@ -51,4 +55,5 @@ const Hero = () => {
       </div>
     </section>;
 };
+
 export default Hero;
