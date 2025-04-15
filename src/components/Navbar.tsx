@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <img alt="Gialoma Life Solutions Logo" src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" className="h-20 mr-3 object-fill" />
+            <img alt="Gialoma Life Solutions Logo" src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" className="h-24 mr-3 object-fill" />
             
           </a>
         </div>
