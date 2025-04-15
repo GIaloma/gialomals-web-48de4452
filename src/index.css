@@ -36,14 +36,32 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    
+    /* Scroll padding to account for fixed navbar */
+    --navbar-height: 4.5rem; /* Default height for mobile */
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --navbar-height: 6rem; /* Height for desktop */
+    }
+  }
+
+  html {
+    scroll-padding-top: var(--navbar-height);
+    scroll-behavior: smooth;
   }
 
   * {
-    @apply border-border scroll-smooth;
+    @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  section {
+    @apply pt-24 md:pt-28; /* Add padding to top of sections */
   }
 
   .hero-gradient {
