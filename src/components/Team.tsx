@@ -15,21 +15,21 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "Alessandro Giallombardo",
+    name: "Paloma Firgaira",
     position: "Co-Founder & CEO",
-    image: "/team-member-image.jpg", // Using the uploaded image
-    bio: "With over a decade of experience in technology management, Alessandro leads our strategic initiatives, focusing on delivering innovative solutions that save our clients valuable time.",
-    linkedin: "https://linkedin.com/in/alessandro-giallombardo",
-    email: "alessandro@gialomalife.com"
+    image: "/team-member-image.jpg",
+    bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
+    linkedin: "https://www.linkedin.com/in/paloma-firgaira-840b50a3",
+    email: "palomafirgaira@gmail.com"
   },
   {
     id: 2,
-    name: "Marco Rossi",
+    name: "Giovanni \"Gianro\" Compagno",
     position: "Co-Founder & CTO",
-    image: "/team-member-image.jpg", // Using the same image for both
-    bio: "Marco heads our technical development with expertise in software architecture and AI integration. His focus on performance and security ensures our solutions are robust and reliable.",
-    linkedin: "https://linkedin.com/in/marco-rossi",
-    email: "marco@gialomalife.com"
+    image: "/team-member-image.jpg",
+    bio: "Gianro brings a wealth of experience in technology project management, with a background in multinational companies and multicultural environments. Specialized in broadcast technology and IT systems, he combines technical expertise with strong leadership skills. Holding an MBA and a master's in Investigative Psychology, his detail-oriented approach and positive mindset ensure our solutions are innovative and reliable.",
+    linkedin: "https://linkedin.com/in/gianro-compagno",
+    email: "gianrocompagno@gmail.com"
   }
 ];
 
