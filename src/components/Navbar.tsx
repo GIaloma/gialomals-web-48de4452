@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -19,16 +20,16 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <img alt="Gialoma Life Solutions Logo" src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" className="h-20 w-60 mr-3 object-contain" />
+            <img alt="Gialoma Life Solutions Logo" src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" className="h-24 w-auto mr-3 object-contain" />
           </a>
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
-          <a href="#solutions" className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
-          <a href="#services" className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
-          <a href="#about" className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
-          <a href="#contact" className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium">Contact</a>
+          <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
+          <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
+          <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
+          <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contact</a>
         </nav>
 
         <div className="hidden md:block">
@@ -46,16 +47,16 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && <div className="md:hidden bg-white absolute top-full left-0 right-0 shadow-md">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a href="#solutions" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
+            <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
               Solutions
             </a>
-            <a href="#services" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
+            <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
               Services
             </a>
-            <a href="#about" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
+            <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
               About
             </a>
-            <a href="#contact" className="text-gialoma-darkgray hover:text-gialoma-gold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
+            <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>
               Contact
             </a>
             <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
