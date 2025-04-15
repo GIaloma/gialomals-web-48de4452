@@ -18,7 +18,7 @@ const teamMembers: TeamMember[] = [
     name: "Paloma Firgaira",
     position: "Co-Founder & CEO",
     image: "/team-member-image.jpg",
-    bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her MBA in Business Administration and expertise as an AI Expert strengthen her leadership and strategic thinking. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
+    bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her MBA in Business Administration and expertise as an AI and Automation Expert strengthen her leadership and strategic thinking. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
     linkedin: "https://www.linkedin.com/in/paloma-firgaira-840b50a3",
     email: "palomafirgaira@gmail.com"
   },
@@ -27,7 +27,7 @@ const teamMembers: TeamMember[] = [
     name: "Gianro Compagno",
     position: "Co-Founder & CTO",
     image: "/team-member-image.jpg",
-    bio: "Gianro brings a wealth of experience in technology project management, with a background in multinational companies and multicultural environments. Specialized in broadcast technology and IT systems, he combines technical expertise with strong leadership skills. Holding an MBA and a master's in Investigative Psychology, his detail-oriented approach and positive mindset ensure our solutions are innovative and reliable.",
+    bio: "Gianro brings a wealth of experience in technology project management from multinational environments. His technical expertise combined with an MBA and a master's in Investigative Psychology creates a unique approach to technology solutions. As an AI and Automation Expert, he applies psychological insights to design more intuitive and human-centered systems. His detail-oriented approach and positive mindset ensure our solutions are not only innovative and reliable but also align with how people naturally think and work.",
     linkedin: "https://linkedin.com/in/gianro-compagno",
     email: "gianrocompagno@gmail.com"
   }
