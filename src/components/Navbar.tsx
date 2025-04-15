@@ -24,7 +24,7 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2 md:py-3' : 'bg-transparent py-3 md:py-5'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <a href="/" className="flex items-center">
+          <a href="#home" className="flex items-center">
             <img 
               alt="Gialoma Life Solutions Logo" 
               src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
@@ -35,6 +35,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
+          <a href="#home" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Home</a>
           <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
           <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
           <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
@@ -71,6 +72,13 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white absolute top-full left-0 right-0 shadow-md">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <a 
+              href="#home" 
+              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </a>
             <a 
               href="#solutions" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
