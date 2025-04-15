@@ -49,9 +49,11 @@ const Navbar = () => {
           </div>
             
           <div className="hidden md:block">
-            <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
-              Get Started
-            </Button>
+            <a href="#get-started">
+              <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
+                Get Started
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -109,9 +111,14 @@ const Navbar = () => {
               <LanguageSelector isMobile={true} />
             </div>
             
-            <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
-              Get Started
-            </Button>
+            <a 
+              href="#get-started" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
+                Get Started
+              </Button>
+            </a>
           </div>
         </div>
       )}
