@@ -15,12 +15,6 @@ const Hero = () => {
           <div className="absolute inset-0 hero-gradient"></div>
         </div>
       </div>
-
-      <div className="container mx-auto px-4 z-10 pt-20">
-        {/* Language Selector - positioned at top right */}
-        <div className="absolute top-28 right-6 md:right-10 z-20">
-          <LanguageSelector />
-        </div>
         
         <div className="max-w-3xl flex items-center relative">
           {/* Logo as background - positioned far right */}
