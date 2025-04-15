@@ -7,11 +7,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Globe } from 'lucide-react';
 
 interface Language {
   code: string;
   name: string;
   flag: string;
+}
+
+interface LanguageSelectorProps {
+  isMobile?: boolean;
 }
 
 const languages: Language[] = [
@@ -20,7 +25,7 @@ const languages: Language[] = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
-export default function LanguageSelector() {
+export default function LanguageSelector({ isMobile = false }: LanguageSelectorProps) {
   const [language, setLanguage] = useState('en');
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -47,22 +52,39 @@ export default function LanguageSelector() {
 
   return (
     <div className="language-selector">
+      {isMobile ? (
+        // Mobile version
+        <div className="mb-1 text-gialoma-lightgold text-sm font-medium">Select Language:</div>
+      ) : null}
+      
       <Select value={language} onValueChange={handleLanguageChange}>
         <SelectTrigger 
-          className={`w-[110px] border-gray-600 ${
-            isScrolled 
-              ? 'bg-white text-gialoma-lightgold' 
-              : 'bg-white/10 backdrop-blur-sm text-white'
-          }`}
+          className={
+            isMobile
+              ? "w-full bg-white text-gialoma-lightgold border-gialoma-lightgold" 
+              : `w-[110px] border-gray-600 ${
+                  isScrolled 
+                    ? 'bg-white text-gialoma-lightgold' 
+                    : 'bg-white/10 backdrop-blur-sm text-white'
+                }`
+          }
         >
           <div className="flex items-center gap-2">
-            <span className="text-lg">{currentLanguage?.flag}</span>
-            <span>{currentLanguage?.code.toUpperCase()}</span>
+            {isMobile ? (
+              <Globe size={16} className="text-gialoma-lightgold" />
+            ) : (
+              <span className="text-lg">{currentLanguage?.flag}</span>
+            )}
+            <span>{isMobile ? currentLanguage?.name : currentLanguage?.code.toUpperCase()}</span>
           </div>
         </SelectTrigger>
-        <SelectContent className="bg-white/90 backdrop-blur-sm">
+        <SelectContent className={isMobile ? "bg-white" : "bg-white/90 backdrop-blur-sm"}>
           {languages.map((lang) => (
-            <SelectItem key={lang.code} value={lang.code} className="cursor-pointer">
+            <SelectItem 
+              key={lang.code} 
+              value={lang.code} 
+              className="cursor-pointer"
+            >
               <div className="flex items-center gap-2">
                 <span className="text-lg">{lang.flag}</span>
                 <span>{lang.name}</span>
