@@ -1,108 +1,145 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
 
 const services = [
   {
     id: 1,
-    title: "Digital Transformation",
-    description: "Transform your business operations with our comprehensive digital solutions. We analyze your current processes, identify opportunities for improvement, and implement cutting-edge technologies to drive efficiency and growth.",
+    title: "Process Automation",
+    description: "Streamline your operations with intelligent automation solutions that eliminate repetitive tasks, reduce errors, and boost efficiency.",
     features: [
-      "Business Process Analysis",
-      "Technology Stack Assessment",
-      "Custom Digital Strategy",
-      "Implementation & Training",
-      "Continuous Improvement"
+      "Creation of automated workflows",
+      "Invoice and delivery note control",
+      "Automation of bookings, schedules, and appointments"
     ],
-    image: "/placeholder.svg",
-    link: "/services/digital-transformation"
+    icon: <Cog className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/process-automation"
   },
   {
     id: 2,
-    title: "Custom Software Development",
-    description: "Tailor-made software solutions to address your unique business challenges. Our experienced development team creates scalable, secure, and user-friendly applications that align perfectly with your specific requirements.",
+    title: "Web Design & Development",
+    description: "Get a professional online presence with our custom-built websites that are responsive, user-friendly, and designed to convert visitors into customers.",
     features: [
-      "Requirements Analysis",
-      "User-Centered Design",
-      "Agile Development",
-      "Quality Assurance",
-      "Ongoing Support & Maintenance"
+      "Responsive corporate websites",
+      "Landing page websites",
+      "Smart form integration",
+      "Scalable and manageable websites"
     ],
-    image: "/placeholder.svg",
-    link: "/services/custom-software"
+    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/web-development"
   },
   {
     id: 3,
-    title: "AI & Automation",
-    description: "Harness the power of artificial intelligence to automate processes and gain valuable insights. Our AI solutions help you make data-driven decisions, optimize operations, and create exceptional customer experiences.",
+    title: "AI Virtual Assistants & Chatbots",
+    description: "Enhance customer service and operational efficiency with intelligent assistants that handle inquiries, appointments, and support around the clock.",
     features: [
-      "AI Strategy Consultation",
-      "Machine Learning Models",
-      "Process Automation",
-      "Predictive Analytics",
-      "Intelligent Chatbots"
+      "Basic, advanced, and full assistants depending on the package",
+      "Multichannel support",
+      "Integration with WhatsApp, web, and social media"
     ],
-    image: "/placeholder.svg",
-    link: "/services/ai-automation"
+    icon: <Bot className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/ai-assistants"
+  },
+  {
+    id: 4,
+    title: "Personalized Tech Consulting",
+    description: "Get expert guidance tailored to your business needs with our consulting services. We'll help you navigate the digital landscape and implement the right solutions.",
+    features: [
+      "Free initial diagnostic",
+      "Current process analysis",
+      "Digital transformation plan design"
+    ],
+    icon: <Briefcase className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/tech-consulting"
+  },
+  {
+    id: 5,
+    title: "Business Optimization & Reporting",
+    description: "Gain valuable insights into your business performance with our customized reporting solutions, helping you make data-driven decisions with confidence.",
+    features: [
+      "Interactive dashboards",
+      "KPI and metric control",
+      "Automated reporting"
+    ],
+    icon: <FileSpreadsheet className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/business-reporting"
+  },
+  {
+    id: 6,
+    title: "Digital Visibility",
+    description: "Increase your online presence and reach more potential customers with our digital visibility services that help you stand out in a crowded marketplace.",
+    features: [
+      "Basic website SEO",
+      "Google My Business setup",
+      "Web analytics integration"
+    ],
+    icon: <Search className="h-14 w-14 text-gialoma-gold" />,
+    link: "/services/digital-visibility"
   }
 ];
 
 const Services = () => {
   return (
-    <section id="services" className="section-padding bg-gialoma-darkgray">
+    <section id="services" className="section-padding bg-white">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Services</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            We offer comprehensive technology services designed to optimize your operations, boost productivity, and drive business growth through innovative solutions.
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="text-gradient">What we do for you</span>
+          </h2>
+          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
+            We offer a range of specialized services designed to streamline your business operations 
+            and enhance your digital presence.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
-            <div key={service.id} className="bg-gialoma-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                />
-              </div>
+            <div 
+              key={service.id} 
+              className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+            >
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-gialoma-gold">{service.title}</h3>
-                <p className="text-gray-300 mb-4">{service.description}</p>
+                <div className="flex justify-center mb-6">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black">{service.title}</h3>
+                <p className="text-gialoma-darkgray mb-5 text-center">{service.description}</p>
                 
-                <div className="mb-5">
-                  <h4 className="text-sm font-medium text-gray-400 mb-2">Key Features:</h4>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
+                <div className="mb-6">
+                  <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx}>{feature}</li>
+                      <li key={idx} className="flex items-start">
+                        <span className="text-gialoma-gold mr-2">•</span>
+                        <span className="text-gialoma-darkgray">{feature}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
                 
-                <Button 
-                  variant="outline" 
-                  className="text-gialoma-lightgold border-gialoma-lightgold hover:bg-gialoma-lightgold hover:text-gialoma-black transition-colors flex items-center"
-                  onClick={() => window.location.href = service.link}
-                >
-                  Learn More <ArrowRight className="ml-2" size={16} />
-                </Button>
+                <div className="text-center">
+                  <Button 
+                    variant="outline" 
+                    className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center mx-auto"
+                    onClick={() => window.location.href = service.link}
+                  >
+                    Learn More <ArrowRight className="ml-2" size={16} />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
         </div>
         
-        <div className="mt-16 text-center">
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Need a specialized solution not listed above? We offer custom services tailored to your specific business needs.
+        <div className="mt-12 text-center">
+          <p className="text-gialoma-darkgray mb-6 max-w-2xl mx-auto">
+            Need a specialized solution? We offer custom services tailored to your specific business needs.
           </p>
           <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-lightgold text-white hover:text-gialoma-black"
-            onClick={() => window.location.href = "/services"}
+            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
+            onClick={() => window.location.href = "/contact"}
           >
-            View All Services
+            Request a Free Consultation
           </Button>
         </div>
       </div>
