@@ -12,6 +12,7 @@ import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import CookieBanner from '../components/CookieBanner';
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <CTA />
       <Contact />
       <Footer />
+      <CookieBanner />
     </div>
   );
 };
