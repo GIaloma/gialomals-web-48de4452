@@ -43,17 +43,17 @@ const Navbar = () => {
           <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacts</a>
         </nav>
 
-        <div className="flex items-center gap-3">
-          {/* Desktop Language Selector */}
-          <div className="hidden md:block">
+        <div className="flex items-center gap-2">
+          {/* Desktop Language Selector - 20% smaller */}
+          <div className="hidden md:block scale-80 transform origin-right">
             <LanguageSelector />
           </div>
 
           {/* Login Button */}
           <div className="hidden md:block">
             <a href="/login">
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3">
-                <LogIn size={18} className="mr-1" /> Login
+              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-auto">
+                <LogIn size={16} className="mr-1" /> Login
               </Button>
             </a>
           </div>
