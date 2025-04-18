@@ -1,6 +1,6 @@
 
-import React, { useRef, useEffect } from 'react';
-import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const solutions = [
@@ -68,28 +68,58 @@ const solutions = [
 
 const Solutions = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      const handleScroll = () => {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+  const startAutoScroll = () => {
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+    }
+    
+    scrollIntervalRef.current = setInterval(() => {
+      if (scrollRef.current && isAutoScrolling) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
         
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
-          scrollContainer.scrollLeft = 0;
+          scrollRef.current.scrollLeft = 0;
         } else {
-          // Increment scroll position
-          scrollContainer.scrollLeft += 1;
+          // Increment scroll position (increased by 15%)
+          scrollRef.current.scrollLeft += 1.15;
         }
-      };
+      }
+    }, 50);
+  };
+  
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
+  }, [isAutoScrolling]);
+  
+  const handleScrollLeft = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
       
-      // Set a timer to scroll the container
-      const timer = setInterval(handleScroll, 50);
-      return () => clearInterval(timer);
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
     }
-  }, []);
+  };
+  
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
 
   return (
     <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
@@ -103,44 +133,65 @@ const Solutions = () => {
           </p>
         </div>
 
-        <div 
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          {solutions.map((solution, index) => (
-            <div 
-              key={index} 
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-            >
-              <div className="mb-5 flex justify-center">
-                <div className="bg-white/20 p-4 rounded-full">
-                  {solution.icon}
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-white text-center">{solution.title}</h3>
-              <p className="text-white/90 mb-4">{solution.description}</p>
-              
-              <div className="mb-5 flex-grow">
-                <ul className="space-y-2">
-                  {solution.benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <span className="text-white mr-2">•</span>
-                      <span className="text-white/90">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <Button 
-                variant="outline" 
-                className="mt-auto border-white bg-black text-white hover:bg-gialoma-gold hover:text-black flex items-center w-full justify-center"
-                onClick={() => window.location.href = solution.link}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={handleScrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -ml-4"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div 
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
+            style={{ scrollBehavior: 'smooth' }}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
+          >
+            {solutions.map((solution, index) => (
+              <div 
+                key={index} 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
               >
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          ))}
+                <div className="mb-5 flex justify-center">
+                  <div className="bg-white/20 p-4 rounded-full">
+                    {solution.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-white text-center">{solution.title}</h3>
+                <p className="text-white/90 mb-4">{solution.description}</p>
+                
+                <div className="mb-5 flex-grow">
+                  <ul className="space-y-2">
+                    {solution.benefits.map((benefit, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-white mr-2">•</span>
+                        <span className="text-white/90">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <Button 
+                  variant="outline" 
+                  className="mt-auto border-white bg-white text-black hover:bg-black hover:text-white hover:border-black flex items-center w-full justify-center"
+                  onClick={() => window.location.href = solution.link}
+                >
+                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+          
+          <button 
+            onClick={handleScrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -mr-4"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
         
         <div className="mt-12 text-center">
