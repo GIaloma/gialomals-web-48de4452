@@ -44,15 +44,15 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Desktop Language Selector - 20% smaller */}
-          <div className="hidden md:block scale-80 transform origin-right">
-            <LanguageSelector />
+          {/* Desktop Language Selector - compact size to match login button */}
+          <div className="hidden md:block">
+            <LanguageSelector isCompact={true} />
           </div>
 
           {/* Login Button */}
           <div className="hidden md:block">
             <a href="/login">
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-auto">
+              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9">
                 <LogIn size={16} className="mr-1" /> Login
               </Button>
             </a>
