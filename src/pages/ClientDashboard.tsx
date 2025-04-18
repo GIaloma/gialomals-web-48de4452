@@ -38,7 +38,7 @@ const initialMessages = [
   },
   {
     role: 'user',
-    content: 'Can you help me optimize my team's workflow?'
+    content: "Can you help me optimize my team's workflow?"
   },
   {
     role: 'assistant',
