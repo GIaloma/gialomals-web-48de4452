@@ -167,14 +167,14 @@ const Services = () => {
             {services.map((service) => (
               <div 
                 key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
+                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[520px]"
               >
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-center mb-6">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black">{service.title}</h3>
-                  <p className="text-gialoma-darkgray mb-5 text-center">{service.description}</p>
+                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black h-[60px] flex items-center justify-center">{service.title}</h3>
+                  <p className="text-gialoma-darkgray mb-5 text-center h-[100px] overflow-hidden">{service.description}</p>
                   
                   <div className="mb-6 flex-grow">
                     <ul className="space-y-2">
