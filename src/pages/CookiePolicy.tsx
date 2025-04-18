@@ -1,12 +1,17 @@
 
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React, { useEffect } from 'react';
+import PolicyNavbar from '../components/PolicyNavbar';
+import PolicyFooter from '../components/PolicyFooter';
 
 const CookiePolicy = () => {
+  // Scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <div className="min-h-screen flex flex-col" id="cookie-policy-top">
+      <PolicyNavbar />
       <main className="flex-grow pt-36 pb-12 bg-gray-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gialoma-black">Cookie Policy</h1>
@@ -186,7 +191,7 @@ const CookiePolicy = () => {
           </section>
         </div>
       </main>
-      <Footer />
+      <PolicyFooter />
     </div>
   );
 };
