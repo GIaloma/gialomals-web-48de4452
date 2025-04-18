@@ -105,9 +105,21 @@ const Footer = () => {
             © {currentYear} Gialoma Life Solutions. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
-            <Link to="/privacy-policy" className="text-gray-400 hover:text-gialoma-gold mr-4">Privacy Policy</Link>
+            <Link 
+              to="/privacy-policy"
+              className="text-gray-400 hover:text-gialoma-gold mr-4"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Privacy Policy
+            </Link>
             <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Terms of Service</a>
-            <Link to="/cookie-policy" className="text-gray-400 hover:text-gialoma-gold">Cookie Policy</Link>
+            <Link 
+              to="/cookie-policy" 
+              className="text-gray-400 hover:text-gialoma-gold"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Cookie Policy
+            </Link>
           </div>
         </div>
       </div>
