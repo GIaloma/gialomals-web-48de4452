@@ -35,9 +35,9 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
+          <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
           <a href="#solutions" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Solutions</a>
           <a href="#services" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Services</a>
-          <a href="#about" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">About</a>
           <a href="#team" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Team</a>
           <a href="#testimonials" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Clients</a>
           <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacts</a>
@@ -81,6 +81,13 @@ const Navbar = () => {
         <div className="md:hidden bg-white absolute top-full left-0 right-0 shadow-md">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
+              href="#about" 
+              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </a>
+            <a 
               href="#solutions" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
@@ -93,13 +100,6 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Services
-            </a>
-            <a 
-              href="#about" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
             </a>
             <a 
               href="#team" 
