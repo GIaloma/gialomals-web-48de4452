@@ -153,15 +153,15 @@ const Solutions = () => {
             {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col h-[500px]"
               >
                 <div className="mb-5 flex justify-center">
                   <div className="bg-white/20 p-4 rounded-full">
                     {solution.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-white text-center">{solution.title}</h3>
-                <p className="text-white/90 mb-4">{solution.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-white text-center h-[60px] flex items-center justify-center">{solution.title}</h3>
+                <p className="text-white/90 mb-4 h-[120px] overflow-hidden">{solution.description}</p>
                 
                 <div className="mb-5 flex-grow">
                   <ul className="space-y-2">
