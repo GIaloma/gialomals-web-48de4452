@@ -9,6 +9,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogIndex from "./pages/BlogIndex";
 import Login from "./pages/Login";
 import ClientDashboard from "./pages/ClientDashboard";
+import CookiePolicy from "./pages/CookiePolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/login" element={<Login />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
