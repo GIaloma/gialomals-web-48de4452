@@ -1,5 +1,6 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
@@ -36,28 +37,58 @@ const testimonials = [
 
 const Testimonials = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      const handleScroll = () => {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+  const startAutoScroll = () => {
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+    }
+    
+    scrollIntervalRef.current = setInterval(() => {
+      if (scrollRef.current && isAutoScrolling) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
         
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
-          scrollContainer.scrollLeft = 0;
+          scrollRef.current.scrollLeft = 0;
         } else {
-          // Increment scroll position
-          scrollContainer.scrollLeft += 1;
+          // Increment scroll position (increased by 15%)
+          scrollRef.current.scrollLeft += 1.15;
         }
-      };
+      }
+    }, 50);
+  };
+  
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
+  }, [isAutoScrolling]);
+  
+  const handleScrollLeft = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
       
-      // Set a timer to scroll the container
-      const timer = setInterval(handleScroll, 50);
-      return () => clearInterval(timer);
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
     }
-  }, []);
+  };
+  
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
   
   return (
     <section id="testimonials" className="section-padding bg-gialoma-beige overflow-hidden">
@@ -69,28 +100,49 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div 
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          {testimonials.map((testimonial) => (
-            <div 
-              key={testimonial.id} 
-              className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 min-w-[320px] md:min-w-[350px]"
-            >
-              <div className="mb-4">
-                <svg className="h-8 w-8 text-gialoma-gold" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={handleScrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 text-gialoma-gold shadow-sm focus:outline-none -ml-4"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div 
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
+            style={{ scrollBehavior: 'smooth' }}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
+          >
+            {testimonials.map((testimonial) => (
+              <div 
+                key={testimonial.id} 
+                className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 min-w-[320px] md:min-w-[350px]"
+              >
+                <div className="mb-4">
+                  <svg className="h-8 w-8 text-gialoma-gold" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <p className="text-gialoma-darkgray mb-6 italic">{testimonial.quote}</p>
+                <div>
+                  <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500">{testimonial.position}</p>
+                </div>
               </div>
-              <p className="text-gialoma-darkgray mb-6 italic">{testimonial.quote}</p>
-              <div>
-                <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
-                <p className="text-sm text-gray-500">{testimonial.position}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          <button 
+            onClick={handleScrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 text-gialoma-gold shadow-sm focus:outline-none -mr-4"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
 
