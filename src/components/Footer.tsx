@@ -8,9 +8,9 @@ const Footer = () => {
   return (
     <footer className="bg-gialoma-black text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 justify-items-center lg:justify-items-start">
           {/* Company Information */}
-          <div>
+          <div className="text-center lg:text-left max-w-xs">
             <h3 className="text-xl font-bold mb-4 text-gialoma-gold">Gialoma Life Solutions</h3>
             <p className="mb-4 text-gray-300">
               Technology that frees up your time. We create innovative solutions to optimize your business operations.
@@ -18,7 +18,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center lg:text-left">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="text-center lg:text-left">
             <h3 className="text-lg font-semibold mb-4">Our Services</h3>
             <ul className="space-y-2">
               <li>
@@ -68,19 +68,19 @@ const Footer = () => {
           </div>
 
           {/* Contact Information */}
-          <div>
+          <div className="text-center lg:text-left max-w-xs">
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <ul className="space-y-3">
-              <li className="text-gray-300 flex items-start">
-                <Phone className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+              <li className="text-gray-300 flex items-start lg:items-center justify-center lg:justify-start">
+                <Phone className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5 lg:mt-0" />
                 <div>
                   <p className="font-medium text-gray-200">Call Us / WhatsApp</p>
                   <a href="tel:+34605865631" className="hover:text-gialoma-gold block">+34 605 865 631</a>
                   <a href="tel:+393200708093" className="hover:text-gialoma-gold block">+39 320 070 8093</a>
                 </div>
               </li>
-              <li className="text-gray-300 flex items-start">
-                <Mail className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+              <li className="text-gray-300 flex items-start lg:items-center justify-center lg:justify-start">
+                <Mail className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5 lg:mt-0" />
                 <div>
                   <p className="font-medium text-gray-200">Email Us</p>
                   <a href="mailto:gialomals@gmail.com" className="hover:text-gialoma-gold">
@@ -88,8 +88,8 @@ const Footer = () => {
                   </a>
                 </div>
               </li>
-              <li className="text-gray-300 flex items-start">
-                <Bot className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+              <li className="text-gray-300 flex items-start lg:items-center justify-center lg:justify-start">
+                <Bot className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5 lg:mt-0" />
                 <div>
                   <p className="font-medium text-gray-200">Virtual Support</p>
                   <p className="text-sm">Available 24/7</p>
