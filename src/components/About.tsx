@@ -5,13 +5,15 @@ const About = () => {
   return (
     <section id="about" className="section-padding bg-gray-100">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center">
-          <div className="md:w-3/5 mb-8 md:mb-0 md:mr-12">
-            <img 
-              src="/lovable-uploads/d00cb800-f381-49d2-8d84-33ae4a851dae.png" 
-              alt="Gialoma Life Solutions Logo Explanation" 
-              className="w-full rounded-lg shadow-lg transform md:scale-110 transition-transform duration-300"
-            />
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start">
+          <div className="md:w-3/5 mb-8 md:mb-0 md:mr-16 md:-ml-6 md:flex md:justify-center">
+            <div className="md:max-w-md lg:max-w-lg">
+              <img 
+                src="/lovable-uploads/d00cb800-f381-49d2-8d84-33ae4a851dae.png" 
+                alt="Gialoma Life Solutions Logo Explanation" 
+                className="w-full rounded-lg shadow-lg transform md:scale-110 transition-transform duration-300"
+              />
+            </div>
           </div>
           <div className="md:w-2/5">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gialoma-black">
