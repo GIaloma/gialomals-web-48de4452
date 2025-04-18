@@ -1,7 +1,7 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
+import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const services = [
   {
@@ -81,28 +81,58 @@ const services = [
 
 const Services = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      const handleScroll = () => {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+  const startAutoScroll = () => {
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+    }
+    
+    scrollIntervalRef.current = setInterval(() => {
+      if (scrollRef.current && isAutoScrolling) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
         
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
-          scrollContainer.scrollLeft = 0;
+          scrollRef.current.scrollLeft = 0;
         } else {
-          // Increment scroll position
-          scrollContainer.scrollLeft += 1;
+          // Increment scroll position (increased by 15%)
+          scrollRef.current.scrollLeft += 1.15;
         }
-      };
+      }
+    }, 50);
+  };
+  
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
+  }, [isAutoScrolling]);
+  
+  const handleScrollLeft = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
       
-      // Set a timer to scroll the container
-      const timer = setInterval(handleScroll, 50);
-      return () => clearInterval(timer);
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
     }
-  }, []);
+  };
+  
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
 
   return (
     <section id="services" className="section-padding bg-white overflow-hidden">
@@ -117,46 +147,67 @@ const Services = () => {
           </p>
         </div>
 
-        <div 
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
-            >
-              <div className="p-6 flex flex-col h-full">
-                <div className="flex justify-center mb-6">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black">{service.title}</h3>
-                <p className="text-gialoma-darkgray mb-5 text-center">{service.description}</p>
-                
-                <div className="mb-6 flex-grow">
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <span className="text-gialoma-gold mr-2">•</span>
-                        <span className="text-gialoma-darkgray">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="mt-auto">
-                  <Button 
-                    variant="outline" 
-                    className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
-                    onClick={() => window.location.href = service.link}
-                  >
-                    Learn More <ArrowRight className="ml-2" size={16} />
-                  </Button>
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={handleScrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -ml-4"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div 
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
+            style={{ scrollBehavior: 'smooth' }}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
+          >
+            {services.map((service) => (
+              <div 
+                key={service.id} 
+                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
+              >
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex justify-center mb-6">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black">{service.title}</h3>
+                  <p className="text-gialoma-darkgray mb-5 text-center">{service.description}</p>
+                  
+                  <div className="mb-6 flex-grow">
+                    <ul className="space-y-2">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <span className="text-gialoma-gold mr-2">•</span>
+                          <span className="text-gialoma-darkgray">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-auto">
+                    <Button 
+                      variant="outline" 
+                      className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
+                      onClick={() => window.location.href = service.link}
+                    >
+                      Learn More <ArrowRight className="ml-2" size={16} />
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          <button 
+            onClick={handleScrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -mr-4"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
         
         <div className="mt-12 text-center">
