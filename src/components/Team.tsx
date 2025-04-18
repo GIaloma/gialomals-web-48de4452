@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Linkedin, Mail } from 'lucide-react';
+import { Linkedin, Mail, Instagram } from 'lucide-react';
 
 interface TeamMember {
   id: number;
@@ -10,6 +10,7 @@ interface TeamMember {
   bio: string;
   linkedin?: string;
   email?: string;
+  instagram?: string;
 }
 
 const teamMembers: TeamMember[] = [
@@ -20,7 +21,8 @@ const teamMembers: TeamMember[] = [
     image: "/team-member-image.jpg",
     bio: "With over 20 years of experience, Paloma is a flexible and agile executive who excels at implementing strategies tailored to each situation. Her MBA in Business Administration and expertise as an AI and Automation Expert strengthen her leadership and strategic thinking. Her efficiency in task planning and rapid adaptation to change positively contribute to her work. With strong leadership and interpersonal skills, she has a proven track record in financial management, strategic planning, and team development.",
     linkedin: "https://www.linkedin.com/in/paloma-firgaira-840b50a3",
-    email: "palomafirgaira@gmail.com"
+    email: "palomafirgaira@gmail.com",
+    instagram: "https://www.instagram.com/prf.171508/"
   },
   {
     id: 2,
@@ -29,7 +31,8 @@ const teamMembers: TeamMember[] = [
     image: "/team-member-image.jpg",
     bio: "Gianro brings a wealth of experience in technology project management from multinational environments. His technical expertise combined with an MBA and a master's in Investigative Psychology creates a unique approach to technology solutions. As an AI and Automation Expert, he applies psychological insights to design more intuitive and human-centered systems. His detail-oriented approach and positive mindset ensure our solutions are not only innovative and reliable but also align with how people naturally think and work.",
     linkedin: "https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110",
-    email: "gianrocompagno@gmail.com"
+    email: "gianrocompagno@gmail.com",
+    instagram: "https://www.instagram.com/gianro89/"
   }
 ];
 
@@ -69,6 +72,16 @@ const Team = () => {
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
                       <Linkedin size={18} />
+                    </a>
+                  )}
+                  {member.instagram && (
+                    <a 
+                      href={member.instagram} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                    >
+                      <Instagram size={18} />
                     </a>
                   )}
                   {member.email && (
