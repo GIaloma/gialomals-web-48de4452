@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Phone, Mail, Bot } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,20 +15,6 @@ const Footer = () => {
             <p className="mb-4 text-gray-300">
               Technology that frees up your time. We create innovative solutions to optimize your business operations.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-gialoma-gold">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gialoma-gold">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gialoma-gold">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gialoma-gold">
-                <Instagram size={20} />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -36,19 +22,22 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">Home</a>
-              </li>
-              <li>
                 <a href="#about" className="text-gray-300 hover:text-gialoma-gold transition-colors">About</a>
-              </li>
-              <li>
-                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Services</a>
               </li>
               <li>
                 <a href="#solutions" className="text-gray-300 hover:text-gialoma-gold transition-colors">Solutions</a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-300 hover:text-gialoma-gold transition-colors">Contact</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Services</a>
+              </li>
+              <li>
+                <a href="#team" className="text-gray-300 hover:text-gialoma-gold transition-colors">Team</a>
+              </li>
+              <li>
+                <a href="#testimonials" className="text-gray-300 hover:text-gialoma-gold transition-colors">Clients</a>
+              </li>
+              <li>
+                <a href="#contact" className="text-gray-300 hover:text-gialoma-gold transition-colors">Contacts</a>
               </li>
             </ul>
           </div>
@@ -58,19 +47,22 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Our Services</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">Digital Transformation</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Process Automation</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">Custom Software Development</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Web Design & Development</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">AI & Automation</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">AI Virtual Assistants & Chatbots</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">Mobile Solutions</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Personalized Tech Consulting</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-gialoma-gold transition-colors">Cloud Services</a>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Business Optimization & Reporting</a>
+              </li>
+              <li>
+                <a href="#services" className="text-gray-300 hover:text-gialoma-gold transition-colors">Digital Visibility</a>
               </li>
             </ul>
           </div>
@@ -78,20 +70,30 @@ const Footer = () => {
           {/* Contact Information */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-300">
-                123 Technology Park, Suite 500<br />
-                Innovation City, IC 10001
+            <ul className="space-y-3">
+              <li className="text-gray-300 flex items-start">
+                <Phone className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+                <div>
+                  <p className="font-medium text-gray-200">Call Us / WhatsApp</p>
+                  <a href="tel:+34605865631" className="hover:text-gialoma-gold block">+34 605 865 631</a>
+                  <a href="tel:+393200708093" className="hover:text-gialoma-gold block">+39 320 070 8093</a>
+                </div>
               </li>
-              <li className="text-gray-300">
-                <a href="tel:+15551234567" className="hover:text-gialoma-gold">
-                  +1 (555) 123-4567
-                </a>
+              <li className="text-gray-300 flex items-start">
+                <Mail className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+                <div>
+                  <p className="font-medium text-gray-200">Email Us</p>
+                  <a href="mailto:gialomals@gmail.com" className="hover:text-gialoma-gold">
+                    gialomals@gmail.com
+                  </a>
+                </div>
               </li>
-              <li className="text-gray-300">
-                <a href="mailto:info@gialomalife.com" className="hover:text-gialoma-gold">
-                  info@gialomalife.com
-                </a>
+              <li className="text-gray-300 flex items-start">
+                <Bot className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5" />
+                <div>
+                  <p className="font-medium text-gray-200">Virtual Support</p>
+                  <p className="text-sm">Available 24/7</p>
+                </div>
               </li>
             </ul>
           </div>
