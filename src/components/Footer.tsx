@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Phone, Mail, Bot } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -106,7 +107,7 @@ const Footer = () => {
           <div className="mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Terms of Service</a>
-            <a href="#" className="text-gray-400 hover:text-gialoma-gold">Cookie Policy</a>
+            <Link to="/cookie-policy" className="text-gray-400 hover:text-gialoma-gold">Cookie Policy</Link>
           </div>
         </div>
       </div>
