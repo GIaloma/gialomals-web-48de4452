@@ -17,6 +17,7 @@ interface Language {
 
 interface LanguageSelectorProps {
   isMobile?: boolean;
+  isCompact?: boolean;
 }
 
 const languages: Language[] = [
@@ -25,7 +26,7 @@ const languages: Language[] = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
-export default function LanguageSelector({ isMobile = false }: LanguageSelectorProps) {
+export default function LanguageSelector({ isMobile = false, isCompact = false }: LanguageSelectorProps) {
   const [language, setLanguage] = useState('en');
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -62,11 +63,17 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
           className={
             isMobile
               ? "w-full bg-white text-gialoma-lightgold border-gialoma-lightgold" 
-              : `w-[110px] border-gray-600 ${
-                  isScrolled 
-                    ? 'bg-white text-gialoma-lightgold' 
-                    : 'bg-white/10 backdrop-blur-sm text-white'
-                }`
+              : isCompact 
+                ? `h-9 py-1 px-3 w-auto min-w-[80px] border-gray-300 ${
+                    isScrolled 
+                      ? 'bg-white text-gialoma-lightgold' 
+                      : 'bg-white/10 backdrop-blur-sm text-white'
+                  }`
+                : `w-[110px] border-gray-600 ${
+                    isScrolled 
+                      ? 'bg-white text-gialoma-lightgold' 
+                      : 'bg-white/10 backdrop-blur-sm text-white'
+                  }`
           }
         >
           <div className="flex items-center gap-2">
