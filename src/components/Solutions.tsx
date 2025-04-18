@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +12,6 @@ const solutions = [
       "Avoid repetitive tasks through automation",
       "Invoicing and appointment processes without manual intervention"
     ],
-    caseStudy: "A small accounting firm saved 15 hours per week by automating their invoice processing and client appointment scheduling.",
     link: "/solutions/time-saving"
   },
   {
@@ -23,7 +22,6 @@ const solutions = [
       "Instant responses with AI chatbots",
       "Forms and online booking in minutes"
     ],
-    caseStudy: "A real estate agency increased client satisfaction by 40% after implementing our AI chatbots for property inquiries.",
     link: "/solutions/customer-service"
   },
   {
@@ -34,7 +32,6 @@ const solutions = [
       "Real-time visibility of sales, expenses, and metrics",
       "Intuitive dashboards from any device"
     ],
-    caseStudy: "A retail shop owner increased profitability by 22% after gaining clear visibility into inventory performance and sales trends.",
     link: "/solutions/business-control"
   },
   {
@@ -45,7 +42,6 @@ const solutions = [
       "Optimized websites that rank on Google",
       "Active presence on social media and business listings"
     ],
-    caseStudy: "A local service provider doubled their new client inquiries after improving their Google visibility and online profiles.",
     link: "/solutions/digital-visibility"
   },
   {
@@ -56,7 +52,6 @@ const solutions = [
       "All data centralized and accessible",
       "Effortless reports and automated insights"
     ],
-    caseStudy: "A consulting firm eliminated end-of-month reporting stress by implementing automated dashboards that update in real-time.",
     link: "/solutions/stress-reduction"
   },
   {
@@ -67,14 +62,37 @@ const solutions = [
       "If you're analog, we'll guide you step by step",
       "If you're digital, we'll help you scale"
     ],
-    caseStudy: "A traditional family business successfully transitioned to digital operations with personalized guidance that respected their pace and culture.",
     link: "/solutions/tech-guidance"
   }
 ];
 
 const Solutions = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      const handleScroll = () => {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        
+        if (scrollLeft >= maxScroll) {
+          // Reset to beginning when reaching the end
+          scrollContainer.scrollLeft = 0;
+        } else {
+          // Increment scroll position
+          scrollContainer.scrollLeft += 1;
+        }
+      };
+      
+      // Set a timer to scroll the container
+      const timer = setInterval(handleScroll, 50);
+      return () => clearInterval(timer);
+    }
+  }, []);
+
   return (
-    <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold">
+    <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -85,11 +103,15 @@ const Solutions = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar"
+          style={{ scrollBehavior: 'smooth' }}
+        >
           {solutions.map((solution, index) => (
             <div 
               key={index} 
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
             >
               <div className="mb-5 flex justify-center">
                 <div className="bg-white/20 p-4 rounded-full">
@@ -99,7 +121,7 @@ const Solutions = () => {
               <h3 className="text-xl font-semibold mb-3 text-white text-center">{solution.title}</h3>
               <p className="text-white/90 mb-4">{solution.description}</p>
               
-              <div className="mb-5">
+              <div className="mb-5 flex-grow">
                 <ul className="space-y-2">
                   {solution.benefits.map((benefit, idx) => (
                     <li key={idx} className="flex items-start">
@@ -110,14 +132,9 @@ const Solutions = () => {
                 </ul>
               </div>
               
-              <div className="mt-4 p-4 bg-white/5 rounded-md text-sm mb-5 border border-white/10">
-                <p className="text-white font-medium mb-2">Success Story:</p>
-                <p className="text-white/80">{solution.caseStudy}</p>
-              </div>
-              
               <Button 
                 variant="outline" 
-                className="mt-2 border-white text-white hover:bg-white hover:text-gialoma-gold flex items-center w-full justify-center"
+                className="mt-auto border-white bg-black text-white hover:bg-gialoma-gold hover:text-black flex items-center w-full justify-center"
                 onClick={() => window.location.href = solution.link}
               >
                 Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -138,6 +155,16 @@ const Solutions = () => {
           </Button>
         </div>
       </div>
+
+      <style jsx>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* Internet Explorer and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari, Opera */
+        }
+      `}</style>
     </section>
   );
 };
