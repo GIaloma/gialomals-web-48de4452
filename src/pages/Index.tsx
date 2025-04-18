@@ -2,11 +2,11 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import About from '../components/About';
 import Solutions from '../components/Solutions';
 import Services from '../components/Services';
 import Pricing from '../components/Pricing';
 import Blog from '../components/Blog';
-import About from '../components/About';
 import Team from '../components/Team';
 import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
@@ -18,11 +18,11 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      <About />
       <Solutions />
       <Services />
       <Pricing />
       <Blog />
-      <About />
       <Team />
       <Testimonials />
       <CTA />
