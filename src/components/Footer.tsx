@@ -105,7 +105,7 @@ const Footer = () => {
             © {currentYear} Gialoma Life Solutions. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Privacy Policy</a>
+            <Link to="/privacy-policy" className="text-gray-400 hover:text-gialoma-gold mr-4">Privacy Policy</Link>
             <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Terms of Service</a>
             <Link to="/cookie-policy" className="text-gray-400 hover:text-gialoma-gold">Cookie Policy</Link>
           </div>
