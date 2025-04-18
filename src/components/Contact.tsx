@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { Phone, Mail, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -82,21 +82,21 @@ const Contact = () => {
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
-                  <MapPin className="h-6 w-6 text-gialoma-gold" />
+                  <Phone className="h-6 w-6 text-gialoma-gold" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">Our Location</h4>
-                  <p className="text-gialoma-darkgray">123 Technology Park, Suite 500<br />Innovation City, IC 10001</p>
+                  <h4 className="font-semibold text-gialoma-black mb-1">Call Us</h4>
+                  <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
                 </div>
               </div>
               
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
-                  <Phone className="h-6 w-6 text-gialoma-gold" />
+                  <MessageSquare className="h-6 w-6 text-gialoma-gold" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">Call Us</h4>
-                  <p className="text-gialoma-darkgray">+1 (555) 123-4567</p>
+                  <h4 className="font-semibold text-gialoma-black mb-1">WhatsApp</h4>
+                  <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
                 </div>
               </div>
               
@@ -106,15 +106,26 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gialoma-black mb-1">Email Us</h4>
-                  <p className="text-gialoma-darkgray">info@gialomalife.com</p>
+                  <p className="text-gialoma-darkgray">gialomals@gmail.com</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 rounded-lg overflow-hidden h-64 bg-gray-200">
-              {/* Google Maps placeholder */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gialoma-darkgray">
-                Map Integration
+            <div className="mt-8 bg-gray-50 p-6 rounded-lg">
+              <h4 className="font-semibold text-gialoma-black mb-3 text-center">Business Hours</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gialoma-darkgray">Monday - Friday:</span>
+                  <span className="text-gialoma-black">9:00 AM - 6:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gialoma-darkgray">Saturday:</span>
+                  <span className="text-gialoma-black">10:00 AM - 2:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gialoma-darkgray">Sunday:</span>
+                  <span className="text-gialoma-black">Closed</span>
+                </div>
               </div>
             </div>
           </div>
