@@ -34,7 +34,7 @@ const userData = {
 const initialMessages = [
   {
     role: 'assistant',
-    content: 'Hello! I'm your personal AI assistant. How can I help you today?'
+    content: "Hello! I'm your personal AI assistant. How can I help you today?"
   },
   {
     role: 'user',
@@ -42,7 +42,7 @@ const initialMessages = [
   },
   {
     role: 'assistant',
-    content: 'Absolutely! I'd be happy to help with workflow optimization. Let's start by identifying your team's main bottlenecks. Could you tell me a little about your current workflow and where you feel the biggest inefficiencies are?'
+    content: "Absolutely! I'd be happy to help with workflow optimization. Let's start by identifying your team's main bottlenecks. Could you tell me a little about your current workflow and where you feel the biggest inefficiencies are?"
   }
 ];
 
