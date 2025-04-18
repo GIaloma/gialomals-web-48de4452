@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
 
@@ -43,10 +43,19 @@ const Navbar = () => {
           <a href="#contact" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacts</a>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Desktop Language Selector */}
           <div className="hidden md:block">
             <LanguageSelector />
+          </div>
+
+          {/* Login Button */}
+          <div className="hidden md:block">
+            <a href="/login">
+              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3">
+                <LogIn size={18} className="mr-1" /> Login
+              </Button>
+            </a>
           </div>
             
           <div className="hidden md:block">
@@ -118,6 +127,16 @@ const Navbar = () => {
             <div className="py-2">
               <LanguageSelector isMobile={true} />
             </div>
+
+            {/* Mobile Login Button */}
+            <a 
+              href="/login" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white w-full flex items-center justify-center">
+                <LogIn size={18} className="mr-2" /> Login
+              </Button>
+            </a>
             
             <a 
               href="#get-started" 
