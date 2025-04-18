@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
 
@@ -80,8 +80,32 @@ const services = [
 ];
 
 const Services = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      const handleScroll = () => {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        
+        if (scrollLeft >= maxScroll) {
+          // Reset to beginning when reaching the end
+          scrollContainer.scrollLeft = 0;
+        } else {
+          // Increment scroll position
+          scrollContainer.scrollLeft += 1;
+        }
+      };
+      
+      // Set a timer to scroll the container
+      const timer = setInterval(handleScroll, 50);
+      return () => clearInterval(timer);
+    }
+  }, []);
+
   return (
-    <section id="services" className="section-padding bg-white">
+    <section id="services" className="section-padding bg-white overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -93,20 +117,24 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar"
+          style={{ scrollBehavior: 'smooth' }}
+        >
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+              className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
             >
-              <div className="p-6">
+              <div className="p-6 flex flex-col h-full">
                 <div className="flex justify-center mb-6">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black">{service.title}</h3>
                 <p className="text-gialoma-darkgray mb-5 text-center">{service.description}</p>
                 
-                <div className="mb-6">
+                <div className="mb-6 flex-grow">
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
@@ -117,10 +145,10 @@ const Services = () => {
                   </ul>
                 </div>
                 
-                <div className="text-center">
+                <div className="mt-auto">
                   <Button 
                     variant="outline" 
-                    className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center mx-auto"
+                    className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
                     onClick={() => window.location.href = service.link}
                   >
                     Learn More <ArrowRight className="ml-2" size={16} />
@@ -143,6 +171,16 @@ const Services = () => {
           </Button>
         </div>
       </div>
+
+      <style jsx>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* Internet Explorer and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari, Opera */
+        }
+      `}</style>
     </section>
   );
 };
