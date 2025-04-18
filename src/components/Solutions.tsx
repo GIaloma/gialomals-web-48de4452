@@ -176,7 +176,7 @@ const Solutions = () => {
                 
                 <Button 
                   variant="outline" 
-                  className="mt-auto border-white bg-white text-black hover:bg-black hover:text-white hover:border-black flex items-center w-full justify-center"
+                  className="mt-auto bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
                   onClick={() => window.location.href = solution.link}
                 >
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
