@@ -1,63 +1,87 @@
 
 import React from 'react';
-import { Clock, Smartphone, Shield, Zap, BarChart, Users, ArrowRight } from 'lucide-react';
+import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const solutions = [
   {
-    icon: <Clock className="h-10 w-10 text-gialoma-gold" />,
-    title: "Time Management",
-    description: "Reclaim your most valuable resource with our AI-powered time management solutions. Automate repetitive tasks, streamline workflows, and focus on what truly matters to your business.",
-    caseStudy: "A marketing agency reduced administrative work by 65% using our time management solutions.",
-    link: "/solutions/time-management"
+    icon: <Clock className="h-12 w-12 text-gialoma-gold" />,
+    title: "Time Saving",
+    description: "Reclaim your most valuable resource: time. Our solutions automate repetitive tasks and streamline processes so you can focus on what truly matters to your business.",
+    benefits: [
+      "Avoid repetitive tasks through automation",
+      "Invoicing and appointment processes without manual intervention"
+    ],
+    caseStudy: "A small accounting firm saved 15 hours per week by automating their invoice processing and client appointment scheduling.",
+    link: "/solutions/time-saving"
   },
   {
-    icon: <Smartphone className="h-10 w-10 text-gialoma-gold" />,
-    title: "Mobile Solutions",
-    description: "Access your business tools anywhere, anytime with our mobile-first approach. Our solutions are designed for seamless operation across all devices, providing flexibility and convenience.",
-    caseStudy: "A field service company increased technician productivity by 40% after implementing our mobile solutions.",
-    link: "/solutions/mobile-solutions"
+    icon: <Users className="h-12 w-12 text-gialoma-gold" />,
+    title: "Improved Customer Service",
+    description: "Enhance your customer experience with tools that allow you to respond quickly, professionally, and consistently across all channels.",
+    benefits: [
+      "Instant responses with AI chatbots",
+      "Forms and online booking in minutes"
+    ],
+    caseStudy: "A real estate agency increased client satisfaction by 40% after implementing our AI chatbots for property inquiries.",
+    link: "/solutions/customer-service"
   },
   {
-    icon: <Shield className="h-10 w-10 text-gialoma-gold" />,
-    title: "Security",
-    description: "Protect your valuable data with our enterprise-grade security solutions. We implement multi-layered security measures to safeguard your information from threats and unauthorized access.",
-    caseStudy: "A financial services firm strengthened their data protection and achieved regulatory compliance with our security solutions.",
-    link: "/solutions/security"
+    icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
+    title: "Greater Business Control",
+    description: "Stay on top of your business with real-time insights and comprehensive dashboards that give you visibility into all aspects of your operations.",
+    benefits: [
+      "Real-time visibility of sales, expenses, and metrics",
+      "Intuitive dashboards from any device"
+    ],
+    caseStudy: "A retail shop owner increased profitability by 22% after gaining clear visibility into inventory performance and sales trends.",
+    link: "/solutions/business-control"
   },
   {
-    icon: <Zap className="h-10 w-10 text-gialoma-gold" />,
-    title: "Performance",
-    description: "Experience lightning-fast systems designed for optimal performance and reliability. Our solutions are built to handle high-volume operations efficiently, ensuring smooth business processes.",
-    caseStudy: "An e-commerce platform reduced page load times by 70% and increased conversions by 25% with our performance optimization.",
-    link: "/solutions/performance"
+    icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
+    title: "Increased Digital Visibility",
+    description: "Stand out in the digital landscape with optimized online presence that helps potential customers find and trust your business.",
+    benefits: [
+      "Optimized websites that rank on Google",
+      "Active presence on social media and business listings"
+    ],
+    caseStudy: "A local service provider doubled their new client inquiries after improving their Google visibility and online profiles.",
+    link: "/solutions/digital-visibility"
   },
   {
-    icon: <BarChart className="h-10 w-10 text-gialoma-gold" />,
-    title: "Analytics",
-    description: "Gain valuable insights with our advanced analytics and reporting tools. Transform raw data into actionable intelligence to make informed business decisions and identify growth opportunities.",
-    caseStudy: "A retail chain increased sales by 30% after implementing our analytics solution to optimize inventory and marketing strategies.",
-    link: "/solutions/analytics"
+    icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
+    title: "Less Stress, More Order",
+    description: "Reduce business anxiety and create organizational harmony with systems that centralize information and automate reporting.",
+    benefits: [
+      "All data centralized and accessible",
+      "Effortless reports and automated insights"
+    ],
+    caseStudy: "A consulting firm eliminated end-of-month reporting stress by implementing automated dashboards that update in real-time.",
+    link: "/solutions/stress-reduction"
   },
   {
-    icon: <Users className="h-10 w-10 text-gialoma-gold" />,
-    title: "Collaboration",
-    description: "Enhance team productivity with our collaborative platforms and tools. Create a connected work environment that fosters communication, idea sharing, and efficient project management.",
-    caseStudy: "A distributed team of 50+ professionals improved project delivery time by 35% using our collaboration tools.",
-    link: "/solutions/collaboration"
+    icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
+    title: "Tech Guidance Tailored to Your Level",
+    description: "Whether you're starting from scratch or looking to optimize, our approach adapts to your technical comfort level and business maturity.",
+    benefits: [
+      "If you're analog, we'll guide you step by step",
+      "If you're digital, we'll help you scale"
+    ],
+    caseStudy: "A traditional family business successfully transitioned to digital operations with personalized guidance that respected their pace and culture.",
+    link: "/solutions/tech-guidance"
   }
 ];
 
 const Solutions = () => {
   return (
-    <section id="solutions" className="section-padding bg-white">
+    <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">Innovative Solutions</span>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+            How we free up your time and improve your life
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
-            We create technology solutions that streamline operations, enhance productivity, and give you back your most valuable resource: time.
+          <p className="text-lg text-white/90 max-w-3xl mx-auto">
+            Our solutions deliver real impact by solving concrete problems and providing tangible benefits that transform how you work and live.
           </p>
         </div>
 
@@ -65,24 +89,35 @@ const Solutions = () => {
           {solutions.map((solution, index) => (
             <div 
               key={index} 
-              className="bg-white border border-gray-100 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300"
             >
-              <div className="mb-4">
-                <div className="bg-gialoma-gold/10 inline-block p-3 rounded-full">
+              <div className="mb-5 flex justify-center">
+                <div className="bg-white/20 p-4 rounded-full">
                   {solution.icon}
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gialoma-black">{solution.title}</h3>
-              <p className="text-gialoma-darkgray mb-5">{solution.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-white text-center">{solution.title}</h3>
+              <p className="text-white/90 mb-4">{solution.description}</p>
               
-              <div className="mt-4 p-4 bg-gray-50 rounded-md text-sm mb-5">
-                <p className="text-gialoma-black font-medium mb-2">Success Story:</p>
-                <p className="text-gialoma-darkgray">{solution.caseStudy}</p>
+              <div className="mb-5">
+                <ul className="space-y-2">
+                  {solution.benefits.map((benefit, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <span className="text-white mr-2">•</span>
+                      <span className="text-white/90">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="mt-4 p-4 bg-white/5 rounded-md text-sm mb-5 border border-white/10">
+                <p className="text-white font-medium mb-2">Success Story:</p>
+                <p className="text-white/80">{solution.caseStudy}</p>
               </div>
               
               <Button 
                 variant="outline" 
-                className="mt-2 border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white flex items-center"
+                className="mt-2 border-white text-white hover:bg-white hover:text-gialoma-gold flex items-center w-full justify-center"
                 onClick={() => window.location.href = solution.link}
               >
                 Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -91,12 +126,15 @@ const Solutions = () => {
           ))}
         </div>
         
-        <div className="mt-16 text-center">
+        <div className="mt-12 text-center">
+          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+            Ready to experience these benefits in your business? Let's start with a conversation about your needs.
+          </p>
           <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
-            onClick={() => window.location.href = "/solutions"}
+            className="bg-white text-gialoma-gold hover:bg-white/90"
+            onClick={() => window.location.href = "/contact"}
           >
-            Explore All Solutions
+            Schedule a Free Consultation
           </Button>
         </div>
       </div>
