@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Phone, Mail, MessageSquare } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -85,17 +85,7 @@ const Contact = () => {
                   <Phone className="h-6 w-6 text-gialoma-gold" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">Call Us</h4>
-                  <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mr-4">
-                  <MessageSquare className="h-6 w-6 text-gialoma-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">WhatsApp</h4>
+                  <h4 className="font-semibold text-gialoma-black mb-1">Call Us / WhatsApp</h4>
                   <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
                 </div>
               </div>
