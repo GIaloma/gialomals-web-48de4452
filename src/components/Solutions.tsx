@@ -70,6 +70,7 @@ const Solutions = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const startAutoScroll = () => {
     if (scrollIntervalRef.current) {
@@ -104,7 +105,17 @@ const Solutions = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const newIndex = Math.max(0, activeIndex - 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -114,7 +125,18 @@ const Solutions = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const maxIndex = solutions.length - 1;
+      const newIndex = Math.min(maxIndex, activeIndex + 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -153,15 +175,17 @@ const Solutions = () => {
             {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col h-[500px]"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
+                style={{ height: 'auto', minHeight: '500px' }}
               >
                 <div className="mb-5 flex justify-center">
                   <div className="bg-white/20 p-4 rounded-full">
                     {solution.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-white text-center h-[60px] flex items-center justify-center">{solution.title}</h3>
-                <p className="text-white/90 mb-4 h-[120px] overflow-hidden">{solution.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center"
+                    style={{ minHeight: '60px', height: 'auto' }}>{solution.title}</h3>
+                <p className="text-white/90 mb-4" style={{ minHeight: '120px', height: 'auto' }}>{solution.description}</p>
                 
                 <div className="mb-5 flex-grow">
                   <ul className="space-y-2">
@@ -214,6 +238,21 @@ const Solutions = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Responsive styles for cards */
+        @media (max-width: 768px) {
+          .solution-card {
+            min-height: 550px;
+          }
+          
+          .solution-card h3 {
+            font-size: 1.25rem;
+          }
+          
+          .solution-card p {
+            font-size: 0.95rem;
+          }
         }
       `}</style>
     </section>
