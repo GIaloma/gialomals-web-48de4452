@@ -1,7 +1,8 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
+import { Carousel } from '@/components/ui/Carousel';
 
 const services = [
   {
@@ -80,81 +81,44 @@ const services = [
 ];
 
 const Services = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  
-  const startAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-    }
-    
-    scrollIntervalRef.current = setInterval(() => {
-      if (scrollRef.current && isAutoScrolling) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+  const renderServiceCard = (service: typeof services[0], index: number) => (
+    <div 
+      className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
+    >
+      <div className="p-6 flex flex-col h-full">
+        <div className="flex justify-center mb-6">
+          {service.icon}
+        </div>
+        <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black h-auto min-h-[60px] flex items-center justify-center">
+          {service.title}
+        </h3>
+        <p className="text-gialoma-darkgray mb-5 text-center h-auto min-h-[100px]">
+          {service.description}
+        </p>
         
-        if (scrollLeft >= maxScroll) {
-          // Reset to beginning when reaching the end
-          scrollRef.current.scrollLeft = 0;
-        } else {
-          // Increment scroll position (increased by 15%)
-          scrollRef.current.scrollLeft += 1.15;
-        }
-      }
-    }, 50);
-  };
-  
-  useEffect(() => {
-    startAutoScroll();
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isAutoScrolling]);
-  
-  const handleScrollLeft = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      
-      // Find the current index based on scroll position
-      const cardWidth = 330 + 24; // card width + gap
-      const newIndex = Math.max(0, activeIndex - 1);
-      setActiveIndex(newIndex);
-      
-      // Scroll to the center of the new active card
-      scrollRef.current.scrollTo({
-        left: newIndex * cardWidth,
-        behavior: 'smooth'
-      });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
-  const handleScrollRight = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      
-      // Find the current index based on scroll position
-      const cardWidth = 330 + 24; // card width + gap
-      const maxIndex = services.length - 1;
-      const newIndex = Math.min(maxIndex, activeIndex + 1);
-      setActiveIndex(newIndex);
-      
-      // Scroll to the center of the new active card
-      scrollRef.current.scrollTo({
-        left: newIndex * cardWidth,
-        behavior: 'smooth'
-      });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
+        <div className="mb-6 flex-grow">
+          <ul className="space-y-2">
+            {service.features.map((feature, idx) => (
+              <li key={idx} className="flex items-start">
+                <span className="text-gialoma-gold mr-2">•</span>
+                <span className="text-gialoma-darkgray">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div className="mt-auto">
+          <Button 
+            variant="outline" 
+            className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
+            onClick={() => window.location.href = service.link}
+          >
+            Learn More <ArrowRight className="ml-2" size={16} />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="services" className="section-padding bg-white overflow-hidden">
@@ -169,71 +133,14 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -ml-4"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
-            style={{ scrollBehavior: 'smooth' }}
-            onMouseEnter={() => setIsAutoScrolling(false)}
-            onMouseLeave={() => setIsAutoScrolling(true)}
-          >
-            {services.map((service) => (
-              <div 
-                key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: 'auto', minHeight: '520px' }}
-              >
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex justify-center mb-6">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center"
-                      style={{ minHeight: '60px', height: 'auto' }}>{service.title}</h3>
-                  <p className="text-gialoma-darkgray mb-5 text-center" 
-                     style={{ minHeight: '100px', height: 'auto' }}>{service.description}</p>
-                  
-                  <div className="mb-6 flex-grow">
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="mt-auto">
-                    <Button 
-                      variant="outline" 
-                      className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
-                      onClick={() => window.location.href = service.link}
-                    >
-                      Learn More <ArrowRight className="ml-2" size={16} />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <button 
-            onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -mr-4"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
+        <Carousel 
+          items={services}
+          renderItem={renderServiceCard}
+          cardMinWidth="330px"
+          cardHeight="auto"
+          showPagination={true}
+          itemClassName="min-h-[520px]"
+        />
         
         <div className="mt-12 text-center">
           <p className="text-gialoma-darkgray mb-6 max-w-2xl mx-auto">
@@ -247,31 +154,6 @@ const Services = () => {
           </Button>
         </div>
       </div>
-
-      <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* Internet Explorer and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari, Opera */
-        }
-        
-        /* Responsive styles for cards */
-        @media (max-width: 768px) {
-          .service-card {
-            min-height: 550px;
-          }
-          
-          .service-card h3 {
-            font-size: 1.25rem;
-          }
-          
-          .service-card p {
-            font-size: 0.95rem;
-          }
-        }
-      `}</style>
     </section>
   );
 };
