@@ -83,6 +83,7 @@ const Services = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const startAutoScroll = () => {
     if (scrollIntervalRef.current) {
@@ -117,7 +118,17 @@ const Services = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const newIndex = Math.max(0, activeIndex - 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -127,7 +138,18 @@ const Services = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const maxIndex = services.length - 1;
+      const newIndex = Math.min(maxIndex, activeIndex + 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -167,14 +189,17 @@ const Services = () => {
             {services.map((service) => (
               <div 
                 key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[520px]"
+                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col"
+                style={{ height: 'auto', minHeight: '520px' }}
               >
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-center mb-6">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black h-[60px] flex items-center justify-center">{service.title}</h3>
-                  <p className="text-gialoma-darkgray mb-5 text-center h-[100px] overflow-hidden">{service.description}</p>
+                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center"
+                      style={{ minHeight: '60px', height: 'auto' }}>{service.title}</h3>
+                  <p className="text-gialoma-darkgray mb-5 text-center" 
+                     style={{ minHeight: '100px', height: 'auto' }}>{service.description}</p>
                   
                   <div className="mb-6 flex-grow">
                     <ul className="space-y-2">
@@ -230,6 +255,21 @@ const Services = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Responsive styles for cards */
+        @media (max-width: 768px) {
+          .service-card {
+            min-height: 550px;
+          }
+          
+          .service-card h3 {
+            font-size: 1.25rem;
+          }
+          
+          .service-card p {
+            font-size: 0.95rem;
+          }
         }
       `}</style>
     </section>
