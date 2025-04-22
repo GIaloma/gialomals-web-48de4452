@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
+import FoundersLogin from './FoundersLogin';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,13 +50,9 @@ const Navbar = () => {
             <LanguageSelector isCompact={true} />
           </div>
 
-          {/* Login Button */}
+          {/* Founders Login Button */}
           <div className="hidden md:block">
-            <a href="/login">
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9">
-                <LogIn size={16} className="mr-1" /> Login
-              </Button>
-            </a>
+            <FoundersLogin />
           </div>
             
           <div className="hidden md:block">
@@ -129,14 +126,9 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Login Button */}
-            <a 
-              href="/login" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white w-full flex items-center justify-center">
-                <LogIn size={18} className="mr-2" /> Login
-              </Button>
-            </a>
+            <div className="py-2">
+              <FoundersLogin />
+            </div>
             
             <a 
               href="#get-started" 
