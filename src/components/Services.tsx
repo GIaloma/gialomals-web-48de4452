@@ -186,7 +186,8 @@ const Services = () => {
                     {service.description}
                   </p>
                   
-                  <div className="mb-6 flex-grow">
+                  {/* Features section with flex-grow to push button to bottom */}
+                  <div className="flex-grow mb-4">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
@@ -199,6 +200,7 @@ const Services = () => {
                     </ul>
                   </div>
                   
+                  {/* Button container with fixed position at bottom */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
