@@ -34,7 +34,7 @@ const services = [
     title: "AI Virtual Assistants & Chatbots",
     description: "Enhance customer service and operational efficiency with intelligent assistants that handle inquiries, appointments, and support around the clock.",
     features: [
-      "Basic, advanced, and full assistants depending on the package",
+      "Basic, advanced, or full assistants",
       "Multichannel support",
       "Integration with WhatsApp, web, and social media"
     ],
