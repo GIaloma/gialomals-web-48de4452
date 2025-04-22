@@ -173,15 +173,27 @@ const Services = () => {
                   <div className="flex justify-center mb-6">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black h-[60px] flex items-center justify-center">{service.title}</h3>
-                  <p className="text-gialoma-darkgray mb-5 text-center h-[100px] overflow-hidden">{service.description}</p>
+                  
+                  {/* Title - Allow text to shrink if needed */}
+                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
+                      style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
+                    {service.title}
+                  </h3>
+                  
+                  {/* Description - Allow text to adjust with smaller font on overflow */}
+                  <p className="text-gialoma-darkgray mb-5 text-center text-sm md:text-base overflow-visible" 
+                     style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
+                    {service.description}
+                  </p>
                   
                   <div className="mb-6 flex-grow">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray">{feature}</span>
+                          <span className="text-gialoma-darkgray text-sm md:text-base" style={{ wordBreak: 'break-word' }}>
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -230,6 +242,19 @@ const Services = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Responsive font-size adjustments */
+        @media (max-width: 640px) {
+          .service-card-title {
+            font-size: 1.1rem;
+          }
+          .service-card-description {
+            font-size: 0.9rem;
+          }
+          .service-card-feature {
+            font-size: 0.9rem;
+          }
         }
       `}</style>
     </section>
