@@ -160,15 +160,25 @@ const Solutions = () => {
                     {solution.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-white text-center h-[60px] flex items-center justify-center">{solution.title}</h3>
-                <p className="text-white/90 mb-4 h-[120px] overflow-hidden">{solution.description}</p>
+                
+                {/* Title - Allow text to shrink if needed */}
+                <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center" 
+                    style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
+                  {solution.title}
+                </h3>
+                
+                {/* Description - Allow text to adjust with smaller font on overflow */}
+                <p className="text-white/90 mb-4 text-sm md:text-base overflow-visible" 
+                   style={{ minHeight: '120px', height: 'auto', wordBreak: 'break-word' }}>
+                  {solution.description}
+                </p>
                 
                 <div className="mb-5 flex-grow">
                   <ul className="space-y-2">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-white mr-2">•</span>
-                        <span className="text-white/90">{benefit}</span>
+                        <span className="text-white/90 text-sm md:text-base" style={{ wordBreak: 'break-word' }}>{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -214,6 +224,19 @@ const Solutions = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Responsive font-size adjustments */
+        @media (max-width: 640px) {
+          .solution-card-title {
+            font-size: 1.1rem;
+          }
+          .solution-card-description {
+            font-size: 0.9rem;
+          }
+          .solution-card-benefit {
+            font-size: 0.9rem;
+          }
         }
       `}</style>
     </section>
