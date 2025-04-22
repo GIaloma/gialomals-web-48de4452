@@ -169,11 +169,12 @@ const Solutions = () => {
                 
                 {/* Description - Allow text to adjust with smaller font on overflow */}
                 <p className="text-white/90 mb-4 text-sm md:text-base overflow-visible" 
-                   style={{ minHeight: '120px', height: 'auto', wordBreak: 'break-word' }}>
+                   style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
                   {solution.description}
                 </p>
                 
-                <div className="mb-5 flex-grow">
+                {/* Benefits section with flex-grow to push button to bottom */}
+                <div className="flex-grow mb-4">
                   <ul className="space-y-2">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
@@ -184,13 +185,16 @@ const Solutions = () => {
                   </ul>
                 </div>
                 
-                <Button 
-                  variant="outline" 
-                  className="mt-auto bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
-                  onClick={() => window.location.href = solution.link}
-                >
-                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                {/* Button container with fixed position at bottom */}
+                <div className="mt-auto">
+                  <Button 
+                    variant="outline" 
+                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
+                    onClick={() => window.location.href = solution.link}
+                  >
+                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
