@@ -7,7 +7,7 @@ const solutions = [
   {
     icon: <Clock className="h-12 w-12 text-gialoma-gold" />,
     title: "Time Saving",
-    description: "Reclaim your most valuable resource: time. Our solutions automate repetitive tasks and streamline processes so you can focus on what truly matters to your business.",
+    description: "Reclaim your most valuable resource: time. Our solutions streamline processes so you can focus on what truly matters.",
     benefits: [
       "Avoid repetitive tasks through automation",
       "Invoicing and appointment processes without manual intervention"
@@ -153,40 +153,42 @@ const Solutions = () => {
             {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col h-[500px]"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
+                style={{ height: "500px" }}
               >
-                <div className="mb-5 flex justify-center">
-                  <div className="bg-white/20 p-4 rounded-full">
-                    {solution.icon}
+                {/* Top section with fixed height */}
+                <div>
+                  <div className="mb-5 flex justify-center">
+                    <div className="bg-white/20 p-4 rounded-full">
+                      {solution.icon}
+                    </div>
                   </div>
+                  
+                  <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center min-h-[60px]">
+                    {solution.title}
+                  </h3>
+                  
+                  <p className="text-white/90 mb-4 text-sm md:text-base">
+                    {solution.description}
+                  </p>
                 </div>
                 
-                {/* Title - Allow text to shrink if needed */}
-                <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center" 
-                    style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
-                  {solution.title}
-                </h3>
-                
-                {/* Description - Allow text to adjust with smaller font on overflow */}
-                <p className="text-white/90 mb-4 text-sm md:text-base overflow-visible" 
-                   style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
-                  {solution.description}
-                </p>
-                
-                {/* Benefits section with flex-grow to push button to bottom */}
-                <div className="flex-grow mb-4">
+                {/* Middle section with flex-grow */}
+                <div className="flex-grow">
                   <ul className="space-y-2">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-white mr-2">•</span>
-                        <span className="text-white/90 text-sm md:text-base" style={{ wordBreak: 'break-word' }}>{benefit}</span>
+                        <span className="text-white mr-2 flex-shrink-0">•</span>
+                        <span className="text-white/90 text-sm md:text-base">
+                          {benefit}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                {/* Button container with fixed position at bottom */}
-                <div className="mt-auto">
+                {/* Bottom section with fixed position */}
+                <div className="mt-auto pt-4">
                   <Button 
                     variant="outline" 
                     className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
@@ -228,19 +230,6 @@ const Solutions = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
-        }
-        
-        /* Responsive font-size adjustments */
-        @media (max-width: 640px) {
-          .solution-card-title {
-            font-size: 1.1rem;
-          }
-          .solution-card-description {
-            font-size: 0.9rem;
-          }
-          .solution-card-benefit {
-            font-size: 0.9rem;
-          }
         }
       `}</style>
     </section>
