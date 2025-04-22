@@ -47,6 +47,7 @@ const Blog = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const startAutoScroll = () => {
     if (scrollIntervalRef.current) {
@@ -81,7 +82,17 @@ const Blog = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const newIndex = Math.max(0, activeIndex - 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -91,7 +102,18 @@ const Blog = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      
+      // Find the current index based on scroll position
+      const cardWidth = 330 + 24; // card width + gap
+      const maxIndex = featuredPosts.length - 1;
+      const newIndex = Math.min(maxIndex, activeIndex + 1);
+      setActiveIndex(newIndex);
+      
+      // Scroll to the center of the new active card
+      scrollRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -128,7 +150,11 @@ const Blog = () => {
             onMouseLeave={() => setIsAutoScrolling(true)}
           >
             {featuredPosts.map((post) => (
-              <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 min-w-[330px] flex flex-col">
+              <div 
+                key={post.id} 
+                className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 min-w-[330px] flex flex-col"
+                style={{ height: 'auto', minHeight: '480px' }}
+              >
                 <img 
                   src={post.coverImage} 
                   alt={post.title} 
@@ -140,10 +166,12 @@ const Blog = () => {
                       {post.category}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors h-16">
+                  <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors"
+                      style={{ minHeight: '3rem', height: 'auto' }}>
                     <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
-                  <p className="text-gialoma-darkgray mb-4 line-clamp-3 flex-grow">
+                  <p className="text-gialoma-darkgray mb-4 flex-grow"
+                     style={{ overflow: 'visible', height: 'auto', minHeight: '4.5rem' }}>
                     {post.excerpt}
                   </p>
                   
@@ -154,7 +182,7 @@ const Blog = () => {
                     <span>{post.readTime}</span>
                   </div>
                   
-                  <Link to={`/blog/${post.slug}`}>
+                  <Link to={`/blog/${post.slug}`} className="mt-auto">
                     <Button 
                       variant="ghost" 
                       className="p-0 text-gialoma-gold hover:text-gialoma-darkgold hover:bg-transparent flex items-center"
@@ -193,6 +221,22 @@ const Blog = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Responsive styles for cards */
+        @media (max-width: 768px) {
+          .blog-card {
+            min-height: 480px;
+          }
+          
+          .blog-card h3 {
+            font-size: 1.1rem;
+            min-height: 2.8rem;
+          }
+          
+          .blog-card p {
+            font-size: 0.9rem;
+          }
         }
       `}</style>
     </section>
