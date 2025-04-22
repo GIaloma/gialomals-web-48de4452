@@ -10,7 +10,7 @@ const solutions = [
     description: "Reclaim your most valuable resource: time. Our solutions streamline processes so you can focus on what truly matters.",
     benefits: [
       "Avoid repetitive tasks through automation",
-      "Invoicing and appointment processes without manual intervention"
+      "AI implementation for accurate results"
     ],
     link: "/solutions/time-saving"
   },
@@ -30,7 +30,7 @@ const solutions = [
     description: "Stay on top of your business with real-time insights and comprehensive dashboards that give you visibility into all aspects of your operations.",
     benefits: [
       "Real-time visibility of sales, expenses, and metrics",
-      "Intuitive dashboards from any device"
+      "Intuitive dashboards"
     ],
     link: "/solutions/business-control"
   },
