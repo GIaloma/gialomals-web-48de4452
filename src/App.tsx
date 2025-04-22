@@ -9,6 +9,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogIndex from "./pages/BlogIndex";
 import Login from "./pages/Login";
 import ClientDashboard from "./pages/ClientDashboard";
+import FounderDashboard from "./pages/FounderDashboard";
 import CookiePolicy from "./pages/CookiePolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/login" element={<Login />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />
+          <Route path="/founder-dashboard" element={<FounderDashboard />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
