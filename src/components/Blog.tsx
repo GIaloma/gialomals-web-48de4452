@@ -123,7 +123,7 @@ const Blog = () => {
   };
 
   return (
-    <section id="blog" className="section-padding bg-white overflow-hidden">
+    <section id="blog" className="section-padding bg-white overflow-hidden mt-12">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -165,7 +165,7 @@ const Blog = () => {
                     </span>
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors h-16">
-                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                    <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">{post.title}</a>
                   </h3>
                   <p className="text-gialoma-darkgray mb-4 line-clamp-3 flex-grow">
                     {post.excerpt}
@@ -178,14 +178,14 @@ const Blog = () => {
                     <span>{post.readTime}</span>
                   </div>
                   
-                  <Link to={`/blog/${post.slug}`}>
+                  <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">
                     <Button 
                       variant="ghost" 
                       className="p-0 text-gialoma-gold hover:text-gialoma-darkgold hover:bg-transparent flex items-center"
                     >
                       Read More <ArrowRight size={16} className="ml-2" />
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}
@@ -201,12 +201,13 @@ const Blog = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
-            onClick={() => window.location.href = "/blog"}
-          >
-            View All Articles
-          </Button>
+          <a href="/blog" target="_blank" rel="noopener noreferrer">
+            <Button 
+              className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
+            >
+              View All Articles
+            </Button>
+          </a>
         </div>
       </div>
 
