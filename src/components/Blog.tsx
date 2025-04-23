@@ -40,6 +40,30 @@ const featuredPosts = [
     tags: ["Team Management", "Efficiency", "Workplace"],
     readTime: "6 min read",
     slug: "optimize-team-productivity"
+  },
+  {
+    id: 4,
+    title: "Cybersecurity Essentials for Modern Businesses",
+    excerpt: "Protect your business with these fundamental cybersecurity practices. Even small businesses can implement these cost-effective measures.",
+    coverImage: "/placeholder.svg",
+    date: "March 21, 2025",
+    author: "Gianro Compagno",
+    category: "Security",
+    tags: ["Cybersecurity", "Data Protection", "Risk Management"],
+    readTime: "7 min read",
+    slug: "cybersecurity-essentials"
+  },
+  {
+    id: 5,
+    title: "How to Build a Data-Driven Decision Culture",
+    excerpt: "Transform your organization by embracing data-driven decision making. Learn the frameworks that make information accessible to everyone.",
+    coverImage: "/placeholder.svg",
+    date: "March 14, 2025",
+    author: "Paloma Firgaira",
+    category: "Business Intelligence",
+    tags: ["Data Analytics", "Business Strategy", "Decision Making"],
+    readTime: "9 min read",
+    slug: "data-driven-decision-culture"
   }
 ];
 
