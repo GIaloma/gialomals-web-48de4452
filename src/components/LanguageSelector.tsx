@@ -18,6 +18,7 @@ interface Language {
 interface LanguageSelectorProps {
   isMobile?: boolean;
   isCompact?: boolean;
+  customColor?: string;
 }
 
 const languages: Language[] = [
@@ -26,7 +27,7 @@ const languages: Language[] = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
-export default function LanguageSelector({ isMobile = false, isCompact = false }: LanguageSelectorProps) {
+export default function LanguageSelector({ isMobile = false, isCompact = false, customColor }: LanguageSelectorProps) {
   const [language, setLanguage] = useState('en');
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -51,6 +52,14 @@ export default function LanguageSelector({ isMobile = false, isCompact = false }
   // Get current language data
   const currentLanguage = languages.find(lang => lang.code === language);
 
+  // Determine text color based on customColor, scrolled state, or defaults
+  const getTextColor = () => {
+    if (customColor) {
+      return customColor === 'white' ? 'text-white' : `text-${customColor}`;
+    }
+    return isScrolled ? 'text-gialoma-lightgold' : 'text-white';
+  };
+
   return (
     <div className="language-selector">
       {isMobile ? (
@@ -66,13 +75,13 @@ export default function LanguageSelector({ isMobile = false, isCompact = false }
               : isCompact 
                 ? `h-9 py-1 px-3 w-auto min-w-[80px] border-gray-300 ${
                     isScrolled 
-                      ? 'bg-white text-gialoma-lightgold' 
-                      : 'bg-white/10 backdrop-blur-sm text-white'
+                      ? 'bg-white text-gialoma-gold' 
+                      : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
                   }`
                 : `w-[110px] border-gray-600 ${
                     isScrolled 
-                      ? 'bg-white text-gialoma-lightgold' 
-                      : 'bg-white/10 backdrop-blur-sm text-white'
+                      ? 'bg-white text-gialoma-gold' 
+                      : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
                   }`
           }
         >
