@@ -46,22 +46,25 @@ const BookNavbar = () => {
         <div className="flex items-center gap-2">
           {/* Desktop Language Selector - compact size to match login button */}
           <div className="hidden md:block">
-            <LanguageSelector isCompact={true} customColor={isScrolled ? 'gialoma-gold' : 'white'} />
+            <LanguageSelector isCompact={true} customColor={isScrolled ? null : 'white'} />
           </div>
 
-          {/* Login Button - Exactly matching main page styling */}
+          {/* Login Button */}
           <div className="hidden md:block">
             <a href="/login">
-              <Button variant="outline" className={`${isScrolled ? 'border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white' : 'border-white text-white hover:bg-white/10'} px-3 py-1 h-9`}>
+              <Button 
+                variant="outline" 
+                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9"
+              >
                 <LogIn size={16} className="mr-1" /> Login
               </Button>
             </a>
           </div>
             
-          {/* Get Started Button - Exactly matching main page styling */}
+          {/* Get Started Button */}
           <div className="hidden md:block">
             <a href="/#get-started">
-              <Button className={`${isScrolled ? 'bg-gialoma-gold hover:bg-gialoma-darkgold text-white' : 'bg-white hover:bg-gray-100 text-black'}`}>
+              <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
                 Get Started
               </Button>
             </a>
