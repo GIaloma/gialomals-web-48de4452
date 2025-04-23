@@ -17,12 +17,8 @@ const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
     
     // Don't show the popup if user has already closed it
     if (!hasClosedPopup) {
-      // Show popup after a slight delay for better UX
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1500);
-      
-      return () => clearTimeout(timer);
+      // Show popup immediately - no delay to ensure it shows same time as CookieBanner
+      setIsVisible(true);
     }
   }, []);
 
