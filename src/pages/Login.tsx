@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import LoginNavbar from '../components/LoginNavbar';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -108,9 +108,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <LoginNavbar />
       
-      <div className="flex-grow flex items-center justify-center bg-gray-50 py-12 px-4">
+      <div className="flex-grow flex items-center justify-center bg-gray-50 py-12 px-4 pt-36 md:pt-40">
         <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gialoma-black">Account Login</h2>
