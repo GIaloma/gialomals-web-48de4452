@@ -76,10 +76,14 @@ const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-md">
               <div>
                 <p className="text-sm text-gray-500">Special Launch Price</p>
-                <p className="text-xl font-bold text-gialoma-gold">$24.99</p>
+                <p className="text-xl font-bold text-gialoma-gold">€5.99</p>
               </div>
-              <p className="text-xs text-gray-500 line-through">$39.99</p>
+              <p className="text-xs text-gray-500 line-through">€15.99</p>
             </div>
+            
+            <p className="text-sm text-gray-500">
+              PDF format with 14-day money-back guarantee
+            </p>
           </div>
           
           <div className="mt-6 space-y-3">
