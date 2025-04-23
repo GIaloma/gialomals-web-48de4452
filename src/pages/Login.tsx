@@ -29,7 +29,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true); // Set to true by default
   const [error, setError] = useState('');
 
   // Increment visit counter on page load (only in founder login)
@@ -81,6 +81,10 @@ const Login = () => {
         // Save login information if "remember me" is checked
         if (rememberMe) {
           localStorage.setItem('gialoma_client_user', JSON.stringify({ name: client.name, type: 'client' }));
+        } else {
+          // Remove any stored data if remember me is not checked
+          localStorage.removeItem('gialoma_client_user');
+          sessionStorage.setItem('gialoma_client_session', JSON.stringify({ name: client.name, type: 'client' }));
         }
         
         // Redirect to client dashboard
@@ -93,9 +97,24 @@ const Login = () => {
       const founder = validFounders.find(f => f.email === email && f.password === password);
       
       if (founder) {
-        // Save login information if "remember me" is checked
+        // Save login information
         if (rememberMe) {
           localStorage.setItem('gialoma_logged_in_user', JSON.stringify({ name: founder.name, type: 'founder' }));
+        } else {
+          // Remove any stored data if remember me is not checked
+          localStorage.removeItem('gialoma_logged_in_user');
+          sessionStorage.setItem('gialoma_founder_session', JSON.stringify({ name: founder.name, type: 'founder' }));
+        }
+        
+        // Ensure counters are initialized
+        if (!localStorage.getItem(VISIT_COUNTER_KEY)) {
+          localStorage.setItem(VISIT_COUNTER_KEY, '1');
+        }
+        if (!localStorage.getItem(TODAY_COUNTER_KEY)) {
+          localStorage.setItem(TODAY_COUNTER_KEY, '1');
+        }
+        if (!localStorage.getItem(LAST_VISIT_DATE_KEY)) {
+          localStorage.setItem(LAST_VISIT_DATE_KEY, new Date().toDateString());
         }
         
         // Redirect to founder dashboard
