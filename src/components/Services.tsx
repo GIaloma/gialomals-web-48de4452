@@ -23,8 +23,7 @@ const services = [
     features: [
       "Responsive corporate websites",
       "Landing page websites",
-      "Smart form integration",
-      "Scalable and manageable websites"
+      "Smart form integration"
     ],
     icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
     link: "/services/web-development"
