@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Navbar from '../components/Navbar';
+import BookNavbar from '../components/BookNavbar';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { Check, Download, Star, Users, BookOpen, Clock, Mail } from 'lucide-react';
@@ -9,7 +9,7 @@ import CookieBanner from '../components/CookieBanner';
 const Book = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <BookNavbar />
       
       {/* Main Content - adding more padding to top to give navbar more space */}
       <div className="flex-grow pt-32 md:pt-36">
