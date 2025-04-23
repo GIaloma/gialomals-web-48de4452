@@ -49,7 +49,7 @@ const BookNavbar = () => {
             <LanguageSelector isCompact={true} customColor={isScrolled ? 'gialoma-gold' : 'white'} />
           </div>
 
-          {/* Login Button */}
+          {/* Login Button - Exactly matching main page styling */}
           <div className="hidden md:block">
             <a href="/login">
               <Button variant="outline" className={`${isScrolled ? 'border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white' : 'border-white text-white hover:bg-white/10'} px-3 py-1 h-9`}>
@@ -58,6 +58,7 @@ const BookNavbar = () => {
             </a>
           </div>
             
+          {/* Get Started Button - Exactly matching main page styling */}
           <div className="hidden md:block">
             <a href="/#get-started">
               <Button className={`${isScrolled ? 'bg-gialoma-gold hover:bg-gialoma-darkgold text-white' : 'bg-white hover:bg-gray-100 text-black'}`}>
@@ -68,7 +69,7 @@ const BookNavbar = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className={`md:hidden ${isScrolled ? 'text-gialoma-gold' : 'text-white'} hover:text-gialoma-darkgold transition-colors`} 
+            className={`md:hidden ${isScrolled ? 'text-gialoma-gold' : 'text-white'} hover:text-gialoma-darkgold transition-colors`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
