@@ -54,7 +54,10 @@ const BookNavbar = () => {
             <a href="/login">
               <Button 
                 variant="outline" 
-                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9"
+                className={isScrolled 
+                  ? "border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9"
+                  : "border-gialoma-lightgold text-gialoma-lightgold hover:bg-gialoma-darkgold hover:text-white px-3 py-1 h-9"
+                }
               >
                 <LogIn size={16} className="mr-1" /> Login
               </Button>
@@ -64,7 +67,10 @@ const BookNavbar = () => {
           {/* Get Started Button */}
           <div className="hidden md:block">
             <a href="/#get-started">
-              <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
+              <Button className={isScrolled 
+                ? "bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
+                : "bg-gialoma-lightgold hover:bg-gialoma-darkgold text-white"
+              }>
                 Get Started
               </Button>
             </a>
