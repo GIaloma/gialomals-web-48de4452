@@ -35,12 +35,12 @@ const BookNavbar = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
-          <a href="/#about" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>About</a>
-          <a href="/#solutions" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>Solutions</a>
-          <a href="/#services" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>Services</a>
-          <a href="/#team" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>Team</a>
-          <a href="/#testimonials" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>Clients</a>
-          <a href="/#contact" className={`${isScrolled ? 'text-gialoma-lightgold' : 'text-white'} hover:text-gialoma-darkgold transition-colors font-medium`}>Contacts</a>
+          <a href="/#about" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>About</a>
+          <a href="/#solutions" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>Solutions</a>
+          <a href="/#services" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>Services</a>
+          <a href="/#team" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>Team</a>
+          <a href="/#testimonials" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>Clients</a>
+          <a href="/#contact" className={`${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors font-medium`}>Contacts</a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ const BookNavbar = () => {
                 variant="outline" 
                 className={isScrolled 
                   ? "border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9"
-                  : "border-gialoma-lightgold text-gialoma-lightgold hover:bg-gialoma-darkgold hover:text-white px-3 py-1 h-9"
+                  : "border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9"
                 }
               >
                 <LogIn size={16} className="mr-1" /> Login
@@ -69,7 +69,7 @@ const BookNavbar = () => {
             <a href="/#get-started">
               <Button className={isScrolled 
                 ? "bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
-                : "bg-gialoma-lightgold hover:bg-gialoma-darkgold text-white"
+                : "bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
               }>
                 Get Started
               </Button>
@@ -92,42 +92,42 @@ const BookNavbar = () => {
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
               href="/#about" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </a>
             <a 
               href="/#solutions" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Solutions
             </a>
             <a 
               href="/#services" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Services
             </a>
             <a 
               href="/#team" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Team
             </a>
             <a 
               href="/#testimonials" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Clients
             </a>
             <a 
               href="/#contact" 
-              className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
+              className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Contacts
