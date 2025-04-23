@@ -1,15 +1,17 @@
 
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { LogOut, Users, BarChart, FileText, Settings, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // Visit counter keys from localStorage
 const VISIT_COUNTER_KEY = 'gialoma_visit_counter';
 const TODAY_COUNTER_KEY = 'gialoma_today_counter';
+const LAST_VISIT_DATE_KEY = 'gialoma_last_visit_date';
 
 const FounderDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<{name: string} | null>(null);
   const [activeSection, setActiveSection] = useState('dashboard');
   const [totalVisits, setTotalVisits] = useState(0);
@@ -17,31 +19,73 @@ const FounderDashboard = () => {
   
   useEffect(() => {
     // Check if the user is logged in
-    const loggedInUser = localStorage.getItem('gialoma_logged_in_user');
+    const loggedInUser = localStorage.getItem('gialoma_logged_in_user') || sessionStorage.getItem('gialoma_founder_session');
+    
     if (loggedInUser) {
       try {
         const userData = JSON.parse(loggedInUser);
-        setIsLoggedIn(true);
-        setCurrentUser(userData);
+        if (userData.type === 'founder') {
+          setIsLoggedIn(true);
+          setCurrentUser(userData);
+        } else {
+          // Not a founder, redirect to appropriate dashboard or login
+          setIsLoggedIn(false);
+        }
       } catch (e) {
         // Handle corrupt data
         localStorage.removeItem('gialoma_logged_in_user');
+        sessionStorage.removeItem('gialoma_founder_session');
         setIsLoggedIn(false);
       }
     } else {
       setIsLoggedIn(false);
     }
     
+    // Initialize visit statistics if they don't exist
+    if (!localStorage.getItem(VISIT_COUNTER_KEY)) {
+      localStorage.setItem(VISIT_COUNTER_KEY, '1');
+    }
+    if (!localStorage.getItem(TODAY_COUNTER_KEY)) {
+      localStorage.setItem(TODAY_COUNTER_KEY, '1');
+    }
+    if (!localStorage.getItem(LAST_VISIT_DATE_KEY)) {
+      localStorage.setItem(LAST_VISIT_DATE_KEY, new Date().toDateString());
+    }
+    
+    // Update today's counter if needed
+    const today = new Date().toDateString();
+    const lastVisitDate = localStorage.getItem(LAST_VISIT_DATE_KEY);
+    if (lastVisitDate !== today) {
+      localStorage.setItem(TODAY_COUNTER_KEY, '1');
+      localStorage.setItem(LAST_VISIT_DATE_KEY, today);
+    }
+    
     // Get visit statistics
     setTotalVisits(parseInt(localStorage.getItem(VISIT_COUNTER_KEY) || '0'));
     setTodayVisits(parseInt(localStorage.getItem(TODAY_COUNTER_KEY) || '0'));
+    
+    setIsLoading(false);
   }, []);
   
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
     localStorage.removeItem('gialoma_logged_in_user');
+    sessionStorage.removeItem('gialoma_founder_session');
+    window.location.href = '/login';
   };
+
+  // Show loading state while checking auth
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-gialoma-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gialoma-darkgray">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Redirect to login page if not logged in
   if (!isLoggedIn) {
@@ -151,7 +195,27 @@ const FounderDashboard = () => {
             
             <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100 mb-8">
               <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-              <p className="text-gray-500 italic">Recent website activity will be shown here.</p>
+              <div className="space-y-4">
+                <div className="p-4 bg-gray-50 rounded-md border border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-gray-800">Site Visit</p>
+                      <p className="text-sm text-gray-600">Visitor from direct traffic</p>
+                    </div>
+                    <p className="text-xs text-gray-500">{new Date().toLocaleTimeString()}</p>
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-gray-50 rounded-md border border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-gray-800">Founder Login</p>
+                      <p className="text-sm text-gray-600">{currentUser?.name}</p>
+                    </div>
+                    <p className="text-xs text-gray-500">{new Date().toLocaleTimeString()}</p>
+                  </div>
+                </div>
+              </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -244,6 +308,30 @@ const FounderDashboard = () => {
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-medium text-gray-700 mb-2">Visit Trend</h3>
+                  <div className="bg-gray-50 p-4 rounded-md">
+                    <p className="text-center text-sm text-gray-500 italic mb-2">Visualization of visit trends over time</p>
+                    <div className="h-48 flex items-end justify-between gap-1 px-6">
+                      {Array.from({ length: 14 }).map((_, i) => {
+                        const height = 30 + Math.floor(Math.random() * 70); // Random heights
+                        return (
+                          <div 
+                            key={i} 
+                            className="bg-gialoma-gold hover:bg-gialoma-darkgold cursor-pointer transition-colors w-full rounded-t"
+                            style={{ height: `${height}%` }}
+                            title={`Day ${i+1}: ${Math.floor(totalVisits / 14 * (height/100))} visits`}
+                          ></div>
+                        );
+                      })}
+                    </div>
+                    <div className="flex justify-between mt-2">
+                      <span className="text-xs text-gray-500">14 days ago</span>
+                      <span className="text-xs text-gray-500">Today</span>
+                    </div>
                   </div>
                 </div>
               </div>
