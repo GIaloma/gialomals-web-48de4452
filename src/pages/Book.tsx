@@ -31,10 +31,14 @@ const Book = () => {
                   <span className="text-white ml-2">Based on 74 reviews</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="bg-white text-gialoma-gold hover:bg-gray-100 px-8 py-6 text-lg">
+                  <Button 
+                    className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
+                  >
                     Buy Now - €5.99
                   </Button>
-                  <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg">
+                  <Button 
+                    className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
+                  >
                     <Download className="mr-2" size={18} /> Preview Chapter
                   </Button>
                 </div>
@@ -156,7 +160,9 @@ const Book = () => {
                       <p className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">Save 63%</p>
                     </div>
                     <div className="flex gap-4">
-                      <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-8 py-6 text-lg">
+                      <Button 
+                        className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-gialoma-gold hover:border-gialoma-gold transition-colors px-8 py-6 text-lg"
+                      >
                         Buy Digital Copy
                       </Button>
                     </div>
@@ -269,7 +275,9 @@ const Book = () => {
             <p className="text-white/90 max-w-2xl mx-auto mb-8">
               Join thousands of business owners who have successfully transformed their operations with the practical strategies in this book.
             </p>
-            <Button className="bg-white text-gialoma-gold hover:bg-gray-100 px-8 py-6 text-lg">
+            <Button 
+              className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
+            >
               Get Your Copy Now - €5.99
             </Button>
             <p className="text-white/80 mt-4 text-sm">
