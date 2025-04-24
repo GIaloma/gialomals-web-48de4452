@@ -194,14 +194,14 @@ const BlogPost = () => {
               <img 
                 alt="Gialoma Life Solutions Logo" 
                 src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
-                className="h-12 w-auto mr-3 object-contain" 
+                className="h-16 md:h-24 w-auto mr-3 object-contain" 
               />
             </a>
           </div>
         </div>
       </div>
       
-      <div className="bg-gialoma-black py-16 mt-20">
+      <div className="bg-gialoma-black py-16 mt-32">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-block bg-gialoma-lightgold/20 text-gialoma-lightgold px-4 py-1 rounded-full mb-4">
