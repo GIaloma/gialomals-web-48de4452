@@ -120,7 +120,13 @@ const PolicyFooter = () => {
             >
               Privacy Policy
             </Link>
-            <a href="#" className="text-gray-400 hover:text-gialoma-gold mr-4">Terms of Service</a>
+            <Link 
+              to="/terms-of-service" 
+              className="text-gray-400 hover:text-gialoma-gold mr-4"
+              onClick={scrollToTop}
+            >
+              Terms of Service
+            </Link>
             <Link 
               to="/cookie-policy" 
               className="text-gray-400 hover:text-gialoma-gold"
