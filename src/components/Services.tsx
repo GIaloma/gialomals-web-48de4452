@@ -134,7 +134,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="section-padding bg-white overflow-hidden">
+    <section id="services" className="section-padding bg-white overflow-hidden pb-8">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -223,7 +223,7 @@ const Services = () => {
           </button>
         </div>
         
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <p className="text-gialoma-darkgray mb-6 max-w-2xl mx-auto">
             Need a specialized solution? We offer custom services tailored to your specific business needs.
           </p>
