@@ -148,7 +148,7 @@ const BlogIndex = () => {
                 <img 
                   alt="Gialoma Life Solutions Logo" 
                   src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
-                  className="h-12 w-auto mr-3 object-contain" 
+                  className="h-16 md:h-24 w-auto mr-3 object-contain" 
                 />
               </a>
             </div>
@@ -156,7 +156,7 @@ const BlogIndex = () => {
         </div>
       </div>
       
-      <div className="bg-gialoma-black py-24 mt-16">
+      <div className="bg-gialoma-black py-24 mt-32">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center">Our Blog</h1>
           <p className="text-gray-300 text-center mt-4 max-w-2xl mx-auto">
