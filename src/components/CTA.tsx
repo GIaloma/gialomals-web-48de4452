@@ -57,12 +57,13 @@ const CTA = () => {
           
           {!submitted ? (
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-gialoma-black hover:bg-gialoma-darkgray text-white text-lg px-8 py-6">
+              <Button 
+                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
+              >
                 Schedule a Demo
               </Button>
               <Button 
-                variant="outline" 
-                className="border-transparent text-lg px-8 py-6 bg-black text-white hover:bg-gray-900"
+                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
                 onClick={openDigitalizationPage}
               >
                 Digitalize Your Business <ExternalLink className="ml-2 h-5 w-5" />
