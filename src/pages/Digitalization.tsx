@@ -10,7 +10,7 @@ const Digitalization = () => {
     <div className="min-h-screen flex flex-col">
       <DigitalizationNavbar />
       
-      <main className="flex-grow pt-32 pb-20">
+      <main className="flex-grow pt-44 md:pt-48 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             {/* Back button */}
