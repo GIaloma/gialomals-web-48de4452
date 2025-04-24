@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Clock, User, Tag, ArrowLeft, ArrowRight, Search } from 'lucide-react';
+import { Clock, User, Tag, ArrowLeft, ArrowRight, Search, X } from 'lucide-react';
 
 // Sample blog posts
 const blogPosts = [
@@ -95,6 +95,12 @@ const BlogIndex = () => {
   const [selectedTag, setSelectedTag] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 4;
+  const navigate = useNavigate();
+
+  // Scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Filter posts based on search term, category, and tag
   const filteredPosts = blogPosts.filter(post => {
@@ -127,11 +133,30 @@ const BlogIndex = () => {
     setCurrentPage(1);
   };
 
+  const handleReadArticle = (slug: string) => {
+    navigate(`/blog/${slug}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <div className="flex flex-col md:flex-row">
+        <div className="fixed top-0 left-0 w-full z-50">
+          <div className="bg-white shadow-md py-4">
+            <div className="container mx-auto px-4">
+              <a href="/" className="flex items-center">
+                <img 
+                  alt="Gialoma Life Solutions Logo" 
+                  src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
+                  className="h-12 w-auto mr-3 object-contain" 
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       
-      <div className="bg-gialoma-black py-20">
+      <div className="bg-gialoma-black py-24 mt-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center">Our Blog</h1>
           <p className="text-gray-300 text-center mt-4 max-w-2xl mx-auto">
@@ -300,7 +325,9 @@ const BlogIndex = () => {
                         </span>
                       </div>
                       <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors">
-                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                        <button onClick={() => handleReadArticle(post.slug)} className="text-left hover:text-gialoma-gold transition-colors">
+                          {post.title}
+                        </button>
                       </h3>
                       <p className="text-gialoma-darkgray mb-4 line-clamp-3">
                         {post.excerpt}
@@ -313,14 +340,14 @@ const BlogIndex = () => {
                         <span>{post.readTime}</span>
                       </div>
                       
-                      <Link to={`/blog/${post.slug}`}>
+                      <button onClick={() => handleReadArticle(post.slug)}>
                         <Button 
                           variant="outline" 
                           className="w-full border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white"
                         >
                           Read Article
                         </Button>
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 ))}
