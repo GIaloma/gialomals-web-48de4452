@@ -51,7 +51,7 @@ const DigitalizationNavbar = () => {
           {/* Login Button */}
           <div className="hidden md:block">
             <a href="/login">
-              <Button variant="outline" className={`${isScrolled ? 'border-gialoma-gold text-gialoma-gold' : 'border-white text-white'} hover:bg-gialoma-gold hover:text-white hover:border-gialoma-gold px-3 py-1 h-9`}>
+              <Button variant="outline" className={`${isScrolled ? 'border-gialoma-gold text-gialoma-gold' : 'border-gialoma-gold text-gialoma-gold'} hover:bg-gialoma-gold hover:text-white hover:border-gialoma-gold px-3 py-1 h-9`}>
                 <LogIn size={16} className="mr-1" /> Login
               </Button>
             </a>
@@ -67,7 +67,7 @@ const DigitalizationNavbar = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className={`md:hidden ${isScrolled ? 'text-gialoma-gold' : 'text-white'} hover:text-gialoma-gold transition-colors`}
+            className={`md:hidden ${isScrolled ? 'text-gialoma-gold' : 'text-gialoma-gold'} hover:text-gialoma-darkgold transition-colors`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
