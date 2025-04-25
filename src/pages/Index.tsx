@@ -17,9 +17,17 @@ import BookPopup from '../components/BookPopup';
 const Index = () => {
   const [showBookPopup, setShowBookPopup] = useState(false);
 
-  // Show the book popup when the page loads
+  // Show the book popup when the page loads, if not already closed in this session
   useEffect(() => {
-    setShowBookPopup(true);
+    const hasClosedPopup = sessionStorage.getItem('gialoma_book_popup_closed');
+    if (!hasClosedPopup) {
+      // Add a small delay to ensure both popups don't compete for attention immediately
+      const timer = setTimeout(() => {
+        setShowBookPopup(true);
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
