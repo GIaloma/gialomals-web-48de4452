@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -8,24 +8,9 @@ interface BookPopupProps {
 }
 
 const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
-  // Check local storage to see if we should show the popup
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Check if the user has already closed the popup in this session
-    const hasClosedPopup = sessionStorage.getItem('gialoma_book_popup_closed');
-    
-    // Don't show the popup if user has already closed it
-    if (!hasClosedPopup) {
-      // Show popup immediately - no delay to ensure it shows same time as CookieBanner
-      setIsVisible(true);
-    }
-  }, []);
-
   const handleClose = () => {
     // Record that the user has closed the popup in this session
     sessionStorage.setItem('gialoma_book_popup_closed', 'true');
-    setIsVisible(false);
     onClose();
   };
 
@@ -34,8 +19,6 @@ const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
     window.open('/book', '_blank');
     handleClose();
   };
-
-  if (!isVisible) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -99,6 +82,23 @@ const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
           </div>
         </div>
       </div>
+
+      {/* CSS for animation */}
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
