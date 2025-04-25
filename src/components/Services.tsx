@@ -138,7 +138,7 @@ const Services = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">What we do for you</span>
+            <span className="text-gradient">Automation without supervision is like a car without a driver</span>
           </h2>
           <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
             We offer a range of specialized services designed to streamline your business operations 
