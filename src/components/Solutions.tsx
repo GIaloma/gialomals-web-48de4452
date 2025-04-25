@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const solutions = [
   {
     icon: <Clock className="h-12 w-12 text-gialoma-gold" />,
-    title: "Time Saving",
+    title: "Quality time is not a luxury, it's a necessity",
     description: "Reclaim your most valuable resource: time. Our solutions streamline processes so you can focus on what truly matters.",
     benefits: [
       "Avoid repetitive tasks through automation",
