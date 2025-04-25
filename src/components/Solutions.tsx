@@ -16,7 +16,7 @@ const solutions = [
   },
   {
     icon: <Users className="h-12 w-12 text-gialoma-gold" />,
-    title: "Improved Customer Service",
+    title: "Don't seek technical perfection, seek human authenticity",
     description: "Enhance your customer experience with tools that allow you to respond quickly, professionally, and consistently across all channels.",
     benefits: [
       "Instant responses with AI chatbots",
@@ -26,7 +26,7 @@ const solutions = [
   },
   {
     icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
-    title: "Greater Business Control",
+    title: "Technology for Human Fulfillment",
     description: "Stay on top of your business with real-time insights and comprehensive dashboards that give you visibility into all aspects of your operations.",
     benefits: [
       "Real-time visibility of sales, expenses, and metrics",
@@ -36,7 +36,7 @@ const solutions = [
   },
   {
     icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
-    title: "Increased Digital Visibility",
+    title: "Online visibility is no longer optional",
     description: "Stand out in the digital landscape with optimized online presence that helps potential customers find and trust your business.",
     benefits: [
       "Optimized websites that rank on Google",
@@ -46,7 +46,7 @@ const solutions = [
   },
   {
     icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
-    title: "Less Stress, More Order",
+    title: "We don't optimize processes, we optimize lives",
     description: "Reduce business anxiety and create organizational harmony with systems that centralize information and automate reporting.",
     benefits: [
       "All data centralized and accessible",
@@ -56,7 +56,7 @@ const solutions = [
   },
   {
     icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
-    title: "Tech Guidance Tailored to Your Level",
+    title: "It's not about automating everything, but about automating intelligently",
     description: "Whether you're starting from scratch or looking to optimize, our approach adapts to your technical comfort level and business maturity.",
     benefits: [
       "If you're analog, we'll guide you step by step",
@@ -126,7 +126,7 @@ const Solutions = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            How we free up your time and improve your life
+            We have automated what can be automated to humanize what is human
           </h2>
           <p className="text-lg text-white/90 max-w-3xl mx-auto">
             Our solutions deliver real impact by solving concrete problems and providing tangible benefits that transform how you work and live.
@@ -154,7 +154,7 @@ const Solutions = () => {
               <div 
                 key={index} 
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "500px" }}
+                style={{ height: "520px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
@@ -164,7 +164,7 @@ const Solutions = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center min-h-[60px]">
+                  <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center min-h-[80px]">
                     {solution.title}
                   </h3>
                   
