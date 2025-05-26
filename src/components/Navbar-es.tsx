@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
+import { Link } from 'react-router-dom';
 
 const NavbarEs = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,13 +25,13 @@ const NavbarEs = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2 md:py-3' : 'bg-transparent py-3 md:py-5'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <a href="#inicio" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img 
               alt="Logo de Gialoma Life Solutions" 
               src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
               className="h-16 md:h-24 w-auto mr-3 object-contain transition-all duration-300" 
             />
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
@@ -51,11 +52,11 @@ const NavbarEs = () => {
 
           {/* Login Button */}
           <div className="hidden md:block">
-            <a href="/login">
+            <Link to="/login">
               <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9">
                 <LogIn size={16} className="mr-1" /> Iniciar Sesión
               </Button>
-            </a>
+            </Link>
           </div>
             
           <div className="hidden md:block">
@@ -129,14 +130,14 @@ const NavbarEs = () => {
             </div>
 
             {/* Mobile Login Button */}
-            <a 
-              href="/login" 
+            <Link 
+              to="/login" 
               onClick={() => setIsMenuOpen(false)}
             >
               <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white w-full flex items-center justify-center">
                 <LogIn size={18} className="mr-2" /> Iniciar Sesión
               </Button>
-            </a>
+            </Link>
             
             <a 
               href="#empezar" 
