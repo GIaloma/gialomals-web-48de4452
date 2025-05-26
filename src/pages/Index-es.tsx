@@ -11,7 +11,7 @@ import TestimonialsEs from '../components/Testimonials-es';
 import CTAEs from '../components/CTA-es';
 import ContactEs from '../components/Contact-es';
 import FooterEs from '../components/Footer-es';
-import CookieBanner from '../components/CookieBanner';
+import CookieBannerEs from '../components/CookieBanner-es';
 import BookPopupEs from '../components/BookPopup-es';
 
 const IndexEs = () => {
@@ -43,7 +43,7 @@ const IndexEs = () => {
       <CTAEs />
       <ContactEs />
       <FooterEs />
-      <CookieBanner />
+      <CookieBannerEs />
       
       {/* Spanish Book Popup */}
       {showBookPopup && <BookPopupEs onClose={() => setShowBookPopup(false)} />}
