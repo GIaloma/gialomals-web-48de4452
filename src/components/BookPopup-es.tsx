@@ -61,7 +61,7 @@ const BookPopupEs: React.FC<BookPopupEsProps> = ({ onClose }) => {
             </div>
             
             <p className="text-sm text-gray-500">
-              Formato PDF con garantía de devolución de 14 días
+              Formato PDF • Descarga instantánea
             </p>
           </div>
           
