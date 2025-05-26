@@ -8,8 +8,8 @@ const CookieBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if the user has already accepted the cookie policy
-    const hasAccepted = localStorage.getItem('cookiePolicyAccepted');
+    // Check if the user has already accepted the cookie policy for English
+    const hasAccepted = localStorage.getItem('cookiePolicyAccepted_en');
     if (!hasAccepted) {
       // Show the banner immediately - no delay to ensure it shows at the same time as BookPopup
       setIsVisible(true);
@@ -17,11 +17,12 @@ const CookieBanner = () => {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookiePolicyAccepted', 'true');
+    localStorage.setItem('cookiePolicyAccepted_en', 'true');
     setIsVisible(false);
   };
 
   const handleClose = () => {
+    // Only close temporarily - it will reappear on next page load until accepted
     setIsVisible(false);
   };
 
