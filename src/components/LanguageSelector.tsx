@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Select,
   SelectContent,
@@ -13,6 +14,7 @@ interface Language {
   code: string;
   name: string;
   flag: string;
+  path: string;
 }
 
 interface LanguageSelectorProps {
@@ -22,14 +24,29 @@ interface LanguageSelectorProps {
 }
 
 const languages: Language[] = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'es', name: 'Español', flag: '🇪🇸', path: '/' },
+  { code: 'en', name: 'English', flag: '🇬🇧', path: '/en' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹', path: '/it' },
 ];
 
 export default function LanguageSelector({ isMobile = false, isCompact = false, customColor }: LanguageSelectorProps) {
-  const [language, setLanguage] = useState('en');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Determine current language based on URL
+  const getCurrentLanguage = () => {
+    const path = location.pathname;
+    if (path.startsWith('/en')) return 'en';
+    if (path.startsWith('/it')) return 'it';
+    return 'es'; // Default to Spanish
+  };
+
+  const [language, setLanguage] = useState(getCurrentLanguage());
+
+  useEffect(() => {
+    setLanguage(getCurrentLanguage());
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +61,11 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
   }, []);
 
   const handleLanguageChange = (value: string) => {
-    setLanguage(value);
-    // You can add logic here to change the language throughout the app
-    // This might involve using a context or i18n library in a real implementation
+    const selectedLanguage = languages.find(lang => lang.code === value);
+    if (selectedLanguage) {
+      setLanguage(value);
+      navigate(selectedLanguage.path);
+    }
   };
 
   // Get current language data
@@ -64,7 +83,7 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
     <div className="language-selector">
       {isMobile ? (
         // Mobile version
-        <div className="mb-1 text-gialoma-lightgold text-sm font-medium">Select Language:</div>
+        <div className="mb-1 text-gialoma-lightgold text-sm font-medium">Seleccionar Idioma:</div>
       ) : null}
       
       <Select value={language} onValueChange={handleLanguageChange}>
