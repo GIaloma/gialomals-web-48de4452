@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import BookNavbar from '../components/BookNavbar';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,108 @@ import { Check, Download, Star, Users, BookOpen, Clock, Mail } from 'lucide-reac
 import CookieBanner from '../components/CookieBanner';
 
 const Book = () => {
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "Digital Transformation Made Simple - Digital Book | Gialoma Life Solutions";
+    
+    // Remove existing meta tags
+    const existingDescription = document.querySelector('meta[name="description"]');
+    const existingKeywords = document.querySelector('meta[name="keywords"]');
+    const existingOgTitle = document.querySelector('meta[property="og:title"]');
+    const existingOgDescription = document.querySelector('meta[property="og:description"]');
+    const existingOgImage = document.querySelector('meta[property="og:image"]');
+    const existingTwitterCard = document.querySelector('meta[name="twitter:card"]');
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    
+    [existingDescription, existingKeywords, existingOgTitle, existingOgDescription, existingOgImage, existingTwitterCard, existingCanonical].forEach(el => {
+      if (el) el.remove();
+    });
+
+    // Add new meta tags
+    const metaTags = [
+      { name: 'description', content: 'Practical guide to business digital transformation. Learn to implement AI and automation without technical knowledge. Instant download for only €5.99.' },
+      { name: 'keywords', content: 'digital transformation, business automation, artificial intelligence, AI for business, digitalization, business technology, Gialoma, digital book' },
+      { property: 'og:title', content: 'Digital Transformation Made Simple - Digital Book | Gialoma' },
+      { property: 'og:description', content: 'Your practical guide to leveraging cutting-edge technologies in your business without technical overwhelm. Proven strategies from Gialoma founders.' },
+      { property: 'og:image', content: '/lovable-uploads/book-cover-en.png' },
+      { property: 'og:url', content: 'https://gialoma.com/book' },
+      { property: 'og:type', content: 'product' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Digital Transformation Made Simple - Digital Book' },
+      { name: 'twitter:description', content: 'Practical guide to implement AI and automation in your business. Only €5.99.' },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'author', content: 'Paloma Firgaira, Gianro Compagno' },
+      { name: 'language', content: 'en' }
+    ];
+
+    metaTags.forEach(tag => {
+      const meta = document.createElement('meta');
+      if (tag.property) {
+        meta.setAttribute('property', tag.property);
+      } else {
+        meta.setAttribute('name', tag.name);
+      }
+      meta.setAttribute('content', tag.content);
+      document.head.appendChild(meta);
+    });
+
+    // Add canonical link
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://gialoma.com/book';
+    document.head.appendChild(canonical);
+
+    // Structured Data (JSON-LD)
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "Digital Transformation Made Simple",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Paloma Firgaira"
+        },
+        {
+          "@type": "Person", 
+          "name": "Gianro Compagno"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Gialoma Life Solutions"
+      },
+      "datePublished": "2025-04-01",
+      "inLanguage": "en",
+      "genre": "Business Technology",
+      "numberOfPages": 320,
+      "bookFormat": "EBook",
+      "offers": {
+        "@type": "Offer",
+        "price": "5.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://gialoma.com/book"
+      },
+      "description": "Your practical guide to leveraging AI and automation to transform your business operations and improve efficiency.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "74"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup
+      const addedElements = document.querySelectorAll('meta[name], meta[property], link[rel="canonical"], script[type="application/ld+json"]');
+      addedElements.forEach(el => el.remove());
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <BookNavbar />
