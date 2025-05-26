@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LoginNavbar from '../components/LoginNavbar';
 import Footer from '../components/Footer';
@@ -31,6 +31,56 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true); // Set to true by default
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "Account Login - Dashboard Access | Gialoma Life Solutions";
+    
+    // Remove existing meta tags
+    const existingDescription = document.querySelector('meta[name="description"]');
+    const existingKeywords = document.querySelector('meta[name="keywords"]');
+    const existingOgTitle = document.querySelector('meta[property="og:title"]');
+    const existingOgDescription = document.querySelector('meta[property="og:description"]');
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    
+    [existingDescription, existingKeywords, existingOgTitle, existingOgDescription, existingCanonical].forEach(el => {
+      if (el) el.remove();
+    });
+
+    // Add new meta tags
+    const metaTags = [
+      { name: 'description', content: 'Access your personalized Gialoma dashboard. Manage your business automation and digitalization services securely.' },
+      { name: 'keywords', content: 'Gialoma login, client access, dashboard, business automation, digital services management' },
+      { property: 'og:title', content: 'Secure Login - Gialoma Dashboard Access' },
+      { property: 'og:description', content: 'Access your personalized dashboard to manage your business digitalization services.' },
+      { property: 'og:url', content: 'https://gialoma.com/login' },
+      { name: 'robots', content: 'noindex, nofollow' }, // Login pages should not be indexed
+      { name: 'language', content: 'en' }
+    ];
+
+    metaTags.forEach(tag => {
+      const meta = document.createElement('meta');
+      if (tag.property) {
+        meta.setAttribute('property', tag.property);
+      } else {
+        meta.setAttribute('name', tag.name);
+      }
+      meta.setAttribute('content', tag.content);
+      document.head.appendChild(meta);
+    });
+
+    // Add canonical link
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://gialoma.com/login';
+    document.head.appendChild(canonical);
+
+    return () => {
+      // Cleanup
+      const addedElements = document.querySelectorAll('meta[name], meta[property], link[rel="canonical"]');
+      addedElements.forEach(el => el.remove());
+    };
+  }, []);
 
   // Increment visit counter on page load (only in founder login)
   React.useEffect(() => {
@@ -132,7 +182,7 @@ const Login = () => {
       <div className="flex-grow flex items-center justify-center bg-gray-50 py-12 px-4 pt-36 md:pt-40">
         <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gialoma-black">Account Login</h2>
+            <h1 className="text-3xl font-bold text-gialoma-black">Account Login</h1>
             <p className="mt-2 text-gialoma-darkgray">
               Access your personalized dashboard
             </p>
