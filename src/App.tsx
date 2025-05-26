@@ -9,12 +9,14 @@ import IndexEs from "./pages/Index-es";
 import BlogPost from "./pages/BlogPost";
 import BlogIndex from "./pages/BlogIndex";
 import Login from "./pages/Login";
+import LoginEs from "./pages/Login-es";
 import ClientDashboard from "./pages/ClientDashboard";
 import FounderDashboard from "./pages/FounderDashboard";
 import CookiePolicy from "./pages/CookiePolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Book from "./pages/Book";
+import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import NotFound from "./pages/NotFound";
 
@@ -40,17 +42,45 @@ const App = () => (
           <Route path="/it" element={<Index />} />
           <Route path="/italiano" element={<Index />} />
           
-          {/* Other pages - these should also be translated eventually */}
+          {/* Book pages - with language support */}
+          <Route path="/libro" element={<BookEs />} />
+          <Route path="/es/libro" element={<BookEs />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/en/book" element={<Book />} />
+          
+          {/* Login pages - with language support */}
+          <Route path="/acceso" element={<LoginEs />} />
+          <Route path="/es/acceso" element={<LoginEs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/en/login" element={<Login />} />
+          
+          {/* Blog pages - these should also be translated eventually */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/es/blog" element={<BlogIndex />} />
+          <Route path="/es/blog/:slug" element={<BlogPost />} />
+          
+          {/* Dashboard pages */}
           <Route path="/client-dashboard" element={<ClientDashboard />} />
+          <Route path="/panel-cliente" element={<ClientDashboard />} />
           <Route path="/founder-dashboard" element={<FounderDashboard />} />
+          <Route path="/panel-fundador" element={<FounderDashboard />} />
+          
+          {/* Legal pages */}
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/politica-cookies" element={<CookiePolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/book" element={<Book />} />
+          <Route path="/terminos-servicio" element={<TermsOfService />} />
+          
+          {/* Other pages */}
           <Route path="/digitalization" element={<Digitalization />} />
+          <Route path="/digitalizacion" element={<Digitalization />} />
+          
+          {/* Legacy redirects for SEO */}
+          <Route path="/inicio" element={<IndexEs />} />
+          <Route path="/home" element={<Index />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
