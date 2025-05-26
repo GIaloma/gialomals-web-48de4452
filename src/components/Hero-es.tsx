@@ -68,7 +68,7 @@ const HeroEs = () => {
                     <ArrowRight className="ml-2" size={18} />
                   </Button>
                 </a>
-                <a href="#contacto">
+                <a href="#contactos">
                   <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6 w-full">
                     Contáctanos
                   </Button>
