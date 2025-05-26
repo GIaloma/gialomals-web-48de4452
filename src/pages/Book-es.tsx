@@ -269,7 +269,7 @@ const BookEs = () => {
                       </Button>
                     </div>
                     <p className="text-sm text-gray-500 mt-4">
-                      <span className="font-medium">Garantía de devolución de 14 días</span> según normativas de la UE. ¿No satisfecho? Contáctanos en gialomals@gmail.com
+                      ¿Preguntas? Contáctanos en gialomals@gmail.com
                     </p>
                   </div>
                   <div className="md:w-1/3">
@@ -339,8 +339,8 @@ const BookEs = () => {
                   answer: "Actualmente, el libro está disponible solo como descarga digital en PDF. Esto te permite leerlo en cualquier dispositivo y tener acceso instantáneo al contenido después de la compra."
                 },
                 {
-                  question: "¿Hay garantía de devolución del dinero?",
-                  answer: "Sí, ofrecemos una garantía de devolución del dinero de 14 días según las normativas de la UE. Si no estás satisfecho con el libro, simplemente contáctanos en gialomals@gmail.com para un reembolso completo."
+                  question: "¿Qué pasa si tengo problemas con mi compra?",
+                  answer: "Si tienes algún problema con tu compra o descarga, por favor contáctanos en gialomals@gmail.com y estaremos encantados de ayudarte."
                 },
                 {
                   question: "¿Cómo se entrega la versión digital?",
@@ -383,7 +383,7 @@ const BookEs = () => {
               Obtén Tu Copia Ahora - €5,99
             </Button>
             <p className="text-white/80 mt-4 text-sm">
-              Formato PDF con garantía de devolución de 14 días
+              Formato PDF • Descarga instantánea
             </p>
           </div>
         </section>
