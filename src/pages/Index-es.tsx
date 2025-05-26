@@ -12,7 +12,7 @@ import CTAEs from '../components/CTA-es';
 import ContactEs from '../components/Contact-es';
 import FooterEs from '../components/Footer-es';
 import CookieBanner from '../components/CookieBanner';
-import BookPopup from '../components/BookPopup';
+import BookPopupEs from '../components/BookPopup-es';
 
 const IndexEs = () => {
   const [showBookPopup, setShowBookPopup] = useState(false);
@@ -45,8 +45,8 @@ const IndexEs = () => {
       <FooterEs />
       <CookieBanner />
       
-      {/* Book Popup */}
-      {showBookPopup && <BookPopup onClose={() => setShowBookPopup(false)} />}
+      {/* Spanish Book Popup */}
+      {showBookPopup && <BookPopupEs onClose={() => setShowBookPopup(false)} />}
     </div>
   );
 };
