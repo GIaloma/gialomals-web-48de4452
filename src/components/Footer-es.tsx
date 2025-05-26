@@ -38,7 +38,7 @@ const FooterEs = () => {
                 <a href="#testimonios" className="text-gray-300 hover:text-gialoma-gold transition-colors">Clientes</a>
               </li>
               <li>
-                <a href="#contacto" className="text-gray-300 hover:text-gialoma-gold transition-colors">Contacto</a>
+                <a href="#contactos" className="text-gray-300 hover:text-gialoma-gold transition-colors">Contactos</a>
               </li>
             </ul>
           </div>
@@ -70,7 +70,7 @@ const FooterEs = () => {
 
           {/* Contact Information */}
           <div className="text-center lg:text-left max-w-xs">
-            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <h3 className="text-lg font-semibold mb-4">Contactos</h3>
             <ul className="space-y-3">
               <li className="text-gray-300 flex items-start lg:items-center justify-center lg:justify-start">
                 <Phone className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5 lg:mt-0" />
