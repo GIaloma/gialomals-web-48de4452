@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import IndexEs from "./pages/Index-es";
 import BlogPost from "./pages/BlogPost";
 import BlogIndex from "./pages/BlogIndex";
+import BlogIndexEs from "./pages/BlogIndex-es";
 import Login from "./pages/Login";
 import LoginEs from "./pages/Login-es";
 import ClientDashboard from "./pages/ClientDashboard";
@@ -54,11 +55,13 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/en/login" element={<Login />} />
           
-          {/* Blog pages - these should also be translated eventually */}
-          <Route path="/blog" element={<BlogIndex />} />
+          {/* Blog pages - with language support */}
+          <Route path="/blog" element={<BlogIndexEs />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/es/blog" element={<BlogIndex />} />
+          <Route path="/es/blog" element={<BlogIndexEs />} />
           <Route path="/es/blog/:slug" element={<BlogPost />} />
+          <Route path="/en/blog" element={<BlogIndex />} />
+          <Route path="/en/blog/:slug" element={<BlogPost />} />
           
           {/* Dashboard pages */}
           <Route path="/client-dashboard" element={<ClientDashboard />} />
