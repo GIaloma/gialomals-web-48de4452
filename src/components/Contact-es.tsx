@@ -7,11 +7,11 @@ import { Phone, Mail, Bot } from 'lucide-react';
 
 const ContactEs = () => {
   return (
-    <section id="contacto" className="section-padding bg-white">
+    <section id="contactos" className="section-padding bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">Contacto</span>
+            <span className="text-gradient">Contactos</span>
           </h2>
           <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
             ¿Tienes preguntas o estás listo para comenzar tu viaje con Gialoma Life Solutions? Contáctanos hoy.
@@ -77,7 +77,7 @@ const ContactEs = () => {
           </div>
 
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Información de Contacto</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Información de Contactos</h3>
             
             <div className="space-y-6">
               <div className="flex items-start">
