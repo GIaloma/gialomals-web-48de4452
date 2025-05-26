@@ -41,7 +41,7 @@ const NavbarEs = () => {
           <a href="#servicios" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Servicios</a>
           <a href="#equipo" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Equipo</a>
           <a href="#testimonios" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Clientes</a>
-          <a href="#contacto" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contacto</a>
+          <a href="#contactos" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contactos</a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -117,11 +117,11 @@ const NavbarEs = () => {
               Clientes
             </a>
             <a 
-              href="#contacto" 
+              href="#contactos" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
-              Contacto
+              Contactos
             </a>
             
             {/* Mobile Language Selector */}
