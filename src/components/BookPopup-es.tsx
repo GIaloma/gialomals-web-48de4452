@@ -9,8 +9,8 @@ interface BookPopupEsProps {
 
 const BookPopupEs: React.FC<BookPopupEsProps> = ({ onClose }) => {
   const handleClose = () => {
-    // Record that the user has closed the popup in this session
-    sessionStorage.setItem('gialoma_book_popup_closed', 'true');
+    // Record that the user has closed the popup in this session for Spanish
+    sessionStorage.setItem('gialoma_book_popup_closed_es', 'true');
     onClose();
   };
 
