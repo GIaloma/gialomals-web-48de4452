@@ -269,7 +269,7 @@ const Book = () => {
                       </Button>
                     </div>
                     <p className="text-sm text-gray-500 mt-4">
-                      <span className="font-medium">14-day money-back guarantee</span> as per EU regulations. Not satisfied? Contact us at gialomals@gmail.com
+                      Questions? Contact us at gialomals@gmail.com
                     </p>
                   </div>
                   <div className="md:w-1/3">
@@ -339,8 +339,8 @@ const Book = () => {
                   answer: "Currently, the book is available only as a PDF digital download. This allows you to read it on any device and have instant access to the content after purchase."
                 },
                 {
-                  question: "Is there a money-back guarantee?",
-                  answer: "Yes, we offer a 14-day money-back guarantee as per EU regulations. If you're not satisfied with the book, simply contact us at gialomals@gmail.com for a full refund."
+                  question: "What if I have issues with my purchase?",
+                  answer: "If you have any issues with your purchase or download, please contact us at gialomals@gmail.com and we'll be happy to help."
                 },
                 {
                   question: "How is the digital version delivered?",
@@ -383,7 +383,7 @@ const Book = () => {
               Get Your Copy Now - €5.99
             </Button>
             <p className="text-white/80 mt-4 text-sm">
-              PDF format with 14-day money-back guarantee
+              PDF format • Instant download
             </p>
           </div>
         </section>
