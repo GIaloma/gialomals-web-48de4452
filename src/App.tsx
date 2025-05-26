@@ -27,9 +27,20 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          {/* Spanish as main/default language */}
+          <Route path="/" element={<IndexEs />} />
           <Route path="/es" element={<IndexEs />} />
           <Route path="/español" element={<IndexEs />} />
+          
+          {/* English as secondary language */}
+          <Route path="/en" element={<Index />} />
+          <Route path="/english" element={<Index />} />
+          
+          {/* Italian placeholder (will use English for now, can be translated later) */}
+          <Route path="/it" element={<Index />} />
+          <Route path="/italiano" element={<Index />} />
+          
+          {/* Other pages - these should also be translated eventually */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/login" element={<Login />} />
@@ -40,6 +51,7 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/book" element={<Book />} />
           <Route path="/digitalization" element={<Digitalization />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
