@@ -9,7 +9,7 @@ import Blog from '../components/Blog';
 import Team from '../components/Team';
 import Testimonials from '../components/Testimonials';
 import CTAEs from '../components/CTA-es';
-import Contact from '../components/Contact';
+import ContactEs from '../components/Contact-es';
 import FooterEs from '../components/Footer-es';
 import CookieBanner from '../components/CookieBanner';
 import BookPopup from '../components/BookPopup';
@@ -41,7 +41,7 @@ const IndexEs = () => {
       <Team />
       <Testimonials />
       <CTAEs />
-      <Contact />
+      <ContactEs />
       <FooterEs />
       <CookieBanner />
       
