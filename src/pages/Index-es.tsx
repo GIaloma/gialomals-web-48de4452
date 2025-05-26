@@ -17,9 +17,9 @@ import BookPopupEs from '../components/BookPopup-es';
 const IndexEs = () => {
   const [showBookPopup, setShowBookPopup] = useState(false);
 
-  // Show the book popup when the page loads, if not already closed in this session
+  // Show the book popup when the page loads, if not already closed in this session for Spanish
   useEffect(() => {
-    const hasClosedPopup = sessionStorage.getItem('gialoma_book_popup_closed');
+    const hasClosedPopup = sessionStorage.getItem('gialoma_book_popup_closed_es');
     if (!hasClosedPopup) {
       // Add a small delay to ensure both popups don't compete for attention immediately
       const timer = setTimeout(() => {
