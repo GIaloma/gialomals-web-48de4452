@@ -4,7 +4,7 @@ import BookNavbarEs from '../components/BookNavbar-es';
 import FooterEs from '../components/Footer-es';
 import { Button } from '@/components/ui/button';
 import { Check, Download, Star, Users, BookOpen, Clock, Mail } from 'lucide-react';
-import CookieBanner from '../components/CookieBanner';
+import CookieBannerEs from '../components/CookieBanner-es';
 
 const BookEs = () => {
   useEffect(() => {
@@ -390,7 +390,7 @@ const BookEs = () => {
       </div>
       
       <FooterEs />
-      <CookieBanner />
+      <CookieBannerEs />
     </div>
   );
 };
