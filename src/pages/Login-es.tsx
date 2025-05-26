@@ -1,0 +1,386 @@
+
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import LoginNavbar from '../components/LoginNavbar';
+import FooterEs from '../components/Footer-es';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { EyeIcon, EyeOffIcon, UserIcon, ShieldIcon } from 'lucide-react';
+
+// Demo users for testing
+const validFounders = [
+  { email: 'paloma@gialoma.com', password: 'founder123', name: 'Paloma Firgaira' },
+  { email: 'gianro@gialoma.com', password: 'founder123', name: 'Gianro Compagno' },
+];
+
+const validClients = [
+  { email: 'demo@gialoma.com', password: 'password123', name: 'Cliente Demo' },
+];
+
+// Counter storage keys in localStorage
+const VISIT_COUNTER_KEY = 'gialoma_visit_counter';
+const TODAY_COUNTER_KEY = 'gialoma_today_counter';
+const LAST_VISIT_DATE_KEY = 'gialoma_last_visit_date';
+
+const LoginEs = () => {
+  const [activeTab, setActiveTab] = useState('client');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "Acceso a tu Cuenta - Panel de Control | Gialoma Life Solutions";
+    
+    // Remove existing meta tags
+    const existingDescription = document.querySelector('meta[name="description"]');
+    const existingKeywords = document.querySelector('meta[name="keywords"]');
+    const existingOgTitle = document.querySelector('meta[property="og:title"]');
+    const existingOgDescription = document.querySelector('meta[property="og:description"]');
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    
+    [existingDescription, existingKeywords, existingOgTitle, existingOgDescription, existingCanonical].forEach(el => {
+      if (el) el.remove();
+    });
+
+    // Add new meta tags
+    const metaTags = [
+      { name: 'description', content: 'Accede a tu panel de control personalizado de Gialoma. Gestiona tus servicios de automatización y digitalización empresarial de forma segura.' },
+      { name: 'keywords', content: 'login Gialoma, acceso cliente, panel control, automatización empresarial, gestión servicios digitales' },
+      { property: 'og:title', content: 'Acceso Seguro - Panel de Control Gialoma' },
+      { property: 'og:description', content: 'Accede a tu dashboard personalizado para gestionar tus servicios de digitalización empresarial.' },
+      { property: 'og:url', content: 'https://gialoma.com/acceso' },
+      { name: 'robots', content: 'noindex, nofollow' }, // Login pages should not be indexed
+      { name: 'language', content: 'es' }
+    ];
+
+    metaTags.forEach(tag => {
+      const meta = document.createElement('meta');
+      if (tag.property) {
+        meta.setAttribute('property', tag.property);
+      } else {
+        meta.setAttribute('name', tag.name);
+      }
+      meta.setAttribute('content', tag.content);
+      document.head.appendChild(meta);
+    });
+
+    // Add canonical link
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://gialoma.com/acceso';
+    document.head.appendChild(canonical);
+
+    return () => {
+      // Cleanup
+      const addedElements = document.querySelectorAll('meta[name], meta[property], link[rel="canonical"]');
+      addedElements.forEach(el => el.remove());
+    };
+  }, []);
+
+  // Increment visit counter on page load (only in founder login)
+  React.useEffect(() => {
+    if (activeTab === 'founder') {
+      updateVisitCounters();
+    }
+  }, [activeTab]);
+
+  const updateVisitCounters = () => {
+    // Check if we've already counted this visit
+    const hasVisited = sessionStorage.getItem('counted_visit');
+    
+    if (!hasVisited) {
+      // Mark that we've counted this visit
+      sessionStorage.setItem('counted_visit', 'true');
+      
+      // Get and increment total visits
+      const storedVisits = localStorage.getItem(VISIT_COUNTER_KEY) || '0';
+      const newTotalVisits = parseInt(storedVisits) + 1;
+      localStorage.setItem(VISIT_COUNTER_KEY, newTotalVisits.toString());
+      
+      // Check if we need to reset today's counter
+      const today = new Date().toDateString();
+      const lastVisitDate = localStorage.getItem(LAST_VISIT_DATE_KEY);
+      
+      if (lastVisitDate !== today) {
+        // It's a new day, reset the today counter
+        localStorage.setItem(TODAY_COUNTER_KEY, '1');
+        localStorage.setItem(LAST_VISIT_DATE_KEY, today);
+      } else {
+        // Same day, increment today's counter
+        const storedTodayVisits = localStorage.getItem(TODAY_COUNTER_KEY) || '0';
+        const newTodayVisits = parseInt(storedTodayVisits) + 1;
+        localStorage.setItem(TODAY_COUNTER_KEY, newTodayVisits.toString());
+      }
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (activeTab === 'client') {
+      // Client authentication
+      const client = validClients.find(c => c.email === email && c.password === password);
+      
+      if (client) {
+        // Save login information if "remember me" is checked
+        if (rememberMe) {
+          localStorage.setItem('gialoma_client_user', JSON.stringify({ name: client.name, type: 'client' }));
+        } else {
+          // Remove any stored data if remember me is not checked
+          localStorage.removeItem('gialoma_client_user');
+          sessionStorage.setItem('gialoma_client_session', JSON.stringify({ name: client.name, type: 'client' }));
+        }
+        
+        // Redirect to client dashboard
+        window.location.href = '/client-dashboard';
+      } else {
+        setError('Email o contraseña incorrectos. Prueba con demo@gialoma.com / password123 para acceso demo.');
+      }
+    } else {
+      // Founder authentication
+      const founder = validFounders.find(f => f.email === email && f.password === password);
+      
+      if (founder) {
+        // Save login information
+        if (rememberMe) {
+          localStorage.setItem('gialoma_logged_in_user', JSON.stringify({ name: founder.name, type: 'founder' }));
+        } else {
+          // Remove any stored data if remember me is not checked
+          localStorage.removeItem('gialoma_logged_in_user');
+          sessionStorage.setItem('gialoma_founder_session', JSON.stringify({ name: founder.name, type: 'founder' }));
+        }
+        
+        // Ensure counters are initialized
+        if (!localStorage.getItem(VISIT_COUNTER_KEY)) {
+          localStorage.setItem(VISIT_COUNTER_KEY, '1');
+        }
+        if (!localStorage.getItem(TODAY_COUNTER_KEY)) {
+          localStorage.setItem(TODAY_COUNTER_KEY, '1');
+        }
+        if (!localStorage.getItem(LAST_VISIT_DATE_KEY)) {
+          localStorage.setItem(LAST_VISIT_DATE_KEY, new Date().toDateString());
+        }
+        
+        // Redirect to founder dashboard
+        window.location.href = '/founder-dashboard';
+      } else {
+        setError('Email o contraseña incorrectos. Prueba con paloma@gialoma.com / founder123 para acceso demo.');
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <LoginNavbar />
+      
+      <div className="flex-grow flex items-center justify-center bg-gray-50 py-12 px-4 pt-36 md:pt-40">
+        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-gialoma-black">Acceso a la Cuenta</h1>
+            <p className="mt-2 text-gialoma-darkgray">
+              Accede a tu panel personalizado
+            </p>
+          </div>
+          
+          <Tabs defaultValue="client" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsTrigger value="client" className="flex items-center justify-center gap-2">
+                <UserIcon size={16} />
+                <span>Cliente</span>
+              </TabsTrigger>
+              <TabsTrigger value="founder" className="flex items-center justify-center gap-2">
+                <ShieldIcon size={16} />
+                <span>Fundador</span>
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="client">
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm mb-4">
+                  {error}
+                </div>
+              )}
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="client-email" className="block text-sm font-medium text-gialoma-darkgray mb-1">
+                      Correo Electrónico
+                    </label>
+                    <Input
+                      id="client-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="client-password" className="block text-sm font-medium text-gialoma-darkgray mb-1">
+                      Contraseña
+                    </label>
+                    <div className="relative">
+                      <Input
+                        id="client-password"
+                        name="password"
+                        type={showPassword ? 'text' : 'password'}
+                        autoComplete="current-password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOffIcon className="h-5 w-5 text-gray-400" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-400" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Checkbox
+                        id="client-remember-me"
+                        checked={rememberMe}
+                        onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                        className="mr-2"
+                      />
+                      <label htmlFor="client-remember-me" className="text-sm text-gialoma-darkgray">
+                        Recordarme
+                      </label>
+                    </div>
+                    
+                    <Link to="/recuperar-contraseña" className="text-sm text-gialoma-gold hover:text-gialoma-darkgold">
+                      ¿Olvidaste tu contraseña?
+                    </Link>
+                  </div>
+                </div>
+                
+                <Button
+                  type="submit"
+                  className="w-full bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
+                >
+                  Iniciar Sesión como Cliente
+                </Button>
+                
+                <div className="text-center mt-4">
+                  <p className="text-sm text-gialoma-darkgray">
+                    ¿No tienes una cuenta?{' '}
+                    <Link to="/registro" className="text-gialoma-gold hover:text-gialoma-darkgold font-medium">
+                      Regístrate
+                    </Link>
+                  </p>
+                </div>
+              </form>
+            </TabsContent>
+            
+            <TabsContent value="founder">
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm mb-4">
+                  {error}
+                </div>
+              )}
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="founder-email" className="block text-sm font-medium text-gialoma-darkgray mb-1">
+                      Correo Electrónico
+                    </label>
+                    <Input
+                      id="founder-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="founder-password" className="block text-sm font-medium text-gialoma-darkgray mb-1">
+                      Contraseña
+                    </label>
+                    <div className="relative">
+                      <Input
+                        id="founder-password"
+                        name="password"
+                        type={showPassword ? 'text' : 'password'}
+                        autoComplete="current-password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOffIcon className="h-5 w-5 text-gray-400" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-400" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Checkbox
+                        id="founder-remember-me"
+                        checked={rememberMe}
+                        onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                        className="mr-2"
+                      />
+                      <label htmlFor="founder-remember-me" className="text-sm text-gialoma-darkgray">
+                        Recordarme
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button
+                  type="submit"
+                  className="w-full bg-gialoma-darkgold hover:bg-gialoma-gold text-white"
+                >
+                  Iniciar Sesión como Fundador
+                </Button>
+                
+                <div className="text-center mt-4 text-sm text-gialoma-darkgray">
+                  <p>Para fines de demostración, usa:</p>
+                  <p>Email: paloma@gialoma.com</p>
+                  <p>Contraseña: founder123</p>
+                </div>
+              </form>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+      
+      <FooterEs />
+    </div>
+  );
+};
+
+export default LoginEs;
