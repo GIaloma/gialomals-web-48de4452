@@ -10,33 +10,23 @@ const CookieBannerEs = () => {
   useEffect(() => {
     // Check if the user has already accepted the cookie policy for Spanish
     const hasAccepted = localStorage.getItem('cookiePolicyAccepted_es');
-    console.log('Spanish Cookie Banner - hasAccepted:', hasAccepted); // Debug log
-    
     if (!hasAccepted) {
       // Show the banner immediately - no delay to ensure it shows at the same time as BookPopup
       setIsVisible(true);
-      console.log('Spanish Cookie Banner - Setting visible to true'); // Debug log
     }
   }, []);
 
   const handleAccept = () => {
-    console.log('Spanish Cookie Banner - Accept clicked'); // Debug log
     localStorage.setItem('cookiePolicyAccepted_es', 'true');
     setIsVisible(false);
   };
 
   const handleClose = () => {
-    console.log('Spanish Cookie Banner - Close clicked'); // Debug log
     // Only close temporarily - it will reappear on next page load until accepted
     setIsVisible(false);
   };
 
-  if (!isVisible) {
-    console.log('Spanish Cookie Banner - Not visible, returning null'); // Debug log
-    return null;
-  }
-
-  console.log('Spanish Cookie Banner - Rendering banner'); // Debug log
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white shadow-lg border-t border-gray-200 p-4 md:p-6">
