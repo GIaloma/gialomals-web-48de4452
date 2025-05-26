@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import NavbarEs from '../components/Navbar-es';
 import HeroEs from '../components/Hero-es';
 import AboutEs from '../components/About-es';
-import Solutions from '../components/Solutions';
-import Services from '../components/Services';
-import Blog from '../components/Blog';
-import Team from '../components/Team';
-import Testimonials from '../components/Testimonials';
+import SolutionsEs from '../components/Solutions-es';
+import ServicesEs from '../components/Services-es';
+import BlogEs from '../components/Blog-es';
+import TeamEs from '../components/Team-es';
+import TestimonialsEs from '../components/Testimonials-es';
 import CTAEs from '../components/CTA-es';
 import ContactEs from '../components/Contact-es';
 import FooterEs from '../components/Footer-es';
@@ -35,11 +35,11 @@ const IndexEs = () => {
       <NavbarEs />
       <HeroEs />
       <AboutEs />
-      <Solutions />
-      <Services />
-      <Blog />
-      <Team />
-      <Testimonials />
+      <SolutionsEs />
+      <ServicesEs />
+      <BlogEs />
+      <TeamEs />
+      <TestimonialsEs />
       <CTAEs />
       <ContactEs />
       <FooterEs />
