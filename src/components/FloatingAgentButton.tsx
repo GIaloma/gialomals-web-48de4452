@@ -78,17 +78,12 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
         </div>
       </div>
 
-      {/* Main FAB */}
+      {/* Main FAB - REMOVED PULSING ANIMATION */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold hover:from-gialoma-lightgold hover:to-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
       >
         {isMenuOpen ? <X size={24} /> : <MessageCircle size={24} />}
-        
-        {/* Pulse animation when closed */}
-        {!isMenuOpen && (
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold animate-ping opacity-20"></div>
-        )}
         
         {/* Tooltip */}
         <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
