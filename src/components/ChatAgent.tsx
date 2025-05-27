@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   Webchat,
-  WebchatProvider,
   getClient,
-  Configuration,
 } from '@botpress/webchat';
 
 const clientId = "41604519-835f-482a-9b27-8f639293c1a9";
@@ -15,12 +13,6 @@ interface ChatAgentProps {
 }
 
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
-  const configuration: Configuration = {
-    color: '#c7ae6a', // Gialoma gold color
-    // You can add more configuration options here
-    // locale: language, // If Botpress supports locale switching
-  };
-
   const client = getClient({
     clientId,
   });
@@ -56,11 +48,14 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
 
         {/* Chat Content */}
         <div className="flex-1 relative">
-          <WebchatProvider client={client} configuration={configuration}>
-            <div className="h-full">
-              <Webchat />
-            </div>
-          </WebchatProvider>
+          <div className="h-full">
+            <Webchat 
+              client={client}
+              configuration={{
+                color: '#c7ae6a', // Gialoma gold color
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
