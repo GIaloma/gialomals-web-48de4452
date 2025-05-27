@@ -22,24 +22,28 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
       script.onload = () => {
         scriptsLoadedRef.current = true;
         
-        // Create the ElevenLabs widget element directly in the page
+        // Create the ElevenLabs widget element
         const widgetElement = document.createElement('elevenlabs-convai');
         widgetElement.setAttribute('agent-id', 'pPlGZHykXaSyJdBNxt7f');
         
-        // Style the widget to appear on the LEFT side (opposite of chat)
+        // Let's try different positioning approaches to force it to the left
         widgetElement.style.position = 'fixed';
         widgetElement.style.bottom = '20px';
-        widgetElement.style.left = '20px'; // CHANGED: LEFT side instead of right
+        widgetElement.style.left = '20px'; // Try to force left
+        widgetElement.style.right = 'auto'; // Override any right positioning
         widgetElement.style.zIndex = '1000';
         widgetElement.style.borderRadius = '10px';
         widgetElement.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+        
+        // Additional CSS to try to override ElevenLabs default positioning
+        widgetElement.style.transform = 'translateX(0)';
         
         // Add to page
         document.body.appendChild(widgetElement);
         widgetContainerRef.current = widgetElement;
         
-        // Add close button for voice agent - positioned relative to widget
-        setTimeout(addCloseButtonToVoice, 1500); // Wait a bit longer for widget to fully load
+        // Add close button - position it where the widget actually appears
+        setTimeout(addCloseButtonToVoice, 2000); // Wait longer to see where widget actually appears
       };
       
       document.head.appendChild(script);
@@ -65,26 +69,33 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
       return;
     }
 
-    // Try to find the actual voice widget dimensions
-    const actualWidget = widgetContainerRef.current.shadowRoot?.querySelector('[class*="widget"]') ||
-                         widgetContainerRef.current.querySelector('[class*="widget"]') ||
-                         widgetContainerRef.current;
+    // Check where the widget actually appeared by getting its computed position
+    const rect = widgetContainerRef.current.getBoundingClientRect();
+    const isActuallyOnRight = rect.right > window.innerWidth / 2;
 
-    // Create a custom close button positioned much closer to the widget
+    // Create close button positioned based on where widget actually is
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
     
-    // Position MUCH closer to the voice widget on LEFT side
-    closeButton.style.bottom = '280px'; // Just above the widget (reduced from 320px)
-    closeButton.style.left = '25px'; // CHANGED: LEFT side to match widget position
+    if (isActuallyOnRight) {
+      // Widget is on right side (ElevenLabs default) - put close button on right
+      closeButton.style.bottom = '280px';
+      closeButton.style.right = '30px'; // RIGHT side to match widget
+      console.log('Voice widget detected on RIGHT side - positioning close button on right');
+    } else {
+      // Widget actually moved to left - put close button on left
+      closeButton.style.bottom = '280px';
+      closeButton.style.left = '25px'; // LEFT side to match widget
+      console.log('Voice widget detected on LEFT side - positioning close button on left');
+    }
     
     closeButton.style.zIndex = '10000';
     closeButton.style.backgroundColor = '#b99a45'; // Gialoma dark gold
     closeButton.style.color = '#000000';
     closeButton.style.border = 'none';
     closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '28px'; // Slightly smaller
+    closeButton.style.width = '28px';
     closeButton.style.height = '28px';
     closeButton.style.fontSize = '14px';
     closeButton.style.fontWeight = 'bold';
@@ -120,7 +131,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
     if (closeButtonRef.current) {
       closeButtonRef.current.style.display = isOpen ? 'block' : 'none';
     } else if (isOpen && scriptsLoadedRef.current) {
-      setTimeout(addCloseButtonToVoice, 1500);
+      setTimeout(addCloseButtonToVoice, 2000);
     }
   }, [isOpen]);
 
