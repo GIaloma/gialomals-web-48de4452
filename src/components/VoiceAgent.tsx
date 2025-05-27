@@ -38,8 +38,8 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
         document.body.appendChild(widgetElement);
         widgetContainerRef.current = widgetElement;
         
-        // Add close button for voice agent
-        addCloseButtonToVoice();
+        // Add close button for voice agent - positioned relative to widget
+        setTimeout(addCloseButtonToVoice, 1000); // Wait for widget to fully load
       };
       
       document.head.appendChild(script);
@@ -60,20 +60,28 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
   }, [isOpen]);
 
   const addCloseButtonToVoice = () => {
-    // Create a custom close button for voice agent
+    if (!widgetContainerRef.current) {
+      setTimeout(addCloseButtonToVoice, 500);
+      return;
+    }
+
+    // Create a custom close button for voice agent positioned next to the widget
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
-    closeButton.style.top = '20px';
-    closeButton.style.right = '20px';
+    
+    // Position relative to the voice widget (which is bottom: 20px, right: 20px)
+    closeButton.style.bottom = '320px'; // Above the voice widget
+    closeButton.style.right = '30px'; // Aligned with widget
+    
     closeButton.style.zIndex = '10000';
     closeButton.style.backgroundColor = '#b99a45'; // Gialoma dark gold (different from chat)
     closeButton.style.color = '#000000';
     closeButton.style.border = 'none';
     closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '40px';
-    closeButton.style.height = '40px';
-    closeButton.style.fontSize = '18px';
+    closeButton.style.width = '32px';
+    closeButton.style.height = '32px';
+    closeButton.style.fontSize = '16px';
     closeButton.style.fontWeight = 'bold';
     closeButton.style.cursor = 'pointer';
     closeButton.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
@@ -107,7 +115,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
     if (closeButtonRef.current) {
       closeButtonRef.current.style.display = isOpen ? 'block' : 'none';
     } else if (isOpen && scriptsLoadedRef.current) {
-      addCloseButtonToVoice();
+      setTimeout(addCloseButtonToVoice, 1000);
     }
   }, [isOpen]);
 
