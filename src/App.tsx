@@ -21,12 +21,15 @@ import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import NotFound from "./pages/NotFound";
-import FloatingAgentButton from "./components/FloatingAgentButton";
-import ChatAgent from "./components/ChatAgent";
-import VoiceAgent from "./components/VoiceAgent";
+// TEMPORARILY COMMENTED OUT - TESTING LOGO PULSING
+// import FloatingAgentButton from "./components/FloatingAgentButton";
+// import ChatAgent from "./components/ChatAgent";
+// import VoiceAgent from "./components/VoiceAgent";
 
 const queryClient = new QueryClient();
 
+// TEMPORARILY DISABLED FLOATING BUTTON TO TEST LOGO PULSING
+/*
 // Component to handle the floating button based on current route
 const FloatingButtonWrapper = () => {
   const location = useLocation();
@@ -77,14 +80,12 @@ const FloatingButtonWrapper = () => {
         onVoiceClick={handleVoiceClick}
       />
       
-      {/* Chat Agent Modal */}
       <ChatAgent
         isOpen={isChatOpen}
         onClose={handleChatClose}
         language={getLanguage()}
       />
       
-      {/* Voice Agent Modal */}
       <VoiceAgent
         isOpen={isVoiceOpen}
         onClose={handleVoiceClose}
@@ -93,6 +94,7 @@ const FloatingButtonWrapper = () => {
     </>
   );
 };
+*/
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -160,8 +162,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-        {/* Floating Agent Button - shows on all pages except dashboards and login */}
-        <FloatingButtonWrapper />
+        {/* TEMPORARILY REMOVED FLOATING BUTTON TO TEST LOGO PULSING */}
+        {/* <FloatingButtonWrapper /> */}
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
