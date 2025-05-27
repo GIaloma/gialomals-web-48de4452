@@ -35,7 +35,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
             window.botpressWebChat.show();
             
             // Add custom close button to Botpress chat
-            addCloseButtonToBotpress();
+            setTimeout(addCloseButtonToBotpress, 1000); // Wait for Botpress to fully load
           }
         }, 500);
       };
@@ -56,20 +56,36 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
   }, [isOpen]);
 
   const addCloseButtonToBotpress = () => {
-    // Create a custom close button
+    // Find the Botpress chat container first
+    const botpressContainer = document.querySelector('#bp-web-widget') || 
+                             document.querySelector('[data-testid="widget"]') ||
+                             document.querySelector('.bp-widget') ||
+                             document.querySelector('iframe[src*="botpress"]');
+    
+    if (!botpressContainer) {
+      // If container not found, try again in a bit
+      setTimeout(addCloseButtonToBotpress, 500);
+      return;
+    }
+
+    // Create a custom close button positioned relative to the chat
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
-    closeButton.style.top = '20px';
-    closeButton.style.right = '20px';
+    
+    // Position the button relative to the chat container
+    const rect = botpressContainer.getBoundingClientRect();
+    closeButton.style.bottom = (window.innerHeight - rect.top + 10) + 'px'; // 10px above chat
+    closeButton.style.right = (window.innerWidth - rect.right + 10) + 'px'; // 10px to the right of chat
+    
     closeButton.style.zIndex = '10000';
     closeButton.style.backgroundColor = '#c7ae6a'; // Gialoma gold
     closeButton.style.color = '#000000';
     closeButton.style.border = 'none';
     closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '40px';
-    closeButton.style.height = '40px';
-    closeButton.style.fontSize = '18px';
+    closeButton.style.width = '32px';
+    closeButton.style.height = '32px';
+    closeButton.style.fontSize = '16px';
     closeButton.style.fontWeight = 'bold';
     closeButton.style.cursor = 'pointer';
     closeButton.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
@@ -99,7 +115,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       if (isOpen) {
         window.botpressWebChat.show();
         if (!closeButtonRef.current) {
-          addCloseButtonToBotpress();
+          setTimeout(addCloseButtonToBotpress, 1000);
         }
       } else {
         window.botpressWebChat.hide();
