@@ -41,7 +41,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
 
   return (
     <div 
-      className="fixed bottom-6 left-6"  // MOVED TO LEFT SIDE
+      className="fixed bottom-6 right-6"  // MOVED BACK TO RIGHT SIDE
       style={{ 
         zIndex: 40,
         willChange: 'auto',
@@ -52,6 +52,17 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       <div className={`transition-all duration-300 ${isMenuOpen ? 'mb-4 space-y-3' : ''}`}>
         {/* Voice Button */}
         <div className="flex items-center space-x-3">
+          {isMenuOpen && (
+            <div 
+              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+              style={{ 
+                animation: 'fadeInRight 0.3s ease-out',
+                willChange: 'auto'
+              }}
+            >
+              {t.voice}
+            </div>
+          )}
           <button
             onClick={handleVoiceClick}
             className={`flex items-center justify-center w-12 h-12 bg-gialoma-darkgold hover:bg-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
@@ -61,21 +72,21 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
           >
             <Mic size={20} />
           </button>
-          {isMenuOpen && (
-            <div 
-              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
-              style={{ 
-                animation: 'fadeInLeft 0.3s ease-out',
-                willChange: 'auto'
-              }}
-            >
-              {t.voice}
-            </div>
-          )}
         </div>
         
         {/* Chat Button */}
         <div className="flex items-center space-x-3">
+          {isMenuOpen && (
+            <div 
+              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+              style={{ 
+                animation: 'fadeInRight 0.3s ease-out',
+                willChange: 'auto'
+              }}
+            >
+              {t.chat}
+            </div>
+          )}
           <button
             onClick={handleChatClick}
             className={`flex items-center justify-center w-12 h-12 bg-gialoma-gold hover:bg-gialoma-lightgold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
@@ -85,21 +96,10 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
           >
             <MessageCircle size={20} />
           </button>
-          {isMenuOpen && (
-            <div 
-              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
-              style={{ 
-                animation: 'fadeInLeft 0.3s ease-out',
-                willChange: 'auto'
-              }}
-            >
-              {t.chat}
-            </div>
-          )}
         </div>
       </div>
 
-      {/* Main FAB - NOW ON LEFT SIDE */}
+      {/* Main FAB - BACK ON RIGHT SIDE */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold hover:from-gialoma-lightgold hover:to-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
@@ -110,9 +110,9 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       >
         {isMenuOpen ? <X size={24} /> : <MessageCircle size={24} />}
         
-        {/* Tooltip - NOW ON RIGHT SIDE */}
+        {/* Tooltip - NOW ON LEFT SIDE OF BUTTON */}
         <div 
-          className="absolute left-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+          className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
           style={{ willChange: 'opacity' }}
         >
           {t.support}
@@ -121,10 +121,10 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
 
       {/* Custom CSS with optimized animations */}
       <style jsx>{`
-        @keyframes fadeInLeft {
+        @keyframes fadeInRight {
           from {
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(10px);
           }
           to {
             opacity: 1;
