@@ -16,7 +16,7 @@ interface ChatAgentProps {
 
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
   const configuration: Configuration = {
-    color: '#3B82F6', // Blue color to match your theme
+    color: '#c7ae6a', // Gialoma gold color
     // You can add more configuration options here
     // locale: language, // If Botpress supports locale switching
   };
@@ -31,7 +31,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md h-96 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold text-gialoma-black">
           <div>
             <h3 className="text-lg font-semibold">
               {language === 'es' ? 'Asistente IA 24/7' : '24/7 AI Assistant'}
@@ -45,7 +45,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-white/20 rounded-full transition-colors"
+            className="p-1 hover:bg-black/10 rounded-full transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
