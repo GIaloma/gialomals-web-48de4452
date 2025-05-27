@@ -26,24 +26,17 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
         const widgetElement = document.createElement('elevenlabs-convai');
         widgetElement.setAttribute('agent-id', 'pPlGZHykXaSyJdBNxt7f');
         
-        // Let's try different positioning approaches to force it to the left
-        widgetElement.style.position = 'fixed';
-        widgetElement.style.bottom = '20px';
-        widgetElement.style.left = '20px'; // Try to force left
-        widgetElement.style.right = 'auto'; // Override any right positioning
-        widgetElement.style.zIndex = '1000';
+        // Let ElevenLabs position it where it wants (usually right side)
+        // Just apply basic styling
         widgetElement.style.borderRadius = '10px';
         widgetElement.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-        
-        // Additional CSS to try to override ElevenLabs default positioning
-        widgetElement.style.transform = 'translateX(0)';
         
         // Add to page
         document.body.appendChild(widgetElement);
         widgetContainerRef.current = widgetElement;
         
-        // Add close button - position it where the widget actually appears
-        setTimeout(addCloseButtonToVoice, 2000); // Wait longer to see where widget actually appears
+        // Add close button after widget loads
+        setTimeout(addCloseButtonToVoice, 1500);
       };
       
       document.head.appendChild(script);
@@ -69,26 +62,14 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
       return;
     }
 
-    // Check where the widget actually appeared by getting its computed position
-    const rect = widgetContainerRef.current.getBoundingClientRect();
-    const isActuallyOnRight = rect.right > window.innerWidth / 2;
-
-    // Create close button positioned based on where widget actually is
+    // Create close button positioned on the right side (matching ElevenLabs default position)
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
     
-    if (isActuallyOnRight) {
-      // Widget is on right side (ElevenLabs default) - put close button on right
-      closeButton.style.bottom = '280px';
-      closeButton.style.right = '30px'; // RIGHT side to match widget
-      console.log('Voice widget detected on RIGHT side - positioning close button on right');
-    } else {
-      // Widget actually moved to left - put close button on left
-      closeButton.style.bottom = '280px';
-      closeButton.style.left = '25px'; // LEFT side to match widget
-      console.log('Voice widget detected on LEFT side - positioning close button on left');
-    }
+    // Position on right side where ElevenLabs typically appears
+    closeButton.style.bottom = '280px';
+    closeButton.style.right = '30px'; // RIGHT side to match ElevenLabs default
     
     closeButton.style.zIndex = '10000';
     closeButton.style.backgroundColor = '#b99a45'; // Gialoma dark gold
@@ -131,7 +112,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
     if (closeButtonRef.current) {
       closeButtonRef.current.style.display = isOpen ? 'block' : 'none';
     } else if (isOpen && scriptsLoadedRef.current) {
-      setTimeout(addCloseButtonToVoice, 2000);
+      setTimeout(addCloseButtonToVoice, 1500);
     }
   }, [isOpen]);
 
