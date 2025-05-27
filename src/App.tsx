@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import IndexEs from "./pages/Index-es";
 import BlogPost from "./pages/BlogPost";
@@ -20,8 +20,55 @@ import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import NotFound from "./pages/NotFound";
+import FloatingAgentButton from "./components/FloatingAgentButton";
 
 const queryClient = new QueryClient();
+
+// Component to handle the floating button based on current route
+const FloatingButtonWrapper = () => {
+  const location = useLocation();
+  
+  // Determine language based on the current route
+  const getLanguage = (): 'en' | 'es' => {
+    const path = location.pathname;
+    if (path.startsWith('/en') || path === '/english' || path === '/book' || path === '/login') {
+      return 'en';
+    }
+    return 'es'; // Default to Spanish
+  };
+
+  // Don't show the floating button on dashboard or login pages
+  const hiddenRoutes = [
+    '/client-dashboard', '/panel-cliente', 
+    '/founder-dashboard', '/panel-fundador',
+    '/login', '/acceso', '/en/login', '/es/acceso'
+  ];
+  
+  if (hiddenRoutes.includes(location.pathname)) {
+    return null;
+  }
+
+  // Placeholder functions - replace these with your actual agent implementations
+  const handleChatClick = () => {
+    console.log('Chat agent clicked - implement your chat agent here');
+    // TODO: Replace with your chat agent code
+    // Example: openChatModal() or initializeChatAgent()
+  };
+
+  const handleVoiceClick = () => {
+    console.log('Voice agent clicked - implement your voice agent here');
+    // TODO: Replace with your voice agent code
+    // Example: openVoiceModal() or initializeVoiceAgent()
+  };
+
+  return (
+    <FloatingAgentButton
+      language={getLanguage()}
+      onChatClick={handleChatClick}
+      onVoiceClick={handleVoiceClick}
+    />
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -88,6 +135,9 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        
+        {/* Floating Agent Button - shows on all pages except dashboards and login */}
+        <FloatingButtonWrapper />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
