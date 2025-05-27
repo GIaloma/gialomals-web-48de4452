@@ -40,7 +40,14 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div 
+      className="fixed bottom-6 left-6"
+      style={{ 
+        zIndex: 40, // Lower z-index to avoid conflicts
+        willChange: 'auto', // Prevent creating new stacking context
+        isolation: 'auto' // Don't isolate this element
+      }}
+    >
       {/* Menu Options */}
       <div className={`transition-all duration-300 ${isMenuOpen ? 'mb-4 space-y-3' : ''}`}>
         {/* Voice Button */}
@@ -50,11 +57,18 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
             className={`flex items-center justify-center w-12 h-12 bg-gialoma-darkgold hover:bg-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
               isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'
             }`}
+            style={{ willChange: 'transform, opacity' }} // Optimize animations
           >
             <Mic size={20} />
           </button>
           {isMenuOpen && (
-            <div className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
+            <div 
+              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+              style={{ 
+                animation: 'fadeInLeft 0.3s ease-out',
+                willChange: 'auto'
+              }}
+            >
               {t.voice}
             </div>
           )}
@@ -67,33 +81,47 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
             className={`flex items-center justify-center w-12 h-12 bg-gialoma-gold hover:bg-gialoma-lightgold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
               isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'
             }`}
+            style={{ willChange: 'transform, opacity' }} // Optimize animations
           >
             <MessageCircle size={20} />
           </button>
           {isMenuOpen && (
-            <div className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
+            <div 
+              className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+              style={{ 
+                animation: 'fadeInLeft 0.3s ease-out',
+                willChange: 'auto'
+              }}
+            >
               {t.chat}
             </div>
           )}
         </div>
       </div>
 
-      {/* Main FAB - NOW ON LEFT SIDE */}
+      {/* Main FAB */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold hover:from-gialoma-lightgold hover:to-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
+        style={{ 
+          willChange: 'transform', // Optimize hover animations only
+          isolation: 'auto' // Don't create stacking context
+        }}
       >
         {isMenuOpen ? <X size={24} /> : <MessageCircle size={24} />}
         
-        {/* Tooltip - NOW ON RIGHT SIDE */}
-        <div className="absolute left-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        {/* Tooltip */}
+        <div 
+          className="absolute left-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+          style={{ willChange: 'opacity' }}
+        >
           {t.support}
         </div>
       </button>
 
-      {/* Custom CSS for fade-in animation */}
+      {/* Custom CSS with optimized animations */}
       <style jsx>{`
-        @keyframes fade-in {
+        @keyframes fadeInLeft {
           from {
             opacity: 0;
             transform: translateX(-10px);
@@ -102,10 +130,6 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
             opacity: 1;
             transform: translateX(0);
           }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
         }
       `}</style>
     </div>
