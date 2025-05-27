@@ -46,13 +46,13 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
         {/* Voice Button */}
         <div className="flex items-center space-x-3">
           {isMenuOpen && (
-            <div className="bg-gray-800 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
+            <div className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
               {t.voice}
             </div>
           )}
           <button
             onClick={handleVoiceClick}
-            className={`flex items-center justify-center w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            className={`flex items-center justify-center w-12 h-12 bg-gialoma-darkgold hover:bg-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
               isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'
             }`}
           >
@@ -63,13 +63,13 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
         {/* Chat Button */}
         <div className="flex items-center space-x-3">
           {isMenuOpen && (
-            <div className="bg-gray-800 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
+            <div className="bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-fade-in">
               {t.chat}
             </div>
           )}
           <button
             onClick={handleChatClick}
-            className={`flex items-center justify-center w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            className={`flex items-center justify-center w-12 h-12 bg-gialoma-gold hover:bg-gialoma-lightgold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
               isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'
             }`}
           >
@@ -81,17 +81,17 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       {/* Main FAB */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
+        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold hover:from-gialoma-lightgold hover:to-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
       >
         {isMenuOpen ? <X size={24} /> : <MessageCircle size={24} />}
         
         {/* Pulse animation when closed */}
         {!isMenuOpen && (
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 animate-ping opacity-20"></div>
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold animate-ping opacity-20"></div>
         )}
         
         {/* Tooltip */}
-        <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
           {t.support}
         </div>
       </button>
