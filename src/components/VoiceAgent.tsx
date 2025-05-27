@@ -26,10 +26,10 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
         const widgetElement = document.createElement('elevenlabs-convai');
         widgetElement.setAttribute('agent-id', 'pPlGZHykXaSyJdBNxt7f');
         
-        // Style the widget to appear as a floating chat
+        // Style the widget to appear on the LEFT side (opposite of chat)
         widgetElement.style.position = 'fixed';
         widgetElement.style.bottom = '20px';
-        widgetElement.style.right = '20px';
+        widgetElement.style.left = '20px'; // CHANGED: LEFT side instead of right
         widgetElement.style.zIndex = '1000';
         widgetElement.style.borderRadius = '10px';
         widgetElement.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
@@ -39,7 +39,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
         widgetContainerRef.current = widgetElement;
         
         // Add close button for voice agent - positioned relative to widget
-        setTimeout(addCloseButtonToVoice, 1000); // Wait for widget to fully load
+        setTimeout(addCloseButtonToVoice, 1500); // Wait a bit longer for widget to fully load
       };
       
       document.head.appendChild(script);
@@ -65,23 +65,28 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
       return;
     }
 
-    // Create a custom close button for voice agent positioned next to the widget
+    // Try to find the actual voice widget dimensions
+    const actualWidget = widgetContainerRef.current.shadowRoot?.querySelector('[class*="widget"]') ||
+                         widgetContainerRef.current.querySelector('[class*="widget"]') ||
+                         widgetContainerRef.current;
+
+    // Create a custom close button positioned much closer to the widget
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
     
-    // Position relative to the voice widget (which is bottom: 20px, right: 20px)
-    closeButton.style.bottom = '320px'; // Above the voice widget
-    closeButton.style.right = '30px'; // Aligned with widget
+    // Position MUCH closer to the voice widget on LEFT side
+    closeButton.style.bottom = '280px'; // Just above the widget (reduced from 320px)
+    closeButton.style.left = '25px'; // CHANGED: LEFT side to match widget position
     
     closeButton.style.zIndex = '10000';
-    closeButton.style.backgroundColor = '#b99a45'; // Gialoma dark gold (different from chat)
+    closeButton.style.backgroundColor = '#b99a45'; // Gialoma dark gold
     closeButton.style.color = '#000000';
     closeButton.style.border = 'none';
     closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '32px';
-    closeButton.style.height = '32px';
-    closeButton.style.fontSize = '16px';
+    closeButton.style.width = '28px'; // Slightly smaller
+    closeButton.style.height = '28px';
+    closeButton.style.fontSize = '14px';
     closeButton.style.fontWeight = 'bold';
     closeButton.style.cursor = 'pointer';
     closeButton.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
@@ -115,7 +120,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
     if (closeButtonRef.current) {
       closeButtonRef.current.style.display = isOpen ? 'block' : 'none';
     } else if (isOpen && scriptsLoadedRef.current) {
-      setTimeout(addCloseButtonToVoice, 1000);
+      setTimeout(addCloseButtonToVoice, 1500);
     }
   }, [isOpen]);
 
