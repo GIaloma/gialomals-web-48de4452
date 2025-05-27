@@ -1,10 +1,4 @@
-import React from 'react';
-import {
-  Webchat,
-  getClient,
-} from '@botpress/webchat';
-
-const clientId = "41604519-835f-482a-9b27-8f639293c1a9";
+import React, { useEffect, useRef } from 'react';
 
 interface ChatAgentProps {
   isOpen: boolean;
@@ -13,9 +7,46 @@ interface ChatAgentProps {
 }
 
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
-  const client = getClient({
-    clientId,
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scriptsLoadedRef = useRef(false);
+
+  useEffect(() => {
+    if (isOpen && !scriptsLoadedRef.current) {
+      // Load the Botpress scripts dynamically
+      const script1 = document.createElement('script');
+      script1.src = 'https://cdn.botpress.cloud/webchat/v2.4/inject.js';
+      script1.async = true;
+      
+      const script2 = document.createElement('script');
+      script2.src = 'https://files.bpcontent.cloud/2025/05/01/17/20250501175630-EVUUQ1E2.js';
+      script2.async = true;
+      
+      script1.onload = () => {
+        // Load the second script after the first one is ready
+        document.head.appendChild(script2);
+      };
+
+      script2.onload = () => {
+        scriptsLoadedRef.current = true;
+        // Initialize Botpress webchat if needed
+        if (window.botpressWebChat) {
+          window.botpressWebChat.init();
+        }
+      };
+      
+      document.head.appendChild(script1);
+      
+      return () => {
+        // Cleanup scripts if component unmounts
+        if (document.head.contains(script1)) {
+          document.head.removeChild(script1);
+        }
+        if (document.head.contains(script2)) {
+          document.head.removeChild(script2);
+        }
+      };
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -47,19 +78,45 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
         </div>
 
         {/* Chat Content */}
-        <div className="flex-1 relative">
-          <div className="h-full">
-            <Webchat 
-              client={client}
-              configuration={{
-                color: '#c7ae6a', // Gialoma gold color
-              }}
-            />
+        <div className="flex-1 relative p-4">
+          <div className="text-center mb-4">
+            <p className="text-gray-600 text-sm">
+              {language === 'es' 
+                ? 'El chat se está cargando...'
+                : 'Chat is loading...'
+              }
+            </p>
+          </div>
+          
+          {/* Botpress Chat Container */}
+          <div 
+            ref={containerRef}
+            className="h-full flex items-center justify-center"
+            id="botpress-webchat-container"
+          >
+            {/* The Botpress webchat will be injected here */}
+            <div className="text-center text-gray-500">
+              {language === 'es' 
+                ? 'Iniciando chat...'
+                : 'Starting chat...'
+              }
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+// Add type declaration for window.botpressWebChat
+declare global {
+  interface Window {
+    botpressWebChat?: {
+      init: () => void;
+      show: () => void;
+      hide: () => void;
+    };
+  }
+}
 
 export default ChatAgent;
