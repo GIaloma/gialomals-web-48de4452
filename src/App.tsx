@@ -21,15 +21,12 @@ import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import NotFound from "./pages/NotFound";
-// TEMPORARILY COMMENTED OUT - TESTING LOGO PULSING
-// import FloatingAgentButton from "./components/FloatingAgentButton";
-// import ChatAgent from "./components/ChatAgent";
-// import VoiceAgent from "./components/VoiceAgent";
+import FloatingAgentButton from "./components/FloatingAgentButton";
+import ChatAgent from "./components/ChatAgent";
+import VoiceAgent from "./components/VoiceAgent";
 
 const queryClient = new QueryClient();
 
-// TEMPORARILY DISABLED FLOATING BUTTON TO TEST LOGO PULSING
-/*
 // Component to handle the floating button based on current route
 const FloatingButtonWrapper = () => {
   const location = useLocation();
@@ -94,7 +91,6 @@ const FloatingButtonWrapper = () => {
     </>
   );
 };
-*/
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -162,8 +158,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-        {/* TEMPORARILY REMOVED FLOATING BUTTON TO TEST LOGO PULSING */}
-        {/* <FloatingButtonWrapper /> */}
+        {/* RESTORED: Optimized Floating Agent Button */}
+        <FloatingButtonWrapper />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
