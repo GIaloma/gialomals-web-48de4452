@@ -68,15 +68,15 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       return;
     }
 
-    // Create a custom close button positioned relative to the chat
+    // Create a custom close button positioned on the left side
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
     
-    // Position the button relative to the chat container
-    const rect = botpressContainer.getBoundingClientRect();
-    closeButton.style.bottom = (window.innerHeight - rect.top + 10) + 'px'; // 10px above chat
-    closeButton.style.right = (window.innerWidth - rect.right + 10) + 'px'; // 10px to the right of chat
+    // Position the button on the LEFT side to match our new layout
+    // We want it near where the chat will be when we force it to left side
+    closeButton.style.bottom = '360px'; // Higher up to be visible above chat
+    closeButton.style.left = '25px'; // LEFT side positioning
     
     closeButton.style.zIndex = '10000';
     closeButton.style.backgroundColor = '#c7ae6a'; // Gialoma gold
@@ -107,6 +107,29 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
     
     document.body.appendChild(closeButton);
     closeButtonRef.current = closeButton;
+
+    // Try to force Botpress chat to left side with CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      #bp-web-widget,
+      [data-testid="widget"],
+      .bp-widget {
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: auto !important;
+        transform: none !important;
+      }
+      
+      /* Target Botpress iframe if it exists */
+      iframe[src*="botpress"] {
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: auto !important;
+      }
+    `;
+    document.head.appendChild(style);
   };
 
   useEffect(() => {
