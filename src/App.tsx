@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useState } from "react";
 import Index from "./pages/Index";
 import IndexEs from "./pages/Index-es";
 import BlogPost from "./pages/BlogPost";
@@ -21,12 +22,15 @@ import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
+import ChatAgent from "./components/ChatAgent";
 
 const queryClient = new QueryClient();
 
 // Component to handle the floating button based on current route
 const FloatingButtonWrapper = () => {
   const location = useLocation();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isVoiceOpen, setIsVoiceOpen] = useState(false);
   
   // Determine language based on the current route
   const getLanguage = (): 'en' | 'es' => {
@@ -48,25 +52,77 @@ const FloatingButtonWrapper = () => {
     return null;
   }
 
-  // Placeholder functions - replace these with your actual agent implementations
   const handleChatClick = () => {
-    console.log('Chat agent clicked - implement your chat agent here');
-    // TODO: Replace with your chat agent code
-    // Example: openChatModal() or initializeChatAgent()
+    setIsChatOpen(true);
   };
 
   const handleVoiceClick = () => {
+    setIsVoiceOpen(true);
     console.log('Voice agent clicked - implement your voice agent here');
-    // TODO: Replace with your voice agent code
-    // Example: openVoiceModal() or initializeVoiceAgent()
+    // TODO: Replace with your voice agent code when you provide it
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
+
+  const handleVoiceClose = () => {
+    setIsVoiceOpen(false);
   };
 
   return (
-    <FloatingAgentButton
-      language={getLanguage()}
-      onChatClick={handleChatClick}
-      onVoiceClick={handleVoiceClick}
-    />
+    <>
+      <FloatingAgentButton
+        language={getLanguage()}
+        onChatClick={handleChatClick}
+        onVoiceClick={handleVoiceClick}
+      />
+      
+      {/* Chat Agent Modal */}
+      <ChatAgent
+        isOpen={isChatOpen}
+        onClose={handleChatClose}
+        language={getLanguage()}
+      />
+      
+      {/* Voice Agent Modal - TODO: Add when you provide the voice agent code */}
+      {isVoiceOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-sm h-80 flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-t-lg">
+              <div>
+                <h3 className="text-lg font-semibold">
+                  {getLanguage() === 'es' ? 'Asistente de Voz' : 'Voice Assistant'}
+                </h3>
+                <p className="text-sm opacity-90">
+                  {getLanguage() === 'es' 
+                    ? 'Próximamente disponible'
+                    : 'Coming soon'
+                  }
+                </p>
+              </div>
+              <button
+                onClick={handleVoiceClose}
+                className="p-1 hover:bg-white/20 rounded-full transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div className="flex-1 flex items-center justify-center p-8">
+              <p className="text-center text-gray-600">
+                {getLanguage() === 'es' 
+                  ? 'El asistente de voz estará disponible pronto. Por ahora, puedes usar el chat.'
+                  : 'Voice assistant will be available soon. For now, you can use the chat.'
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
