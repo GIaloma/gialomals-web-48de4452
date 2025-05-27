@@ -56,14 +56,14 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md h-[500px] flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-green-500 to-blue-500 text-white">
+        <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold text-gialoma-black">
           <div>
             <h3 className="text-lg font-semibold">{t.title}</h3>
             <p className="text-sm opacity-90">{t.subtitle}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-white/20 rounded-full transition-colors"
+            className="p-1 hover:bg-black/10 rounded-full transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
