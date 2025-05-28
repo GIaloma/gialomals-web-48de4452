@@ -9,6 +9,7 @@ interface ChatAgentProps {
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
   const scriptsLoadedRef = useRef(false);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const retryCount = useRef(0);
 
   useEffect(() => {
     if (isOpen && !scriptsLoadedRef.current) {
@@ -35,6 +36,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
             window.botpressWebChat.show();
             
             // Add custom close button to Botpress chat
+            retryCount.current = 0;
             setTimeout(addCloseButtonToBotpress, 1000); // Wait for Botpress to fully load
           }
         }, 500);
@@ -56,16 +58,38 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
   }, [isOpen]);
 
   const addCloseButtonToBotpress = () => {
+    retryCount.current++;
+    
+    // If we've tried too many times, create button anyway
+    if (retryCount.current > 10) {
+      console.log('Creating close button without Botpress container detection');
+      createCloseButton();
+      return;
+    }
+
     // Find the Botpress chat container first
     const botpressContainer = document.querySelector('#bp-web-widget') || 
                              document.querySelector('[data-testid="widget"]') ||
                              document.querySelector('.bp-widget') ||
-                             document.querySelector('iframe[src*="botpress"]');
+                             document.querySelector('iframe[src*="botpress"]') ||
+                             document.querySelector('[class*="widget"]') ||
+                             document.querySelector('[id*="botpress"]');
     
     if (!botpressContainer) {
+      console.log(`Attempt ${retryCount.current}: Botpress container not found, retrying...`);
       // If container not found, try again in a bit
       setTimeout(addCloseButtonToBotpress, 500);
       return;
+    }
+
+    console.log('Botpress container found:', botpressContainer);
+    createCloseButton();
+  };
+
+  const createCloseButton = () => {
+    // Remove existing button if any
+    if (closeButtonRef.current && document.body.contains(closeButtonRef.current)) {
+      document.body.removeChild(closeButtonRef.current);
     }
 
     // Create a custom close button positioned on the left side
@@ -73,63 +97,87 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
     closeButton.innerHTML = '✕';
     closeButton.style.position = 'fixed';
     
-    // Position the button on the LEFT side to match our new layout
-    // We want it near where the chat will be when we force it to left side
-    closeButton.style.bottom = '360px'; // Higher up to be visible above chat
+    // Position the button on the LEFT side - make it very visible
+    closeButton.style.bottom = '300px'; // Lower position to be more visible
     closeButton.style.left = '25px'; // LEFT side positioning
     
-    closeButton.style.zIndex = '10000';
+    closeButton.style.zIndex = '99999'; // Even higher z-index
     closeButton.style.backgroundColor = '#c7ae6a'; // Gialoma gold
     closeButton.style.color = '#000000';
-    closeButton.style.border = 'none';
+    closeButton.style.border = '2px solid #b99a45'; // Add border for visibility
     closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '32px';
-    closeButton.style.height = '32px';
-    closeButton.style.fontSize = '16px';
+    closeButton.style.width = '40px'; // Make it bigger
+    closeButton.style.height = '40px';
+    closeButton.style.fontSize = '18px'; // Bigger font
     closeButton.style.fontWeight = 'bold';
     closeButton.style.cursor = 'pointer';
-    closeButton.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+    closeButton.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)'; // Stronger shadow
     closeButton.style.transition = 'all 0.2s ease';
+    closeButton.style.display = 'flex';
+    closeButton.style.alignItems = 'center';
+    closeButton.style.justifyContent = 'center';
+    
+    // Add a data attribute to identify it
+    closeButton.setAttribute('data-chat-close', 'true');
     
     closeButton.onmouseover = () => {
       closeButton.style.backgroundColor = '#d5c28f'; // Gialoma light gold
-      closeButton.style.transform = 'scale(1.1)';
+      closeButton.style.transform = 'scale(1.2)';
+      closeButton.style.boxShadow = '0 6px 20px rgba(0,0,0,0.6)';
     };
     
     closeButton.onmouseout = () => {
       closeButton.style.backgroundColor = '#c7ae6a'; // Gialoma gold
       closeButton.style.transform = 'scale(1)';
+      closeButton.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
     };
     
     closeButton.onclick = () => {
+      console.log('Chat close button clicked');
       onClose();
     };
     
     document.body.appendChild(closeButton);
     closeButtonRef.current = closeButton;
+    
+    console.log('Chat close button created and added to page');
 
     // Try to force Botpress chat to left side with CSS
-    const style = document.createElement('style');
-    style.textContent = `
-      #bp-web-widget,
-      [data-testid="widget"],
-      .bp-widget {
-        position: fixed !important;
-        bottom: 20px !important;
-        left: 20px !important;
-        right: auto !important;
-        transform: none !important;
-      }
-      
-      /* Target Botpress iframe if it exists */
-      iframe[src*="botpress"] {
-        position: fixed !important;
-        bottom: 20px !important;
-        left: 20px !important;
-        right: auto !important;
-      }
-    `;
-    document.head.appendChild(style);
+    const existingStyle = document.querySelector('#chat-positioning-style');
+    if (!existingStyle) {
+      const style = document.createElement('style');
+      style.id = 'chat-positioning-style';
+      style.textContent = `
+        #bp-web-widget,
+        [data-testid="widget"],
+        .bp-widget {
+          position: fixed !important;
+          bottom: 20px !important;
+          left: 20px !important;
+          right: auto !important;
+          transform: none !important;
+        }
+        
+        /* Target Botpress iframe if it exists */
+        iframe[src*="botpress"] {
+          position: fixed !important;
+          bottom: 20px !important;
+          left: 20px !important;
+          right: auto !important;
+        }
+        
+        /* Generic widget targeting */
+        [class*="widget"][class*="chat"],
+        [id*="botpress"],
+        [class*="botpress"] {
+          position: fixed !important;
+          bottom: 20px !important;
+          left: 20px !important;
+          right: auto !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
   };
 
   useEffect(() => {
@@ -138,13 +186,17 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       if (isOpen) {
         window.botpressWebChat.show();
         if (!closeButtonRef.current) {
+          retryCount.current = 0;
           setTimeout(addCloseButtonToBotpress, 1000);
+        } else {
+          // Show existing button
+          closeButtonRef.current.style.display = 'flex';
         }
       } else {
         window.botpressWebChat.hide();
-        if (closeButtonRef.current && document.body.contains(closeButtonRef.current)) {
-          document.body.removeChild(closeButtonRef.current);
-          closeButtonRef.current = null;
+        if (closeButtonRef.current) {
+          // Hide button instead of removing it
+          closeButtonRef.current.style.display = 'none';
         }
       }
     }
