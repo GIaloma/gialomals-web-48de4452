@@ -8,6 +8,7 @@ interface ChatAgentProps {
 
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
   const scriptsLoadedRef = useRef(false);
+  const chatInitializedRef = useRef(false);
 
   useEffect(() => {
     if (isOpen && !scriptsLoadedRef.current) {
@@ -29,9 +30,11 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
         scriptsLoadedRef.current = true;
         // Initialize and show Botpress webchat directly
         setTimeout(() => {
-          if (window.botpressWebChat) {
+          if (window.botpressWebChat && !chatInitializedRef.current) {
             window.botpressWebChat.init();
+            chatInitializedRef.current = true;
             window.botpressWebChat.show();
+            console.log('Botpress chat initialized and shown');
           }
         }, 500);
       };
@@ -39,7 +42,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       document.head.appendChild(script1);
       
       return () => {
-        // Hide the chat when component unmounts
+        // Clean up function - this runs when component unmounts completely
         if (window.botpressWebChat) {
           window.botpressWebChat.hide();
         }
@@ -49,14 +52,39 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
 
   useEffect(() => {
     // Show or hide chat based on isOpen state
-    if (scriptsLoadedRef.current && window.botpressWebChat) {
+    if (scriptsLoadedRef.current && window.botpressWebChat && chatInitializedRef.current) {
       if (isOpen) {
+        console.log('Showing Botpress chat');
         window.botpressWebChat.show();
       } else {
+        console.log('Hiding Botpress chat');
         window.botpressWebChat.hide();
       }
     }
   }, [isOpen]);
+
+  // Handle close button click
+  const handleCloseClick = () => {
+    console.log('Close button clicked');
+    
+    // Hide Botpress chat immediately
+    if (window.botpressWebChat) {
+      window.botpressWebChat.hide();
+      console.log('Botpress chat hidden via API');
+    }
+    
+    // Also try to hide any visible chat elements with CSS
+    const chatElements = document.querySelectorAll('#bp-web-widget, [data-testid="widget"], .bp-widget, iframe[src*="botpress"]');
+    chatElements.forEach(element => {
+      if (element instanceof HTMLElement) {
+        element.style.display = 'none';
+        console.log('Chat element hidden via CSS:', element);
+      }
+    });
+    
+    // Call the parent's onClose function
+    onClose();
+  };
 
   // Render a close button overlay when chat is open
   if (!isOpen) return null;
@@ -67,7 +95,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       style={{ zIndex: 99999 }}
     >
       <button
-        onClick={onClose}
+        onClick={handleCloseClick}
         className="flex items-center justify-center w-10 h-10 bg-gialoma-gold hover:bg-gialoma-lightgold text-gialoma-black rounded-full shadow-lg transition-all duration-200 hover:scale-110 border-2 border-gialoma-darkgold"
         style={{
           boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
