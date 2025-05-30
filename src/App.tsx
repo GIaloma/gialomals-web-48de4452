@@ -20,6 +20,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
+import DigitalMaturityEvaluation from "./pages/DigitalMaturityEvaluation";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
 import ChatAgent from "./components/ChatAgent";
@@ -146,9 +147,11 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/terminos-servicio" element={<TermsOfService />} />
           
-          {/* Other pages */}
+          {/* Digitalization pages */}
           <Route path="/digitalization" element={<Digitalization />} />
           <Route path="/digitalizacion" element={<Digitalization />} />
+          <Route path="/evaluacion-digital" element={<DigitalMaturityEvaluation />} />
+          <Route path="/digital-evaluation" element={<DigitalMaturityEvaluation />} />
           
           {/* Legacy redirects for SEO */}
           <Route path="/inicio" element={<IndexEs />} />
