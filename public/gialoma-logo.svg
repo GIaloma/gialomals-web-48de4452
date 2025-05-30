@@ -1,0 +1,21 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer brush stroke circle -->
+  <path d="M50 200 Q50 50 200 50 Q350 50 350 200 Q350 350 200 350 Q50 350 50 200" 
+        fill="none" stroke="#b8985a" stroke-width="20" stroke-linecap="round"/>
+  
+  <!-- Inner brush strokes -->
+  <path d="M80 150 Q150 100 220 150" fill="none" stroke="#b8985a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M320 180 Q250 130 180 180" fill="none" stroke="#b8985a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 250 Q160 200 230 250" fill="none" stroke="#b8985a" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Brain outline -->
+  <path d="M120 180 Q120 140 160 130 Q200 125 240 140 Q280 150 280 180 Q285 200 270 220 Q260 240 240 250 Q220 260 200 255 Q180 250 160 240 Q140 220 130 200 Q120 190 120 180" 
+        fill="none" stroke="#b8985a" stroke-width="3"/>
+  
+  <!-- Neural network pattern -->
+  <g stroke="#b8985a" stroke-width="1.5" fill="#b8985a">
+    <!-- Nodes -->
+    <circle cx="160" cy="160" r="4"/>
+    <circle cx="200" cy="150" r="4"/>
+    <circle cx="240" cy="160" r="4"/>
+    <circle cx="180" cy="180" r="4"/>
