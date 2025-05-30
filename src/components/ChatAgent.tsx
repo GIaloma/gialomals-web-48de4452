@@ -15,7 +15,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
       const chatWindow = window.open(
         '', // Empty URL initially
         'gialoma-chat', // Window name (reuses same window if already open)
-        'width=400,height=600,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no,status=no'
+        'width=500,height=600,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no,status=no'
       );
 
       if (chatWindow) {
@@ -27,6 +27,10 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${language === 'es' ? 'Chat - Gialoma' : 'Chat - Gialoma'}</title>
+    
+    <!-- Botpress Webchat Script -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    
     <style>
         body {
             margin: 0;
@@ -58,7 +62,10 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
-            height: 70vh;
+            height: 500px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
         .close-info {
             text-align: center;
@@ -69,6 +76,18 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
             font-size: 14px;
             color: #666;
         }
+        
+        /* Custom Botpress Styles */
+        #webchat .bpWebchat {
+            position: unset;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            max-width: 100%;
+        }
+        #webchat .bpFab {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -77,8 +96,9 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
         <div class="subtitle">${language === 'es' ? 'Asistente de IA' : 'AI Assistant'}</div>
     </div>
     
-    <div class="chat-container" id="chat-container">
-        <!-- Botpress chat will be injected here -->
+    <div class="chat-container">
+        <!-- Put this on your page BEFORE the script below -->
+        <div id="webchat" style="width: 500px; height: 500px;"></div>
     </div>
     
     <div class="close-info">
@@ -87,30 +107,38 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
           : '💡 You can close this window when you\'re done chatting'}
     </div>
 
-    <!-- Load Botpress Scripts -->
-    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2025/05/01/17/20250501175630-EVUUQ1E2.js"></script>
-    
     <script>
         // Initialize Botpress when page loads
         window.addEventListener('load', function() {
             setTimeout(function() {
-                if (window.botpressWebChat) {
-                    window.botpressWebChat.init();
-                    window.botpressWebChat.show();
-                    
-                    // Try to style the chat to fit the container
-                    setTimeout(function() {
-                        const chatElement = document.querySelector('#bp-web-widget') || 
-                                          document.querySelector('[data-testid="widget"]');
-                        if (chatElement) {
-                            chatElement.style.position = 'relative';
-                            chatElement.style.width = '100%';
-                            chatElement.style.height = '100%';
-                            chatElement.style.border = 'none';
-                        }
-                    }, 1000);
-                }
+                window.botpress.on("webchat:ready", () => {
+                    window.botpress.open();
+                });
+                
+                window.botpress.init({
+                    "botId": "757520fb-9440-4ae6-bba2-9d41959405fd",
+                    "configuration": {
+                        "botName": "Gialoma",
+                        "botDescription": "Me dejas ayudarte?",
+                        "fabImage": "https://files.bpcontent.cloud/2025/05/27/16/20250527163748-RGFMO1M4.png",
+                        "website": {},
+                        "email": {
+                            "title": "gialomals@gmail.com",
+                            "link": "gialomals@gmail.com"
+                        },
+                        "phone": {},
+                        "termsOfService": {},
+                        "privacyPolicy": {},
+                        "color": "#c7ae6a",
+                        "variant": "soft",
+                        "themeMode": "light",
+                        "fontFamily": "inter",
+                        "radius": 1,
+                        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/05/27/14/20250527145559-MBN7KQN2.css"
+                    },
+                    "clientId": "41604519-835f-482a-9b27-8f639293c1a9",
+                    "selector": "#webchat"
+                });
             }, 500);
         });
 
