@@ -1,261 +1,90 @@
-
-import React, { useRef, useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const services = [
-  {
-    id: 1,
-    title: "Automatización de Procesos",
-    description: "Optimiza tus operaciones con soluciones de automatización inteligente que eliminan tareas repetitivas, reducen errores y aumentan la eficiencia.",
-    features: [
-      "Creación de flujos de trabajo automatizados",
-      "Control de facturas y albaranes",
-      "Automatización de reservas, horarios y citas"
-    ],
-    icon: <Cog className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/process-automation"
-  },
-  {
-    id: 2,
-    title: "Diseño y Desarrollo Web",
-    description: "Obtén una presencia online profesional con nuestros sitios web personalizados que son responsivos, fáciles de usar y diseñados para convertir visitantes en clientes.",
-    features: [
-      "Sitios web corporativos responsivos",
-      "Páginas de aterrizaje",
-      "Integración de formularios inteligentes"
-    ],
-    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/web-development"
-  },
-  {
-    id: 3,
-    title: "Asistentes Virtuales IA y Chatbots",
-    description: "Mejora el servicio al cliente y la eficiencia operacional con asistentes inteligentes que manejan consultas, citas y soporte las 24 horas.",
-    features: [
-      "Asistentes básicos, avanzados o completos",
-      "Soporte multicanal",
-      "Integración con WhatsApp, web y redes sociales"
-    ],
-    icon: <Bot className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/ai-assistants"
-  },
-  {
-    id: 4,
-    title: "Consultoría Tecnológica Personalizada",
-    description: "Obtén orientación experta adaptada a las necesidades de tu negocio con nuestros servicios de consultoría. Te ayudaremos a navegar el panorama digital e implementar las soluciones correctas.",
-    features: [
-      "Diagnóstico inicial gratuito",
-      "Análisis de procesos actuales",
-      "Diseño de plan de transformación digital"
-    ],
-    icon: <Briefcase className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/tech-consulting"
-  },
-  {
-    id: 5,
-    title: "Optimización e Informes de Negocio",
-    description: "Obtén información valiosa sobre el rendimiento de tu negocio con nuestras soluciones de reportes personalizados, ayudándote a tomar decisiones basadas en datos con confianza.",
-    features: [
-      "Paneles interactivos",
-      "Control de KPIs y métricas",
-      "Reportes automatizados"
-    ],
-    icon: <FileSpreadsheet className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/business-reporting"
-  },
-  {
-    id: 6,
-    title: "Visibilidad Digital",
-    description: "Aumenta tu presencia online y alcanza más clientes potenciales con nuestros servicios de visibilidad digital que te ayudan a destacar en un mercado competitivo.",
-    features: [
-      "SEO básico para sitios web",
-      "Configuración de Google My Business",
-      "Integración de analíticas web"
-    ],
-    icon: <Search className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/digital-visibility"
-  }
-];
+import React from 'react';
+import { Rocket, ShieldCheck, LayoutDashboard, BarChartBig, Users, Code } from 'lucide-react';
 
 const ServicesEs = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  const startAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-    }
-    
-    scrollIntervalRef.current = setInterval(() => {
-      if (scrollRef.current && isAutoScrolling) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-        
-        if (scrollLeft >= maxScroll) {
-          // Reset to beginning when reaching the end
-          scrollRef.current.scrollLeft = 0;
-        } else {
-          // Increment scroll position (increased by 15%)
-          scrollRef.current.scrollLeft += 1.15;
-        }
-      }
-    }, 50);
-  };
-  
-  useEffect(() => {
-    startAutoScroll();
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isAutoScrolling]);
-  
-  const handleScrollLeft = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
-  const handleScrollRight = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-
   return (
-    <section id="servicios" className="section-padding bg-white overflow-hidden pb-8">
+    <section id="servicios" className="section-padding bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">La automatización sin supervisión es como un coche sin conductor</span>
+            <span className="text-gradient">Nuestros Servicios</span>
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
-            Ofrecemos una gama de servicios especializados diseñados para optimizar las operaciones de tu negocio 
-            y mejorar tu presencia digital.
+          <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
+            Impulsamos tu éxito con soluciones tecnológicas innovadoras y a medida.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -ml-4"
-            aria-label="Desplazar a la izquierda"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
-            style={{ scrollBehavior: 'smooth' }}
-            onMouseEnter={() => setIsAutoScrolling(false)}
-            onMouseLeave={() => setIsAutoScrolling(true)}
-          >
-            {services.map((service) => (
-              <div 
-                key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[520px]"
-              >
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex justify-center mb-6">
-                    {service.icon}
-                  </div>
-                  
-                  {/* Title - Allow text to shrink if needed */}
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
-                      style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
-                    {service.title}
-                  </h3>
-                  
-                  {/* Description - Allow text to adjust with smaller font on overflow */}
-                  <p className="text-gialoma-darkgray mb-5 text-center text-sm md:text-base overflow-visible" 
-                     style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
-                    {service.description}
-                  </p>
-                  
-                  {/* Features section with flex-grow to push button to bottom */}
-                  <div className="flex-grow mb-4">
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base" style={{ wordBreak: 'break-word' }}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Button container with fixed position at bottom */}
-                  <div className="mt-auto">
-                    <Button 
-                      variant="outline" 
-                      className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
-                      onClick={() => window.location.href = service.link}
-                    >
-                      Saber Más <ArrowRight className="ml-2" size={16} />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Servicio 1 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up">
+            <Rocket className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Desarrollo de Software a Medida</h3>
+            <p className="text-gialoma-darkgray">
+              Creamos soluciones de software personalizadas que se adaptan perfectamente a tus necesidades y procesos empresariales.
+            </p>
           </div>
-          
-          <button 
-            onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -mr-4"
-            aria-label="Desplazar a la derecha"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-        
-        <div className="mt-8 text-center">
-          <p className="text-gialoma-darkgray mb-6 max-w-2xl mx-auto">
-            ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
-          </p>
-          <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
-            onClick={() => window.location.href = "/contactos"}
-          >
-            Solicita una Consulta Gratuita
-          </Button>
+
+          {/* Servicio 2 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <ShieldCheck className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Consultoría en Ciberseguridad</h3>
+            <p className="text-gialoma-darkgray">
+              Protegemos tu negocio contra amenazas cibernéticas con estrategias de seguridad robustas y soluciones de vanguardia.
+            </p>
+          </div>
+
+          {/* Servicio 3 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <LayoutDashboard className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Optimización de Infraestructuras IT</h3>
+            <p className="text-gialoma-darkgray">
+              Mejoramos la eficiencia y el rendimiento de tus sistemas IT para reducir costos y aumentar la productividad.
+            </p>
+          </div>
+
+          {/* Servicio 4 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up">
+            <BarChartBig className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Análisis de Datos y Business Intelligence</h3>
+            <p className="text-gialoma-darkgray">
+              Transformamos tus datos en información valiosa para la toma de decisiones estratégicas y el crecimiento de tu negocio.
+            </p>
+          </div>
+
+          {/* Servicio 5 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <Users className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Soporte Técnico Especializado</h3>
+            <p className="text-gialoma-darkgray">
+              Ofrecemos soporte técnico de alta calidad para resolver tus problemas de manera rápida y eficiente.
+            </p>
+          </div>
+
+          {/* Servicio 6 */}
+          <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <Code className="text-gialoma-gold mb-4 w-10 h-10" />
+            <h3 className="text-xl font-semibold text-gialoma-black mb-2">Integración de Sistemas</h3>
+            <p className="text-gialoma-darkgray">
+              Integramos tus sistemas existentes para crear un entorno de trabajo más eficiente y conectado.
+            </p>
+          </div>
         </div>
       </div>
 
-      <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* Internet Explorer and Edge */
-          scrollbar-width: none;  /* Firefox */
+      {/* CSS for animation */}
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari, Opera */
-        }
-        
-        /* Responsive font-size adjustments */
-        @media (max-width: 640px) {
-          .service-card-title {
-            font-size: 1.1rem;
-          }
-          .service-card-description {
-            font-size: 0.9rem;
-          }
-          .service-card-feature {
-            font-size: 0.9rem;
-          }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.6s ease-out;
         }
       `}</style>
     </section>
