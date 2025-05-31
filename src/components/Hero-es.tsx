@@ -23,7 +23,7 @@ const HeroEs = () => {
         <div className="max-w-3xl relative">
           {/* Logo as background - desktop version (right side) */}
           <img 
-            src="/lovable-uploads/ab1aa6c7-1e66-4aea-b8a4-2a12631c4bb5.png" 
+            src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
             alt="Logo de Gialoma Life Solutions" 
             className="hidden md:block absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
             style={{ animationDelay: "0.6s" }}
@@ -35,7 +35,7 @@ const HeroEs = () => {
             <div className="md:hidden absolute top-0 left-0 right-0 overflow-visible pointer-events-none h-auto z-0">
               <div className="flex justify-center">
                 <img 
-                  src="/lovable-uploads/ab1aa6c7-1e66-4aea-b8a4-2a12631c4bb5.png" 
+                  src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
                   alt="Logo de Gialoma Life Solutions" 
                   className="opacity-10 w-52 h-52 object-contain animate-pulse animate-fade-in -mt-4" 
                   style={{ animationDelay: "0.2s" }}
