@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 interface VoiceAgentProps {
@@ -8,7 +9,7 @@ interface VoiceAgentProps {
 
 export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, language }) => {
   const scriptsLoadedRef = useRef(false);
-  const widgetContainerRef = useRef<HTMLDivElement | null>(null);
+  const widgetContainerRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
