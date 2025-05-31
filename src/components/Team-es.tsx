@@ -51,12 +51,12 @@ const TeamEs = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[650px]">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[850px]">
               <div className="aspect-w-4 aspect-h-3 relative">
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-104 object-cover object-center"
+                  className="w-full h-128 object-cover object-center"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
