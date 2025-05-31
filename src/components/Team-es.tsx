@@ -49,17 +49,17 @@ const TeamEs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-lg flex flex-col">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[650px]">
               <div className="aspect-w-4 aspect-h-3 relative">
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-80 object-cover object-center"
+                  className="w-full h-104 object-cover object-center"
                 />
               </div>
-              <div className="p-8 flex-1 flex flex-col">
+              <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
                 <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
                 <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1">{member.bio}</p>
