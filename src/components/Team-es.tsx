@@ -49,21 +49,21 @@ const TeamEs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col">
-              <div className="aspect-w-4 aspect-h-3 relative">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-xs flex flex-col">
+              <div className="aspect-w-3 aspect-h-4 relative overflow-hidden">
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-104 object-cover object-center"
+                  className={`w-full h-80 object-cover ${member.id === 1 ? 'object-top scale-125 -translate-y-4' : 'object-center'}`}
                 />
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
-                <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
-                <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1">{member.bio}</p>
-                <div className="flex space-x-4 mt-auto">
+              <div className="p-4 flex-1 flex flex-col">
+                <h3 className="text-lg md:text-xl font-semibold text-gialoma-black">{member.name}</h3>
+                <p className="text-gialoma-lightgold font-medium mb-2 text-xs md:text-sm">{member.position}</p>
+                <p className="text-gialoma-darkgray mb-4 text-xs md:text-sm flex-1 leading-relaxed">{member.bio}</p>
+                <div className="flex space-x-3 mt-auto">
                   {member.linkedin && (
                     <a 
                       href={member.linkedin} 
@@ -71,7 +71,7 @@ const TeamEs = () => {
                       rel="noopener noreferrer"
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
-                      <Linkedin size={18} />
+                      <Linkedin size={16} />
                     </a>
                   )}
                   {member.instagram && (
@@ -81,7 +81,7 @@ const TeamEs = () => {
                       rel="noopener noreferrer"
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
-                      <Instagram size={18} />
+                      <Instagram size={16} />
                     </a>
                   )}
                   {member.email && (
@@ -89,7 +89,7 @@ const TeamEs = () => {
                       href={`mailto:${member.email}`}
                       className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
                     >
-                      <Mail size={18} />
+                      <Mail size={16} />
                     </a>
                   )}
                 </div>
