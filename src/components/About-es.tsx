@@ -8,7 +8,7 @@ const AboutEs = () => {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center">
           <div className="md:w-3/5 mb-8 md:mb-0 md:mr-16 md:-ml-6">
             <img 
-              src="/lovable-uploads/d00cb800-f381-49d2-8d84-33ae4a851dae.png" 
+              src="/lovable-uploads/d9a9205a-16f2-4d97-9599-f8ecb482a494.png" 
               alt="Explicación del Logo de Gialoma Life Solutions" 
               className="w-full rounded-lg shadow-lg transform md:scale-110 transition-transform duration-300"
             />
