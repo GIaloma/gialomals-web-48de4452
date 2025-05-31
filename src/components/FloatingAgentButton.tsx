@@ -120,7 +120,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       </button>
 
       {/* Custom CSS with optimized animations */}
-      <style>{`
+      <style jsx>{`
         @keyframes fadeInRight {
           from {
             opacity: 0;

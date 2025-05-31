@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -83,7 +84,7 @@ const BookPopupEs: React.FC<BookPopupEsProps> = ({ onClose }) => {
       </div>
 
       {/* CSS for animation */}
-      <style>{`
+      <style jsx>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;

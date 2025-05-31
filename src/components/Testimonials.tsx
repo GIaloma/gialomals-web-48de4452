@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -145,7 +146,7 @@ const Testimonials = () => {
         </div>
       </div>
 
-      <style>{`
+      <style jsx>{`
         .hide-scrollbar {
           -ms-overflow-style: none;  /* Internet Explorer and Edge */
           scrollbar-width: none;  /* Firefox */
