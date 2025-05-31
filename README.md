@@ -1,73 +1,157 @@
-# Welcome to your Lovable project
+# Gialoma's Web - Calendar Integration Service
 
-## Project info
+## 📁 Project Structure
 
-**URL**: https://lovable.dev/projects/f49cf5a1-cab9-4ef0-924e-d694a16d7d69
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/f49cf5a1-cab9-4ef0-924e-d694a16d7d69) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+gialomals-web-48de4452/
+├── public/
+│   └── assets/
+│       ├── images/          # Company logos, photos, icons
+│       ├── documents/       # PDF files, contracts, etc.
+│       └── templates/       # HTML document templates
+├── src/
+│   ├── components/         # React components
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utility libraries
+│   └── pages/             # Page components
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+## 🖼️ Adding Images
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+To add images to your project:
 
-**Use GitHub Codespaces**
+1. Place your image files in `public/assets/images/`
+2. Reference them in your code using: `/assets/images/your-image.jpg`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Recommended Image Types:
+- **Logos**: SVG or PNG with transparent background
+- **Photos**: JPG or WebP for better compression
+- **Icons**: SVG for scalability
 
-## What technologies are used for this project?
+## 📄 Document Templates
 
-This project is built with:
+The project includes professional document templates:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **NDA Template**: `public/assets/templates/nda-minimalista.html`
+- **Privacy Policy**: `public/assets/templates/politica-privacidad.html`
+- **Contract Annexes**: `public/assets/documents/anexos-contrato.md`
 
-## How can I deploy this project?
+### Using Templates in Your Web App
 
-Simply open [Lovable](https://lovable.dev/projects/f49cf5a1-cab9-4ef0-924e-d694a16d7d69) and click on Share -> Publish.
+```tsx
+// Example: Loading a template
+const templateUrl = '/assets/templates/nda-minimalista.html';
 
-## Can I connect a custom domain to my Lovable project?
+// You can embed it in an iframe or fetch and display
+<iframe src={templateUrl} width="100%" height="600px" />
+```
 
-Yes, you can!
+## 🚀 Quick Start for Adding Files
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Method 1: Using GitHub Web Interface
+1. Go to your repository on GitHub
+2. Navigate to `public/assets/images/` or appropriate folder
+3. Click "Add file" > "Upload files"
+4. Drag and drop your files
+5. Commit changes
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Method 2: Using Git Commands
+```bash
+# Clone the repository
+git clone https://github.com/GIaloma/gialomals-web-48de4452.git
+cd gialomals-web-48de4452
+
+# Add your files
+cp /path/to/your/image.jpg public/assets/images/
+cp /path/to/your/document.pdf public/assets/documents/
+
+# Commit and push
+git add .
+git commit -m "Add images and documents"
+git push origin main
+```
+
+## 📱 File Usage Examples
+
+### In React Components:
+```tsx
+// Logo in header
+<img src="/assets/images/company-logo.png" alt="Company Logo" />
+
+// Download link for documents
+<a href="/assets/documents/privacy-policy.pdf" download>
+  Download Privacy Policy
+</a>
+
+// Background image
+<div style={{ backgroundImage: 'url(/assets/images/hero-bg.jpg)' }}>
+  Content here
+</div>
+```
+
+### In CSS:
+```css
+.hero-section {
+  background-image: url('/assets/images/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.company-logo {
+  content: url('/assets/images/logo.svg');
+  width: 200px;
+  height: auto;
+}
+```
+
+## 🎨 Recommended Assets to Add
+
+### Images:
+- [ ] Company logo (SVG/PNG)
+- [ ] Favicon (ICO/PNG)
+- [ ] Hero/banner images
+- [ ] Team photos
+- [ ] Service illustrations
+- [ ] Background patterns
+
+### Documents:
+- [ ] Privacy policy (PDF)
+- [ ] Terms of service (PDF)
+- [ ] Service brochures
+- [ ] Certificates/credentials
+- [ ] Case studies
+
+## 🔧 Optimization Tips
+
+### Image Optimization:
+- Compress images before uploading
+- Use WebP format for better compression
+- Include multiple sizes for responsive design
+- Add alt text for accessibility
+
+### File Organization:
+```
+public/assets/images/
+├── logos/
+│   ├── logo.svg
+│   ├── logo-white.svg
+│   └── favicon.ico
+├── heroes/
+│   ├── hero-main.jpg
+│   └── hero-about.jpg
+└── team/
+    ├── john-doe.jpg
+    └── jane-smith.jpg
+```
+
+## 📞 Support
+
+If you need help uploading or organizing files, please refer to:
+- GitHub documentation
+- This README file
+- Contact the development team
+
+---
+
+*Last updated: May 31, 2025*
