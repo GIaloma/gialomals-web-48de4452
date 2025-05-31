@@ -84,8 +84,8 @@ const FooterEs = () => {
                 <Mail className="h-5 w-5 text-gialoma-gold mr-2 mt-0.5 lg:mt-0" />
                 <div>
                   <p className="font-medium text-gray-200">Escríbenos</p>
-                  <a href="mailto:gialomals@gmail.com" className="hover:text-gialoma-gold">
-                    gialomals@gmail.com
+                  <a href="mailto:gialoma@gialoma.com" className="hover:text-gialoma-gold">
+                    gialoma@gialoma.com
                   </a>
                 </div>
               </li>
