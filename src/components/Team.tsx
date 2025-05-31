@@ -56,7 +56,7 @@ const Team = () => {
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover ${member.id === 2 ? 'transform scale-90' : ''}`}
                 />
               </div>
               <div className="p-4 md:p-6">
