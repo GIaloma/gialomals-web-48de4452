@@ -56,7 +56,7 @@ const TeamEs = () => {
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-80 object-cover object-center"
+                  className="w-full h-104 object-cover object-center"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
