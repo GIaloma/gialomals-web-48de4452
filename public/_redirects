@@ -1,0 +1,11 @@
+# Netlify redirects for SPA routing
+/*    /index.html   200
+
+# Redirect common language routes to main paths  
+/spanish   /es   301
+/ingles    /en   301
+/italiano  /it   301
+
+# Redirect old paths (if any)
+/home      /en   301
+/inicio    /es   301
