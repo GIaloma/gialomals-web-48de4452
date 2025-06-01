@@ -81,6 +81,7 @@ const services = [
 const Services = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const startAutoScroll = () => {
@@ -96,9 +97,13 @@ const Services = () => {
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
           scrollRef.current.scrollLeft = 0;
+          setCurrentIndex(0);
         } else {
           // Increment scroll position (increased by 15%)
           scrollRef.current.scrollLeft += 1.15;
+          // Update current index based on scroll position
+          const cardWidth = 340; // approximate card width + gap
+          setCurrentIndex(Math.round(scrollLeft / cardWidth));
         }
       }
     }, 50);
@@ -116,7 +121,9 @@ const Services = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      const newIndex = currentIndex > 0 ? currentIndex - 1 : services.length - 1;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -126,7 +133,9 @@ const Services = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      const newIndex = currentIndex < services.length - 1 ? currentIndex + 1 : 0;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -166,7 +175,7 @@ const Services = () => {
             {services.map((service) => (
               <div 
                 key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[520px]"
+                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[560px]"
               >
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-center mb-6">
