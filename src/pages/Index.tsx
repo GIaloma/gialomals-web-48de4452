@@ -5,7 +5,7 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Solutions from '../components/Solutions';
 import Services from '../components/Services';
-import Blog from '../components/Blog';
+// Blog temporarily removed - import Blog from '../components/Blog';
 import Team from '../components/Team';
 import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
@@ -39,7 +39,7 @@ const Index = () => {
       <About />
       <Solutions />
       <Services />
-      <Blog />
+      {/* Blog temporarily removed - <Blog /> */}
       <Team />
       <Testimonials />
       <CTA />
