@@ -9,7 +9,7 @@ const solutions = [
     title: "El tiempo de calidad no es un lujo, es una necesidad",
     description: "Recupera tu recurso más valioso: el tiempo. Nuestras soluciones optimizan procesos para que puedas enfocarte en lo que realmente importa.",
     benefits: [
-      "Evita tareas repetitivas mediante automatización",
+      "Automatiza tareas repetitivas",
       "Implementación de IA para resultados precisos"
     ],
     link: "/solutions/time-saving"
@@ -20,7 +20,7 @@ const solutions = [
     description: "Mejora la experiencia de tus clientes con herramientas que te permiten responder rápida, profesional y consistentemente en todos los canales.",
     benefits: [
       "Respuestas instantáneas con chatbots de IA",
-      "Formularios y reservas online en minutos"
+      "Formularios y reservas online"
     ],
     link: "/solutions/customer-service"
   },
@@ -69,6 +69,7 @@ const solutions = [
 const SolutionsEs = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const startAutoScroll = () => {
@@ -84,9 +85,13 @@ const SolutionsEs = () => {
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
           scrollRef.current.scrollLeft = 0;
+          setCurrentIndex(0);
         } else {
           // Increment scroll position (increased by 15%)
           scrollRef.current.scrollLeft += 1.15;
+          // Update current index based on scroll position
+          const cardWidth = 340; // approximate card width + gap
+          setCurrentIndex(Math.round(scrollLeft / cardWidth));
         }
       }
     }, 50);
@@ -104,7 +109,9 @@ const SolutionsEs = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      const newIndex = currentIndex > 0 ? currentIndex - 1 : solutions.length - 1;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -114,7 +121,9 @@ const SolutionsEs = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      const newIndex = currentIndex < solutions.length - 1 ? currentIndex + 1 : 0;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -161,7 +170,7 @@ const SolutionsEs = () => {
               <div 
                 key={index} 
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "520px" }}
+                style={{ height: "560px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
