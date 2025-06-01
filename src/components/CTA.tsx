@@ -42,6 +42,13 @@ const CTA = () => {
     window.open('/digitalization', '_blank');
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="get-started" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 gold-gradient opacity-90 z-0"></div>
@@ -59,8 +66,9 @@ const CTA = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button 
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
+                onClick={scrollToContact}
               >
-                Schedule a Demo
+                Request a Quote
               </Button>
               <Button 
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
