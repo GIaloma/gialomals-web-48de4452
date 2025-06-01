@@ -70,6 +70,7 @@ const featuredPosts = [
 const Blog = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const startAutoScroll = () => {
@@ -85,9 +86,13 @@ const Blog = () => {
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
           scrollRef.current.scrollLeft = 0;
+          setCurrentIndex(0);
         } else {
           // Increment scroll position (increased by 15%)
           scrollRef.current.scrollLeft += 1.15;
+          // Update current index based on scroll position
+          const cardWidth = 340; // approximate card width + gap
+          setCurrentIndex(Math.round(scrollLeft / cardWidth));
         }
       }
     }, 50);
@@ -105,7 +110,9 @@ const Blog = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      const newIndex = currentIndex > 0 ? currentIndex - 1 : featuredPosts.length - 1;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -115,7 +122,9 @@ const Blog = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      const newIndex = currentIndex < featuredPosts.length - 1 ? currentIndex + 1 : 0;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -152,7 +161,7 @@ const Blog = () => {
             onMouseLeave={() => setIsAutoScrolling(true)}
           >
             {featuredPosts.map((post) => (
-              <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 min-w-[330px] flex flex-col">
+              <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 min-w-[330px] flex flex-col h-[560px]">
                 <img 
                   src={post.coverImage} 
                   alt={post.title} 
@@ -164,7 +173,7 @@ const Blog = () => {
                       {post.category}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors h-16">
+                  <h3 className="text-xl font-bold mb-2 text-gialoma-black hover:text-gialoma-gold transition-colors" style={{ minHeight: '60px' }}>
                     <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">{post.title}</a>
                   </h3>
                   <p className="text-gialoma-darkgray mb-4 line-clamp-3 flex-grow">
@@ -178,14 +187,16 @@ const Blog = () => {
                     <span>{post.readTime}</span>
                   </div>
                   
-                  <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">
-                    <Button 
-                      variant="ghost" 
-                      className="p-0 text-gialoma-gold hover:text-gialoma-darkgold hover:bg-transparent flex items-center"
-                    >
-                      Read More <ArrowRight size={16} className="ml-2" />
-                    </Button>
-                  </a>
+                  <div className="mt-auto">
+                    <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">
+                      <Button 
+                        variant="ghost" 
+                        className="p-0 text-gialoma-gold hover:text-gialoma-darkgold hover:bg-transparent flex items-center"
+                      >
+                        Read More <ArrowRight size={16} className="ml-2" />
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
