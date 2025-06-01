@@ -29,7 +29,7 @@ const NavbarEs = () => {
             <img 
               alt="Logo de Gialoma Life Solutions" 
               src="/lovable-uploads/4fe10b17-aa26-49e1-a9a2-e516e09ef670.png" 
-              className="h-20 md:h-28 w-auto mr-3 object-contain transition-all duration-300" 
+              className="h-16 md:h-24 w-auto mr-3 object-contain transition-all duration-300" 
             />
           </Link>
         </div>
