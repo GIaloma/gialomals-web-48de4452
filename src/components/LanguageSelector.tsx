@@ -26,7 +26,7 @@ interface LanguageSelectorProps {
 const languages: Language[] = [
   { code: 'es', name: 'Español', flag: '🇪🇸', path: '/' },
   { code: 'en', name: 'English', flag: '🇬🇧', path: '/en' },
-  { code: 'it', name: 'Italiano', flag: '🇮🇹', path: '/it' },
+  // Italian temporarily removed - { code: 'it', name: 'Italiano', flag: '🇮🇹', path: '/it' },
 ];
 
 export default function LanguageSelector({ isMobile = false, isCompact = false, customColor }: LanguageSelectorProps) {
@@ -38,7 +38,7 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
   const getCurrentLanguage = () => {
     const path = location.pathname;
     if (path.startsWith('/en')) return 'en';
-    if (path.startsWith('/it')) return 'it';
+    // if (path.startsWith('/it')) return 'it'; // Italian temporarily disabled
     return 'es'; // Default to Spanish
   };
 
@@ -64,7 +64,8 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
     const selectedLanguage = languages.find(lang => lang.code === value);
     if (selectedLanguage) {
       setLanguage(value);
-      navigate(selectedLanguage.path);
+      // Navigate to the new language page and refresh
+      window.location.href = selectedLanguage.path;
     }
   };
 
