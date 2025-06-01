@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
 import { Link } from 'react-router-dom';
@@ -45,12 +45,12 @@ const NavbarEs = () => {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Desktop Language Selector - compact size to match login button */}
+          {/* Desktop Language Selector - compact size */}
           <div className="hidden md:block">
             <LanguageSelector isCompact={true} />
           </div>
 
-          {/* Login Button */}
+          {/* Login Button - Temporarily removed
           <div className="hidden md:block">
             <Link to="/login">
               <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9">
@@ -58,6 +58,7 @@ const NavbarEs = () => {
               </Button>
             </Link>
           </div>
+          */}
             
           <div className="hidden md:block">
             <a href="#empezar">
@@ -129,7 +130,7 @@ const NavbarEs = () => {
               <LanguageSelector isMobile={true} />
             </div>
 
-            {/* Mobile Login Button */}
+            {/* Mobile Login Button - Temporarily removed
             <Link 
               to="/login" 
               onClick={() => setIsMenuOpen(false)}
@@ -138,6 +139,7 @@ const NavbarEs = () => {
                 <LogIn size={18} className="mr-2" /> Iniciar Sesión
               </Button>
             </Link>
+            */}
             
             <a 
               href="#empezar" 
