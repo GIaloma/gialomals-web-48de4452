@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { X } from 'lucide-react';
+import React, { useEffect } from 'react';
 
 interface ChatAgentProps {
   isOpen: boolean;
@@ -8,154 +7,215 @@ interface ChatAgentProps {
 }
 
 export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language }) => {
-  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && chatContainerRef.current) {
-      // Clear any existing content
-      chatContainerRef.current.innerHTML = '';
-      
-      // Create the webchat div
-      const webchatDiv = document.createElement('div');
-      webchatDiv.id = 'webchat';
-      webchatDiv.style.width = '100%';
-      webchatDiv.style.height = '100%';
-      webchatDiv.style.minHeight = '500px';
-      
-      chatContainerRef.current.appendChild(webchatDiv);
+    if (isOpen) {
+      // Create a new window/tab for the chat
+      const chatWindow = window.open(
+        '', // Empty URL initially
+        'gialoma-chat', // Window name (reuses same window if already open)
+        'width=400,height=600,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no,status=no'
+      );
 
-      // Load Botpress script if not already loaded
-      if (!document.querySelector('script[src*="botpress.cloud"]')) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.botpress.cloud/webchat/v2.4/inject.js';
-        script.onload = () => {
-          initializeBotpress();
-        };
-        document.head.appendChild(script);
-      } else {
-        // Script already loaded, initialize directly
-        initializeBotpress();
-      }
-
-      // Add custom styles for Botpress
-      if (!document.querySelector('#botpress-custom-styles')) {
-        const style = document.createElement('style');
-        style.id = 'botpress-custom-styles';
-        style.textContent = `
-          #webchat .bpWebchat {
-            position: unset !important;
-            width: 100% !important;
-            height: 100% !important;
-            max-height: 100% !important;
-            max-width: 100% !important;
-            border-radius: 0 !important;
-          }
-          #webchat .bpFab {
-            display: none !important;
-          }
-          .chat-overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-          }
-        `;
-        document.head.appendChild(style);
-      }
-
-      function initializeBotpress() {
-        if (window.botpress) {
-          // Set up event listener for when webchat is ready
-          window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
-          });
-
-          // Initialize Botpress with your configuration
-          window.botpress.init({
-            "botId": "757520fb-9440-4ae6-bba2-9d41959405fd",
-            "configuration": {
-              "botName": "Gialoma",
-              "botDescription": language === 'es' ? "¿Me dejas ayudarte?" : "Can I help you?",
-              "fabImage": "https://files.bpcontent.cloud/2025/05/27/16/20250527163748-RGFMO1M4.png",
-              "website": {},
-              "email": {
-                "title": "gialomals@gmail.com",
-                "link": "gialomals@gmail.com"
-              },
-              "phone": {},
-              "termsOfService": {},
-              "privacyPolicy": {},
-              "color": "#c7ae6a",
-              "variant": "soft",
-              "themeMode": "light",
-              "fontFamily": "inter",
-              "radius": 1,
-              "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/05/27/14/20250527145559-MBN7KQN2.css"
-            },
-            "clientId": "41604519-835f-482a-9b27-8f639293c1a9",
-            "selector": "#webchat"
-          });
+      if (chatWindow) {
+        // Create the HTML content for the chat window with bubble
+        const chatHTML = `
+<!DOCTYPE html>
+<html lang="${language}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${language === 'es' ? 'Chat - Gialoma' : 'Chat - Gialoma'}</title>
+    
+    <!-- Botpress Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/05/01/17/20250501175630-EVUUQ1E2.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 350px;
+            width: 100%;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #c7ae6a;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .chat-info {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            font-size: 14px;
+            color: #666;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .chat-info .icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Custom Botpress bubble positioning */
+        .bp-widget-web {
+            bottom: 20px !important;
+            right: 20px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">GIALOMA</div>
+        <div class="subtitle">${language === 'es' ? 'Asistente de IA' : 'AI Assistant'}</div>
+        <div class="description">
+            ${language === 'es' 
+              ? 'Haz clic en el botón de chat para comenzar una conversación' 
+              : 'Click the chat button to start a conversation'}
+        </div>
+    </div>
+    
+    <div class="chat-info">
+        <span class="icon">💬</span>
+        ${language === 'es' 
+          ? 'El chat aparecerá en la esquina inferior derecha.<br>Puedes cerrar esta ventana cuando termines.' 
+          : 'The chat will appear in the bottom right corner.<br>You can close this window when you\'re done.'}
+    </div>
+
+    <script>
+        // Initialize Botpress when page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Initialize Botpress with your configuration
+                window.botpress.init({
+                    "botId": "757520fb-9440-4ae6-bba2-9d41959405fd",
+                    "configuration": {
+                        "botName": "Gialoma",
+                        "botDescription": "${language === 'es' ? 'Me dejas ayudarte?' : 'Can I help you?'}",
+                        "fabImage": "https://files.bpcontent.cloud/2025/05/27/16/20250527163748-RGFMO1M4.png",
+                        "website": {},
+                        "email": {
+                            "title": "gialomals@gmail.com",
+                            "link": "gialomals@gmail.com"
+                        },
+                        "phone": {},
+                        "termsOfService": {},
+                        "privacyPolicy": {},
+                        "color": "#c7ae6a",
+                        "variant": "soft",
+                        "themeMode": "light",
+                        "fontFamily": "inter",
+                        "radius": 1,
+                        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/05/27/14/20250527145559-MBN7KQN2.css"
+                    },
+                    "clientId": "41604519-835f-482a-9b27-8f639293c1a9"
+                });
+
+                // Auto-open the chat after a brief delay
+                setTimeout(function() {
+                    if (window.botpress && window.botpress.open) {
+                        window.botpress.open();
+                    }
+                }, 1000);
+            }, 500);
+        });
+
+        // Handle window close
+        window.addEventListener('beforeunload', function() {
+            // Notify parent window that chat is closing
+            if (window.opener && !window.opener.closed) {
+                try {
+                    window.opener.postMessage({ type: 'chat-closed' }, '*');
+                } catch (e) {
+                    // Ignore cross-origin errors
+                }
+            }
+        });
+
+        // Add keyboard shortcut to close window
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            }
+        });
+    </script>
+</body>
+</html>
+        `;
+
+        // Write the HTML to the new window
+        chatWindow.document.write(chatHTML);
+        chatWindow.document.close();
+
+        // Focus the new window
+        chatWindow.focus();
+
+        // Listen for messages from the chat window
+        const handleMessage = (event: MessageEvent) => {
+          if (event.data?.type === 'chat-closed') {
+            onClose();
+            window.removeEventListener('message', handleMessage);
+          }
+        };
+        
+        window.addEventListener('message', handleMessage);
+
+        // Check if window is closed periodically
+        const checkClosed = setInterval(() => {
+          if (chatWindow.closed) {
+            onClose();
+            clearInterval(checkClosed);
+            window.removeEventListener('message', handleMessage);
+          }
+        }, 1000);
+
+        // Close our state immediately since we've opened the window
+        setTimeout(() => {
+          onClose();
+        }, 100);
+      } else {
+        // If popup was blocked, show an alert
+        alert(language === 'es' 
+          ? 'Por favor permite las ventanas emergentes para usar el chat' 
+          : 'Please allow popups to use the chat feature');
+        onClose();
       }
     }
+  }, [isOpen, language, onClose]);
 
-    // Cleanup function
-    return () => {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.innerHTML = '';
-      }
-    };
-  }, [isOpen, language]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center chat-overlay">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-md h-full max-h-[600px] flex flex-col m-4">
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gialoma-gold rounded-t-lg">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-              <span className="text-gialoma-gold font-bold text-sm">G</span>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold">Gialoma</h3>
-              <p className="text-white/80 text-sm">
-                {language === 'es' ? 'Asistente de IA' : 'AI Assistant'}
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-white hover:text-white/70 transition-colors"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Chat Container */}
-        <div className="flex-1 overflow-hidden">
-          <div
-            ref={chatContainerRef}
-            className="w-full h-full"
-          />
-        </div>
-
-        {/* Footer */}
-        <div className="p-3 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-          <p className="text-xs text-gray-500 text-center">
-            {language === 'es' 
-              ? 'Powered by Gialoma AI • Presiona ESC para cerrar' 
-              : 'Powered by Gialoma AI • Press ESC to close'}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+  // This component doesn't render anything visible - the chat opens in a new window
+  return null;
 };
-
-// Extend the Window interface to include botpress
-declare global {
-  interface Window {
-    botpress: any;
-  }
-}
 
 export default ChatAgent;
