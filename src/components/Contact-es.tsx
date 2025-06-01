@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Phone, Mail, Bot, Check } from 'lucide-react';
+import { Phone, Mail, Bot, Check, AlertCircle } from 'lucide-react';
 
 const ContactEs = () => {
   const [formData, setFormData] = useState({
@@ -14,18 +14,58 @@ const ContactEs = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
+  const submitToAirtable = async (data: typeof formData) => {
+    try {
+      const airtableData = {
+        fields: {
+          "Full Name": data.name,
+          "Email": data.email,
+          "Subject": data.subject,
+          "Message": data.message,
+          "Submission Date": new Date().toISOString(),
+          "Language": "Spanish",
+          "Status": "New",
+          "Source Page": window.location.href
+        }
+      };
+
+      const response = await fetch('https://api.airtable.com/v0/appm1vsnLsbKwoEHC/tblETJBTKXn3Y5yy1', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_TOKEN || 'patnfMJcpDvIGKmKl.b8b1a0e3f8b7d8b7e8e8c8d8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8'}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(airtableData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit to Airtable');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Airtable submission error:', error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
 
     try {
-      // Create email body
+      // Submit to Airtable
+      await submitToAirtable(formData);
+
+      // Also create mailto link as backup
       const emailBody = `
 Nuevo mensaje desde el sitio web de Gialoma Life Solutions
 
@@ -41,12 +81,8 @@ Enviado desde: ${window.location.href}
 Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
       `;
 
-      // Create mailto link
-      const mailtoLink = `mailto:gialoma@gialoma.com?subject=${encodeURIComponent('Nuevo mensaje: ' + formData.subject)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:gialoma@gialoma.com?subject=${encodeURIComponent('Nuevo mensaje del sitio web: ' + formData.subject)}&body=${encodeURIComponent(emailBody)}`;
       
-      // Open email client
-      window.location.href = mailtoLink;
-
       // Show success message
       setIsSuccess(true);
       
@@ -58,13 +94,19 @@ Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
         message: ''
       });
 
+      // Open email client (optional backup)
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+      }, 1000);
+
       // Hide success message after 5 seconds
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
 
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error submitting form:', error);
+      setError('Hubo un error al enviar tu mensaje. Por favor intenta de nuevo o contáctanos directamente.');
     } finally {
       setIsSubmitting(false);
     }
@@ -85,6 +127,13 @@ Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-gray-50 p-8 rounded-lg">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Envíanos un Mensaje</h3>
+            
+            {error && (
+              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start">
+                <AlertCircle className="h-5 w-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" />
+                <p className="text-red-700 text-sm">{error}</p>
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
