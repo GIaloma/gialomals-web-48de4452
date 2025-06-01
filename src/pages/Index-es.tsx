@@ -5,7 +5,7 @@ import HeroEs from '../components/Hero-es';
 import AboutEs from '../components/About-es';
 import SolutionsEs from '../components/Solutions-es';
 import ServicesEs from '../components/Services-es';
-import BlogEs from '../components/Blog-es';
+// Blog temporarily removed - import BlogEs from '../components/Blog-es';
 import TeamEs from '../components/Team-es';
 import TestimonialsEs from '../components/Testimonials-es';
 import CTAEs from '../components/CTA-es';
@@ -39,7 +39,7 @@ const IndexEs = () => {
       <AboutEs />
       <SolutionsEs />
       <ServicesEs />
-      <BlogEs />
+      {/* Blog temporarily removed - <BlogEs /> */}
       <TeamEs />
       <TestimonialsEs />
       <CTAEs />
