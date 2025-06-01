@@ -28,7 +28,7 @@ const NavbarEs = () => {
           <Link to="/" className="flex items-center">
             <img 
               alt="Logo de Gialoma Life Solutions" 
-              src="/lovable-uploads/ab1aa6c7-1e66-4aea-b8a4-2a12631c4bb5.png" 
+              src="/lovable-uploads/b8c689b2-335d-4549-9690-cabe17ecedf3.png" 
               className="h-20 md:h-28 w-auto mr-3 object-contain transition-all duration-300" 
             />
           </Link>

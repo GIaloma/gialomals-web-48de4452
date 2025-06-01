@@ -28,7 +28,7 @@ const teamMembers: TeamMember[] = [
     id: 2,
     name: "Gianro Compagno",
     position: "Co-Fundador y CTO",
-    image: "/lovable-uploads/dd56a12e-46fb-4315-845c-e76025e1a4ef.png",
+    image: "/lovable-uploads/6fd82241-fd88-41e7-9163-de3904e4afce.png",
     bio: "Gianro aporta una gran experiencia en gestión de proyectos tecnológicos en entornos multinacionales. Su experiencia técnica combinada con un MBA y una maestría en Psicología Investigativa crea un enfoque único para las soluciones tecnológicas. Como Experto en IA y Automatización, aplica conocimientos psicológicos para diseñar sistemas más intuitivos y centrados en el ser humano. Su enfoque orientado al detalle y mentalidad positiva aseguran que nuestras soluciones no solo sean innovadoras y confiables, sino que también se alineen con cómo las personas piensan y trabajan naturalmente.",
     linkedin: "https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110",
     email: "gianrocompagno@gmail.com",
