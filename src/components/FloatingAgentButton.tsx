@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { MessageCircle, Mic, X } from 'lucide-react';
 
@@ -41,7 +42,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
 
   return (
     <div 
-      className="fixed bottom-6 right-6"  // MOVED BACK TO RIGHT SIDE
+      className="fixed bottom-6 right-6"
       style={{ 
         zIndex: 40,
         willChange: 'auto',
@@ -99,7 +100,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
         </div>
       </div>
 
-      {/* Main FAB - BACK ON RIGHT SIDE */}
+      {/* Main FAB */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-gialoma-gold to-gialoma-darkgold hover:from-gialoma-lightgold hover:to-gialoma-gold text-gialoma-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
@@ -110,7 +111,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       >
         {isMenuOpen ? <X size={24} /> : <MessageCircle size={24} />}
         
-        {/* Tooltip - NOW ON LEFT SIDE OF BUTTON */}
+        {/* Tooltip */}
         <div 
           className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gialoma-darkgray text-gialoma-gold px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
           style={{ willChange: 'opacity' }}
@@ -120,7 +121,7 @@ export const FloatingAgentButton: React.FC<FloatingAgentButtonProps> = ({
       </button>
 
       {/* Custom CSS with optimized animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInRight {
           from {
             opacity: 0;
