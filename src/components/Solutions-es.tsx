@@ -12,7 +12,7 @@ const solutions = [
       "Automatiza tareas repetitivas",
       "Implementación de IA para resultados precisos"
     ],
-    link: "/solutions/time-saving"
+    link: "#contactos"
   },
   {
     icon: <Users className="h-12 w-12 text-gialoma-gold" />,
@@ -22,7 +22,7 @@ const solutions = [
       "Respuestas instantáneas con chatbots de IA",
       "Formularios y reservas online"
     ],
-    link: "/solutions/customer-service"
+    link: "#contactos"
   },
   {
     icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
@@ -32,7 +32,7 @@ const solutions = [
       "Visibilidad en tiempo real de ventas, gastos y métricas",
       "Paneles intuitivos"
     ],
-    link: "/solutions/business-control"
+    link: "#contactos"
   },
   {
     icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
@@ -42,7 +42,7 @@ const solutions = [
       "Sitios web optimizados que aparecen en Google",
       "Presencia activa en redes sociales y directorios empresariales"
     ],
-    link: "/solutions/digital-visibility"
+    link: "#contactos"
   },
   {
     icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
@@ -52,7 +52,7 @@ const solutions = [
       "Todos los datos centralizados y accesibles",
       "Reportes sin esfuerzo e insights automatizados"
     ],
-    link: "/solutions/stress-reduction"
+    link: "#contactos"
   },
   {
     icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
@@ -62,7 +62,7 @@ const solutions = [
       "Si eres analógico, te guiaremos paso a paso",
       "Si eres digital, te ayudaremos a escalar"
     ],
-    link: "/solutions/tech-guidance"
+    link: "#contactos"
   }
 ];
 
@@ -127,6 +127,17 @@ const SolutionsEs = () => {
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
+
+  const handleSolutionClick = (link: string) => {
+    if (link.startsWith('#')) {
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = link;
     }
   };
 
@@ -208,7 +219,7 @@ const SolutionsEs = () => {
                   <Button 
                     variant="outline" 
                     className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
-                    onClick={() => window.location.href = solution.link}
+                    onClick={() => handleSolutionClick(solution.link)}
                   >
                     Saber Más <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
