@@ -121,6 +121,13 @@ const SolutionsEs = () => {
     }
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contactos');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="soluciones" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
@@ -216,9 +223,9 @@ const SolutionsEs = () => {
           </p>
           <Button 
             className="bg-white text-gialoma-gold hover:bg-white/90"
-            onClick={() => window.location.href = "/contactos"}
+            onClick={scrollToContact}
           >
-            Programa una Consulta Gratuita
+            Programa una Consulta
           </Button>
         </div>
       </div>
