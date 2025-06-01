@@ -74,7 +74,7 @@ const CTAEs = () => {
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
                 onClick={openDigitalizationPage}
               >
-                Digitaliza tu Negocio <ExternalLink className="ml-2 h-5 w-5" />
+                Analiza tu Negocio <ExternalLink className="ml-2 h-5 w-5" />
               </Button>
             </div>
           ) : (
