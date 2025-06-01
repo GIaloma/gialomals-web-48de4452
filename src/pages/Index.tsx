@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -12,16 +12,17 @@ import CTA from '../components/CTA';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import CookieBanner from '../components/CookieBanner';
-import BookPopup from '../components/BookPopup';
+// BookPopup temporarily removed - import BookPopup from '../components/BookPopup';
 
 const Index = () => {
-  const [showBookPopup, setShowBookPopup] = useState(false);
+  // Book popup state temporarily removed
+  // const [showBookPopup, setShowBookPopup] = useState(false);
 
-  // Show the book popup when the page loads, if not already closed in this session for English
+  // Book popup useEffect temporarily removed
+  /*
   useEffect(() => {
     const hasClosedPopup = sessionStorage.getItem('gialoma_book_popup_closed_en');
     if (!hasClosedPopup) {
-      // Add a small delay to ensure both popups don't compete for attention immediately
       const timer = setTimeout(() => {
         setShowBookPopup(true);
       }, 500);
@@ -29,6 +30,7 @@ const Index = () => {
       return () => clearTimeout(timer);
     }
   }, []);
+  */
 
   return (
     <div className="min-h-screen">
@@ -45,8 +47,8 @@ const Index = () => {
       <Footer />
       <CookieBanner />
       
-      {/* Book Popup */}
-      {showBookPopup && <BookPopup onClose={() => setShowBookPopup(false)} />}
+      {/* Book Popup temporarily removed */}
+      {/* {showBookPopup && <BookPopup onClose={() => setShowBookPopup(false)} />} */}
     </div>
   );
 };
