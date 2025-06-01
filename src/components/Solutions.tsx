@@ -12,7 +12,7 @@ const solutions = [
       "Avoid repetitive tasks through automation",
       "AI implementation for accurate results"
     ],
-    link: "/solutions/time-saving"
+    link: "#contact"
   },
   {
     icon: <Users className="h-12 w-12 text-gialoma-gold" />,
@@ -22,7 +22,7 @@ const solutions = [
       "Instant responses with AI chatbots",
       "Forms and online booking in minutes"
     ],
-    link: "/solutions/customer-service"
+    link: "#contact"
   },
   {
     icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
@@ -32,7 +32,7 @@ const solutions = [
       "Real-time visibility of sales, expenses, and metrics",
       "Intuitive dashboards"
     ],
-    link: "/solutions/business-control"
+    link: "#contact"
   },
   {
     icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
@@ -42,7 +42,7 @@ const solutions = [
       "Optimized websites that rank on Google",
       "Active presence on social media and business listings"
     ],
-    link: "/solutions/digital-visibility"
+    link: "#contact"
   },
   {
     icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
@@ -52,7 +52,7 @@ const solutions = [
       "All data centralized and accessible",
       "Effortless reports and automated insights"
     ],
-    link: "/solutions/stress-reduction"
+    link: "#contact"
   },
   {
     icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
@@ -62,7 +62,7 @@ const solutions = [
       "If you're analog, we'll guide you step by step",
       "If you're digital, we'll help you scale"
     ],
-    link: "/solutions/tech-guidance"
+    link: "#contact"
   }
 ];
 
@@ -118,6 +118,17 @@ const Solutions = () => {
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
+
+  const handleSolutionClick = (link: string) => {
+    if (link.startsWith('#')) {
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = link;
     }
   };
 
@@ -199,7 +210,7 @@ const Solutions = () => {
                   <Button 
                     variant="outline" 
                     className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
-                    onClick={() => window.location.href = solution.link}
+                    onClick={() => handleSolutionClick(solution.link)}
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

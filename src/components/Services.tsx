@@ -14,7 +14,7 @@ const services = [
       "Automation of bookings, schedules, and appointments"
     ],
     icon: <Cog className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/process-automation"
+    link: "#contact"
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const services = [
       "Smart form integration"
     ],
     icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/web-development"
+    link: "#contact"
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const services = [
       "Integration with WhatsApp, web, and social media"
     ],
     icon: <Bot className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/ai-assistants"
+    link: "#contact"
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const services = [
       "Digital transformation plan design"
     ],
     icon: <Briefcase className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/tech-consulting"
+    link: "#contact"
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ const services = [
       "Automated reporting"
     ],
     icon: <FileSpreadsheet className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/business-reporting"
+    link: "#contact"
   },
   {
     id: 6,
@@ -74,7 +74,7 @@ const services = [
       "Web analytics integration"
     ],
     icon: <Search className="h-14 w-14 text-gialoma-gold" />,
-    link: "/services/digital-visibility"
+    link: "#contact"
   }
 ];
 
@@ -139,6 +139,17 @@ const Services = () => {
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
+
+  const handleServiceClick = (link: string) => {
+    if (link.startsWith('#')) {
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = link;
     }
   };
 
@@ -213,7 +224,7 @@ const Services = () => {
                     <Button 
                       variant="outline" 
                       className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
-                      onClick={() => window.location.href = service.link}
+                      onClick={() => handleServiceClick(service.link)}
                     >
                       Learn More <ArrowRight className="ml-2" size={16} />
                     </Button>
@@ -240,7 +251,7 @@ const Services = () => {
             className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
             onClick={() => window.location.href = "/contact"}
           >
-            Request a Free Consultation
+            Request a Consultation
           </Button>
         </div>
       </div>

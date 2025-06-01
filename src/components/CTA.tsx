@@ -74,7 +74,7 @@ const CTA = () => {
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
                 onClick={openDigitalizationPage}
               >
-                Digitalize Your Business <ExternalLink className="ml-2 h-5 w-5" />
+                Analyze Your Business <ExternalLink className="ml-2 h-5 w-5" />
               </Button>
             </div>
           ) : (
