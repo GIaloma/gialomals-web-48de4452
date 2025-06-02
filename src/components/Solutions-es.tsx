@@ -237,8 +237,8 @@ const SolutionsEs = () => {
           </button>
         </div>
         
-        <div className="mt-12 text-center">
-          <p className="text-xl text-white/95 mb-8 max-w-3xl mx-auto font-medium">
+        <div className="mt-8 text-center">
+          <p className="text-xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
           <Button 
