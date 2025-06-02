@@ -101,9 +101,6 @@ const Contact = () => {
                 <MessageCircle className="h-6 w-6 text-gialoma-gold mr-3" />
                 <h3 className="text-2xl font-semibold text-gialoma-black">Live Chat</h3>
               </div>
-              <p className="text-gialoma-darkgray mb-4">
-                Chat directly with our virtual assistant to get immediate answers to your questions.
-              </p>
               <EmbeddedChatAgent language="en" height="400px" />
             </div>
           </div>
