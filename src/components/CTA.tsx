@@ -55,26 +55,26 @@ const CTA = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
             Ready to take back your time?
           </h2>
-          <p className="text-xl mb-8 text-white/90">
+          <p className="text-2xl mb-10 text-white/90 leading-relaxed">
             Let us show you how our technology solutions can transform your business operations and free up your valuable time.
           </p>
           
           {!submitted ? (
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Button 
-                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
+                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
                 onClick={scrollToContact}
               >
                 Request a Quote
               </Button>
               <Button 
-                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-lg px-8 py-6"
+                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
                 onClick={openDigitalizationPage}
               >
-                Analyze Your Business <ExternalLink className="ml-2 h-5 w-5" />
+                Analyze Your Business <ExternalLink className="ml-3 h-6 w-6" />
               </Button>
             </div>
           ) : (
