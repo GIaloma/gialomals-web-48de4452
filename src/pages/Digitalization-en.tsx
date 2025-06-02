@@ -2,13 +2,13 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import DigitalizationNavbar from '../components/DigitalizationNavbar';
+import DigitalizationNavbarEn from '../components/DigitalizationNavbar-en';
 import Footer from '../components/Footer';
 
 const DigitalizationEn = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <DigitalizationNavbar />
+      <DigitalizationNavbarEn />
       
       <main className="flex-grow pt-44 md:pt-48 pb-20">
         <div className="container mx-auto px-4">
