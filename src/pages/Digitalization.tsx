@@ -91,16 +91,13 @@ const Digitalization = () => {
                   </div>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex justify-center">
                   <a href="/evaluacion-digital">
                     <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white flex items-center gap-2">
                       Comenzar Evaluación
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </a>
-                  <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white">
-                    Contactar Ahora
-                  </Button>
                 </div>
               </div>
               
@@ -140,12 +137,20 @@ const Digitalization = () => {
                 <div className="flex items-start">
                   <div className="bg-gialoma-gold/10 p-3 rounded-full mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gialoma-gold">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <path d="M9 12l2 2 4-4"></path>
+                      <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1"></path>
+                      <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1"></path>
+                      <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1"></path>
+                      <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1"></path>
+                      <path d="m16 16 1.5 1.5"></path>
+                      <path d="m6.5 6.5 1.5 1.5"></path>
+                      <path d="m16.5 6.5-1.5 1.5"></path>
+                      <path d="m6.5 16.5 1.5-1.5"></path>
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gialoma-black">Seguridad de Datos</h3>
-                    <p className="text-gray-700">Implementamos medidas de seguridad robustas para proteger los datos valiosos de tu empresa</p>
+                    <h3 className="text-lg font-semibold text-gialoma-black">Asistentes Virtuales con IA</h3>
+                    <p className="text-gray-700">Implementamos chatbots inteligentes que mejoran la experiencia del cliente las 24 horas</p>
                   </div>
                 </div>
 
