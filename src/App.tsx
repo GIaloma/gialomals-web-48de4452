@@ -20,6 +20,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
+import DigitalizationEn from "./pages/Digitalization-en";
 import DigitalMaturityEvaluation from "./pages/DigitalMaturityEvaluation";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
@@ -37,7 +38,7 @@ const FloatingButtonWrapper = () => {
   // Determine language based on the current route
   const getLanguage = (): 'en' | 'es' => {
     const path = location.pathname;
-    if (path.startsWith('/en') || path === '/english' || path === '/book' || path === '/login') {
+    if (path.startsWith('/en') || path === '/english' || path === '/book' || path === '/login' || path === '/digitalization') {
       return 'en';
     }
     return 'es'; // Default to Spanish
@@ -147,9 +148,11 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/terminos-servicio" element={<TermsOfService />} />
           
-          {/* Digitalization pages */}
-          <Route path="/digitalization" element={<Digitalization />} />
+          {/* Digitalization pages - with language support */}
+          <Route path="/digitalization" element={<DigitalizationEn />} />
+          <Route path="/en/digitalization" element={<DigitalizationEn />} />
           <Route path="/digitalizacion" element={<Digitalization />} />
+          <Route path="/es/digitalizacion" element={<Digitalization />} />
           <Route path="/evaluacion-digital" element={<DigitalMaturityEvaluation />} />
           <Route path="/digital-evaluation" element={<DigitalMaturityEvaluation />} />
           
