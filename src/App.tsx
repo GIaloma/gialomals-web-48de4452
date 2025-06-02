@@ -21,7 +21,6 @@ import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import DigitalizationEn from "./pages/Digitalization-en";
-import DigitalMaturityEvaluation from "./pages/DigitalMaturityEvaluation";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
 import ChatAgent from "./components/ChatAgent";
@@ -153,12 +152,14 @@ const App = () => (
           <Route path="/en/digitalization" element={<DigitalizationEn />} />
           <Route path="/digitalizacion" element={<Digitalization />} />
           <Route path="/es/digitalizacion" element={<Digitalization />} />
-          <Route path="/evaluacion-digital" element={<DigitalMaturityEvaluation />} />
-          <Route path="/digital-evaluation" element={<DigitalMaturityEvaluation />} />
           
           {/* Legacy redirects for SEO */}
           <Route path="/inicio" element={<IndexEs />} />
           <Route path="/home" element={<Index />} />
+          
+          {/* Redirect old evaluation routes to digitalization pages */}
+          <Route path="/evaluacion-digital" element={<Digitalization />} />
+          <Route path="/digital-evaluation" element={<DigitalizationEn />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
