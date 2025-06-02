@@ -1,13 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useEffect } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import DigitalizationNavbar from '../components/DigitalizationNavbar';
 import Footer from '../components/Footer';
 
 const Digitalization = () => {
-  const [showEvaluation, setShowEvaluation] = useState(false);
-
   useEffect(() => {
     // Load Fillout script if not already loaded
     if (!document.querySelector('script[src="https://server.fillout.com/embed/v1/"]')) {
@@ -17,24 +14,6 @@ const Digitalization = () => {
       document.body.appendChild(script);
     }
   }, []);
-
-  const startEvaluation = () => {
-    setShowEvaluation(true);
-  };
-
-  if (showEvaluation) {
-    return (
-      <div style={{position:'fixed', top:'0px', left:'0px', right:'0px', bottom:'0px'}}>
-        <div 
-          data-fillout-id="quXDk3DgRqus" 
-          data-fillout-embed-type="fullscreen" 
-          style={{width:'100%', height:'100%'}} 
-          data-fillout-inherit-parameters 
-        ></div>
-        <script src="https://server.fillout.com/embed/v1/"></script>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -131,13 +110,16 @@ const Digitalization = () => {
                 </div>
                 
                 <div className="flex justify-center">
-                  <Button 
-                    className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white flex items-center gap-2 text-lg px-10 py-4"
-                    onClick={startEvaluation}
-                  >
-                    Comenzar Evaluación
-                    <ArrowRight className="h-5 w-5" />
-                  </Button>
+                  <div 
+                    data-fillout-id="quXDk3DgRqus" 
+                    data-fillout-embed-type="popup" 
+                    data-fillout-button-text="Comenzar Evaluación" 
+                    data-fillout-dynamic-resize 
+                    data-fillout-button-color="#C7AE6A" 
+                    data-fillout-button-size="large" 
+                    data-fillout-inherit-parameters 
+                    data-fillout-popup-size="large"
+                  ></div>
                 </div>
               </div>
 
@@ -268,6 +250,9 @@ const Digitalization = () => {
       </main>
       
       <Footer />
+      
+      {/* Fillout script */}
+      <script src="https://server.fillout.com/embed/v1/"></script>
     </div>
   );
 };
