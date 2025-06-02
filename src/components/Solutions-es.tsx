@@ -238,11 +238,11 @@ const SolutionsEs = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+          <p className="text-xl text-white/95 mb-8 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
           <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90"
+            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg px-8 py-3"
             onClick={scrollToContact}
           >
             Programa una Consulta
