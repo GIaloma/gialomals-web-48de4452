@@ -251,11 +251,11 @@ const ServicesEs = () => {
         </div>
         
         <div className="mt-8 text-center">
-          <p className="text-gialoma-darkgray mb-6 max-w-2xl mx-auto">
+          <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
             ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
           </p>
           <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white"
+            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
             onClick={scrollToContact}
           >
             Solicita una Consulta
