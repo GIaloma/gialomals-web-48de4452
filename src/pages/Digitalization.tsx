@@ -1,11 +1,74 @@
 
-import React from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DigitalizationNavbar from '../components/DigitalizationNavbar';
 import Footer from '../components/Footer';
 
 const Digitalization = () => {
+  const [showEvaluation, setShowEvaluation] = useState(false);
+
+  useEffect(() => {
+    // Load Fillout script if not already loaded
+    if (!document.querySelector('script[src="https://server.fillout.com/embed/v1/"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://server.fillout.com/embed/v1/';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const startEvaluation = () => {
+    setShowEvaluation(true);
+  };
+
+  if (showEvaluation) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <DigitalizationNavbar />
+        
+        <main className="flex-grow pt-44 md:pt-48 pb-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="mb-8">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowEvaluation(false)}
+                  className="flex items-center gap-2 text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Volver
+                </Button>
+              </div>
+
+              <div className="bg-white shadow-xl rounded-xl p-8 md:p-12">
+                <h2 className="text-3xl font-bold mb-4 text-gialoma-black text-center">
+                  Evaluación de Madurez Digital y Bienestar Laboral
+                </h2>
+                <div className="w-20 h-1 bg-gialoma-gold mx-auto mb-6"></div>
+                
+                <p className="text-lg text-gray-700 mb-8 text-center">
+                  Descubre el nivel de digitalización de tu empresa. <strong>Completa este cuestionario</strong> y obtén un diagnóstico personalizado sobre las oportunidades de automatización y mejora del bienestar laboral de tu equipo.
+                </p>
+
+                {/* Fillout Evaluation Form */}
+                <div 
+                  style={{width:'100%', height:'500px'}} 
+                  data-fillout-id="quXDk3DgRqus" 
+                  data-fillout-embed-type="standard" 
+                  data-fillout-inherit-parameters 
+                  data-fillout-dynamic-resize
+                ></div>
+              </div>
+            </div>
+          </div>
+        </main>
+        
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <DigitalizationNavbar />
@@ -32,10 +95,10 @@ const Digitalization = () => {
               
               <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 p-8 rounded-lg mb-10 border border-gialoma-gold/20">
                 <h2 className="text-2xl font-semibold mb-4 text-gialoma-black">
-                  🚀 Evaluación de Madurez Digital
+                  🚀 Evaluación de Madurez Digital y Bienestar Laboral
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  Descubre el nivel de digitalización de tu empresa y obtén un diagnóstico personalizado sobre las oportunidades de automatización y mejora del bienestar laboral de tu equipo.
+                  Descubre el nivel de digitalización de tu empresa. <strong>Completa este cuestionario</strong> y obtén un diagnóstico personalizado sobre las oportunidades de automatización y mejora del bienestar laboral de tu equipo.
                 </p>
                 <p className="text-gray-700 mb-6">
                   Nuestro cuestionario interactivo te proporcionará:
@@ -90,14 +153,69 @@ const Digitalization = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="mb-6 text-center">
+                  <p className="text-lg text-gray-700 mb-2">
+                    <strong>Tiempo estimado:</strong> 5-10 minutos
+                  </p>
+                  <p className="text-lg text-gray-700">
+                    <strong>Resultado:</strong> Informe detallado con tu puntuación y próximos pasos
+                  </p>
+                </div>
                 
                 <div className="flex justify-center">
-                  <a href="/evaluacion-digital">
-                    <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white flex items-center gap-2">
-                      Comenzar Evaluación
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </a>
+                  <Button 
+                    className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white flex items-center gap-2"
+                    onClick={startEvaluation}
+                  >
+                    Comenzar Evaluación
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Process Steps Section */}
+              <div className="border-t border-gray-200 pt-8 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                  <div>
+                    <div className="w-16 h-16 bg-gialoma-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold text-gialoma-gold">1</span>
+                    </div>
+                    <h4 className="font-semibold text-gialoma-black mb-2">Responde las Preguntas</h4>
+                    <p className="text-gialoma-darkgray text-sm">
+                      Completa el cuestionario sobre tus procesos actuales y objetivos digitales
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <div className="w-16 h-16 bg-gialoma-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold text-gialoma-gold">2</span>
+                    </div>
+                    <h4 className="font-semibold text-gialoma-black mb-2">Recibe tu Análisis</h4>
+                    <p className="text-gialoma-darkgray text-sm">
+                      Obtén un informe detallado con tu nivel de madurez digital actual
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <div className="w-16 h-16 bg-gialoma-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold text-gialoma-gold">3</span>
+                    </div>
+                    <h4 className="font-semibold text-gialoma-black mb-2">Actúa Según el Plan</h4>
+                    <p className="text-gialoma-darkgray text-sm">
+                      Implementa las recomendaciones personalizadas para tu empresa
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="w-16 h-16 bg-gialoma-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold text-gialoma-gold">4</span>
+                    </div>
+                    <h4 className="font-semibold text-gialoma-black mb-2">Empieza a Ahorrar Tiempo y Dinero</h4>
+                    <p className="text-gialoma-darkgray text-sm">
+                      Disfruta de los beneficios de la automatización en tu día a día
+                    </p>
+                  </div>
                 </div>
               </div>
               
