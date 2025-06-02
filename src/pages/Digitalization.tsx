@@ -24,49 +24,14 @@ const Digitalization = () => {
 
   if (showEvaluation) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <DigitalizationNavbar />
-        
-        <main className="flex-grow pt-44 md:pt-48 pb-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="mb-8">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setShowEvaluation(false)}
-                  className="flex items-center gap-2 text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  Volver
-                </Button>
-              </div>
-
-              <div className="bg-white shadow-xl rounded-xl p-10 md:p-16">
-                <h2 className="text-4xl font-bold mb-4 text-gialoma-gold text-center">
-                  Evaluación de Madurez Digital y Bienestar Laboral
-                </h2>
-                <div className="w-24 h-1 bg-gialoma-gold mx-auto mb-8"></div>
-                
-                <p className="text-xl text-gray-700 mb-10 text-center">
-                  Descubre el nivel de digitalización de tu empresa. <strong>Completa este cuestionario</strong> y obtén un diagnóstico personalizado sobre las oportunidades de automatización y mejora del bienestar laboral de tu equipo.
-                </p>
-
-                {/* Fillout Evaluation Form */}
-                <div 
-                  style={{width:'100%', height:'500px'}} 
-                  data-fillout-id="quXDk3DgRqus" 
-                  data-fillout-embed-type="standard" 
-                  data-fillout-inherit-parameters 
-                  data-fillout-dynamic-resize
-                ></div>
-                
-                <script src="https://server.fillout.com/embed/v1/"></script>
-              </div>
-            </div>
-          </div>
-        </main>
-        
-        <Footer />
+      <div style={{position:'fixed', top:'0px', left:'0px', right:'0px', bottom:'0px'}}>
+        <div 
+          data-fillout-id="quXDk3DgRqus" 
+          data-fillout-embed-type="fullscreen" 
+          style={{width:'100%', height:'100%'}} 
+          data-fillout-inherit-parameters 
+        ></div>
+        <script src="https://server.fillout.com/embed/v1/"></script>
       </div>
     );
   }
@@ -96,7 +61,7 @@ const Digitalization = () => {
               </div>
               
               <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 p-10 rounded-lg mb-12 border border-gialoma-gold/20">
-                <h2 className="text-3xl font-semibold mb-6 text-gialoma-black">
+                <h2 className="text-3xl font-semibold mb-6 text-gialoma-gold">
                   🚀 Evaluación de Madurez Digital y Bienestar Laboral
                 </h2>
                 <p className="text-lg text-gray-700 mb-6">
