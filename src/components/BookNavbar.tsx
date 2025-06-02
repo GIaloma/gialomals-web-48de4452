@@ -27,7 +27,7 @@ const BookNavbar = () => {
           <a href="/" className="flex items-center">
             <img 
               alt="Gialoma Life Solutions Logo" 
-              src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
+              src="/lovable-uploads/8935091c-bbeb-4259-b435-bc8ddb03745e.png" 
               className="h-16 md:h-24 w-auto mr-3 object-contain transition-all duration-300" 
             />
           </a>
