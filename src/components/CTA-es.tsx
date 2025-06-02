@@ -39,7 +39,7 @@ const CTAEs = () => {
   };
 
   const openDigitalizationPage = () => {
-    window.open('/digitalization', '_blank');
+    window.open('/digitalizacion', '_blank');
   };
 
   const scrollToContact = () => {
