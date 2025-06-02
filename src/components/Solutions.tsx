@@ -69,6 +69,7 @@ const solutions = [
 const Solutions = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const startAutoScroll = () => {
@@ -84,9 +85,13 @@ const Solutions = () => {
         if (scrollLeft >= maxScroll) {
           // Reset to beginning when reaching the end
           scrollRef.current.scrollLeft = 0;
+          setCurrentIndex(0);
         } else {
           // Increment scroll position (increased by 15%)
           scrollRef.current.scrollLeft += 1.15;
+          // Update current index based on scroll position
+          const cardWidth = 340; // approximate card width + gap
+          setCurrentIndex(Math.round(scrollLeft / cardWidth));
         }
       }
     }, 50);
@@ -104,7 +109,9 @@ const Solutions = () => {
   const handleScrollLeft = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      const newIndex = currentIndex > 0 ? currentIndex - 1 : solutions.length - 1;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -114,7 +121,9 @@ const Solutions = () => {
   const handleScrollRight = () => {
     if (scrollRef.current) {
       setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      const newIndex = currentIndex < solutions.length - 1 ? currentIndex + 1 : 0;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -172,7 +181,7 @@ const Solutions = () => {
               <div 
                 key={index} 
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "520px" }}
+                style={{ height: "560px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
@@ -228,12 +237,12 @@ const Solutions = () => {
           </button>
         </div>
         
-        <div className="mt-12 text-center">
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+        <div className="mt-8 text-center">
+          <p className="text-xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             Ready to experience these benefits in your business? Let's start with a conversation about your needs.
           </p>
           <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90"
+            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg px-8 py-3"
             onClick={scrollToContact}
           >
             Schedule a Consultation
