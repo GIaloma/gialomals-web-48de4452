@@ -21,9 +21,9 @@ const DigitalizationNavbar = () => {
       <div className="container mx-auto px-4 flex justify-center items-center">
         <a href="/" className="flex items-center">
           <img 
-            alt="Gialoma Life Solutions Logo" 
-            src="/lovable-uploads/d3975bb5-3e96-450e-a77f-7fd8af9e04de.png" 
-            className="h-16 md:h-24 w-auto object-contain transition-all duration-300" 
+            alt="Logo de Gialoma Life Solutions" 
+            src="/lovable-uploads/4fe10b17-aa26-49e1-a9a2-e516e09ef670.png" 
+            className="h-14 md:h-20 w-auto object-contain transition-all duration-300" 
           />
         </a>
       </div>
