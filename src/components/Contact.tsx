@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
-import { Phone, Mail, Bot } from 'lucide-react';
+import { Phone, Mail, Bot, MessageCircle } from 'lucide-react';
+import EmbeddedChatAgent from './EmbeddedChatAgent';
 
 const Contact = () => {
   useEffect(() => {
@@ -39,57 +40,71 @@ const Contact = () => {
             ></div>
           </div>
 
-          <div>
-            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Contact Information</h3>
-            
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mr-4">
-                  <Phone className="h-6 w-6 text-gialoma-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">Call Us / WhatsApp</h4>
-                  <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
-                </div>
-              </div>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Contact Information</h3>
               
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mr-4">
-                  <Mail className="h-6 w-6 text-gialoma-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gialoma-black mb-1">Email Us</h4>
-                  <p className="text-gialoma-darkgray">gialoma@gialoma.com</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 bg-gray-50 p-6 rounded-lg">
-              <h4 className="font-semibold text-gialoma-black mb-3 text-center">Business Hours</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gialoma-darkgray">Monday - Friday:</span>
-                  <span className="text-gialoma-black">9:00 - 18:00 CET</span>
-                </div>
-                <div className="flex justify-between text-gray-400">
-                  <span>Saturday - Sunday:</span>
-                  <span>Closed</span>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-4">
+                    <Phone className="h-6 w-6 text-gialoma-gold" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gialoma-black mb-1">Call Us / WhatsApp</h4>
+                    <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
+                  </div>
                 </div>
                 
-                <div className="pt-3 border-t border-gray-200">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-3">
-                      <Bot className="h-5 w-5 text-gialoma-gold mt-1" />
-                    </div>
-                    <div>
-                      <h5 className="font-medium text-gialoma-black">Virtual Support Available 24/7</h5>
-                      <p className="text-sm text-gialoma-darkgray">
-                        Our virtual assistant and support system is available around the clock to help with your inquiries.
-                      </p>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-4">
+                    <Mail className="h-6 w-6 text-gialoma-gold" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gialoma-black mb-1">Email Us</h4>
+                    <p className="text-gialoma-darkgray">gialoma@gialoma.com</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 bg-gray-50 p-6 rounded-lg">
+                <h4 className="font-semibold text-gialoma-black mb-3 text-center">Business Hours</h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gialoma-darkgray">Monday - Friday:</span>
+                    <span className="text-gialoma-black">9:00 - 18:00 CET</span>
+                  </div>
+                  <div className="flex justify-between text-gray-400">
+                    <span>Saturday - Sunday:</span>
+                    <span>Closed</span>
+                  </div>
+                  
+                  <div className="pt-3 border-t border-gray-200">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 mr-3">
+                        <Bot className="h-5 w-5 text-gialoma-gold mt-1" />
+                      </div>
+                      <div>
+                        <h5 className="font-medium text-gialoma-black">Virtual Support Available 24/7</h5>
+                        <p className="text-sm text-gialoma-darkgray">
+                          Our virtual assistant and support system is available around the clock to help with your inquiries.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Embedded Chat Agent */}
+            <div>
+              <div className="flex items-center mb-4">
+                <MessageCircle className="h-6 w-6 text-gialoma-gold mr-3" />
+                <h3 className="text-2xl font-semibold text-gialoma-black">Live Chat</h3>
+              </div>
+              <p className="text-gialoma-darkgray mb-4">
+                Chat directly with our virtual assistant to get immediate answers to your questions.
+              </p>
+              <EmbeddedChatAgent language="en" height="400px" />
             </div>
           </div>
         </div>
