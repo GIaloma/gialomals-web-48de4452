@@ -2,19 +2,15 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square70x70logo src="/lovable-uploads/gialoma-favicon-180x180.png"/>
-            <square150x150logo src="/lovable-uploads/gialoma-favicon-180x180.png"/>
-            <square310x310logo src="/lovable-uploads/gialoma-favicon-512x512.png"/>
-            <wide310x150logo src="/lovable-uploads/gialoma-favicon-512x512.png"/>
+            <square70x70logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <square150x150logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <square310x310logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <wide310x150logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
             <TileColor>#b8985a</TileColor>
         </tile>
         <notification>
             <frequency>30</frequency>
             <cycle>1</cycle>
         </notification>
-        <meta name="application-name" content="Gialoma Life Solutions"/>
-        <meta name="msapplication-tooltip" content="Technology that frees up your time"/>
-        <meta name="msapplication-starturl" content="/"/>
-        <meta name="msapplication-navbutton-color" content="#b8985a"/>
     </msapplication>
 </browserconfig>
