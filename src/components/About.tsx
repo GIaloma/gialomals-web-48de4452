@@ -18,10 +18,10 @@ const About = () => {
           
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Card 1: The Names */}
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border border-gray-200">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-600">
+                <div className="w-20 h-20 bg-gradient-to-br from-gialoma-gold/20 to-gialoma-gold/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gialoma-gold">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg>
@@ -30,25 +30,25 @@ const About = () => {
                 <p className="text-gialoma-darkgray">The origin of our identity</p>
               </div>
               <div className="space-y-4">
-                <div className="text-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border border-blue-200">
-                  <span className="font-bold text-xl text-blue-700">Gianro</span>
+                <div className="text-center p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+                  <span className="font-bold text-xl text-gialoma-black">Gianro</span>
                 </div>
                 <div className="text-center text-3xl text-gialoma-gold font-bold">+</div>
-                <div className="text-center p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg border border-purple-200">
-                  <span className="font-bold text-xl text-purple-700">Paloma</span>
+                <div className="text-center p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+                  <span className="font-bold text-xl text-gialoma-black">Paloma</span>
                 </div>
                 <div className="text-center text-3xl text-gialoma-gold font-bold">=</div>
-                <div className="text-center p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg border-2 border-gialoma-gold transform group-hover:scale-105 transition-transform duration-300">
+                <div className="text-center p-4 bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/20 rounded-lg border-2 border-gialoma-gold transform group-hover:scale-105 transition-transform duration-300">
                   <span className="font-bold text-2xl text-gialoma-gold">GIALOMA</span>
                 </div>
               </div>
             </div>
 
             {/* Card 2: The Foundation */}
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border border-gray-200">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600">
+                <div className="w-20 h-20 bg-gradient-to-br from-gialoma-gold/20 to-gialoma-gold/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gialoma-gold">
                     <path d="M8 2v4"></path>
                     <path d="M16 2v4"></path>
                     <path d="M21 6H3"></path>
@@ -65,32 +65,32 @@ const About = () => {
                 <p className="text-sm text-gialoma-darkgray mt-2">Spanish word that inspires</p>
               </div>
               <div className="space-y-4">
-                <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-200">
+                <div className="p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
                   <div className="flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600 mr-3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-amber-600 mr-3">
                       <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                     </svg>
-                    <span className="font-bold text-green-700 text-lg">Stability</span>
+                    <span className="font-bold text-amber-700 text-lg">Stability</span>
                   </div>
                 </div>
-                <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg border border-emerald-200">
+                <div className="p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border border-yellow-200">
                   <div className="flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-emerald-600 mr-3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-yellow-600 mr-3">
                       <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                       <path d="M2 17l10 5 10-5"></path>
                       <path d="M2 12l10 5 10-5"></path>
                     </svg>
-                    <span className="font-bold text-emerald-700 text-lg">Growth</span>
+                    <span className="font-bold text-yellow-700 text-lg">Growth</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Card 3: The Mission */}
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border border-gray-200">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-purple-600">
+                <div className="w-20 h-20 bg-gradient-to-br from-gialoma-gold/20 to-gialoma-gold/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gialoma-gold">
                     <path d="M9 12l2 2 4-4"></path>
                     <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.74 5.61 1.98"></path>
                   </svg>
@@ -99,15 +99,15 @@ const About = () => {
                 <p className="text-gialoma-darkgray">Our purpose and vision</p>
               </div>
               <div className="space-y-4">
-                <div className="text-center p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg border border-purple-200">
-                  <span className="font-bold text-lg text-purple-700">AI Technology</span>
+                <div className="text-center p-4 bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border border-slate-200">
+                  <span className="font-bold text-lg text-slate-700">AI Technology</span>
                 </div>
                 <div className="text-center text-3xl text-gialoma-gold font-bold">×</div>
-                <div className="text-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg border border-orange-200">
-                  <span className="font-bold text-lg text-orange-700">Human Design</span>
+                <div className="text-center p-4 bg-gradient-to-r from-stone-50 to-stone-100 rounded-lg border border-stone-200">
+                  <span className="font-bold text-lg text-stone-700">Human Design</span>
                 </div>
                 <div className="text-center text-3xl text-gialoma-gold font-bold">=</div>
-                <div className="text-center p-4 bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 rounded-lg border-2 border-gialoma-gold transform group-hover:scale-105 transition-transform duration-300">
+                <div className="text-center p-4 bg-gradient-to-r from-gialoma-gold/10 via-gialoma-gold/15 to-gialoma-gold/20 rounded-lg border-2 border-gialoma-gold transform group-hover:scale-105 transition-transform duration-300">
                   <span className="font-bold text-gialoma-gold text-lg leading-tight">
                     Live More<br/>
                     Work Less
@@ -119,7 +119,7 @@ const About = () => {
           
           {/* Bottom Message */}
           <div className="text-center">
-            <div className="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto border border-gray-200">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-gialoma-gold/20 to-gialoma-gold/40 rounded-full flex items-center justify-center">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gialoma-gold">
