@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
 import { Phone, Mail, Bot, MessageCircle } from 'lucide-react';
-import EmbeddedChatAgent from './EmbeddedChatAgent';
 
 const Contact = () => {
   useEffect(() => {
@@ -12,10 +11,77 @@ const Contact = () => {
       script.async = true;
       document.body.appendChild(script);
     }
+
+    // Load Botpress v3.0 script if not already loaded
+    if (!document.querySelector('script[src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"]')) {
+      const botpressScript = document.createElement('script');
+      botpressScript.src = 'https://cdn.botpress.cloud/webchat/v3.0/inject.js';
+      botpressScript.async = true;
+      document.head.appendChild(botpressScript);
+
+      // Initialize Botpress after script loads
+      botpressScript.onload = () => {
+        setTimeout(() => {
+          if (window.botpress) {
+            window.botpress.on("webchat:ready", () => {
+              window.botpress.open();
+            });
+            
+            window.botpress.init({
+              "botId": "c828a0c2-b428-4caa-bb15-72e4afb46bcb",
+              "configuration": {
+                "version": "v1",
+                "botName": "Natalia",
+                "fabImage": "https://files.bpcontent.cloud/2025/06/07/17/20250607174013-SEVTS4FD.png",
+                "website": {
+                  "title": "www.gialoma.com",
+                  "link": "www.gialoma.com"
+                },
+                "email": {
+                  "title": "gialoma@gialoma.com",
+                  "link": "gialoma@gialoma.com"
+                },
+                "phone": {
+                  "title": "+34605865631",
+                  "link": "+34605865631"
+                },
+                "termsOfService": {},
+                "privacyPolicy": {},
+                "color": "#c7ae6a",
+                "variant": "solid",
+                "headerVariant": "solid",
+                "themeMode": "light",
+                "fontFamily": "ibm",
+                "radius": 3,
+                "feedbackEnabled": false,
+                "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+              },
+              "clientId": "bbc7acb7-ea94-4bf7-ace4-e0b02df48042",
+              "selector": "#webchat"
+            });
+          }
+        }, 500);
+      };
+    }
   }, []);
 
   return (
     <section id="contact" className="section-padding bg-white">
+      <style>
+        {`
+          #webchat .bpWebchat {
+            position: unset;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            max-width: 100%;
+          }
+          #webchat .bpFab {
+            display: none;
+          }
+        `}
+      </style>
+      
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -95,13 +161,15 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Embedded Chat Agent */}
+            {/* New Embedded Chat Agent */}
             <div className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white hover:bg-gray-50/50 p-6 rounded-lg">
               <div className="flex items-center mb-4">
                 <MessageCircle className="h-6 w-6 text-gialoma-gold mr-3" />
                 <h3 className="text-2xl font-semibold text-gialoma-black">Live Chat</h3>
               </div>
-              <EmbeddedChatAgent language="en" height="400px" />
+              <div className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                <div id="webchat" style={{width: '100%', height: '500px'}}></div>
+              </div>
             </div>
           </div>
         </div>
