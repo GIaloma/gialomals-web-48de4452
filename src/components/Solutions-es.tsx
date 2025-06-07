@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 const solutions = [
   {
-    icon: <Clock className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Clock className="h-12 w-12 text-white" />,
     title: "El tiempo de calidad no es un lujo, es una necesidad",
     description: "Recupera tu recurso más valioso: el tiempo. Nuestras soluciones optimizan procesos para que puedas enfocarte en lo que realmente importa.",
     benefits: [
@@ -15,7 +15,7 @@ const solutions = [
     category: "efficiency"
   },
   {
-    icon: <Users className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Users className="h-12 w-12 text-white" />,
     title: "No busques la perfección técnica, busca la autenticidad humana",
     description: "Mejora la experiencia de tus clientes con herramientas que te permiten responder rápida, profesional y consistentemente en todos los canales.",
     benefits: [
@@ -26,7 +26,7 @@ const solutions = [
     category: "experience"
   },
   {
-    icon: <BarChart3 className="h-12 w-12 text-gialoma-gold" />,
+    icon: <BarChart3 className="h-12 w-12 text-white" />,
     title: "Tecnología para la Realización Humana",
     description: "Mantente al día con tu negocio con información en tiempo real y paneles integrales que te dan visibilidad de todos los aspectos de tus operaciones.",
     benefits: [
@@ -37,7 +37,7 @@ const solutions = [
     category: "growth"
   },
   {
-    icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Globe className="h-12 w-12 text-white" />,
     title: "La visibilidad online ya no es opcional",
     description: "Destácate en el panorama digital con una presencia online optimizada que ayude a los clientes potenciales a encontrar y confiar en tu negocio.",
     benefits: [
@@ -48,7 +48,7 @@ const solutions = [
     category: "experience"
   },
   {
-    icon: <Heart className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Heart className="h-12 w-12 text-white" />,
     title: "No optimizamos procesos, optimizamos vidas",
     description: "Reduce la ansiedad empresarial y crea armonía organizacional con sistemas que centralizan la información y automatizan reportes.",
     benefits: [
@@ -59,7 +59,7 @@ const solutions = [
     category: "growth"
   },
   {
-    icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Lightbulb className="h-12 w-12 text-white" />,
     title: "No se trata de automatizar todo, sino de automatizar inteligentemente",
     description: "Ya sea que comiences desde cero o busques optimizar, nuestro enfoque se adapta a tu nivel de comodidad tecnológica y madurez empresarial.",
     benefits: [
@@ -116,10 +116,10 @@ const SolutionsEs = () => {
     <section id="soluciones" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Hemos automatizado lo que se puede automatizar para humanizar lo que es humano
           </h2>
-          <p className="text-lg text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Nuestras soluciones generan un impacto real al resolver problemas concretos y proporcionar beneficios tangibles que transforman cómo trabajas y vives.
           </p>
         </div>
@@ -140,8 +140,8 @@ const SolutionsEs = () => {
                 >
                   {category.icon}
                   <div className="text-center">
-                    <div className="font-semibold text-sm md:text-base">{category.name}</div>
-                    <div className="text-xs opacity-80 hidden md:block">{category.description}</div>
+                    <div className="font-semibold text-base md:text-lg">{category.name}</div>
+                    <div className="text-sm opacity-80 hidden md:block">{category.description}</div>
                   </div>
                 </button>
               ))}
@@ -154,7 +154,7 @@ const SolutionsEs = () => {
               <div 
                 key={index} 
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "560px" }}
+                style={{ height: "580px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
@@ -164,22 +164,22 @@ const SolutionsEs = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center min-h-[80px]">
+                  <h3 className="text-xl font-semibold mb-4 text-white text-center flex items-center justify-center min-h-[80px]">
                     {solution.title}
                   </h3>
                   
-                  <p className="text-white/90 mb-4 text-sm md:text-base">
+                  <p className="text-white/90 mb-5 text-base md:text-lg text-justify">
                     {solution.description}
                   </p>
                 </div>
                 
                 {/* Middle section with flex-grow */}
                 <div className="flex-grow">
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-white mr-2 flex-shrink-0">•</span>
-                        <span className="text-white/90 text-sm md:text-base">
+                        <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
+                        <span className="text-white/90 text-base md:text-lg text-justify">
                           {benefit}
                         </span>
                       </li>
@@ -191,7 +191,7 @@ const SolutionsEs = () => {
                 <div className="mt-auto pt-4">
                   <Button 
                     variant="outline" 
-                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
+                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
                     onClick={() => handleSolutionClick(solution.link)}
                   >
                     Saber Más <ArrowRight className="ml-2 h-4 w-4" />
@@ -203,11 +203,11 @@ const SolutionsEs = () => {
         </div>
         
         <div className="mt-8 text-center">
-          <p className="text-xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
+          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
           <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg px-8 py-3"
+            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
             onClick={scrollToContact}
           >
             Programa una Consulta
