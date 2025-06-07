@@ -180,33 +180,41 @@ const Solutions = () => {
             {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "580px" }}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
+                style={{ 
+                  minWidth: "340px", 
+                  width: "340px",
+                  height: "600px" 
+                }}
               >
-                {/* Top section with fixed height */}
-                <div>
-                  <div className="mb-5 flex justify-center">
-                    <div className="bg-white/20 p-4 rounded-full">
-                      {solution.icon}
-                    </div>
+                {/* Icon section - fixed height */}
+                <div className="flex justify-center mb-6">
+                  <div className="bg-white/20 p-4 rounded-full">
+                    {solution.icon}
                   </div>
-                  
-                  <h3 className="text-xl font-semibold mb-4 text-white text-center flex items-center justify-center min-h-[80px]">
+                </div>
+                
+                {/* Title section - fixed height */}
+                <div className="h-20 flex items-center justify-center mb-4">
+                  <h3 className="text-xl font-semibold text-white text-center leading-tight">
                     {solution.title}
                   </h3>
-                  
-                  <p className="text-white/90 mb-5 text-base md:text-lg text-justify">
+                </div>
+                
+                {/* Description section - fixed height */}
+                <div className="h-24 mb-4">
+                  <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
                     {solution.description}
                   </p>
                 </div>
                 
-                {/* Middle section with flex-grow */}
-                <div className="flex-grow">
+                {/* Benefits section - flexible height but contained */}
+                <div className="flex-grow mb-4">
                   <ul className="space-y-3">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
-                        <span className="text-white/90 text-base md:text-lg text-justify">
+                        <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
                           {benefit}
                         </span>
                       </li>
@@ -214,8 +222,8 @@ const Solutions = () => {
                   </ul>
                 </div>
                 
-                {/* Bottom section with fixed position */}
-                <div className="mt-auto pt-4">
+                {/* Button section - fixed at bottom */}
+                <div className="mt-auto">
                   <Button 
                     variant="outline" 
                     className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
