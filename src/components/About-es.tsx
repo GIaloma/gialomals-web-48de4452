@@ -19,7 +19,7 @@ const AboutEs = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
             {/* Left Side - Story Cards */}
             <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">Los Nombres</span>
@@ -29,7 +29,7 @@ const AboutEs = () => {
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">La Base</span>
@@ -39,7 +39,7 @@ const AboutEs = () => {
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">La Misión</span>
@@ -52,7 +52,7 @@ const AboutEs = () => {
             
             {/* Right Side - Brand Display */}
             <div className="relative">
-              <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
                 <div className="text-center text-gialoma-black">
                   <div className="text-6xl font-bold mb-4 tracking-wider">
                     G<span className="text-gialoma-gold font-bold">IA</span>LOMA
@@ -81,7 +81,7 @@ const AboutEs = () => {
           
           {/* Philosophy Section */}
           <div className="text-center">
-            <div className="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto border border-gray-100">
+            <div className="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-gialoma-gold/20 to-gialoma-gold/40 rounded-full flex items-center justify-center">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gialoma-gold">
