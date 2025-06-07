@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <square150x150logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <square310x310logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <wide310x150logo src="/lovable-uploads/f7ead9d5-6151-4495-a452-e9dae868152d.png"/>
+            <TileColor>#b8985a</TileColor>
+        </tile>
+        <notification>
+            <frequency>30</frequency>
+            <cycle>1</cycle>
+        </notification>
+    </msapplication>
+</browserconfig>
