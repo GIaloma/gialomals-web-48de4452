@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const solutions = [
   {
-    icon: <Clock className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Clock className="h-12 w-12 text-white" />,
     title: "Quality time is not a luxury, it's a necessity",
     description: "Reclaim your most valuable resource: time. Our solutions streamline processes so you can focus on what truly matters.",
     benefits: [
@@ -15,7 +15,7 @@ const solutions = [
     link: "#contact"
   },
   {
-    icon: <Users className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Users className="h-12 w-12 text-white" />,
     title: "Don't seek technical perfection, seek human authenticity",
     description: "Enhance your customer experience with tools that allow you to respond quickly, professionally, and consistently across all channels.",
     benefits: [
@@ -25,7 +25,7 @@ const solutions = [
     link: "#contact"
   },
   {
-    icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
+    icon: <ChartBar className="h-12 w-12 text-white" />,
     title: "Technology for Human Fulfillment",
     description: "Stay on top of your business with real-time insights and comprehensive dashboards that give you visibility into all aspects of your operations.",
     benefits: [
@@ -35,7 +35,7 @@ const solutions = [
     link: "#contact"
   },
   {
-    icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Globe className="h-12 w-12 text-white" />,
     title: "Online visibility is no longer optional",
     description: "Stand out in the digital landscape with optimized online presence that helps potential customers find and trust your business.",
     benefits: [
@@ -45,7 +45,7 @@ const solutions = [
     link: "#contact"
   },
   {
-    icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
+    icon: <HeartPulse className="h-12 w-12 text-white" />,
     title: "We don't optimize processes, we optimize lives",
     description: "Reduce business anxiety and create organizational harmony with systems that centralize information and automate reporting.",
     benefits: [
@@ -55,7 +55,7 @@ const solutions = [
     link: "#contact"
   },
   {
-    icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
+    icon: <Lightbulb className="h-12 w-12 text-white" />,
     title: "It's not about automating everything, but about automating intelligently",
     description: "Whether you're starting from scratch or looking to optimize, our approach adapts to your technical comfort level and business maturity.",
     benefits: [
@@ -152,10 +152,10 @@ const Solutions = () => {
     <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             We have automated what can be automated to humanize what is human
           </h2>
-          <p className="text-lg text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Our solutions deliver real impact by solving concrete problems and providing tangible benefits that transform how you work and live.
           </p>
         </div>
@@ -164,10 +164,10 @@ const Solutions = () => {
           {/* Navigation Arrows */}
           <button 
             onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -ml-4"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-3 text-white focus:outline-none -ml-4"
             aria-label="Scroll left"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={28} />
           </button>
           
           <div 
@@ -181,7 +181,7 @@ const Solutions = () => {
               <div 
                 key={index} 
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
-                style={{ height: "560px" }}
+                style={{ height: "580px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
@@ -191,22 +191,22 @@ const Solutions = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-3 text-white text-center flex items-center justify-center min-h-[80px]">
+                  <h3 className="text-xl font-semibold mb-4 text-white text-center flex items-center justify-center min-h-[80px]">
                     {solution.title}
                   </h3>
                   
-                  <p className="text-white/90 mb-4 text-sm md:text-base">
+                  <p className="text-white/90 mb-5 text-base md:text-lg text-justify">
                     {solution.description}
                   </p>
                 </div>
                 
                 {/* Middle section with flex-grow */}
                 <div className="flex-grow">
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-white mr-2 flex-shrink-0">•</span>
-                        <span className="text-white/90 text-sm md:text-base">
+                        <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
+                        <span className="text-white/90 text-base md:text-lg text-justify">
                           {benefit}
                         </span>
                       </li>
@@ -218,7 +218,7 @@ const Solutions = () => {
                 <div className="mt-auto pt-4">
                   <Button 
                     variant="outline" 
-                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors"
+                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
                     onClick={() => handleSolutionClick(solution.link)}
                   >
                     Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -230,19 +230,19 @@ const Solutions = () => {
           
           <button 
             onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -mr-4"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-3 text-white focus:outline-none -mr-4"
             aria-label="Scroll right"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={28} />
           </button>
         </div>
         
         <div className="mt-8 text-center">
-          <p className="text-xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
+          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             Ready to experience these benefits in your business? Let's start with a conversation about your needs.
           </p>
           <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg px-8 py-3"
+            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
             onClick={scrollToContact}
           >
             Schedule a Consultation
