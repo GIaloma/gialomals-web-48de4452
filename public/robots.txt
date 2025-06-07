@@ -1,14 +1,13 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Allow crawling of favicon and icon files
+Allow: /favicon.ico
+Allow: /safari-pinned-tab.svg
+Allow: /site.webmanifest
+Allow: /browserconfig.xml
+Allow: /lovable-uploads/gialoma-favicon-*.png
+Allow: /lovable-uploads/*.png
+
+# Sitemap location
+Sitemap: https://gialomaweb.netlify.app/sitemap.xml
