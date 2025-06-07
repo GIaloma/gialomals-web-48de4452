@@ -126,7 +126,7 @@ const SolutionsEs = () => {
 
         <div className="relative">
           {/* Tab Navigation - Replaces the navigation arrows area */}
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center">
               {Object.entries(categories).map(([key, category]) => (
                 <button
@@ -148,65 +148,66 @@ const SolutionsEs = () => {
             </div>
           </div>
           
-          {/* Content area - Same structure as original carousel, just showing filtered solutions */}
-          <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4">
-            {filteredSolutions.map((solution, index) => (
-              <div 
-                key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
-                style={{ 
-                  minWidth: "340px", 
-                  width: "340px",
-                  height: "600px" 
-                }}
-              >
-                {/* Icon section - fixed height */}
-                <div className="flex justify-center mb-6">
-                  <div className="bg-white/20 p-4 rounded-full">
-                    {solution.icon}
+          {/* Content area - Centered cards taking full space */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl w-full px-8">
+              {filteredSolutions.map((solution, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
+                  style={{ 
+                    minHeight: "650px",
+                    height: "650px" 
+                  }}
+                >
+                  {/* Icon section - fixed height */}
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-white/20 p-5 rounded-full">
+                      {solution.icon}
+                    </div>
+                  </div>
+                  
+                  {/* Title section - fixed height */}
+                  <div className="h-24 flex items-center justify-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
+                      {solution.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Description section - fixed height */}
+                  <div className="h-28 mb-6">
+                    <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                      {solution.description}
+                    </p>
+                  </div>
+                  
+                  {/* Benefits section - flexible height but contained */}
+                  <div className="flex-grow mb-6">
+                    <ul className="space-y-4">
+                      {solution.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
+                          <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                            {benefit}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Button section - fixed at bottom */}
+                  <div className="mt-auto">
+                    <Button 
+                      variant="outline" 
+                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
+                      onClick={() => handleSolutionClick(solution.link)}
+                    >
+                      Saber Más <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
-                
-                {/* Title section - fixed height */}
-                <div className="h-20 flex items-center justify-center mb-4">
-                  <h3 className="text-xl font-semibold text-white text-center leading-tight">
-                    {solution.title}
-                  </h3>
-                </div>
-                
-                {/* Description section - fixed height */}
-                <div className="h-24 mb-4">
-                  <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
-                    {solution.description}
-                  </p>
-                </div>
-                
-                {/* Benefits section - flexible height but contained */}
-                <div className="flex-grow mb-4">
-                  <ul className="space-y-3">
-                    {solution.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
-                        <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
-                          {benefit}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Button section - fixed at bottom */}
-                <div className="mt-auto">
-                  <Button 
-                    variant="outline" 
-                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
-                    onClick={() => handleSolutionClick(solution.link)}
-                  >
-                    Saber Más <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
         
