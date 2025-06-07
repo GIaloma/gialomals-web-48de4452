@@ -24,9 +24,9 @@ export const EmbeddedChatAgent: React.FC<EmbeddedChatAgentProps> = ({
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${language === 'es' ? 'Chat - Gialoma' : 'Chat - Gialoma'}</title>
     
-    <!-- Updated Botpress v3.0 Scripts -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2025/06/06/09/20250606092953-YNVKJXHW.js"></script>
+    <!-- Botpress Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/05/01/17/20250501175630-EVUUQ1E2.js"></script>
     
     <style>
         body {
@@ -123,7 +123,7 @@ export const EmbeddedChatAgent: React.FC<EmbeddedChatAgentProps> = ({
         <p>
             ${language === 'es' 
               ? '¡Hola! Estoy aquí para ayudarte con cualquier pregunta.' 
-              : 'Hello! I\\'m here to help you with any questions.'}
+              : 'Hello! I\'m here to help you with any questions.'}
         </p>
     </div>
     

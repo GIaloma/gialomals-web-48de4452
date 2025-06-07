@@ -27,9 +27,9 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${language === 'es' ? 'Chat - Gialoma' : 'Chat - Gialoma'}</title>
     
-    <!-- Updated Botpress v3.0 Scripts -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2025/06/06/09/20250606092953-YNVKJXHW.js"></script>
+    <!-- Botpress Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/05/01/17/20250501175630-EVUUQ1E2.js"></script>
     
     <style>
         body {
@@ -110,7 +110,7 @@ export const ChatAgent: React.FC<ChatAgentProps> = ({ isOpen, onClose, language 
         <span class="icon">💬</span>
         ${language === 'es' 
           ? 'El chat aparecerá en la esquina inferior derecha.<br>Puedes cerrar esta ventana cuando termines.' 
-          : 'The chat will appear in the bottom right corner.<br>You can close this window when you\\'re done.'}
+          : 'The chat will appear in the bottom right corner.<br>You can close this window when you\'re done.'}
     </div>
 
     <script>
