@@ -18,19 +18,6 @@ const services = [
     highlight: true
   },
   {
-    id: 2,
-    title: "Diseño y Desarrollo Web",
-    description: "Obtén una presencia online profesional con nuestros sitios web personalizados que son responsivos, fáciles de usar y diseñados para convertir visitantes en clientes.",
-    features: [
-      "Sitios web corporativos responsivos",
-      "Páginas de aterrizaje",
-      "Integración de formularios inteligentes"
-    ],
-    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contactos",
-    category: "digital"
-  },
-  {
     id: 3,
     title: "Asistentes Virtuales IA y Chatbots",
     description: "Mejora el servicio al cliente y la eficiencia operacional con asistentes inteligentes que manejan consultas, citas y soporte las 24 horas.",
@@ -43,6 +30,19 @@ const services = [
     link: "#contactos",
     category: "automation",
     highlight: true
+  },
+  {
+    id: 2,
+    title: "Diseño y Desarrollo Web",
+    description: "Obtén una presencia online profesional con nuestros sitios web personalizados que son responsivos, fáciles de usar y diseñados para convertir visitantes en clientes.",
+    features: [
+      "Sitios web corporativos responsivos",
+      "Páginas de aterrizaje",
+      "Integración de formularios inteligentes"
+    ],
+    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
+    link: "#contactos",
+    category: "digital"
   },
   {
     id: 4,
@@ -179,25 +179,25 @@ const ServicesEs = () => {
                     </div>
                   </div>
                   
-                  {/* Title - Same styling as original */}
+                  {/* Title - Justified text */}
                   <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
                       style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.title}
                   </h3>
                   
-                  {/* Description - Same styling as original */}
-                  <p className="text-gialoma-darkgray mb-5 text-center text-sm md:text-base overflow-visible" 
+                  {/* Description - Justified text */}
+                  <p className="text-gialoma-darkgray mb-5 text-justify text-sm md:text-base overflow-visible" 
                      style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.description}
                   </p>
                   
-                  {/* Features section - Same styling as original */}
+                  {/* Features section - Justified text */}
                   <div className="flex-grow mb-4">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base" style={{ wordBreak: 'break-word' }}>
+                          <span className="text-gialoma-darkgray text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
                             {feature}
                           </span>
                         </li>
