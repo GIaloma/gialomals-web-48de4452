@@ -90,7 +90,7 @@ const Solutions = () => {
           // Increment scroll position (increased by 15%)
           scrollRef.current.scrollLeft += 1.15;
           // Update current index based on scroll position
-          const cardWidth = 340; // approximate card width + gap
+          const cardWidth = 500; // updated card width + gap
           setCurrentIndex(Math.round(scrollLeft / cardWidth));
         }
       }
@@ -111,7 +111,7 @@ const Solutions = () => {
       setIsAutoScrolling(false);
       const newIndex = currentIndex > 0 ? currentIndex - 1 : solutions.length - 1;
       setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
+      scrollRef.current.scrollTo({ left: newIndex * 500, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -123,7 +123,7 @@ const Solutions = () => {
       setIsAutoScrolling(false);
       const newIndex = currentIndex < solutions.length - 1 ? currentIndex + 1 : 0;
       setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
+      scrollRef.current.scrollTo({ left: newIndex * 500, behavior: 'smooth' });
       
       // Resume auto scrolling after manual interaction
       setTimeout(() => setIsAutoScrolling(true), 2000);
@@ -172,7 +172,7 @@ const Solutions = () => {
           
           <div 
             ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
+            className="flex overflow-x-auto gap-8 pb-4 hide-scrollbar px-8 justify-center"
             style={{ scrollBehavior: 'smooth' }}
             onMouseEnter={() => setIsAutoScrolling(false)}
             onMouseLeave={() => setIsAutoScrolling(true)}
@@ -180,37 +180,37 @@ const Solutions = () => {
             {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
                 style={{ 
-                  minWidth: "340px", 
-                  width: "340px",
-                  height: "600px" 
+                  minWidth: "480px", 
+                  width: "480px",
+                  height: "650px" 
                 }}
               >
                 {/* Icon section - fixed height */}
                 <div className="flex justify-center mb-6">
-                  <div className="bg-white/20 p-4 rounded-full">
+                  <div className="bg-white/20 p-5 rounded-full">
                     {solution.icon}
                   </div>
                 </div>
                 
                 {/* Title section - fixed height */}
-                <div className="h-20 flex items-center justify-center mb-4">
-                  <h3 className="text-xl font-semibold text-white text-center leading-tight">
+                <div className="h-24 flex items-center justify-center mb-6">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
                     {solution.title}
                   </h3>
                 </div>
                 
                 {/* Description section - fixed height */}
-                <div className="h-24 mb-4">
+                <div className="h-28 mb-6">
                   <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
                     {solution.description}
                   </p>
                 </div>
                 
                 {/* Benefits section - flexible height but contained */}
-                <div className="flex-grow mb-4">
-                  <ul className="space-y-3">
+                <div className="flex-grow mb-6">
+                  <ul className="space-y-4">
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
