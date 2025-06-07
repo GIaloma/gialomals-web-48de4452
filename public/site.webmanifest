@@ -1,3 +1,4 @@
+
 {
     "name": "Gialoma Life Solutions",
     "short_name": "Gialoma",
@@ -10,7 +11,7 @@
     "scope": "/",
     "icons": [
         {
-            "src": "/lovable-uploads/gialoma-favicon-32x32.png",
+            "src": "/lovable-uploads/72a26000-ca62-489f-b6a4-c4cb8522e3c6.png",
             "sizes": "32x32",
             "type": "image/png",
             "purpose": "any"
@@ -52,7 +53,7 @@
             "purpose": "any"
         },
         {
-            "src": "/lovable-uploads/gialoma-favicon-180x180.png",
+            "src": "/lovable-uploads/a8a1c3eb-77a1-4105-95ce-d9dcb95fd739.png",
             "sizes": "180x180",
             "type": "image/png",
             "purpose": "any"
@@ -70,7 +71,7 @@
             "purpose": "any"
         },
         {
-            "src": "/lovable-uploads/gialoma-favicon-512x512.png",
+            "src": "/lovable-uploads/9d099af8-08d2-4cda-a37b-6ad247719e28.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
