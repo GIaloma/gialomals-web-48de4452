@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Clock, Users, BarChart3, Globe, Heart, Lightbulb, ArrowRight } from 'lucide-react';
+
+import React, { useRef, useEffect, useState } from 'react';
+import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const solutions = [
@@ -11,8 +12,7 @@ const solutions = [
       "Automatiza tareas repetitivas",
       "Implementación de IA para resultados precisos"
     ],
-    link: "#contactos",
-    category: "efficiency"
+    link: "#contactos"
   },
   {
     icon: <Users className="h-12 w-12 text-gialoma-gold" />,
@@ -22,19 +22,17 @@ const solutions = [
       "Respuestas instantáneas con chatbots de IA",
       "Formularios y reservas online"
     ],
-    link: "#contactos",
-    category: "experience"
+    link: "#contactos"
   },
   {
-    icon: <BarChart3 className="h-12 w-12 text-gialoma-gold" />,
+    icon: <ChartBar className="h-12 w-12 text-gialoma-gold" />,
     title: "Tecnología para la Realización Humana",
     description: "Mantente al día con tu negocio con información en tiempo real y paneles integrales que te dan visibilidad de todos los aspectos de tus operaciones.",
     benefits: [
       "Visibilidad en tiempo real de ventas, gastos y métricas",
       "Paneles intuitivos"
     ],
-    link: "#contactos",
-    category: "growth"
+    link: "#contactos"
   },
   {
     icon: <Globe className="h-12 w-12 text-gialoma-gold" />,
@@ -44,19 +42,17 @@ const solutions = [
       "Sitios web optimizados que aparecen en Google",
       "Presencia activa en redes sociales y directorios empresariales"
     ],
-    link: "#contactos",
-    category: "experience"
+    link: "#contactos"
   },
   {
-    icon: <Heart className="h-12 w-12 text-gialoma-gold" />,
+    icon: <HeartPulse className="h-12 w-12 text-gialoma-gold" />,
     title: "No optimizamos procesos, optimizamos vidas",
     description: "Reduce la ansiedad empresarial y crea armonía organizacional con sistemas que centralizan la información y automatizan reportes.",
     benefits: [
       "Todos los datos centralizados y accesibles",
       "Reportes sin esfuerzo e insights automatizados"
     ],
-    link: "#contactos",
-    category: "growth"
+    link: "#contactos"
   },
   {
     icon: <Lightbulb className="h-12 w-12 text-gialoma-gold" />,
@@ -66,33 +62,75 @@ const solutions = [
       "Si eres analógico, te guiaremos paso a paso",
       "Si eres digital, te ayudaremos a escalar"
     ],
-    link: "#contactos",
-    category: "efficiency"
+    link: "#contactos"
   }
 ];
 
-const categories = {
-  efficiency: {
-    name: "Eficiencia",
-    description: "Optimiza tu tiempo y procesos",
-    icon: <Clock className="h-5 w-5" />
-  },
-  experience: {
-    name: "Experiencia",
-    description: "Mejora la experiencia del cliente", 
-    icon: <Users className="h-5 w-5" />
-  },
-  growth: {
-    name: "Crecimiento",
-    description: "Impulsa el crecimiento de tu negocio",
-    icon: <BarChart3 className="h-5 w-5" />
-  }
-};
-
 const SolutionsEs = () => {
-  const [activeTab, setActiveTab] = useState('efficiency');
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const startAutoScroll = () => {
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+    }
+    
+    scrollIntervalRef.current = setInterval(() => {
+      if (scrollRef.current && isAutoScrolling) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+        
+        if (scrollLeft >= maxScroll) {
+          // Reset to beginning when reaching the end
+          scrollRef.current.scrollLeft = 0;
+          setCurrentIndex(0);
+        } else {
+          // Increment scroll position (increased by 15%)
+          scrollRef.current.scrollLeft += 1.15;
+          // Update current index based on scroll position
+          const cardWidth = 340; // approximate card width + gap
+          setCurrentIndex(Math.round(scrollLeft / cardWidth));
+        }
+      }
+    }, 50);
+  };
+  
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
+  }, [isAutoScrolling]);
+  
+  const handleScrollLeft = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      const newIndex = currentIndex > 0 ? currentIndex - 1 : solutions.length - 1;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
+      
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
+  
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      setIsAutoScrolling(false);
+      const newIndex = currentIndex < solutions.length - 1 ? currentIndex + 1 : 0;
+      setCurrentIndex(newIndex);
+      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
+      
+      // Resume auto scrolling after manual interaction
+      setTimeout(() => setIsAutoScrolling(true), 2000);
+    }
+  };
 
-  const handleSolutionClick = (link) => {
+  const handleSolutionClick = (link: string) => {
     if (link.startsWith('#')) {
       const element = document.querySelector(link);
       if (element) {
@@ -110,8 +148,6 @@ const SolutionsEs = () => {
     }
   };
 
-  const filteredSolutions = solutions.filter(solution => solution.category === activeTab);
-
   return (
     <section id="soluciones" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
@@ -124,37 +160,28 @@ const SolutionsEs = () => {
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center">
-            {Object.entries(categories).map(([key, category]) => (
-              <button
-                key={key}
-                onClick={() => setActiveTab(key)}
-                className={`px-4 md:px-6 py-3 rounded-md font-medium transition-all duration-300 flex items-center gap-2 ${
-                  activeTab === key
-                    ? 'bg-white text-gialoma-gold shadow-md'
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                {category.icon}
-                <div className="text-center">
-                  <div className="font-semibold text-sm md:text-base">{category.name}</div>
-                  <div className="text-xs opacity-80 hidden md:block">{category.description}</div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Single Content Area - Maintains same height as original carousel */}
-        <div className="relative" style={{ minHeight: '560px' }}>
-          <div className="grid md:grid-cols-2 gap-6 pb-4">
-            {filteredSolutions.map((solution, index) => (
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={handleScrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -ml-4"
+            aria-label="Desplazar a la izquierda"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div 
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
+            style={{ scrollBehavior: 'smooth' }}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
+          >
+            {solutions.map((solution, index) => (
               <div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
-                style={{ height: '560px' }}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 min-w-[330px] flex flex-col"
+                style={{ height: "560px" }}
               >
                 {/* Top section with fixed height */}
                 <div>
@@ -168,7 +195,7 @@ const SolutionsEs = () => {
                     {solution.title}
                   </h3>
                   
-                  <p className="text-white/90 mb-4 text-sm md:text-base text-justify">
+                  <p className="text-white/90 mb-4 text-sm md:text-base">
                     {solution.description}
                   </p>
                 </div>
@@ -179,7 +206,7 @@ const SolutionsEs = () => {
                     {solution.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-white mr-2 flex-shrink-0">•</span>
-                        <span className="text-white/90 text-sm md:text-base text-justify">
+                        <span className="text-white/90 text-sm md:text-base">
                           {benefit}
                         </span>
                       </li>
@@ -200,6 +227,14 @@ const SolutionsEs = () => {
               </div>
             ))}
           </div>
+          
+          <button 
+            onClick={handleScrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 text-white focus:outline-none -mr-4"
+            aria-label="Desplazar a la derecha"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
         
         <div className="mt-8 text-center">
@@ -216,48 +251,12 @@ const SolutionsEs = () => {
       </div>
 
       <style jsx>{`
-        .container {
-          max-width: 1200px;
-          padding-left: 1rem;
-          padding-right: 1rem;
-          margin: 0 auto;
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* Internet Explorer and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
-        
-        .section-padding {
-          padding-top: 4rem;
-          padding-bottom: 4rem;
-        }
-        
-        .text-gialoma-gold {
-          color: #d4af37;
-        }
-        
-        .bg-gialoma-gold {
-          background-color: #d4af37;
-        }
-        
-        .from-gialoma-darkgold {
-          --tw-gradient-from: #b8941f;
-        }
-        
-        .to-gialoma-gold {
-          --tw-gradient-to: #d4af37;
-        }
-        
-        @media (max-width: 768px) {
-          .container {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-          }
-          
-          .section-padding {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-          }
-          
-          .grid {
-            grid-template-columns: 1fr;
-          }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari, Opera */
         }
       `}</style>
     </section>
