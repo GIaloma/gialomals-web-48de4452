@@ -125,6 +125,36 @@ const testimonials = [
     highlight: "25% más ocupación",
     icon: <MapPin className="w-5 h-5" />,
     category: "healthcare"
+  },
+  {
+    id: 13,
+    quote: "Mi consultorio odontológico maneja gran volumen de pacientes. La automatización de Gialoma me permite enviar recordatorios automáticos, gestionar cancelaciones y reprogramar citas sin perder tiempo. Mis pacientes están más satisfechos y yo más organizado.",
+    author: "Dr. Fernando Castillo",
+    position: "Odontólogo",
+    rating: 5,
+    highlight: "Gestión automática de recordatorios",
+    icon: <Clock className="w-5 h-5" />,
+    category: "healthcare"
+  },
+  {
+    id: 14,
+    quote: "Como propietaria de una academia de idiomas, tenía profesores freelance con horarios cambiantes y alumnos en múltiples modalidades. Gialoma sincronizó todo: clases presenciales, online, pruebas de nivel. Un cambio radical en nuestra eficiencia operativa.",
+    author: "Sofía Morales",
+    position: "Directora, Academia Lingua Plus",
+    rating: 5,
+    highlight: "Sincronización multi-modalidad",
+    icon: <Users className="w-5 h-5" />,
+    category: "education"
+  },
+  {
+    id: 15,
+    quote: "Mi centro de estética tenía problemas con dobles reservas y confusión de horarios entre mi equipo de tres especialistas. Con Gialoma cada profesional ve su agenda individual pero yo tengo una vista global. Zero conflictos desde hace 6 meses.",
+    author: "Valentina Torres",
+    position: "Propietaria, Centro Estético Bellezza",
+    rating: 5,
+    highlight: "Zero conflictos de horarios",
+    icon: <CheckCircle className="w-5 h-5" />,
+    category: "beauty"
   }
 ];
 
@@ -140,7 +170,8 @@ const TestimonialsEs = () => {
       hospitality: 'text-green-600', 
       legal: 'text-purple-600',
       restaurant: 'text-orange-600',
-      professional: 'text-indigo-600'
+      professional: 'text-indigo-600',
+      education: 'text-teal-600'
     };
     return colors[category as keyof typeof colors] || 'text-gray-600';
   };
@@ -152,28 +183,29 @@ const TestimonialsEs = () => {
       hospitality: 'bg-green-100',
       legal: 'bg-purple-100', 
       restaurant: 'bg-orange-100',
-      professional: 'bg-indigo-100'
+      professional: 'bg-indigo-100',
+      education: 'bg-teal-100'
     };
     return backgrounds[category as keyof typeof backgrounds] || 'bg-gray-100';
   };
 
   return (
-    <section id="testimonios" className="section-padding gold-gradient">
+    <section id="testimonios" className="section-padding bg-gialoma-beige overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">
             Profesionales de Todo Tipo Confían en Nosotros
           </h2>
-          <p className="text-lg text-white/90 max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto mb-8">
             Más de 300 profesionales y pequeños negocios han transformado su gestión con nuestras soluciones. 
             Desde consultas médicas hasta hoteles rurales, descubre cómo hemos simplificado procesos manteniendo la máxima seguridad.
           </p>
-          <div className="flex justify-center items-center gap-2 text-yellow-400">
+          <div className="flex justify-center items-center gap-2 text-gialoma-gold">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-6 h-6 fill-current" />
             ))}
-            <span className="text-lg font-semibold text-white ml-2">4.9/5</span>
-            <span className="text-white/70 text-sm">(300+ opiniones)</span>
+            <span className="text-lg font-semibold text-gialoma-black ml-2">4.9/5</span>
+            <span className="text-gialoma-darkgray text-sm">(300+ opiniones)</span>
           </div>
         </div>
 
@@ -182,7 +214,7 @@ const TestimonialsEs = () => {
           {visibleTestimonials.map((testimonial) => (
             <div 
               key={testimonial.id} 
-              className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+              className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full"
             >
               {/* Header with rating and category */}
               <div className="flex items-center justify-between mb-4">
@@ -194,25 +226,28 @@ const TestimonialsEs = () => {
                 <div className="text-2xl">"</div>
               </div>
 
-              {/* Quote */}
-              <p className="text-gialoma-darkgray mb-6 leading-relaxed">
+              {/* Quote - justified text, flexible growth */}
+              <p className="text-gialoma-darkgray mb-6 leading-relaxed text-justify flex-grow">
                 {testimonial.quote}
               </p>
 
-              {/* Highlight Feature */}
-              <div className={`${getCategoryBg(testimonial.category)} rounded-lg p-3 mb-4 flex items-center gap-2`}>
-                <div className={getCategoryColor(testimonial.category)}>
-                  {testimonial.icon}
+              {/* Bottom section - Highlight Feature + Author aligned to bottom */}
+              <div className="mt-auto">
+                {/* Highlight Feature */}
+                <div className={`${getCategoryBg(testimonial.category)} rounded-lg p-3 mb-4 flex items-center gap-2`}>
+                  <div className={getCategoryColor(testimonial.category)}>
+                    {testimonial.icon}
+                  </div>
+                  <span className="text-sm font-semibold text-gialoma-black">
+                    {testimonial.highlight}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold text-gialoma-black">
-                  {testimonial.highlight}
-                </span>
-              </div>
 
-              {/* Author */}
-              <div className="border-t pt-4">
-                <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
-                <p className="text-sm text-gray-500">{testimonial.position}</p>
+                {/* Author */}
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500">{testimonial.position}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -222,7 +257,7 @@ const TestimonialsEs = () => {
         <div className="text-center mb-12">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gialoma-gold rounded-lg hover:bg-white/90 transition-colors duration-200 font-semibold shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gialoma-gold text-white rounded-lg hover:bg-gialoma-darkgold transition-colors duration-200 font-semibold shadow-lg"
           >
             {isExpanded ? (
               <>
@@ -240,77 +275,77 @@ const TestimonialsEs = () => {
 
         {/* Business Categories */}
         {isExpanded && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg mb-12 border border-white/20">
-            <h3 className="text-xl font-bold text-center mb-6 text-white">
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-8 shadow-lg mb-12 border border-gialoma-gold/20">
+            <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
               Sectores que Hemos Transformado
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Shield className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Salud</span>
+                <span className="text-sm font-medium text-gialoma-black">Salud</span>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Star className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Star className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Belleza</span>
+                <span className="text-sm font-medium text-gialoma-black">Belleza</span>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <MapPin className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <MapPin className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Hostelería</span>
+                <span className="text-sm font-medium text-gialoma-black">Hostelería</span>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <CheckCircle className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <CheckCircle className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Legal</span>
+                <span className="text-sm font-medium text-gialoma-black">Legal</span>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Users className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Users className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Restauración</span>
+                <span className="text-sm font-medium text-gialoma-black">Restauración</span>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Clock className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Clock className="w-6 h-6 text-gialoma-gold" />
                 </div>
-                <span className="text-sm font-medium text-white">Servicios</span>
+                <span className="text-sm font-medium text-gialoma-black">Servicios</span>
               </div>
             </div>
           </div>
         )}
 
         {/* Trust Indicators */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
-          <h3 className="text-xl font-bold text-center mb-6 text-white">
+        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gialoma-gold/20">
+          <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
             Garantías para Todos los Sectores
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Shield className="w-6 h-6 text-gialoma-gold" />
               </div>
-              <h4 className="font-semibold text-white mb-2">RGPD Compliant</h4>
-              <p className="text-sm text-white/80">Cumplimiento estricto de normativas de protección de datos</p>
+              <h4 className="font-semibold text-gialoma-black mb-2">RGPD Compliant</h4>
+              <p className="text-sm text-gialoma-darkgray">Cumplimiento estricto de normativas de protección de datos</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Clock className="w-6 h-6 text-gialoma-gold" />
               </div>
-              <h4 className="font-semibold text-white mb-2">Revocación &lt; 48h</h4>
-              <p className="text-sm text-white/80">Control total sobre accesos con revocación inmediata</p>
+              <h4 className="font-semibold text-gialoma-black mb-2">Revocación &lt; 48h</h4>
+              <p className="text-sm text-gialoma-darkgray">Control total sobre accesos con revocación inmediata</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <CheckCircle className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle className="w-6 h-6 text-gialoma-gold" />
               </div>
-              <h4 className="font-semibold text-white mb-2">Sin Almacenamiento</h4>
-              <p className="text-sm text-white/80">Procesamiento en tiempo real sin guardar datos sensibles</p>
+              <h4 className="font-semibold text-gialoma-black mb-2">Sin Almacenamiento</h4>
+              <p className="text-sm text-gialoma-darkgray">Procesamiento en tiempo real sin guardar datos sensibles</p>
             </div>
           </div>
         </div>
