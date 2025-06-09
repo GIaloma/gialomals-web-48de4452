@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Star, CheckCircle, Clock, Shield, ChevronDown, ChevronUp, Users, MapPin } from 'lucide-react';
 
 const testimonials = [
@@ -160,8 +160,31 @@ const testimonials = [
 
 const TestimonialsEs = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   
   const visibleTestimonials = isExpanded ? testimonials : testimonials.slice(0, 6);
+
+  const handleToggleExpand = () => {
+    if (isExpanded && buttonRef.current) {
+      // Store the current button position before collapsing
+      const buttonPosition = buttonRef.current.getBoundingClientRect().top + window.pageYOffset;
+      
+      setIsExpanded(false);
+      
+      // After the state updates and content collapses, scroll to maintain button position
+      setTimeout(() => {
+        const newButtonPosition = buttonRef.current?.getBoundingClientRect().top + window.pageYOffset;
+        if (newButtonPosition && newButtonPosition !== buttonPosition) {
+          window.scrollTo({
+            top: window.pageYOffset + (newButtonPosition - buttonPosition),
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      setIsExpanded(true);
+    }
+  };
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -256,7 +279,8 @@ const TestimonialsEs = () => {
         {/* Expand/Collapse Button */}
         <div className="text-center mb-12">
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
+            ref={buttonRef}
+            onClick={handleToggleExpand}
             className="inline-flex items-center gap-2 px-6 py-3 bg-gialoma-gold text-white rounded-lg hover:bg-gialoma-darkgold transition-colors duration-200 font-semibold shadow-lg"
           >
             {isExpanded ? (
