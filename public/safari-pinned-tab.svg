@@ -1,9 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="35" fill="none" stroke="#000" stroke-width="3"/>
-  <circle cx="50" cy="50" r="20" fill="none" stroke="#000" stroke-width="2"/>
-  <circle cx="50" cy="50" r="8" fill="#000"/>
-  <path d="M50 15 L58 35 L50 32 L42 35 Z" fill="#000"/>
-  <path d="M85 50 L65 58 L68 50 L65 42 Z" fill="#000"/>
-  <path d="M50 85 L42 65 L50 68 L58 65 Z" fill="#000"/>
-  <path d="M15 50 L35 42 L32 50 L35 58 Z" fill="#000"/>
+  <!-- Simple geometric representation of the Gialoma logo -->
+  <!-- Letter G shape -->
+  <path d="M20 50 C20 30, 30 20, 50 20 C70 20, 80 30, 80 40 L65 40 C65 35, 60 30, 50 30 C35 30, 30 35, 30 50 C30 65, 35 70, 50 70 C60 70, 65 65, 65 60 L50 60 L50 50 L80 50 L80 60 C80 75, 70 80, 50 80 C30 80, 20 70, 20 50 Z" fill="#000"/>
 </svg>
