@@ -61,22 +61,22 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="section-padding bg-gradient-to-br from-gray-50 to-white">
+    <section id="testimonials" className="section-padding gold-gradient">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Healthcare Professionals Trust Us
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-white/90 max-w-3xl mx-auto mb-8">
             Over 150 healthcare professionals have transformed their agenda management with our solutions. 
             Discover how we've simplified their processes while maintaining maximum security.
           </p>
-          <div className="flex justify-center items-center gap-2 text-yellow-500">
+          <div className="flex justify-center items-center gap-2 text-yellow-400">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-6 h-6 fill-current" />
             ))}
-            <span className="text-lg font-semibold text-gialoma-black ml-2">4.9/5</span>
-            <span className="text-gray-500 text-sm">(150+ reviews)</span>
+            <span className="text-lg font-semibold text-white ml-2">4.9/5</span>
+            <span className="text-white/70 text-sm">(150+ reviews)</span>
           </div>
         </div>
 
@@ -122,31 +122,31 @@ const Testimonials = () => {
         </div>
 
         {/* Trust Indicators */}
-        <div className="bg-white rounded-xl p-8 shadow-lg">
-          <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
+          <h3 className="text-xl font-bold text-center mb-6 text-white">
             Guarantees for Healthcare Professionals
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Shield className="w-6 h-6 text-white" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">GDPR Compliant</h4>
-              <p className="text-sm text-gray-600">Strict compliance with data protection regulations</p>
+              <h4 className="font-semibold text-white mb-2">GDPR Compliant</h4>
+              <p className="text-sm text-white/80">Strict compliance with data protection regulations</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Clock className="w-6 h-6 text-white" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">Revocation &lt; 48h</h4>
-              <p className="text-sm text-gray-600">Total control over access with immediate revocation</p>
+              <h4 className="font-semibold text-white mb-2">Revocation &lt; 48h</h4>
+              <p className="text-sm text-white/80">Total control over access with immediate revocation</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <CheckCircle className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle className="w-6 h-6 text-white" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">No Storage</h4>
-              <p className="text-sm text-gray-600">Real-time processing without storing sensitive data</p>
+              <h4 className="font-semibold text-white mb-2">No Storage</h4>
+              <p className="text-sm text-white/80">Real-time processing without storing sensitive data</p>
             </div>
           </div>
         </div>
