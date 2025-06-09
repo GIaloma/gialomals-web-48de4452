@@ -49,35 +49,16 @@ const FlagIcon = ({ countryCode, className = "" }: { countryCode: string; classN
   );
 };
 
-// Fallback flag component with better designs
+// Fallback flag component with clean designs
 const FallbackFlag = ({ countryCode, className = "" }: { countryCode: string; className?: string }) => {
   const flagStyles = {
     ES: {
       background: 'linear-gradient(to bottom, #AA151B 0%, #AA151B 25%, #F1BF00 25%, #F1BF00 75%, #AA151B 75%, #AA151B 100%)',
     },
     GB: {
-      background: '#012169', // Just use the blue background for simplicity
-      color: 'white',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '8px',
-      fontWeight: 'bold'
+      background: '#012169', // Simple blue background for British flag fallback
     }
   };
-
-  if (countryCode === 'GB') {
-    return (
-      <div 
-        className={`inline-block w-5 h-4 rounded-sm border border-gray-200 ${className}`}
-        style={flagStyles[countryCode as keyof typeof flagStyles]}
-        role="img"
-        aria-label={`${countryCode} flag`}
-      >
-        UK
-      </div>
-    );
-  }
 
   return (
     <div 
