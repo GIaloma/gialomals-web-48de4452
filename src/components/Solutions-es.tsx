@@ -113,26 +113,26 @@ const SolutionsEs = () => {
   const filteredSolutions = solutions.filter(solution => solution.category === activeTab);
 
   return (
-    <section id="soluciones" className="section-padding-responsive bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
-      <div className="container-adaptive mx-auto">
-        <div className="text-center mb-12 xl:mb-16">
-          <h2 className="heading-responsive font-bold mb-6 text-white">
+    <section id="soluciones" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Hemos automatizado lo que se puede automatizar para humanizar lo que es humano
           </h2>
-          <p className="text-responsive-xl text-white/90 max-w-4xl xl:max-w-5xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Nuestras soluciones generan un impacto real al resolver problemas concretos y proporcionar beneficios tangibles que transforman cómo trabajas y vives.
           </p>
         </div>
 
         <div className="relative">
-          {/* Tab Navigation - Enhanced for larger screens */}
-          <div className="flex justify-center mb-8 xl:mb-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 xl:p-2 flex flex-wrap gap-1 xl:gap-2 justify-center">
+          {/* Tab Navigation - Replaces the navigation arrows area */}
+          <div className="flex justify-center mb-6">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center">
               {Object.entries(categories).map(([key, category]) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`px-4 md:px-6 xl:px-8 py-3 xl:py-4 rounded-md font-medium transition-all duration-300 flex items-center gap-2 xl:gap-3 ${
+                  className={`px-4 md:px-6 py-3 rounded-md font-medium transition-all duration-300 flex items-center gap-2 ${
                     activeTab === key
                       ? 'bg-white text-gialoma-gold shadow-md'
                       : 'text-white hover:bg-white/10'
@@ -140,56 +140,54 @@ const SolutionsEs = () => {
                 >
                   {category.icon}
                   <div className="text-center">
-                    <div className="font-semibold text-base md:text-lg xl:text-xl">{category.name}</div>
-                    <div className="text-sm xl:text-base opacity-80 hidden md:block">{category.description}</div>
+                    <div className="font-semibold text-base md:text-lg">{category.name}</div>
+                    <div className="text-sm opacity-80 hidden md:block">{category.description}</div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
           
-          {/* Content area - Enhanced responsive grid */}
+          {/* Content area - Centered cards taking full space */}
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-2 gap-8 xl:gap-12 max-w-8xl w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl w-full px-8">
               {filteredSolutions.map((solution, index) => (
                 <div 
                   key={index} 
-                  className="bg-white/10 backdrop-blur-sm rounded-lg p-8 xl:p-10 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
                   style={{ 
                     minHeight: "650px",
-                    height: "auto" 
+                    height: "650px" 
                   }}
                 >
-                  {/* Icon section - enhanced for larger screens */}
-                  <div className="flex justify-center mb-6 xl:mb-8">
-                    <div className="bg-white/20 p-5 xl:p-6 rounded-full">
-                      <div className="xl:scale-125">
-                        {solution.icon}
-                      </div>
+                  {/* Icon section - fixed height */}
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-white/20 p-5 rounded-full">
+                      {solution.icon}
                     </div>
                   </div>
                   
-                  {/* Title section - responsive height */}
-                  <div className="min-h-24 xl:min-h-28 flex items-center justify-center mb-6 xl:mb-8">
-                    <h3 className="text-2xl md:text-3xl xl:text-4xl font-semibold text-white text-center leading-tight">
+                  {/* Title section - fixed height */}
+                  <div className="h-24 flex items-center justify-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
                       {solution.title}
                     </h3>
                   </div>
                   
-                  {/* Description section - enhanced text */}
-                  <div className="mb-6 xl:mb-8">
-                    <p className="text-white/90 text-base md:text-lg xl:text-xl text-justify leading-relaxed">
+                  {/* Description section - fixed height */}
+                  <div className="h-28 mb-6">
+                    <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
                       {solution.description}
                     </p>
                   </div>
                   
-                  {/* Benefits section - enhanced spacing */}
-                  <div className="flex-grow mb-6 xl:mb-8">
-                    <ul className="space-y-4 xl:space-y-6">
+                  {/* Benefits section - flexible height but contained */}
+                  <div className="flex-grow mb-6">
+                    <ul className="space-y-4">
                       {solution.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-white mr-3 xl:mr-4 flex-shrink-0 text-lg xl:text-xl">•</span>
-                          <span className="text-white/90 text-base md:text-lg xl:text-xl text-justify leading-relaxed">
+                          <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
+                          <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
                             {benefit}
                           </span>
                         </li>
@@ -197,14 +195,14 @@ const SolutionsEs = () => {
                     </ul>
                   </div>
                   
-                  {/* Button section - enhanced sizing */}
+                  {/* Button section - fixed at bottom */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
-                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base xl:text-lg py-6 xl:py-7"
+                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
                       onClick={() => handleSolutionClick(solution.link)}
                     >
-                      Saber Más <ArrowRight className="ml-2 h-4 w-4 xl:h-5 xl:w-5" />
+                      Saber Más <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
                 </div>
@@ -213,12 +211,12 @@ const SolutionsEs = () => {
           </div>
         </div>
         
-        <div className="mt-12 xl:mt-16 text-center">
-          <p className="text-xl md:text-2xl xl:text-3xl text-white/95 mb-6 xl:mb-8 max-w-4xl xl:max-w-5xl mx-auto font-medium">
+        <div className="mt-8 text-center">
+          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
           <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl xl:text-2xl px-8 xl:px-12 py-4 xl:py-6"
+            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
             onClick={scrollToContact}
           >
             Programa una Consulta

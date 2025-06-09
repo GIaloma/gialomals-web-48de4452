@@ -119,27 +119,27 @@ const ServicesEs = () => {
     : services.filter(service => service.category === activeFilter);
 
   return (
-    <section id="servicios" className="section-padding-responsive bg-white overflow-hidden">
-      <div className="container-adaptive mx-auto">
-        <div className="text-center mb-12 xl:mb-16">
-          <h2 className="heading-responsive font-bold mb-6">
+    <section id="servicios" className="section-padding bg-white overflow-hidden pb-8">
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">La automatización sin supervisión es como un coche sin conductor</span>
           </h2>
-          <p className="text-responsive-xl text-gialoma-darkgray max-w-4xl xl:max-w-5xl mx-auto">
+          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
             Ofrecemos una gama de servicios especializados diseñados para optimizar las operaciones de tu negocio 
             y mejorar tu presencia digital.
           </p>
         </div>
 
-        {/* Filter Buttons - Enhanced for larger screens */}
-        <div className="relative mb-6 xl:mb-8">
+        {/* Filter Buttons - Same height as original carousel navigation area */}
+        <div className="relative mb-4">
           <div className="flex justify-center">
-            <div className="bg-gray-100 rounded-lg p-1 xl:p-2 flex flex-wrap gap-1 xl:gap-2 justify-center">
+            <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap gap-1 justify-center">
               {Object.entries(categories).map(([key, label]) => (
                 <button
                   key={key}
                   onClick={() => setActiveFilter(key)}
-                  className={`px-4 md:px-6 xl:px-8 py-2 xl:py-3 rounded-md font-medium transition-all duration-300 text-sm md:text-base xl:text-lg ${
+                  className={`px-4 md:px-6 py-2 rounded-md font-medium transition-all duration-300 text-sm md:text-base ${
                     activeFilter === key
                       ? 'bg-gialoma-gold text-white shadow-md'
                       : 'text-gray-600 hover:bg-gray-200'
@@ -152,54 +152,52 @@ const ServicesEs = () => {
           </div>
         </div>
 
-        {/* Services Grid - Enhanced responsive grid */}
-        <div className="relative">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-3 gap-6 xl:gap-8 2xl:gap-12">
+        {/* Services Grid - Maintains same content area height as carousel */}
+        <div className="relative" style={{ minHeight: '560px' }}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
             {filteredServices.map((service) => (
               <div 
                 key={service.id} 
-                className={`bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-auto min-h-[560px] xl:min-h-[600px] ${
+                className={`bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-[560px] ${
                   service.highlight ? 'border-2 border-gialoma-gold bg-white' : ''
                 }`}
                 onMouseEnter={() => setHoveredCard(service.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 {service.highlight && (
-                  <div className="absolute top-0 right-0 bg-gialoma-gold text-white text-xs xl:text-sm px-3 xl:px-4 py-1 xl:py-2 rounded-bl-lg font-medium relative">
+                  <div className="absolute top-0 right-0 bg-gialoma-gold text-white text-xs px-3 py-1 rounded-bl-lg font-medium relative">
                     Popular
                   </div>
                 )}
                 
-                <div className="p-6 xl:p-8 flex flex-col h-full">
-                  <div className="flex justify-center mb-6 xl:mb-8">
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex justify-center mb-6">
                     <div className={`transition-all duration-300 ${
                       hoveredCard === service.id ? 'transform scale-110' : ''
                     }`}>
-                      <div className="xl:scale-125">
-                        {service.icon}
-                      </div>
+                      {service.icon}
                     </div>
                   </div>
                   
-                  {/* Title - Enhanced responsive sizing */}
-                  <h3 className="text-xl xl:text-2xl 2xl:text-3xl font-semibold text-center mb-4 xl:mb-6 text-gialoma-black flex items-center justify-center" 
+                  {/* Title - Justified text */}
+                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
                       style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.title}
                   </h3>
                   
-                  {/* Description - Enhanced text sizing */}
-                  <p className="text-gialoma-darkgray mb-5 xl:mb-6 text-justify text-sm md:text-base xl:text-lg overflow-visible" 
+                  {/* Description - Justified text */}
+                  <p className="text-gialoma-darkgray mb-5 text-justify text-sm md:text-base overflow-visible" 
                      style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.description}
                   </p>
                   
-                  {/* Features section - Enhanced spacing and text */}
-                  <div className="flex-grow mb-4 xl:mb-6">
-                    <ul className="space-y-2 xl:space-y-3">
+                  {/* Features section - Justified text */}
+                  <div className="flex-grow mb-4">
+                    <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-2 xl:mr-3 text-lg xl:text-xl">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base xl:text-lg text-justify" style={{ wordBreak: 'break-word' }}>
+                          <span className="text-gialoma-gold mr-2">•</span>
+                          <span className="text-gialoma-darkgray text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
                             {feature}
                           </span>
                         </li>
@@ -207,11 +205,11 @@ const ServicesEs = () => {
                     </ul>
                   </div>
                   
-                  {/* Button - Enhanced sizing */}
+                  {/* Button - Same styling as original */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
-                      className={`transition-all duration-300 flex items-center w-full justify-center group text-base xl:text-lg py-3 xl:py-4 ${
+                      className={`transition-all duration-300 flex items-center w-full justify-center group ${
                         service.highlight 
                           ? 'bg-gialoma-gold text-white border-gialoma-gold hover:bg-gialoma-darkgold' 
                           : 'text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white'
@@ -219,7 +217,7 @@ const ServicesEs = () => {
                       onClick={() => handleServiceClick(service.link)}
                     >
                       Saber Más 
-                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform xl:h-5 xl:w-5" size={16} />
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
                     </Button>
                   </div>
                 </div>
@@ -228,13 +226,13 @@ const ServicesEs = () => {
           </div>
         </div>
         
-        {/* Bottom section - Enhanced responsive spacing */}
-        <div className="mt-12 xl:mt-16 text-center">
-          <p className="text-xl xl:text-2xl 2xl:text-3xl text-gialoma-darkgray mb-8 xl:mb-10 max-w-4xl xl:max-w-5xl mx-auto font-medium">
+        {/* Bottom section - Exact same spacing as original */}
+        <div className="mt-8 text-center">
+          <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
             ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
           </p>
           <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg xl:text-xl 2xl:text-2xl px-8 xl:px-12 py-3 xl:py-4"
+            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
             onClick={scrollToContact}
           >
             Solicita una Consulta
@@ -288,7 +286,7 @@ const ServicesEs = () => {
           background-color: #e5e7eb;
         }
         
-        /* Enhanced responsive adjustments */
+        /* Responsive adjustments matching original */
         @media (max-width: 640px) {
           .service-card-title {
             font-size: 1.1rem;

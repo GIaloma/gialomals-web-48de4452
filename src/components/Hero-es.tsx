@@ -19,20 +19,20 @@ const HeroEs = () => {
         </div>
       </div>
         
-      <div className="container-adaptive mx-auto">
-        <div className="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl relative">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl relative">
           {/* Logo as background - desktop version (right side) */}
           <img 
             src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
             alt="Logo de Gialoma Life Solutions" 
-            className="hidden lg:block absolute top-1/2 right-[-25%] xl:right-[-20%] 2xl:right-[-15%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-80 xl:w-96 2xl:w-[28rem] h-80 xl:h-96 2xl:h-[28rem] z-0 animate-pulse animate-fade-in object-contain" 
+            className="hidden md:block absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
             style={{ animationDelay: "0.6s" }}
           />
           
           {/* Mobile text content with background logo */}
-          <div className="relative lg:static">
-            {/* Logo as background - mobile version */}
-            <div className="lg:hidden absolute top-0 left-0 right-0 overflow-visible pointer-events-none h-auto z-0">
+          <div className="relative md:static">
+            {/* Logo as background - mobile version (sized to fit text only) */}
+            <div className="md:hidden absolute top-0 left-0 right-0 overflow-visible pointer-events-none h-auto z-0">
               <div className="flex justify-center">
                 <img 
                   src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
@@ -45,31 +45,31 @@ const HeroEs = () => {
             
             <div className="relative w-full z-10">
               <h1 
-                className="heading-responsive font-bold mb-6 text-white animate-fade-in" 
+                className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in" 
                 style={{ animationDelay: "0.2s" }}
               >
                 <span className="text-gialoma-gold">Tecnología</span> que libera tu tiempo
               </h1>
               
               <p 
-                className="text-responsive-xl mb-8 text-gray-100 animate-fade-in max-w-4xl" 
+                className="text-xl md:text-2xl mb-8 text-gray-100 animate-fade-in" 
                 style={{ animationDelay: "0.4s" }}
               >
                 Diseñamos y desarrollamos soluciones tecnológicas innovadoras que optimizan tus procesos y te devuelven tiempo valioso.
               </p>
               
               <div 
-                className="flex flex-col sm:flex-row gap-4 xl:gap-6 animate-fade-in mt-20 md:mt-8" 
+                className="flex flex-col sm:flex-row gap-4 animate-fade-in mt-20 md:mt-8" 
                 style={{ animationDelay: "0.6s" }}
               >
                 <a href="#soluciones">
-                  <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg xl:text-xl px-8 xl:px-10 py-6 xl:py-7 w-full">
+                  <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6 w-full">
                     Nuestras Soluciones
                     <ArrowRight className="ml-2" size={18} />
                   </Button>
                 </a>
                 <a href="#contactos">
-                  <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg xl:text-xl px-8 xl:px-10 py-6 xl:py-7 w-full">
+                  <Button variant="outline" className="border-transparent bg-gialoma-gold hover:bg-gialoma-darkgold text-black text-lg px-8 py-6 w-full">
                     Contáctanos
                   </Button>
                 </a>
