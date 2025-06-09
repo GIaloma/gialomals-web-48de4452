@@ -93,12 +93,12 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
             isMobile
               ? "w-full bg-white text-gialoma-lightgold border-gialoma-lightgold" 
               : isCompact 
-                ? `h-9 py-1 px-3 w-auto min-w-[80px] border-gray-300 ${
+                ? `h-9 py-1 px-3 w-auto min-w-[120px] border-gray-300 ${ 
                     isScrolled 
                       ? 'bg-white text-gialoma-gold' 
                       : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
                   }`
-                : `w-[110px] border-gray-600 ${
+                : `w-[140px] border-gray-600 ${ 
                     isScrolled 
                       ? 'bg-white text-gialoma-gold' 
                       : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
@@ -109,9 +109,13 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
             {isMobile ? (
               <Globe size={16} className="text-gialoma-lightgold" />
             ) : (
-              <span className="text-lg">{currentLanguage?.flag}</span>
+              <span className="text-lg" role="img" aria-label={`${currentLanguage?.name} flag`}>
+                {currentLanguage?.flag}
+              </span>
             )}
-            <span>{isMobile ? currentLanguage?.name : currentLanguage?.code.toUpperCase()}</span>
+            <span className="font-medium">
+              {isMobile ? currentLanguage?.name : currentLanguage?.name}
+            </span>
           </div>
         </SelectTrigger>
         <SelectContent className={isMobile ? "bg-white" : "bg-white/90 backdrop-blur-sm"}>
@@ -122,8 +126,10 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
               className="cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span className="text-lg">{lang.flag}</span>
-                <span>{lang.name}</span>
+                <span className="text-lg" role="img" aria-label={`${lang.name} flag`}>
+                  {lang.flag}
+                </span>
+                <span className="font-medium">{lang.name}</span>
               </div>
             </SelectItem>
           ))}
