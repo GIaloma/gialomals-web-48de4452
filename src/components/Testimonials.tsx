@@ -1,160 +1,156 @@
 
-import React, { useRef, useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Star, CheckCircle, Clock, Shield } from 'lucide-react';
 
 const testimonials = [
   {
     id: 1,
-    quote: "Gialoma's solutions have transformed our operations, saving us countless hours each week. Their technology is intuitive and effective.",
-    author: "Sarah Johnson",
-    position: "Operations Director, TechCorp"
+    quote: "Gialoma's agenda automation completely transformed my practice. I used to lose 2 hours daily managing appointments across different platforms. Now everything syncs automatically with Google Calendar.",
+    author: "Dr. Elena Martinez",
+    position: "Clinical Psychologist",
+    rating: 5,
+    highlight: "Saves 2 hours daily",
+    icon: <Clock className="w-5 h-5" />
   },
   {
     id: 2,
-    quote: "Working with Gialoma has been a game-changer for our business. Their custom software has automated our most time-consuming tasks.",
-    author: "Michael Chen",
-    position: "CEO, Innovate Inc."
+    quote: "As a healthcare professional, patient data security is paramount. Gialoma strictly complies with GDPR and never stores sensitive information. I work confidently knowing everything is protected.",
+    author: "Dr. Carlos Ruiz",
+    position: "Medical Specialist",
+    rating: 5,
+    highlight: "GDPR compliance guaranteed",
+    icon: <Shield className="w-5 h-5" />
   },
   {
     id: 3,
-    quote: "The team at Gialoma truly understands how to leverage technology to save time. Our productivity has increased by 40% since implementing their solutions.",
-    author: "Alexandra Rivera",
-    position: "CTO, Global Solutions"
+    quote: "I had appointments scattered across Doctoralia, my physical calendar, and manual reminders. Gialoma unified everything into one view. My patients get automatic confirmations and I have more time for what matters.",
+    author: "Maria Gonzalez",
+    position: "Physical Therapist",
+    rating: 5,
+    highlight: "Complete agenda unification",
+    icon: <CheckCircle className="w-5 h-5" />
   },
   {
     id: 4,
-    quote: "The chatbot Gialoma developed for us has revolutionized our customer service. It handles over 70% of inquiries without human intervention.",
-    author: "David Patel",
-    position: "Customer Service Manager, RetailPlus"
+    quote: "The integration was seamless. In less than a week I went from chaos with multiple calendars to having everything perfectly organized. Technical support was exceptional, guiding me step by step.",
+    author: "Dr. Jose Luis Fernandez",
+    position: "Dentist",
+    rating: 5,
+    highlight: "1-week implementation",
+    icon: <CheckCircle className="w-5 h-5" />
   },
   {
     id: 5,
-    quote: "As a small business owner with limited tech knowledge, I appreciated Gialoma's patient guidance. They made digital transformation accessible.",
-    author: "Maria Gonzalez",
-    position: "Owner, Artisan Bakery"
+    quote: "I was amazed by how easy it is to revoke access if needed. In less than 48 hours I can cut any connection. This flexibility gives me total control over my professional data.",
+    author: "Ana Lopez",
+    position: "Occupational Therapist",
+    rating: 5,
+    highlight: "Total access control",
+    icon: <Shield className="w-5 h-5" />
+  },
+  {
+    id: 6,
+    quote: "I manage three different practices and each had its own system. Gialoma connected Quirónsalud, my private agenda, and Doctoralia into one calendar. Revolutionary for my practice.",
+    author: "Dr. Miguel Serrano",
+    position: "Orthopedic Surgeon",
+    rating: 5,
+    highlight: "3 practices unified",
+    icon: <CheckCircle className="w-5 h-5" />
   }
 ];
 
 const Testimonials = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  const startAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-    }
-    
-    scrollIntervalRef.current = setInterval(() => {
-      if (scrollRef.current && isAutoScrolling) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-        
-        if (scrollLeft >= maxScroll) {
-          // Reset to beginning when reaching the end
-          scrollRef.current.scrollLeft = 0;
-        } else {
-          // Increment scroll position (increased by 15%)
-          scrollRef.current.scrollLeft += 1.15;
-        }
-      }
-    }, 50);
-  };
-  
-  useEffect(() => {
-    startAutoScroll();
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isAutoScrolling]);
-  
-  const handleScrollLeft = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
-  const handleScrollRight = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
   return (
-    <section id="testimonials" className="section-padding bg-gialoma-beige overflow-hidden">
+    <section id="testimonials" className="section-padding bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">What Our Clients Say</h2>
-          <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
-            Don't just take our word for it — hear from the businesses we've helped.
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">
+            Healthcare Professionals Trust Us
+          </h2>
+          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto mb-8">
+            Over 150 healthcare professionals have transformed their agenda management with our solutions. 
+            Discover how we've simplified their processes while maintaining maximum security.
           </p>
+          <div className="flex justify-center items-center gap-2 text-yellow-500">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-6 h-6 fill-current" />
+            ))}
+            <span className="text-lg font-semibold text-gialoma-black ml-2">4.9/5</span>
+            <span className="text-gray-500 text-sm">(150+ reviews)</span>
+          </div>
         </div>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 text-gialoma-gold shadow-sm focus:outline-none -ml-4"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
-            style={{ scrollBehavior: 'smooth' }}
-            onMouseEnter={() => setIsAutoScrolling(false)}
-            onMouseLeave={() => setIsAutoScrolling(true)}
-          >
-            {testimonials.map((testimonial) => (
-              <div 
-                key={testimonial.id} 
-                className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 min-w-[320px] md:min-w-[350px] flex flex-col h-[400px]"
-              >
-                <div className="mb-4">
-                  <svg className="h-8 w-8 text-gialoma-gold" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
+        {/* Gallery Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {testimonials.map((testimonial) => (
+            <div 
+              key={testimonial.id} 
+              className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+            >
+              {/* Header with rating */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
                 </div>
-                <p className="text-gialoma-darkgray mb-6 italic flex-grow">{testimonial.quote}</p>
-                <div className="mt-auto">
-                  <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.position}</p>
-                </div>
+                <div className="text-2xl">"</div>
               </div>
-            ))}
+
+              {/* Quote */}
+              <p className="text-gialoma-darkgray mb-6 leading-relaxed line-clamp-4 group-hover:line-clamp-none transition-all duration-300">
+                {testimonial.quote}
+              </p>
+
+              {/* Highlight Feature */}
+              <div className="bg-gialoma-beige rounded-lg p-3 mb-4 flex items-center gap-2">
+                <div className="text-gialoma-gold">
+                  {testimonial.icon}
+                </div>
+                <span className="text-sm font-semibold text-gialoma-black">
+                  {testimonial.highlight}
+                </span>
+              </div>
+
+              {/* Author */}
+              <div className="border-t pt-4">
+                <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
+                <p className="text-sm text-gray-500">{testimonial.position}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="bg-white rounded-xl p-8 shadow-lg">
+          <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
+            Guarantees for Healthcare Professionals
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Shield className="w-6 h-6 text-green-600" />
+              </div>
+              <h4 className="font-semibold text-gialoma-black mb-2">GDPR Compliant</h4>
+              <p className="text-sm text-gray-600">Strict compliance with data protection regulations</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Clock className="w-6 h-6 text-blue-600" />
+              </div>
+              <h4 className="font-semibold text-gialoma-black mb-2">Revocation < 48h</h4>
+              <p className="text-sm text-gray-600">Total control over access with immediate revocation</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle className="w-6 h-6 text-purple-600" />
+              </div>
+              <h4 className="font-semibold text-gialoma-black mb-2">No Storage</h4>
+              <p className="text-sm text-gray-600">Real-time processing without storing sensitive data</p>
+            </div>
           </div>
-          
-          <button 
-            onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 text-gialoma-gold shadow-sm focus:outline-none -mr-4"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={24} />
-          </button>
         </div>
       </div>
-
-      <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* Internet Explorer and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari, Opera */
-        }
-      `}</style>
     </section>
   );
 };
