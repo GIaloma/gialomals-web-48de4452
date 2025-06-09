@@ -83,4 +83,186 @@
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
+
+  /* Enhanced responsive container classes for better large screen optimization */
+  .container-fluid-responsive {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Responsive container that adapts to screen size */
+  .container-adaptive {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 1280px; /* Smaller screens */
+  }
+
+  /* Enhanced breakpoint-based containers */
+  @media (min-width: 640px) {
+    .container-adaptive {
+      max-width: 640px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container-adaptive {
+      max-width: 768px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-adaptive {
+      max-width: 1024px;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-adaptive {
+      max-width: 1200px;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container-adaptive {
+      max-width: 1400px;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  /* For ultra-wide screens (1920px+) */
+  @media (min-width: 1920px) {
+    .container-adaptive {
+      max-width: 1600px;
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  /* Enhanced grid responsive classes */
+  .grid-responsive {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid-responsive {
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid-responsive {
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .grid-responsive {
+      gap: 3rem;
+    }
+  }
+
+  /* Responsive text scaling */
+  .text-responsive-xl {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  @media (min-width: 768px) {
+    .text-responsive-xl {
+      font-size: 1.5rem; /* 24px */
+      line-height: 2rem; /* 32px */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-responsive-xl {
+      font-size: 1.75rem; /* 28px */
+      line-height: 2.25rem; /* 36px */
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .text-responsive-xl {
+      font-size: 2rem; /* 32px */
+      line-height: 2.5rem; /* 40px */
+    }
+  }
+
+  /* Responsive heading sizes */
+  .heading-responsive {
+    font-size: 2rem; /* 32px */
+    line-height: 2.5rem; /* 40px */
+  }
+
+  @media (min-width: 768px) {
+    .heading-responsive {
+      font-size: 2.5rem; /* 40px */
+      line-height: 3rem; /* 48px */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .heading-responsive {
+      font-size: 3rem; /* 48px */
+      line-height: 3.5rem; /* 56px */
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .heading-responsive {
+      font-size: 3.5rem; /* 56px */
+      line-height: 4rem; /* 64px */
+    }
+  }
+
+  /* Enhanced section padding */
+  .section-padding-responsive {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding-responsive {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding-responsive {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .section-padding-responsive {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
 }
