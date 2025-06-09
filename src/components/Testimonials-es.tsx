@@ -302,7 +302,7 @@ const TestimonialsEs = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Clock className="w-6 h-6 text-blue-600" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">Revocación < 48h</h4>
+              <h4 className="font-semibold text-gialoma-black mb-2">Revocación &lt; 48h</h4>
               <p className="text-sm text-gray-600">Control total sobre accesos con revocación inmediata</p>
             </div>
             <div className="text-center">
