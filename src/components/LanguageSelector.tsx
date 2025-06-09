@@ -29,24 +29,59 @@ const languages: Language[] = [
   // Italian temporarily removed - { code: 'it', name: 'IT', flag: 'IT', path: '/it' },
 ];
 
-// CSS flag component that works across all browsers
+// Proper flag component using external flag images
 const FlagIcon = ({ countryCode, className = "" }: { countryCode: string; className?: string }) => {
+  // Using Flagpedia CDN for high-quality flag images
+  const flagUrl = `https://flagpedia.net/data/flags/w40/${countryCode.toLowerCase()}.webp`;
+  
+  return (
+    <img 
+      src={flagUrl}
+      alt={`${countryCode} flag`}
+      className={`inline-block w-5 h-4 rounded-sm border border-gray-200 object-cover ${className}`}
+      onError={(e) => {
+        // Fallback to a simple colored rectangle if flag image fails to load
+        const target = e.target as HTMLImageElement;
+        target.style.display = 'none';
+        target.nextElementSibling?.setAttribute('style', 'display: inline-block');
+      }}
+    />
+  );
+};
+
+// Fallback flag component with better designs
+const FallbackFlag = ({ countryCode, className = "" }: { countryCode: string; className?: string }) => {
   const flagStyles = {
     ES: {
-      background: 'linear-gradient(to bottom, #C60B1E 0%, #C60B1E 25%, #FFC400 25%, #FFC400 75%, #C60B1E 75%, #C60B1E 100%)',
+      background: 'linear-gradient(to bottom, #AA151B 0%, #AA151B 25%, #F1BF00 25%, #F1BF00 75%, #AA151B 75%, #AA151B 100%)',
     },
     GB: {
-      background: `
-        linear-gradient(to bottom, #012169 0%, #012169 33.33%, white 33.33%, white 66.66%, #C8102E 66.66%, #C8102E 100%),
-        linear-gradient(to right, #012169 0%, #012169 33.33%, white 33.33%, white 66.66%, #C8102E 66.66%, #C8102E 100%)
-      `,
-      backgroundBlendMode: 'multiply',
+      background: '#012169', // Just use the blue background for simplicity
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '8px',
+      fontWeight: 'bold'
     }
   };
 
+  if (countryCode === 'GB') {
+    return (
+      <div 
+        className={`inline-block w-5 h-4 rounded-sm border border-gray-200 ${className}`}
+        style={flagStyles[countryCode as keyof typeof flagStyles]}
+        role="img"
+        aria-label={`${countryCode} flag`}
+      >
+        UK
+      </div>
+    );
+  }
+
   return (
     <div 
-      className={`inline-block w-5 h-4 rounded-sm border border-gray-300 ${className}`}
+      className={`inline-block w-5 h-4 rounded-sm border border-gray-200 ${className}`}
       style={flagStyles[countryCode as keyof typeof flagStyles]}
       role="img"
       aria-label={`${countryCode} flag`}
@@ -134,7 +169,13 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
             {isMobile ? (
               <Globe size={16} className="text-gialoma-lightgold" />
             ) : (
-              <FlagIcon countryCode={currentLanguage?.flag || 'ES'} />
+              <div className="relative">
+                <FlagIcon countryCode={currentLanguage?.flag || 'ES'} />
+                <FallbackFlag 
+                  countryCode={currentLanguage?.flag || 'ES'} 
+                  className="hidden"
+                />
+              </div>
             )}
             <span className="font-medium text-sm">
               {currentLanguage?.name}
@@ -149,7 +190,13 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
               className="cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <FlagIcon countryCode={lang.flag} />
+                <div className="relative">
+                  <FlagIcon countryCode={lang.flag} />
+                  <FallbackFlag 
+                    countryCode={lang.flag} 
+                    className="hidden"
+                  />
+                </div>
                 <span className="font-medium">{lang.name}</span>
               </div>
             </SelectItem>
