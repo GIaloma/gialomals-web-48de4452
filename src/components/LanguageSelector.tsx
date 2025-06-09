@@ -24,10 +24,35 @@ interface LanguageSelectorProps {
 }
 
 const languages: Language[] = [
-  { code: 'es', name: 'Español', flag: '🇪🇸', path: '/' },
-  { code: 'en', name: 'English', flag: '🇬🇧', path: '/en' },
-  // Italian temporarily removed - { code: 'it', name: 'Italiano', flag: '🇮🇹', path: '/it' },
+  { code: 'es', name: 'ES', flag: 'ES', path: '/' },
+  { code: 'en', name: 'EN', flag: 'GB', path: '/en' },
+  // Italian temporarily removed - { code: 'it', name: 'IT', flag: 'IT', path: '/it' },
 ];
+
+// CSS flag component that works across all browsers
+const FlagIcon = ({ countryCode, className = "" }: { countryCode: string; className?: string }) => {
+  const flagStyles = {
+    ES: {
+      background: 'linear-gradient(to bottom, #C60B1E 0%, #C60B1E 25%, #FFC400 25%, #FFC400 75%, #C60B1E 75%, #C60B1E 100%)',
+    },
+    GB: {
+      background: `
+        linear-gradient(to bottom, #012169 0%, #012169 33.33%, white 33.33%, white 66.66%, #C8102E 66.66%, #C8102E 100%),
+        linear-gradient(to right, #012169 0%, #012169 33.33%, white 33.33%, white 66.66%, #C8102E 66.66%, #C8102E 100%)
+      `,
+      backgroundBlendMode: 'multiply',
+    }
+  };
+
+  return (
+    <div 
+      className={`inline-block w-5 h-4 rounded-sm border border-gray-300 ${className}`}
+      style={flagStyles[countryCode as keyof typeof flagStyles]}
+      role="img"
+      aria-label={`${countryCode} flag`}
+    />
+  );
+};
 
 export default function LanguageSelector({ isMobile = false, isCompact = false, customColor }: LanguageSelectorProps) {
   const navigate = useNavigate();
@@ -93,12 +118,12 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
             isMobile
               ? "w-full bg-white text-gialoma-lightgold border-gialoma-lightgold" 
               : isCompact 
-                ? `h-9 py-1 px-3 w-auto min-w-[120px] border-gray-300 ${ 
+                ? `h-9 py-1 px-3 w-auto min-w-[80px] border-gray-300 ${ 
                     isScrolled 
                       ? 'bg-white text-gialoma-gold' 
                       : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
                   }`
-                : `w-[140px] border-gray-600 ${ 
+                : `w-[100px] border-gray-600 ${ 
                     isScrolled 
                       ? 'bg-white text-gialoma-gold' 
                       : `bg-white/10 backdrop-blur-sm ${getTextColor()}`
@@ -109,12 +134,10 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
             {isMobile ? (
               <Globe size={16} className="text-gialoma-lightgold" />
             ) : (
-              <span className="text-lg" role="img" aria-label={`${currentLanguage?.name} flag`}>
-                {currentLanguage?.flag}
-              </span>
+              <FlagIcon countryCode={currentLanguage?.flag || 'ES'} />
             )}
-            <span className="font-medium">
-              {isMobile ? currentLanguage?.name : currentLanguage?.name}
+            <span className="font-medium text-sm">
+              {currentLanguage?.name}
             </span>
           </div>
         </SelectTrigger>
@@ -126,9 +149,7 @@ export default function LanguageSelector({ isMobile = false, isCompact = false, 
               className="cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span className="text-lg" role="img" aria-label={`${lang.name} flag`}>
-                  {lang.flag}
-                </span>
+                <FlagIcon countryCode={lang.flag} />
                 <span className="font-medium">{lang.name}</span>
               </div>
             </SelectItem>
