@@ -164,15 +164,15 @@ const CookiePolicy = () => {
                 <div>
                   <strong className="text-gialoma-darkgray">Chrome:</strong>
                   <ol className="list-decimal pl-6 text-gialoma-darkgray mt-1">
-                    <li>Haga clic en el menú Chrome (⋮) > Configuración</li>
-                    <li>Vaya a "Privacidad y seguridad" > "Cookies y otros datos de sitios"</li>
+                    <li>Haga clic en el menú Chrome (⋮) &gt; Configuración</li>
+                    <li>Vaya a "Privacidad y seguridad" &gt; "Cookies y otros datos de sitios"</li>
                     <li>Configure según sus preferencias</li>
                   </ol>
                 </div>
                 <div>
                   <strong className="text-gialoma-darkgray">Firefox:</strong>
                   <ol className="list-decimal pl-6 text-gialoma-darkgray mt-1">
-                    <li>Haga clic en el menú (☰) > Configuración</li>
+                    <li>Haga clic en el menú (☰) &gt; Configuración</li>
                     <li>Vaya a "Privacidad y seguridad"</li>
                     <li>En la sección "Cookies y datos del sitio web", configure según sus preferencias</li>
                   </ol>
@@ -180,14 +180,14 @@ const CookiePolicy = () => {
                 <div>
                   <strong className="text-gialoma-darkgray">Safari:</strong>
                   <ol className="list-decimal pl-6 text-gialoma-darkgray mt-1">
-                    <li>Vaya a Preferencias > Privacidad</li>
+                    <li>Vaya a Preferencias &gt; Privacidad</li>
                     <li>Configure la opción "Cookies y datos de sitios web"</li>
                   </ol>
                 </div>
                 <div>
                   <strong className="text-gialoma-darkgray">Edge:</strong>
                   <ol className="list-decimal pl-6 text-gialoma-darkgray mt-1">
-                    <li>Haga clic en el menú (⋯) > Configuración</li>
+                    <li>Haga clic en el menú (⋯) &gt; Configuración</li>
                     <li>Vaya a "Cookies y permisos de sitio"</li>
                     <li>Configure según sus preferencias</li>
                   </ol>
