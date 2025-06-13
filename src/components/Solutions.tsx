@@ -141,11 +141,9 @@ const Solutions = () => {
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleScheduleConsultation = () => {
+    // Open TidyCal booking page in a new tab
+    window.open('https://tidycal.com/gialomals/programa-una-consulta', '_blank');
   };
 
   return (
@@ -251,7 +249,7 @@ const Solutions = () => {
           </p>
           <Button 
             className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
-            onClick={scrollToContact}
+            onClick={handleScheduleConsultation}
           >
             Schedule a Consultation
           </Button>
