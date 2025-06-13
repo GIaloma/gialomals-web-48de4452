@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
-import { Phone, Mail, Bot, MessageCircle } from 'lucide-react';
-import EmbeddedChatAgent from './EmbeddedChatAgent';
+import { Phone, Mail, Bot, Mic } from 'lucide-react';
+import EmbeddedVoiceAgent from './EmbeddedVoiceAgent';
 
 const Contact = () => {
   useEffect(() => {
@@ -86,7 +86,7 @@ const Contact = () => {
                       <div>
                         <h5 className="font-medium text-gialoma-black">Virtual Support Available 24/7</h5>
                         <p className="text-sm text-gialoma-darkgray">
-                          Our virtual assistant and support system is available around the clock to help with your inquiries.
+                          Our virtual voice assistant is available around the clock to help with your inquiries.
                         </p>
                       </div>
                     </div>
@@ -95,13 +95,13 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Embedded Chat Agent */}
+            {/* Embedded Voice Agent */}
             <div className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white hover:bg-gray-50/50 p-6 rounded-lg">
               <div className="flex items-center mb-4">
-                <MessageCircle className="h-6 w-6 text-gialoma-gold mr-3" />
-                <h3 className="text-2xl font-semibold text-gialoma-black">Live Chat</h3>
+                <Mic className="h-6 w-6 text-gialoma-gold mr-3" />
+                <h3 className="text-2xl font-semibold text-gialoma-black">Live Voice Agent</h3>
               </div>
-              <EmbeddedChatAgent language="en" height="400px" />
+              <EmbeddedVoiceAgent language="en" height="400px" />
             </div>
           </div>
         </div>
