@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
 import ChatAgent from "./components/ChatAgent";
 import VoiceAgent from "./components/VoiceAgent";
+import CookieBannerEs from "./components/CookieBanner-es";
 
 const queryClient = new QueryClient();
 
@@ -167,6 +168,9 @@ const App = () => (
         
         {/* RESTORED: Optimized Floating Agent Button */}
         <FloatingButtonWrapper />
+        
+        {/* NEW: Cookie Banner for GDPR Compliance */}
+        <CookieBannerEs />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
