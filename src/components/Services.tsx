@@ -83,24 +83,54 @@ const Services = () => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTidyCal, setShowTidyCal] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Load TidyCal script when component mounts
   useEffect(() => {
+    // Check if script is already loaded
+    const existingScript = document.querySelector('script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]');
+    
+    if (existingScript) {
+      setScriptLoaded(true);
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
     script.async = true;
+    script.onload = () => {
+      setScriptLoaded(true);
+    };
+    script.onerror = () => {
+      console.error('Failed to load TidyCal script');
+    };
+    
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup script when component unmounts
-      try {
-        document.head.removeChild(script);
-      } catch (e) {
-        // Script may have already been removed
+      // Only remove if we added it
+      if (document.head.contains(script)) {
+        try {
+          document.head.removeChild(script);
+        } catch (e) {
+          // Script may have already been removed
+        }
       }
     };
   }, []);
+
+  // Initialize TidyCal when both script is loaded and embed is shown
+  useEffect(() => {
+    if (showTidyCal && scriptLoaded) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        if (window.TidyCal) {
+          window.TidyCal.init();
+        }
+      }, 100);
+    }
+  }, [showTidyCal, scriptLoaded]);
   
   const startAutoScroll = () => {
     if (scrollIntervalRef.current) {
@@ -172,7 +202,15 @@ const Services = () => {
   };
 
   const handleConsultationClick = () => {
-    setShowTidyCal(true);
+    if (scriptLoaded) {
+      setShowTidyCal(true);
+    } else {
+      // Fallback to contact section if script hasn't loaded
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -272,15 +310,35 @@ const Services = () => {
           
           {/* TidyCal embed or button */}
           {showTidyCal ? (
-            <div className="max-w-2xl mx-auto">
-              <div className="tidycal-embed" data-path="gialomals/solicita-una-consulta"></div>
+            <div className="w-full max-w-4xl mx-auto">
+              <div className="bg-white rounded-lg shadow-lg p-6 border">
+                <div className="mb-4 text-center">
+                  <h3 className="text-xl font-semibold text-gialoma-black mb-2">Schedule Your Consultation</h3>
+                  <p className="text-gialoma-darkgray">Choose the best time for your free consultation</p>
+                </div>
+                <div 
+                  className="tidycal-embed" 
+                  data-path="gialomals/solicita-una-consulta"
+                  style={{ minHeight: '600px' }}
+                ></div>
+                <div className="mt-4 text-center">
+                  <Button 
+                    variant="outline"
+                    onClick={() => setShowTidyCal(false)}
+                    className="text-gray-600 border-gray-300 hover:bg-gray-50"
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
             </div>
           ) : (
             <Button 
               className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
               onClick={handleConsultationClick}
+              disabled={!scriptLoaded}
             >
-              Request a Consultation
+              {scriptLoaded ? 'Request a Consultation' : 'Loading...'}
             </Button>
           )}
         </div>
