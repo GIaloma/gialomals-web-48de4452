@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
 
@@ -95,6 +95,20 @@ const categories = {
 const ServicesEs = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [showTidyCal, setShowTidyCal] = useState(false);
+
+  // Load TidyCal script when component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup script when component unmounts
+      document.head.removeChild(script);
+    };
+  }, []);
 
   const handleServiceClick = (link) => {
     if (link.startsWith('#')) {
@@ -107,11 +121,8 @@ const ServicesEs = () => {
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contactos');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleConsultaClick = () => {
+    setShowTidyCal(true);
   };
 
   const filteredServices = activeFilter === 'all' 
@@ -231,12 +242,20 @@ const ServicesEs = () => {
           <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
             ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
           </p>
-          <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
-            onClick={scrollToContact}
-          >
-            Solicita una Consulta
-          </Button>
+          
+          {/* TidyCal embed or button */}
+          {showTidyCal ? (
+            <div className="max-w-2xl mx-auto">
+              <div className="tidycal-embed" data-path="gialomals/solicita-una-consulta"></div>
+            </div>
+          ) : (
+            <Button 
+              className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
+              onClick={handleConsultaClick}
+            >
+              Solicita una Consulta
+            </Button>
+          )}
         </div>
       </div>
 
