@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Phone, Mail, Bot } from 'lucide-react';
+import { Phone, Mail, Bot, Linkedin, Instagram } from 'lucide-react';
 
 const ContactEs = () => {
   useEffect(() => {
@@ -52,7 +52,62 @@ const ContactEs = () => {
               </div>
             </div>
 
+            {/* Social Media Section */}
             <div className="mt-10 bg-white p-8 rounded-lg shadow-sm">
+              <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Conecta con Nuestros Fundadores</h4>
+              
+              {/* Paloma */}
+              <div className="mb-6">
+                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Paloma Firgaira - Co-Fundadora y CEO</h5>
+                <div className="flex space-x-4">
+                  <a 
+                    href="https://www.linkedin.com/in/paloma-firgaira-840b50a3" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                  >
+                    <Linkedin size={20} className="mr-2" />
+                    LinkedIn
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/prf.171508/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                  >
+                    <Instagram size={20} className="mr-2" />
+                    Instagram
+                  </a>
+                </div>
+              </div>
+
+              {/* Gianro */}
+              <div className="mb-6">
+                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Gianro Compagno - Co-Fundador y CTO</h5>
+                <div className="flex space-x-4">
+                  <a 
+                    href="https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                  >
+                    <Linkedin size={20} className="mr-2" />
+                    LinkedIn
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/gianro89/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                  >
+                    <Instagram size={20} className="mr-2" />
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 bg-white p-8 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-4 text-center text-xl">Horarios de Atención</h4>
               <div className="space-y-4">
                 <div className="flex justify-between text-lg">
