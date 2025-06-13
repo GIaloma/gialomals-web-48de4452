@@ -23,7 +23,6 @@ import Digitalization from "./pages/Digitalization";
 import DigitalizationEn from "./pages/Digitalization-en";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
-import ChatAgent from "./components/ChatAgent";
 import VoiceAgent from "./components/VoiceAgent";
 import CookieBannerEs from "./components/CookieBanner-es";
 
@@ -32,7 +31,6 @@ const queryClient = new QueryClient();
 // Component to handle the floating button based on current route
 const FloatingButtonWrapper = () => {
   const location = useLocation();
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isVoiceOpen, setIsVoiceOpen] = useState(false);
   
   // Determine language based on the current route
@@ -55,16 +53,8 @@ const FloatingButtonWrapper = () => {
     return null;
   }
 
-  const handleChatClick = () => {
-    setIsChatOpen(true);
-  };
-
   const handleVoiceClick = () => {
     setIsVoiceOpen(true);
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
   };
 
   const handleVoiceClose = () => {
@@ -75,14 +65,7 @@ const FloatingButtonWrapper = () => {
     <>
       <FloatingAgentButton
         language={getLanguage()}
-        onChatClick={handleChatClick}
         onVoiceClick={handleVoiceClick}
-      />
-      
-      <ChatAgent
-        isOpen={isChatOpen}
-        onClose={handleChatClose}
-        language={getLanguage()}
       />
       
       <VoiceAgent
@@ -166,10 +149,10 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-        {/* RESTORED: Optimized Floating Agent Button */}
+        {/* Optimized Floating Voice Agent Button */}
         <FloatingButtonWrapper />
         
-        {/* NEW: Cookie Banner for GDPR Compliance */}
+        {/* Cookie Banner for GDPR Compliance */}
         <CookieBannerEs />
       </BrowserRouter>
     </TooltipProvider>
