@@ -42,11 +42,9 @@ const CTAEs = () => {
     window.open('/digitalizacion', '_blank');
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contactos');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handlePidePresupuesto = () => {
+    // Open TidyCal booking page in a new tab
+    window.open('https://tidycal.com/gialomals/pide-presupuesto', '_blank');
   };
 
   return (
@@ -66,7 +64,7 @@ const CTAEs = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Button 
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
-                onClick={scrollToContact}
+                onClick={handlePidePresupuesto}
               >
                 Pide un Presupuesto
               </Button>
