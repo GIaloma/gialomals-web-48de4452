@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -79,6 +79,34 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gialomalife" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <!-- Dynamic Language Detection Script -->
+    <script>
+      // Dynamic language detection and HTML lang attribute update
+      (function() {
+        function getLanguageFromPath() {
+          const path = window.location.pathname;
+          if (path.startsWith('/en') || path === '/english' || path === '/book' || path === '/login' || path === '/digitalization') {
+            return 'en';
+          }
+          return 'es'; // Default to Spanish
+        }
+        
+        // Update HTML lang attribute based on route
+        const detectedLang = getLanguageFromPath();
+        document.documentElement.lang = detectedLang;
+        
+        // Update document title based on language
+        if (detectedLang === 'es') {
+          document.title = 'Gialoma Life Solutions - Tecnología que libera tu tiempo';
+          // Update description meta tag
+          const metaDescription = document.querySelector('meta[name="description"]');
+          if (metaDescription) {
+            metaDescription.setAttribute('content', 'Gialoma Life Solutions ofrece soluciones tecnológicas innovadoras que optimizan operaciones y liberan tu valioso tiempo.');
+          }
+        }
+      })();
+    </script>
 
     <!-- =============================================== -->
     <!-- GOOGLE ANALYTICS 4 - CONDITIONAL LOADING       -->
