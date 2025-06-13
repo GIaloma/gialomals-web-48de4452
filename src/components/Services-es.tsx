@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
 
@@ -95,54 +95,6 @@ const categories = {
 const ServicesEs = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [showTidyCal, setShowTidyCal] = useState(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-
-  // Load TidyCal script when component mounts
-  useEffect(() => {
-    // Check if script is already loaded
-    const existingScript = document.querySelector('script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]');
-    
-    if (existingScript) {
-      setScriptLoaded(true);
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
-    script.async = true;
-    script.onload = () => {
-      setScriptLoaded(true);
-    };
-    script.onerror = () => {
-      console.error('Failed to load TidyCal script');
-    };
-    
-    document.head.appendChild(script);
-
-    return () => {
-      // Only remove if we added it
-      if (document.head.contains(script)) {
-        try {
-          document.head.removeChild(script);
-        } catch (e) {
-          // Script may have already been removed
-        }
-      }
-    };
-  }, []);
-
-  // Initialize TidyCal when both script is loaded and embed is shown
-  useEffect(() => {
-    if (showTidyCal && scriptLoaded) {
-      // Small delay to ensure DOM is ready
-      setTimeout(() => {
-        if (window.TidyCal) {
-          window.TidyCal.init();
-        }
-      }, 100);
-    }
-  }, [showTidyCal, scriptLoaded]);
 
   const handleServiceClick = (link) => {
     if (link.startsWith('#')) {
@@ -156,15 +108,8 @@ const ServicesEs = () => {
   };
 
   const handleConsultaClick = () => {
-    if (scriptLoaded) {
-      setShowTidyCal(true);
-    } else {
-      // Fallback to contact section if script hasn't loaded
-      const contactSection = document.getElementById('contactos');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    // Open TidyCal booking page in a new tab
+    window.open('https://tidycal.com/gialomals/solicita-una-consulta', '_blank');
   };
 
   const filteredServices = activeFilter === 'all' 
@@ -285,39 +230,12 @@ const ServicesEs = () => {
             ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
           </p>
           
-          {/* TidyCal embed or button */}
-          {showTidyCal ? (
-            <div className="w-full max-w-4xl mx-auto">
-              <div className="bg-white rounded-lg shadow-lg p-6 border">
-                <div className="mb-4 text-center">
-                  <h3 className="text-xl font-semibold text-gialoma-black mb-2">Agenda tu Consulta</h3>
-                  <p className="text-gialoma-darkgray">Selecciona el mejor momento para tu consulta gratuita</p>
-                </div>
-                <div 
-                  className="tidycal-embed" 
-                  data-path="gialomals/solicita-una-consulta"
-                  style={{ minHeight: '600px' }}
-                ></div>
-                <div className="mt-4 text-center">
-                  <Button 
-                    variant="outline"
-                    onClick={() => setShowTidyCal(false)}
-                    className="text-gray-600 border-gray-300 hover:bg-gray-50"
-                  >
-                    Cerrar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <Button 
-              className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
-              onClick={handleConsultaClick}
-              disabled={!scriptLoaded}
-            >
-              {scriptLoaded ? 'Solicita una Consulta' : 'Cargando...'}
-            </Button>
-          )}
+          <Button 
+            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
+            onClick={handleConsultaClick}
+          >
+            Solicita una Consulta
+          </Button>
         </div>
       </div>
 
