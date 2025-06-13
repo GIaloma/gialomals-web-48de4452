@@ -82,7 +82,25 @@ const Services = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showTidyCal, setShowTidyCal] = useState(false);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Load TidyCal script when component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup script when component unmounts
+      try {
+        document.head.removeChild(script);
+      } catch (e) {
+        // Script may have already been removed
+      }
+    };
+  }, []);
   
   const startAutoScroll = () => {
     if (scrollIntervalRef.current) {
@@ -153,11 +171,8 @@ const Services = () => {
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleConsultationClick = () => {
+    setShowTidyCal(true);
   };
 
   return (
@@ -254,12 +269,20 @@ const Services = () => {
           <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
             Need a specialized solution? We offer custom services tailored to your specific business needs.
           </p>
-          <Button 
-            className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
-            onClick={scrollToContact}
-          >
-            Request a Consultation
-          </Button>
+          
+          {/* TidyCal embed or button */}
+          {showTidyCal ? (
+            <div className="max-w-2xl mx-auto">
+              <div className="tidycal-embed" data-path="gialomals/solicita-una-consulta"></div>
+            </div>
+          ) : (
+            <Button 
+              className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white text-lg px-8 py-3"
+              onClick={handleConsultationClick}
+            >
+              Request a Consultation
+            </Button>
+          )}
         </div>
       </div>
 
