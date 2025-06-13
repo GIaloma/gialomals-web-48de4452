@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 // IMPORTANTE: Reemplaza con tu ID real de Google Analytics
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Reemplaza por tu ID real
+const GA_MEASUREMENT_ID = 'G-4VXMZJPJ5N'; // Tu ID real de Google Analytics
 
 interface CookieConsent {
   necessary: boolean;
