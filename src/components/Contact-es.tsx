@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Phone, Mail, Bot, Mic } from 'lucide-react';
-import EmbeddedVoiceAgent from './EmbeddedVoiceAgent';
+import { Phone, Mail, Bot } from 'lucide-react';
 
 const ContactEs = () => {
   useEffect(() => {
@@ -15,93 +14,91 @@ const ContactEs = () => {
   }, []);
 
   return (
-    <section id="contactos" className="section-padding bg-white">
+    <section id="contact" className="section-padding bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">Contactos</span>
+            <span className="text-gradient">Contacto</span>
           </h2>
           <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
-            ¿Tienes preguntas o estás listo para comenzar tu viaje con Gialoma Life Solutions? Contáctanos hoy.
+            ¿Tienes preguntas o estás listo para comenzar tu camino con Gialoma Life Solutions? Contáctanos hoy mismo.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
-            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Envíanos un Mensaje</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Contact Information Card - Now larger */}
+          <div className="bg-gray-50 p-10 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+            <h3 className="text-2xl font-semibold mb-8 text-gialoma-black">Información de Contacto</h3>
             
-            {/* Fillout Spanish Form */}
-            <div 
-              style={{width:'100%', height:'500px'}} 
-              data-fillout-id="pw2CQvvBZmus" 
-              data-fillout-embed-type="standard" 
-              data-fillout-inherit-parameters 
-              data-fillout-dynamic-resize
-            ></div>
-          </div>
-
-          <div className="space-y-8">
-            <div className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white hover:bg-gray-50/50 p-6 rounded-lg">
-              <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Información de Contactos</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 mr-4">
-                    <Phone className="h-6 w-6 text-gialoma-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gialoma-black mb-1">Llámanos / WhatsApp</h4>
-                    <p className="text-gialoma-darkgray">+34 605 865 631<br/>+39 320 070 8093</p>
-                  </div>
+            <div className="space-y-8">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mr-6">
+                  <Phone className="h-8 w-8 text-gialoma-gold" />
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 mr-4">
-                    <Mail className="h-6 w-6 text-gialoma-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gialoma-black mb-1">Escríbenos</h4>
-                    <p className="text-gialoma-darkgray">gialoma@gialoma.com</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold text-gialoma-black mb-2 text-lg">Llámanos / WhatsApp</h4>
+                  <p className="text-gialoma-darkgray text-lg">+34 605 865 631<br/>+39 320 070 8093</p>
                 </div>
               </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mr-6">
+                  <Mail className="h-8 w-8 text-gialoma-gold" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gialoma-black mb-2 text-lg">Envíanos un Email</h4>
+                  <p className="text-gialoma-darkgray text-lg">gialoma@gialoma.com</p>
+                </div>
+              </div>
+            </div>
 
-              <div className="mt-8 bg-gray-50 p-6 rounded-lg">
-                <h4 className="font-semibold text-gialoma-black mb-3 text-center">Horario de Atención</h4>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gialoma-darkgray">Lunes - Viernes:</span>
-                    <span className="text-gialoma-black">9:00 - 18:00 CET</span>
-                  </div>
-                  <div className="flex justify-between text-gray-400">
-                    <span>Sábado - Domingo:</span>
-                    <span>Cerrado</span>
-                  </div>
-                  
-                  <div className="pt-3 border-t border-gray-200">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 mr-3">
-                        <Bot className="h-5 w-5 text-gialoma-gold mt-1" />
-                      </div>
-                      <div>
-                        <h5 className="font-medium text-gialoma-black">Soporte Virtual Disponible 24/7</h5>
-                        <p className="text-sm text-gialoma-darkgray">
-                          Nuestro asistente virtual de voz está disponible las 24 horas para ayudarte con tus consultas.
-                        </p>
-                      </div>
+            <div className="mt-10 bg-white p-8 rounded-lg shadow-sm">
+              <h4 className="font-semibold text-gialoma-black mb-4 text-center text-xl">Horarios de Atención</h4>
+              <div className="space-y-4">
+                <div className="flex justify-between text-lg">
+                  <span className="text-gialoma-darkgray">Lunes - Viernes:</span>
+                  <span className="text-gialoma-black font-medium">9:00 - 18:00 CET</span>
+                </div>
+                <div className="flex justify-between text-lg text-gray-400">
+                  <span>Sábado - Domingo:</span>
+                  <span>Cerrado</span>
+                </div>
+                
+                <div className="pt-6 border-t border-gray-200">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-4">
+                      <Bot className="h-6 w-6 text-gialoma-gold mt-1" />
+                    </div>
+                    <div>
+                      <h5 className="font-medium text-gialoma-black text-lg mb-2">Soporte Virtual Disponible 24/7</h5>
+                      <p className="text-gialoma-darkgray">
+                        Nuestro asistente virtual de voz está disponible las 24 horas para ayudarte con tus consultas. 
+                        Usa el botón flotante en la esquina inferior derecha de la página.
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Embedded Voice Agent */}
-            <div className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white hover:bg-gray-50/50 p-6 rounded-lg">
-              <div className="flex items-center mb-4">
-                <Mic className="h-6 w-6 text-gialoma-gold mr-3" />
-                <h3 className="text-2xl font-semibold text-gialoma-black">Agente de Voz en Vivo</h3>
-              </div>
-              <EmbeddedVoiceAgent language="es" height="400px" />
+          {/* Form Card - Now smaller */}
+          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Envíanos un Mensaje</h3>
+            
+            {/* Fillout Spanish Form - Reduced height */}
+            <div 
+              style={{width:'100%', height:'420px'}} 
+              data-fillout-id="tzBXGdYBfxus" 
+              data-fillout-embed-type="standard" 
+              data-fillout-inherit-parameters 
+              data-fillout-dynamic-resize
+            ></div>
+            
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gialoma-darkgray">
+                Normalmente respondemos en un plazo de 24 horas durante los días laborales.
+              </p>
             </div>
           </div>
         </div>
