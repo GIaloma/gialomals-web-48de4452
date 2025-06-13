@@ -6,13 +6,21 @@ interface EmbeddedVoiceAgentProps {
   height?: string;
 }
 
+// Use the same global flag as VoiceAgent
+declare global {
+  interface Window {
+    ElevenLabsScriptLoaded?: boolean;
+    ElevenLabsScriptLoading?: boolean;
+  }
+}
+
 export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({ 
   language, 
   height = '400px' 
 }) => {
   const [isAgentActive, setIsAgentActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const scriptsLoadedRef = useRef(false);
+  const [error, setError] = useState<string | null>(null);
   const widgetContainerRef = useRef<HTMLDivElement | null>(null);
   const embedContainerRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +31,8 @@ export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({
       startButton: 'Start Voice Chat',
       stopButton: 'Stop Voice Chat',
       loading: 'Initializing voice agent...',
-      description: 'Click the button below to start talking with our AI voice assistant. You can ask questions about our services, get help, or just have a conversation!'
+      description: 'Click the button below to start talking with our AI voice assistant. You can ask questions about our services, get help, or just have a conversation!',
+      error: 'Unable to load voice agent. Please try again later.'
     },
     es: {
       title: 'Habla con el Agente de Voz de Gialoma',
@@ -31,59 +40,114 @@ export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({
       startButton: 'Iniciar Chat de Voz',
       stopButton: 'Detener Chat de Voz',
       loading: 'Inicializando agente de voz...',
-      description: '¡Haz clic en el botón de abajo para empezar a hablar con nuestro asistente de voz IA. Puedes hacer preguntas sobre nuestros servicios, obtener ayuda o simplemente conversar!'
+      description: '¡Haz clic en el botón de abajo para empezar a hablar con nuestro asistente de voz IA. Puedes hacer preguntas sobre nuestros servicios, obtener ayuda o simplemente conversar!',
+      error: 'No se pudo cargar el agente de voz. Por favor, inténtalo más tarde.'
     }
   };
 
   const t = texts[language];
 
-  const loadVoiceAgent = () => {
-    setIsLoading(true);
-    
-    if (!scriptsLoadedRef.current) {
-      // Load the ElevenLabs script dynamically
+  const loadElevenLabsScript = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      // Check if already loaded
+      if (window.ElevenLabsScriptLoaded) {
+        resolve();
+        return;
+      }
+
+      // Check if already loading
+      if (window.ElevenLabsScriptLoading) {
+        // Wait for the script to load
+        const checkLoaded = () => {
+          if (window.ElevenLabsScriptLoaded) {
+            resolve();
+          } else {
+            setTimeout(checkLoaded, 100);
+          }
+        };
+        checkLoaded();
+        return;
+      }
+
+      // Check if script already exists in DOM
+      const existingScript = document.querySelector('script[src="https://elevenlabs.io/convai-widget/index.js"]');
+      if (existingScript) {
+        window.ElevenLabsScriptLoaded = true;
+        resolve();
+        return;
+      }
+
+      // Load the script
+      window.ElevenLabsScriptLoading = true;
       const script = document.createElement('script');
       script.src = 'https://elevenlabs.io/convai-widget/index.js';
       script.async = true;
       script.type = 'text/javascript';
       
       script.onload = () => {
-        scriptsLoadedRef.current = true;
-        createEmbeddedWidget();
+        window.ElevenLabsScriptLoaded = true;
+        window.ElevenLabsScriptLoading = false;
+        resolve();
       };
       
       script.onerror = () => {
-        setIsLoading(false);
-        console.error('Failed to load ElevenLabs script');
+        window.ElevenLabsScriptLoading = false;
+        reject(new Error('Failed to load ElevenLabs script'));
       };
       
       document.head.appendChild(script);
-    } else {
-      createEmbeddedWidget();
-    }
+    });
+  };
+
+  const loadVoiceAgent = () => {
+    setIsLoading(true);
+    setError(null);
+    
+    loadElevenLabsScript()
+      .then(() => {
+        createEmbeddedWidget();
+      })
+      .catch((error) => {
+        console.error('Error loading ElevenLabs script:', error);
+        setError(t.error);
+        setIsLoading(false);
+      });
   };
 
   const createEmbeddedWidget = () => {
-    if (!embedContainerRef.current) return;
+    if (!embedContainerRef.current) {
+      setIsLoading(false);
+      return;
+    }
 
-    // Create the ElevenLabs widget element
-    const widgetElement = document.createElement('elevenlabs-convai');
-    widgetElement.setAttribute('agent-id', 'pPlGZHykXaSyJdBNxt7f');
-    
-    // Style the widget to fit in the container
-    widgetElement.style.width = '100%';
-    widgetElement.style.height = '100%';
-    widgetElement.style.borderRadius = '8px';
-    widgetElement.style.border = '2px solid #c7ae6a';
-    widgetElement.style.overflow = 'hidden';
-    
-    // Clear container and add widget
-    embedContainerRef.current.innerHTML = '';
-    embedContainerRef.current.appendChild(widgetElement);
-    widgetContainerRef.current = widgetElement;
-    
-    setIsLoading(false);
-    setIsAgentActive(true);
+    try {
+      // Create a unique container ID to avoid conflicts
+      const containerId = `embedded-voice-agent-${Date.now()}`;
+      
+      // Create the ElevenLabs widget element
+      const widgetElement = document.createElement('elevenlabs-convai');
+      widgetElement.setAttribute('agent-id', 'pPlGZHykXaSyJdBNxt7f');
+      widgetElement.id = containerId;
+      
+      // Style the widget to fit in the container
+      widgetElement.style.width = '100%';
+      widgetElement.style.height = '100%';
+      widgetElement.style.borderRadius = '8px';
+      widgetElement.style.border = 'none';
+      widgetElement.style.overflow = 'hidden';
+      
+      // Clear container and add widget
+      embedContainerRef.current.innerHTML = '';
+      embedContainerRef.current.appendChild(widgetElement);
+      widgetContainerRef.current = widgetElement;
+      
+      setIsLoading(false);
+      setIsAgentActive(true);
+    } catch (error) {
+      console.error('Error creating embedded widget:', error);
+      setError(t.error);
+      setIsLoading(false);
+    }
   };
 
   const stopVoiceAgent = () => {
@@ -92,6 +156,7 @@ export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({
       widgetContainerRef.current = null;
     }
     setIsAgentActive(false);
+    setError(null);
   };
 
   useEffect(() => {
@@ -102,6 +167,35 @@ export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({
       }
     };
   }, []);
+
+  if (error) {
+    return (
+      <div className="w-full" style={{ height }}>
+        <div className="h-full flex flex-col items-center justify-center bg-gradient-to-br from-red-50 to-red-100 rounded-lg border-2 border-red-200 p-6">
+          <div className="text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
+                <Mic className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h4 className="text-lg font-semibold text-red-700 mb-2">Voice Agent Error</h4>
+            <p className="text-sm text-red-600 mb-4 max-w-md">
+              {error}
+            </p>
+            <button
+              onClick={() => {
+                setError(null);
+                loadVoiceAgent();
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full" style={{ height }}>
