@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -80,6 +79,54 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gialomalife" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <!-- =============================================== -->
+    <!-- GOOGLE ANALYTICS 4 - CONDITIONAL LOADING       -->
+    <!-- =============================================== -->
+    <script>
+      // Check for existing cookie consent before loading GA4
+      function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+      }
+
+      // Load GA4 if consent is already given
+      const consentCookie = getCookie('gialoma_cookie_consent');
+      if (consentCookie) {
+        try {
+          const consent = JSON.parse(consentCookie);
+          if (consent.analytics) {
+            // Load Google Analytics 4 immediately
+            (function() {
+              const script = document.createElement('script');
+              script.async = true;
+              script.src = 'https://www.googletagmanager.com/gtag/js?id=G-G15VKZG5HH';
+              document.head.appendChild(script);
+              
+              script.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-G15VKZG5HH', {
+                  'anonymize_ip': true,
+                  'cookie_flags': 'SameSite=Secure',
+                  'allow_google_signals': false
+                });
+                console.log('Google Analytics 4 loaded with existing consent');
+              };
+            })();
+          }
+        } catch (error) {
+          console.error('Error parsing cookie consent:', error);
+        }
+      }
+    </script>
   </head>
 
   <body>
