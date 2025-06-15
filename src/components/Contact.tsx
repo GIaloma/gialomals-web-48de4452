@@ -37,11 +37,11 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information Card - Now larger */}
-          <div className="bg-gray-50 p-10 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
-            <h3 className="text-2xl font-semibold mb-8 text-gialoma-black">Contact Information</h3>
+          {/* Contact Information Card - Adjusted to match form card height */}
+          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Contact Information</h3>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-6">
                   <Phone className="h-8 w-8 text-gialoma-gold" />
@@ -63,13 +63,13 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Media Section */}
-            <div className="mt-10 bg-white p-8 rounded-lg shadow-sm">
-              <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Connect with Our Founders</h4>
+            {/* Social Media Section - Reduced padding */}
+            <div className="mt-8 bg-white p-6 rounded-lg shadow-sm">
+              <h4 className="font-semibold text-gialoma-black mb-4 text-center text-xl">Connect with Our Founders</h4>
               
               {/* Paloma */}
-              <div className="mb-6">
-                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Paloma Firgaira - Co-Founder & CEO</h5>
+              <div className="mb-4">
+                <h5 className="font-medium text-gialoma-black mb-2 text-lg">Paloma Firgaira - Co-Founder & CEO</h5>
                 <div className="flex space-x-4">
                   <a 
                     href="https://www.linkedin.com/in/paloma-firgaira-840b50a3" 
@@ -93,8 +93,8 @@ const Contact = () => {
               </div>
 
               {/* Gianro */}
-              <div className="mb-6">
-                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Gianro Compagno - Co-Founder & CTO</h5>
+              <div className="mb-4">
+                <h5 className="font-medium text-gialoma-black mb-2 text-lg">Gianro Compagno - Co-Founder & CTO</h5>
                 <div className="flex space-x-4">
                   <a 
                     href="https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110" 
@@ -118,9 +118,9 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="mt-6 bg-white p-8 rounded-lg shadow-sm">
+            <div className="mt-6 bg-white p-6 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-4 text-center text-xl">Business Hours</h4>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="flex justify-between text-lg">
                   <span className="text-gialoma-darkgray">Monday - Friday:</span>
                   <span className="text-gialoma-black font-medium">9:00 - 18:00 CET</span>
@@ -130,16 +130,16 @@ const Contact = () => {
                   <span>Closed</span>
                 </div>
                 
-                <div className="pt-6 border-t border-gray-200">
+                <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mr-4">
                       <Bot className="h-6 w-6 text-gialoma-gold mt-1" />
                     </div>
                     <div>
-                      <h5 className="font-medium text-gialoma-black text-lg mb-2">Virtual Support Available 24/7</h5>
-                      <p className="text-gialoma-darkgray">
-                        Our virtual voice assistant is available around the clock to help with your inquiries. 
-                        Use the floating button in the bottom-right corner of the page.
+                      <h5 className="font-medium text-gialoma-black text-lg mb-2">Virtual Support 24/7</h5>
+                      <p className="text-gialoma-darkgray text-sm">
+                        Our virtual voice assistant is available around the clock. 
+                        Use the floating button in the bottom-right corner.
                       </p>
                     </div>
                   </div>
@@ -148,13 +148,13 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Form Card - Now smaller */}
+          {/* Form Card */}
           <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Send Us a Message</h3>
             
-            {/* Fillout English Form - Reduced height */}
+            {/* Fillout English Form */}
             <div 
-              style={{width:'100%', height:'420px'}} 
+              style={{width:'100%', height:'500px'}} 
               data-fillout-id="mFkKCM3vryus" 
               data-fillout-embed-type="standard" 
               data-fillout-inherit-parameters 
