@@ -30,8 +30,8 @@ const CookieBannerEs = () => {
   const [showModal, setShowModal] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<CookieConsent>({
     necessary: true,
-    analytics: false,
-    marketing: false,
+    analytics: true, // Por defecto habilitado (modelo opt-out)
+    marketing: true, // Por defecto habilitado (modelo opt-out)
     timestamp: null
   });
 
@@ -42,10 +42,23 @@ const CookieBannerEs = () => {
 
   const checkExistingConsent = () => {
     const hasConsent = getCookie('gialoma_cookie_consent');
+    const hasOptedOut = getCookie('gialoma_cookies_declined');
+    
+    // Si el usuario ha optado por no usar cookies, respetar su elección
+    if (hasOptedOut === 'true') {
+      setCookieConsent({
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      });
+      // No mostrar banner si ya ha rechazado
+      return;
+    }
     
     if (!hasConsent) {
-      // Mostrar banner después de 1 segundo
-      setTimeout(() => setIsVisible(true), 1000);
+      // Mostrar banner informativo para nuevos visitantes (modelo opt-out)
+      setTimeout(() => setIsVisible(true), 2000); // Retrasado para no interrumpir UX
     } else {
       try {
         const consent = JSON.parse(hasConsent);
@@ -56,7 +69,13 @@ const CookieBannerEs = () => {
         }
       } catch (error) {
         console.error('Error parsing cookie consent:', error);
-        setIsVisible(true);
+        // Por defecto habilitado (modelo opt-out)
+        setCookieConsent({
+          necessary: true,
+          analytics: true,
+          marketing: true,
+          timestamp: Date.now()
+        });
       }
     }
   };
@@ -118,7 +137,8 @@ const CookieBannerEs = () => {
     updateGoogleConsent(consent);
   };
 
-  const acceptAllCookies = () => {
+  const continueWithCurrentSettings = () => {
+    // Usuario está conforme con la configuración por defecto (todo habilitado)
     const consent = {
       necessary: true,
       analytics: true,
@@ -127,12 +147,12 @@ const CookieBannerEs = () => {
     };
     
     saveConsent(consent);
-    loadGoogleAnalytics();
     setIsVisible(false);
-    trackEvent('cookie_consent', { consent_type: 'all' });
+    trackEvent('cookie_consent', { consent_type: 'continue_default' });
   };
 
-  const rejectOptionalCookies = () => {
+  const optOutAll = () => {
+    // Usuario quiere rechazar todas las cookies opcionales
     const consent = {
       necessary: true,
       analytics: false,
@@ -140,9 +160,11 @@ const CookieBannerEs = () => {
       timestamp: Date.now()
     };
     
+    // Establecer cookie de rechazo
+    setCookie('gialoma_cookies_declined', 'true', 365);
     saveConsent(consent);
     setIsVisible(false);
-    console.log('Solo cookies necesarias aceptadas');
+    console.log('Usuario rechazó todas las cookies opcionales');
   };
 
   const acceptAnalyticsOnly = () => {
@@ -268,24 +290,24 @@ const CookieBannerEs = () => {
 
   return (
     <>
-      {/* Banner Principal */}
+      {/* Banner Principal - Modelo Opt-out */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-gialoma-black to-gray-800 text-white shadow-lg border-t-3 border-gialoma-gold">
         <div className="container mx-auto px-4 py-4 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
             <div className="flex items-center gap-3 mb-2 lg:mb-0">
               <Cookie className="text-gialoma-gold h-6 w-6 flex-shrink-0" />
-              <h3 className="text-lg font-semibold text-gialoma-gold">🍪 Configuración de Cookies</h3>
+              <h3 className="text-lg font-semibold text-gialoma-gold">🍪 Experiencia Mejorada</h3>
             </div>
             
             <div className="flex-1 min-w-0">
               <p className="text-sm text-gray-300 mb-2">
-                Utilizamos cookies para mejorar tu experiencia. Puedes aceptar todas, elegir solo analíticas, 
-                rechazar las opcionales o{' '}
+                Utilizamos cookies para brindarte la mejor experiencia y analíticas para mejorar nuestros servicios. 
+                Puedes continuar con nuestra configuración recomendada o{' '}
                 <button 
                   onClick={openModal} 
                   className="text-gialoma-gold hover:text-gialoma-lightgold underline font-medium"
                 >
-                  configurar tus preferencias
+                  personalizar tus preferencias
                 </button>.
               </p>
               <p className="text-xs text-gray-400">
@@ -302,23 +324,23 @@ const CookieBannerEs = () => {
             
             <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
-                onClick={acceptAllCookies}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-3 py-2"
+                onClick={continueWithCurrentSettings}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2"
               >
-                Aceptar todas
+                ✓ Continuar
               </Button>
               <Button
                 onClick={acceptAnalyticsOnly}
                 className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2"
               >
-                Solo analíticas
+                Solo Analíticas
               </Button>
               <Button
-                onClick={rejectOptionalCookies}
+                onClick={optOutAll}
                 variant="outline"
                 className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
               >
-                Solo necesarias
+                Rechazar
               </Button>
               <Button
                 onClick={openModal}
@@ -326,7 +348,7 @@ const CookieBannerEs = () => {
                 className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
               >
                 <Settings className="h-4 w-4 mr-1" />
-                Configurar
+                Personalizar
               </Button>
             </div>
           </div>
@@ -340,7 +362,7 @@ const CookieBannerEs = () => {
             {/* Header del Modal */}
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gialoma-black">Configuración de Cookies</h2>
+                <h2 className="text-2xl font-bold text-gialoma-black">Preferencias de Cookies</h2>
                 <button
                   onClick={closeModal}
                   className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
@@ -349,25 +371,24 @@ const CookieBannerEs = () => {
                 </button>
               </div>
               <p className="text-gialoma-darkgray mt-2">
-                Elige qué cookies quieres permitir. Puedes cambiar estas preferencias en cualquier momento.
+                Personaliza qué cookies quieres permitir. Nuestra configuración recomendada ya está seleccionada para la mejor experiencia.
               </p>
             </div>
 
             {/* Contenido del Modal */}
             <div className="p-6 space-y-6">
-              {/* Cookies Técnicas */}
+              {/* Cookies Esenciales */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Cookies Técnicas</h3>
+                  <h3 className="font-semibold text-gialoma-black">Cookies Esenciales</h3>
                   <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-medium">
-                    NECESARIAS
+                    SIEMPRE ACTIVAS
                   </span>
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray">
-                    Estas cookies son esenciales para el funcionamiento básico del sitio web. Incluyen funciones como 
-                    navegación, acceso a áreas seguras y funcionalidades básicas. El sitio web no puede funcionar 
-                    correctamente sin estas cookies.
+                    Estas cookies son esenciales para que el sitio web funcione correctamente. Permiten funciones básicas como 
+                    navegación, seguridad y accesibilidad. El sitio web no puede funcionar correctamente sin estas cookies.
                   </p>
                 </div>
               </div>
@@ -375,7 +396,10 @@ const CookieBannerEs = () => {
               {/* Cookies de Análisis */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Cookies de Análisis (Google Analytics)</h3>
+                  <div>
+                    <h3 className="font-semibold text-gialoma-black">Cookies de Análisis</h3>
+                    <span className="text-xs text-green-600 font-medium">✓ Recomendado</span>
+                  </div>
                   <button
                     onClick={toggleAnalytics}
                     className={`relative w-12 h-6 rounded-full transition-colors ${
@@ -391,14 +415,13 @@ const CookieBannerEs = () => {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray mb-3">
-                    Estas cookies nos ayudan a entender cómo interactúas con nuestro sitio web, proporcionándonos 
-                    información sobre las páginas visitadas, el tiempo de permanencia y otros datos analíticos. 
-                    Utilizamos Google Analytics 4 para este propósito.
+                    Nos ayudan a entender cómo los visitantes interactúan con nuestro sitio web recopilando información de forma anónima. 
+                    Estos datos nos ayudan a mejorar tu experiencia y optimizar nuestros servicios.
                   </p>
                   <div className="text-xs text-gialoma-darkgray space-y-1">
-                    <p><strong>Datos recopilados:</strong> Páginas visitadas, tiempo en el sitio, origen del tráfico, datos demográficos generales.</p>
-                    <p><strong>Finalidad:</strong> Mejorar la experiencia del usuario y optimizar nuestros servicios.</p>
-                    <p><strong>Conservación:</strong> Hasta 26 meses.</p>
+                    <p><strong>Qué recopilamos:</strong> Páginas visitadas, tiempo en el sitio, fuentes de tráfico, ubicación general (país)</p>
+                    <p><strong>Finalidad:</strong> Mejora del sitio web y optimización de la experiencia del usuario</p>
+                    <p><strong>Conservación:</strong> Hasta 26 meses, anonimizado después de 14 meses</p>
                   </div>
                 </div>
               </div>
@@ -406,7 +429,10 @@ const CookieBannerEs = () => {
               {/* Cookies de Marketing */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Cookies de Marketing y Publicidad</h3>
+                  <div>
+                    <h3 className="font-semibold text-gialoma-black">Marketing y Personalización</h3>
+                    <span className="text-xs text-blue-600 font-medium">◐ Opcional</span>
+                  </div>
                   <button
                     onClick={toggleMarketing}
                     className={`relative w-12 h-6 rounded-full transition-colors ${
@@ -422,14 +448,13 @@ const CookieBannerEs = () => {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray mb-3">
-                    Estas cookies se utilizan para rastrear visitantes a través de sitios web. La intención es mostrar 
-                    anuncios que sean relevantes y atractivos para el usuario individual y, por lo tanto, más valiosos 
-                    para editores y anunciantes de terceros.
+                    Permiten contenido personalizado y publicidad relevante. Estas cookies nos ayudan a mostrarte 
+                    contenido más relevante y medir la efectividad de nuestras campañas de marketing.
                   </p>
                   <div className="text-xs text-gialoma-darkgray space-y-1">
-                    <p><strong>Datos recopilados:</strong> Comportamiento del usuario, interacciones con anuncios, seguimiento de conversiones.</p>
-                    <p><strong>Finalidad:</strong> Publicidad personalizada y campañas de remarketing.</p>
-                    <p><strong>Conservación:</strong> Hasta 2 años.</p>
+                    <p><strong>Qué recopilamos:</strong> Intereses, interacciones con anuncios, seguimiento de conversiones</p>
+                    <p><strong>Finalidad:</strong> Contenido personalizado y publicidad relevante</p>
+                    <p><strong>Conservación:</strong> Hasta 2 años</p>
                   </div>
                 </div>
               </div>
@@ -445,13 +470,13 @@ const CookieBannerEs = () => {
                 variant="outline"
                 className="border-gray-300 text-gray-600 hover:bg-gray-50"
               >
-                Solo necesarias
+                Solo Esenciales
               </Button>
               <Button
                 onClick={saveAndCloseModal}
                 className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black"
               >
-                Guardar preferencias
+                Guardar Preferencias
               </Button>
             </div>
           </div>
