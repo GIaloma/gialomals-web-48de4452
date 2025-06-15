@@ -1,7 +1,6 @@
-
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Cog, Monitor, Bot, Briefcase, FileSpreadsheet, Search } from 'lucide-react';
 
 const services = [
   {
@@ -14,19 +13,9 @@ const services = [
       "Automation of bookings, schedules, and appointments"
     ],
     icon: <Cog className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
-  },
-  {
-    id: 2,
-    title: "Web Design & Development",
-    description: "Get a professional online presence with our custom-built websites that are responsive, user-friendly, and designed to convert visitors into customers.",
-    features: [
-      "Responsive corporate websites",
-      "Landing page websites",
-      "Smart form integration"
-    ],
-    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
+    link: "#contact",
+    category: "automation",
+    highlight: true
   },
   {
     id: 3,
@@ -38,7 +27,22 @@ const services = [
       "Integration with WhatsApp, web, and social media"
     ],
     icon: <Bot className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
+    link: "#contact",
+    category: "automation",
+    highlight: true
+  },
+  {
+    id: 2,
+    title: "Web Design & Development",
+    description: "Get a professional online presence with our custom-built websites that are responsive, user-friendly, and designed to convert visitors into customers.",
+    features: [
+      "Responsive corporate websites",
+      "Landing page websites",
+      "Smart form integration"
+    ],
+    icon: <Monitor className="h-14 w-14 text-gialoma-gold" />,
+    link: "#contact",
+    category: "digital"
   },
   {
     id: 4,
@@ -50,7 +54,8 @@ const services = [
       "Digital transformation plan design"
     ],
     icon: <Briefcase className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
+    link: "#contact",
+    category: "consulting"
   },
   {
     id: 5,
@@ -62,7 +67,8 @@ const services = [
       "Automated reporting"
     ],
     icon: <FileSpreadsheet className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
+    link: "#contact",
+    category: "consulting"
   },
   {
     id: 6,
@@ -74,75 +80,23 @@ const services = [
       "Web analytics integration"
     ],
     icon: <Search className="h-14 w-14 text-gialoma-gold" />,
-    link: "#contact"
+    link: "#contact",
+    category: "digital"
   }
 ];
 
-const Services = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  const startAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-    }
-    
-    scrollIntervalRef.current = setInterval(() => {
-      if (scrollRef.current && isAutoScrolling) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-        
-        if (scrollLeft >= maxScroll) {
-          // Reset to beginning when reaching the end
-          scrollRef.current.scrollLeft = 0;
-          setCurrentIndex(0);
-        } else {
-          // Increment scroll position (increased by 15%)
-          scrollRef.current.scrollLeft += 1.15;
-          // Update current index based on scroll position
-          const cardWidth = 340; // approximate card width + gap
-          setCurrentIndex(Math.round(scrollLeft / cardWidth));
-        }
-      }
-    }, 50);
-  };
-  
-  useEffect(() => {
-    startAutoScroll();
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isAutoScrolling]);
-  
-  const handleScrollLeft = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      const newIndex = currentIndex > 0 ? currentIndex - 1 : services.length - 1;
-      setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
-  const handleScrollRight = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      const newIndex = currentIndex < services.length - 1 ? currentIndex + 1 : 0;
-      setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 340, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
+const categories = {
+  all: "All Services",
+  automation: "Automation",
+  digital: "Digital Presence",
+  consulting: "Consulting"
+};
 
-  const handleServiceClick = (link: string) => {
+const Services = () => {
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const handleServiceClick = (link) => {
     if (link.startsWith('#')) {
       const element = document.querySelector(link);
       if (element) {
@@ -158,6 +112,10 @@ const Services = () => {
     window.open('https://tidycal.com/gialomals/solicita-una-consulta', '_blank');
   };
 
+  const filteredServices = activeFilter === 'all' 
+    ? services 
+    : services.filter(service => service.category === activeFilter);
+
   return (
     <section id="services" className="section-padding bg-white overflow-hidden pb-8">
       <div className="container mx-auto">
@@ -171,52 +129,73 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -ml-4"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar px-4"
-            style={{ scrollBehavior: 'smooth' }}
-            onMouseEnter={() => setIsAutoScrolling(false)}
-            onMouseLeave={() => setIsAutoScrolling(true)}
-          >
-            {services.map((service) => (
+        {/* Filter Buttons - Same height as original carousel navigation area */}
+        <div className="relative mb-4">
+          <div className="flex justify-center">
+            <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap gap-1 justify-center">
+              {Object.entries(categories).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveFilter(key)}
+                  className={`px-4 md:px-6 py-2 rounded-md font-medium transition-all duration-300 text-sm md:text-base ${
+                    activeFilter === key
+                      ? 'bg-gialoma-gold text-white shadow-md'
+                      : 'text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Services Grid - Maintains same content area height as carousel */}
+        <div className="relative" style={{ minHeight: '560px' }}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
+            {filteredServices.map((service) => (
               <div 
                 key={service.id} 
-                className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 min-w-[330px] flex flex-col h-[560px]"
+                className={`bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-[560px] ${
+                  service.highlight ? 'border-2 border-gialoma-gold bg-white' : ''
+                }`}
+                onMouseEnter={() => setHoveredCard(service.id)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
+                {service.highlight && (
+                  <div className="absolute top-0 right-0 bg-gialoma-gold text-white text-xs px-3 py-1 rounded-bl-lg font-medium relative">
+                    Popular
+                  </div>
+                )}
+                
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-center mb-6">
-                    {service.icon}
+                    <div className={`transition-all duration-300 ${
+                      hoveredCard === service.id ? 'transform scale-110' : ''
+                    }`}>
+                      {service.icon}
+                    </div>
                   </div>
                   
-                  {/* Title - Allow text to shrink if needed */}
+                  {/* Title - Justified text */}
                   <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
                       style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.title}
                   </h3>
                   
-                  {/* Description - Allow text to adjust with smaller font on overflow */}
-                  <p className="text-gialoma-darkgray mb-5 text-center text-sm md:text-base overflow-visible" 
+                  {/* Description - Justified text */}
+                  <p className="text-gialoma-darkgray mb-5 text-justify text-sm md:text-base overflow-visible" 
                      style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.description}
                   </p>
                   
-                  {/* Features section with flex-grow to push button to bottom */}
+                  {/* Features section - Justified text */}
                   <div className="flex-grow mb-4">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base" style={{ wordBreak: 'break-word' }}>
+                          <span className="text-gialoma-darkgray text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
                             {feature}
                           </span>
                         </li>
@@ -224,30 +203,28 @@ const Services = () => {
                     </ul>
                   </div>
                   
-                  {/* Button container with fixed position at bottom */}
+                  {/* Button - Same styling as original */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
-                      className="text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white transition-colors flex items-center w-full justify-center"
+                      className={`transition-all duration-300 flex items-center w-full justify-center group ${
+                        service.highlight 
+                          ? 'bg-gialoma-gold text-white border-gialoma-gold hover:bg-gialoma-darkgold' 
+                          : 'text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white'
+                      }`}
                       onClick={() => handleServiceClick(service.link)}
                     >
-                      Learn More <ArrowRight className="ml-2" size={16} />
+                      Learn More 
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
                     </Button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          
-          <button 
-            onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 text-gray-600 focus:outline-none -mr-4"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={24} />
-          </button>
         </div>
         
+        {/* Bottom section - Exact same spacing as original */}
         <div className="mt-8 text-center">
           <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
             Need a specialized solution? We offer custom services tailored to your specific business needs.
@@ -263,15 +240,52 @@ const Services = () => {
       </div>
 
       <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* Internet Explorer and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari, Opera */
+        /* Preserve all original CSS custom properties and classes */
+        .text-gradient {
+          background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: #d4af37;
         }
         
-        /* Responsive font-size adjustments */
+        .text-gialoma-gold {
+          color: #d4af37;
+        }
+        
+        .text-gialoma-darkgray {
+          color: #6b7280;
+        }
+        
+        .text-gialoma-black {
+          color: #1f2937;
+        }
+        
+        .bg-gialoma-gold {
+          background-color: #d4af37;
+        }
+        
+        .bg-gialoma-darkgold {
+          background-color: #b8941f;
+        }
+        
+        .border-gialoma-gold {
+          border-color: #d4af37;
+        }
+        
+        .hover\\:bg-gialoma-gold:hover {
+          background-color: #d4af37;
+        }
+        
+        .hover\\:bg-gialoma-darkgold:hover {
+          background-color: #b8941f;
+        }
+        
+        .hover\\:bg-gray-200:hover {
+          background-color: #e5e7eb;
+        }
+        
+        /* Responsive adjustments matching original */
         @media (max-width: 640px) {
           .service-card-title {
             font-size: 1.1rem;
@@ -281,6 +295,16 @@ const Services = () => {
           }
           .service-card-feature {
             font-size: 0.9rem;
+          }
+          
+          .grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        @media (max-width: 1024px) and (min-width: 641px) {
+          .grid {
+            grid-template-columns: repeat(2, 1fr);
           }
         }
       `}</style>
