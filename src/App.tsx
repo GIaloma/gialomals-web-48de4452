@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
 import VoiceAgent from "./components/VoiceAgent";
 import CookieBannerEs from "./components/CookieBanner-es";
+import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,27 @@ const FloatingButtonWrapper = () => {
       />
     </>
   );
+};
+
+// Component to handle the cookie banner based on current route
+const CookieBannerWrapper = () => {
+  const location = useLocation();
+  
+  // Determine language based on the current route
+  const getLanguage = (): 'en' | 'es' => {
+    const path = location.pathname;
+    if (path.startsWith('/en') || path === '/english' || path === '/book' || path === '/login' || path === '/digitalization') {
+      return 'en';
+    }
+    return 'es'; // Default to Spanish
+  };
+
+  // Show appropriate cookie banner based on language
+  if (getLanguage() === 'en') {
+    return <CookieBanner />;
+  } else {
+    return <CookieBannerEs />;
+  }
 };
 
 const App = () => (
@@ -152,8 +174,8 @@ const App = () => (
         {/* Optimized Floating Voice Agent Button */}
         <FloatingButtonWrapper />
         
-        {/* Cookie Banner for GDPR Compliance */}
-        <CookieBannerEs />
+        {/* Cookie Banner for GDPR Compliance - Language aware */}
+        <CookieBannerWrapper />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
