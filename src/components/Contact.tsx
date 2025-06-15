@@ -37,9 +37,9 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information Card - Fine-tuned spacing */}
-          <div className="bg-gray-50 p-10 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
-            <h3 className="text-2xl font-semibold mb-7 text-gialoma-black">Contact Information</h3>
+          {/* Contact Information Card - Match margins with form card */}
+          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+            <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Contact Information</h3>
             
             <div className="space-y-7">
               <div className="flex items-start">
@@ -63,8 +63,8 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Media Section - Reduced top and bottom spacing */}
-            <div className="mt-8 bg-white p-8 rounded-lg shadow-sm">
+            {/* Social Media Section - Slightly reduced top margin */}
+            <div className="mt-7 bg-white p-8 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Connect with Our Founders</h4>
               
               {/* Paloma */}
