@@ -9,12 +9,23 @@ const ContactEs = () => {
       const script = document.createElement('script');
       script.src = 'https://server.fillout.com/embed/v1/';
       script.async = true;
+      script.onload = () => {
+        console.log('Fillout script loaded successfully');
+      };
+      script.onerror = () => {
+        console.error('Failed to load Fillout script');
+      };
       document.body.appendChild(script);
+    } else {
+      // Trigger reinit if script already exists
+      if ((window as any).Fillout && (window as any).Fillout.initializeWidgets) {
+        (window as any).Fillout.initializeWidgets();
+      }
     }
   }, []);
 
   return (
-    <section id="contact" className="section-padding bg-white">
+    <section id="contactos" className="section-padding bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
