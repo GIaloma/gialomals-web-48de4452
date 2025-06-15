@@ -10,7 +10,7 @@ const ContactEs = () => {
       script.src = 'https://server.fillout.com/embed/v1/';
       script.async = true;
       script.onload = () => {
-        console.log('Fillout script loaded successfully');
+        console.log('Fillout script loaded successfully for Spanish form');
       };
       script.onerror = () => {
         console.error('Failed to load Fillout script');
@@ -148,14 +148,14 @@ const ContactEs = () => {
             </div>
           </div>
 
-          {/* Form Card - Now smaller */}
+          {/* Form Card */}
           <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Envíanos un Mensaje</h3>
             
-            {/* Fillout Spanish Form - Reduced height */}
+            {/* Fillout Spanish Form - Correct ID and height */}
             <div 
-              style={{width:'100%', height:'420px'}} 
-              data-fillout-id="tzBXGdYBfxus" 
+              style={{width:'100%', height:'500px'}} 
+              data-fillout-id="pw2CQvvBZmus" 
               data-fillout-embed-type="standard" 
               data-fillout-inherit-parameters 
               data-fillout-dynamic-resize
