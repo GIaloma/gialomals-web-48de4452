@@ -10,7 +10,20 @@ const GA_MEASUREMENT_ID = 'G-G15VKZG5HH';
 interface CookieConsent {
   necessary: boolean;
   analytics: boolean;
+  marketing: boolean;
   timestamp: number | null;
+}
+
+// Declare global gtag consent functions
+declare global {
+  interface Window {
+    gtagConsent: {
+      grantAll: () => void;
+      grantAnalytics: () => void;
+      denyAll: () => void;
+      update: (consentObj: any) => void;
+    };
+  }
 }
 
 const CookieBanner = () => {
@@ -19,6 +32,7 @@ const CookieBanner = () => {
   const [cookieConsent, setCookieConsent] = useState<CookieConsent>({
     necessary: true,
     analytics: false,
+    marketing: false,
     timestamp: null
   });
 
@@ -28,7 +42,7 @@ const CookieBanner = () => {
   }, []);
 
   const checkExistingConsent = () => {
-    const hasConsent = getCookie('gialoma_cookie_consent_en');
+    const hasConsent = getCookie('gialoma_cookie_consent');
     
     if (!hasConsent) {
       // Show banner after 1 second
@@ -37,6 +51,7 @@ const CookieBanner = () => {
       try {
         const consent = JSON.parse(hasConsent);
         setCookieConsent(consent);
+        updateGoogleConsent(consent);
         if (consent.analytics) {
           loadGoogleAnalytics();
         }
@@ -51,11 +66,24 @@ const CookieBanner = () => {
     if (navigator.doNotTrack === "1" || 
         navigator.doNotTrack === "yes" || 
         (navigator as any).msDoNotTrack === "1") {
-      setCookieConsent(prev => ({ ...prev, analytics: false }));
+      setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
       console.log('Do Not Track detected - analytics disabled');
       return true;
     }
     return false;
+  };
+
+  const updateGoogleConsent = (consent: CookieConsent) => {
+    // Update Google Consent Mode v2
+    if (window.gtagConsent) {
+      if (consent.marketing && consent.analytics) {
+        window.gtagConsent.grantAll();
+      } else if (consent.analytics && !consent.marketing) {
+        window.gtagConsent.grantAnalytics();
+      } else {
+        window.gtagConsent.denyAll();
+      }
+    }
   };
 
   const loadGoogleAnalytics = () => {
@@ -77,22 +105,25 @@ const CookieBanner = () => {
       gtag('config', GA_MEASUREMENT_ID, {
         'anonymize_ip': true,
         'cookie_flags': 'SameSite=Secure',
-        'allow_google_signals': false
+        'allow_google_signals': cookieConsent.marketing || false,
+        'allow_ad_personalization_signals': cookieConsent.marketing || false
       });
       
-      console.log('Google Analytics loaded with consent');
+      console.log('📊 Google Analytics loaded with consent');
     };
   };
 
   const saveConsent = (consent: CookieConsent) => {
-    setCookie('gialoma_cookie_consent_en', JSON.stringify(consent), 365);
+    setCookie('gialoma_cookie_consent', JSON.stringify(consent), 365);
     setCookieConsent(consent);
+    updateGoogleConsent(consent);
   };
 
   const acceptAllCookies = () => {
     const consent = {
       necessary: true,
       analytics: true,
+      marketing: true,
       timestamp: Date.now()
     };
     
@@ -106,12 +137,27 @@ const CookieBanner = () => {
     const consent = {
       necessary: true,
       analytics: false,
+      marketing: false,
       timestamp: Date.now()
     };
     
     saveConsent(consent);
     setIsVisible(false);
     console.log('Only necessary cookies accepted');
+  };
+
+  const acceptAnalyticsOnly = () => {
+    const consent = {
+      necessary: true,
+      analytics: true,
+      marketing: false,
+      timestamp: Date.now()
+    };
+    
+    saveConsent(consent);
+    loadGoogleAnalytics();
+    setIsVisible(false);
+    trackEvent('cookie_consent', { consent_type: 'analytics_only' });
   };
 
   const openModal = () => {
@@ -132,7 +178,11 @@ const CookieBanner = () => {
     
     if (consent.analytics) {
       loadGoogleAnalytics();
-      trackEvent('cookie_consent', { consent_type: 'custom_analytics' });
+      trackEvent('cookie_consent', { 
+        consent_type: 'custom',
+        analytics: consent.analytics,
+        marketing: consent.marketing
+      });
     }
     
     setShowModal(false);
@@ -143,6 +193,13 @@ const CookieBanner = () => {
     setCookieConsent(prev => ({
       ...prev,
       analytics: !prev.analytics
+    }));
+  };
+
+  const toggleMarketing = () => {
+    setCookieConsent(prev => ({
+      ...prev,
+      marketing: !prev.marketing
     }));
   };
 
@@ -203,7 +260,8 @@ const CookieBanner = () => {
       trackContactForm,
       trackServiceInquiry,
       trackResourceDownload,
-      hasAnalyticsConsent: () => cookieConsent.analytics
+      hasAnalyticsConsent: () => cookieConsent.analytics,
+      hasMarketingConsent: () => cookieConsent.marketing
     };
   }, [cookieConsent]);
 
@@ -222,8 +280,8 @@ const CookieBanner = () => {
             
             <div className="flex-1 min-w-0">
               <p className="text-sm text-gray-300 mb-2">
-                We use necessary cookies for site functionality and analytics cookies to improve your experience. 
-                You can accept all, reject optional ones, or{' '}
+                We use cookies to enhance your experience. You can accept all, choose only analytics, 
+                reject optional ones, or{' '}
                 <button 
                   onClick={openModal} 
                   className="text-gialoma-gold hover:text-gialoma-lightgold underline font-medium"
@@ -243,26 +301,32 @@ const CookieBanner = () => {
               </p>
             </div>
             
-            <div className="flex flex-wrap items-center gap-3 lg:flex-nowrap">
+            <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
                 onClick={acceptAllCookies}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105"
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-3 py-2"
               >
                 Accept All
               </Button>
               <Button
+                onClick={acceptAnalyticsOnly}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2"
+              >
+                Analytics Only
+              </Button>
+              <Button
                 onClick={rejectOptionalCookies}
                 variant="outline"
-                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200"
+                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
               >
                 Essential Only
               </Button>
               <Button
                 onClick={openModal}
                 variant="outline"
-                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200"
+                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
               >
-                <Settings className="h-4 w-4 mr-2" />
+                <Settings className="h-4 w-4 mr-1" />
                 Configure
               </Button>
             </div>
@@ -339,13 +403,44 @@ const CookieBanner = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Marketing Cookies */}
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                  <h3 className="font-semibold text-gialoma-black">Marketing & Advertising Cookies</h3>
+                  <button
+                    onClick={toggleMarketing}
+                    className={`relative w-12 h-6 rounded-full transition-colors ${
+                      cookieConsent.marketing ? 'bg-gialoma-gold' : 'bg-gray-300'
+                    }`}
+                  >
+                    <div
+                      className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${
+                        cookieConsent.marketing ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+                <div className="p-4">
+                  <p className="text-sm text-gialoma-darkgray mb-3">
+                    These cookies are used to track visitors across websites. The intention is to display ads that 
+                    are relevant and engaging for the individual user and thereby more valuable for publishers and 
+                    third party advertisers.
+                  </p>
+                  <div className="text-xs text-gialoma-darkgray space-y-1">
+                    <p><strong>Data collected:</strong> User behavior, ad interactions, conversion tracking.</p>
+                    <p><strong>Purpose:</strong> Personalized advertising and retargeting campaigns.</p>
+                    <p><strong>Retention:</strong> Up to 2 years.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Modal Footer */}
             <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
               <Button
                 onClick={() => {
-                  setCookieConsent(prev => ({ ...prev, analytics: false }));
+                  setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
                   saveAndCloseModal();
                 }}
                 variant="outline"
