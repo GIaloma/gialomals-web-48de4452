@@ -109,6 +109,45 @@
     </script>
 
     <!-- =============================================== -->
+    <!-- GOOGLE CONSENT MODE V2 - GDPR COMPLIANT SETUP -->
+    <!-- =============================================== -->
+    <script>
+      // Define dataLayer and the gtag function
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Set default consent to 'denied' as a placeholder for GDPR compliance
+      // This ensures compliance in EU regions before user consent
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted', // Security always granted for fraud prevention
+        'wait_for_update': 500 // Wait 500ms for consent management platform
+      });
+
+      // Enable URL passthrough for better measurement when storage is denied
+      gtag('set', 'url_passthrough', true);
+      
+      // Enable ads data redaction when ad_storage is denied
+      gtag('set', 'ads_data_redaction', true);
+    </script>
+
+    <!-- =============================================== -->
+    <!-- GOOGLE TAG MANAGER - HEAD SECTION             -->
+    <!-- =============================================== -->
+    <!-- TODO: Replace GTM-XXXXXXX with your actual GTM container ID -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- =============================================== -->
     <!-- GOOGLE ANALYTICS 4 - CONDITIONAL LOADING       -->
     <!-- =============================================== -->
     <script>
@@ -124,13 +163,68 @@
         return null;
       }
 
+      // Global consent update functions for cookie banner integration
+      window.gtagConsent = {
+        // Grant all consents (when user accepts all cookies)
+        grantAll: function() {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted',
+            'functionality_storage': 'granted',
+            'personalization_storage': 'granted'
+          });
+          console.log('✅ All Google consents granted');
+        },
+        
+        // Grant only analytics consent (when user accepts only necessary + analytics)
+        grantAnalytics: function() {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'granted',
+            'functionality_storage': 'granted',
+            'personalization_storage': 'denied'
+          });
+          console.log('✅ Analytics consent granted, ads denied');
+        },
+        
+        // Deny all except necessary (when user rejects all optional cookies)
+        denyAll: function() {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'functionality_storage': 'denied',
+            'personalization_storage': 'denied'
+          });
+          console.log('❌ All optional consents denied');
+        },
+        
+        // Custom consent update (for granular control)
+        update: function(consentObj) {
+          gtag('consent', 'update', consentObj);
+          console.log('🔄 Custom consent updated:', consentObj);
+        }
+      };
+
       // Load GA4 if consent is already given
       const consentCookie = getCookie('gialoma_cookie_consent');
       if (consentCookie) {
         try {
           const consent = JSON.parse(consentCookie);
           if (consent.analytics) {
-            // Load Google Analytics 4 immediately
+            // Update consent based on saved preferences
+            if (consent.marketing) {
+              window.gtagConsent.grantAll();
+            } else {
+              window.gtagConsent.grantAnalytics();
+            }
+            
+            // Load Google Analytics 4 immediately if analytics consent is granted
             (function() {
               const script = document.createElement('script');
               script.async = true;
@@ -144,20 +238,29 @@
                 gtag('config', 'G-G15VKZG5HH', {
                   'anonymize_ip': true,
                   'cookie_flags': 'SameSite=Secure',
-                  'allow_google_signals': false
+                  'allow_google_signals': consent.marketing || false,
+                  'allow_ad_personalization_signals': consent.marketing || false
                 });
-                console.log('Google Analytics 4 loaded with existing consent');
+                console.log('📊 Google Analytics 4 loaded with existing consent');
               };
             })();
           }
         } catch (error) {
-          console.error('Error parsing cookie consent:', error);
+          console.error('❌ Error parsing cookie consent:', error);
         }
       }
     </script>
   </head>
 
   <body>
+    <!-- =============================================== -->
+    <!-- GOOGLE TAG MANAGER - BODY SECTION (NOSCRIPT)  -->
+    <!-- =============================================== -->
+    <!-- TODO: Replace GTM-XXXXXXX with your actual GTM container ID -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
