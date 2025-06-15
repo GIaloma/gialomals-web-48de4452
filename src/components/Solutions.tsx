@@ -1,6 +1,5 @@
-
-import React, { useRef, useEffect, useState } from 'react';
-import { Clock, Users, ChartBar, Globe, HeartPulse, Lightbulb, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Clock, Users, BarChart3, Globe, Heart, Lightbulb, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const solutions = [
@@ -9,10 +8,11 @@ const solutions = [
     title: "Quality time is not a luxury, it's a necessity",
     description: "Reclaim your most valuable resource: time. Our solutions streamline processes so you can focus on what truly matters.",
     benefits: [
-      "Avoid repetitive tasks through automation",
+      "Automate repetitive tasks",
       "AI implementation for accurate results"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "efficiency"
   },
   {
     icon: <Users className="h-12 w-12 text-white" />,
@@ -20,39 +20,43 @@ const solutions = [
     description: "Enhance your customer experience with tools that allow you to respond quickly, professionally, and consistently across all channels.",
     benefits: [
       "Instant responses with AI chatbots",
-      "Forms and online booking in minutes"
+      "Forms and online booking"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "experience"
   },
   {
-    icon: <ChartBar className="h-12 w-12 text-white" />,
+    icon: <BarChart3 className="h-12 w-12 text-white" />,
     title: "Technology for Human Fulfillment",
     description: "Stay on top of your business with real-time insights and comprehensive dashboards that give you visibility into all aspects of your operations.",
     benefits: [
       "Real-time visibility of sales, expenses, and metrics",
       "Intuitive dashboards"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "growth"
   },
   {
     icon: <Globe className="h-12 w-12 text-white" />,
     title: "Online visibility is no longer optional",
     description: "Stand out in the digital landscape with optimized online presence that helps potential customers find and trust your business.",
     benefits: [
-      "Optimized websites that rank on Google",
-      "Active presence on social media and business listings"
+      "Optimized websites that appear on Google",
+      "Active presence on social media and business directories"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "experience"
   },
   {
-    icon: <HeartPulse className="h-12 w-12 text-white" />,
+    icon: <Heart className="h-12 w-12 text-white" />,
     title: "We don't optimize processes, we optimize lives",
     description: "Reduce business anxiety and create organizational harmony with systems that centralize information and automate reporting.",
     benefits: [
       "All data centralized and accessible",
       "Effortless reports and automated insights"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "growth"
   },
   {
     icon: <Lightbulb className="h-12 w-12 text-white" />,
@@ -62,75 +66,33 @@ const solutions = [
       "If you're analog, we'll guide you step by step",
       "If you're digital, we'll help you scale"
     ],
-    link: "#contact"
+    link: "#contact",
+    category: "efficiency"
   }
 ];
 
-const Solutions = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  const startAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-    }
-    
-    scrollIntervalRef.current = setInterval(() => {
-      if (scrollRef.current && isAutoScrolling) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-        
-        if (scrollLeft >= maxScroll) {
-          // Reset to beginning when reaching the end
-          scrollRef.current.scrollLeft = 0;
-          setCurrentIndex(0);
-        } else {
-          // Increment scroll position (increased by 15%)
-          scrollRef.current.scrollLeft += 1.15;
-          // Update current index based on scroll position
-          const cardWidth = 500; // updated card width + gap
-          setCurrentIndex(Math.round(scrollLeft / cardWidth));
-        }
-      }
-    }, 50);
-  };
-  
-  useEffect(() => {
-    startAutoScroll();
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isAutoScrolling]);
-  
-  const handleScrollLeft = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      const newIndex = currentIndex > 0 ? currentIndex - 1 : solutions.length - 1;
-      setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 500, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
-  
-  const handleScrollRight = () => {
-    if (scrollRef.current) {
-      setIsAutoScrolling(false);
-      const newIndex = currentIndex < solutions.length - 1 ? currentIndex + 1 : 0;
-      setCurrentIndex(newIndex);
-      scrollRef.current.scrollTo({ left: newIndex * 500, behavior: 'smooth' });
-      
-      // Resume auto scrolling after manual interaction
-      setTimeout(() => setIsAutoScrolling(true), 2000);
-    }
-  };
+const categories = {
+  efficiency: {
+    name: "Efficiency",
+    description: "Optimize your time and processes",
+    icon: <Clock className="h-5 w-5" />
+  },
+  experience: {
+    name: "Experience",
+    description: "Improve customer experience", 
+    icon: <Users className="h-5 w-5" />
+  },
+  growth: {
+    name: "Growth",
+    description: "Drive business growth",
+    icon: <BarChart3 className="h-5 w-5" />
+  }
+};
 
-  const handleSolutionClick = (link: string) => {
+const Solutions = () => {
+  const [activeTab, setActiveTab] = useState('efficiency');
+
+  const handleSolutionClick = (link) => {
     if (link.startsWith('#')) {
       const element = document.querySelector(link);
       if (element) {
@@ -146,6 +108,8 @@ const Solutions = () => {
     window.open('https://tidycal.com/gialomals/programa-una-consulta', '_blank');
   };
 
+  const filteredSolutions = solutions.filter(solution => solution.category === activeTab);
+
   return (
     <section id="solutions" className="section-padding bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold overflow-hidden">
       <div className="container mx-auto">
@@ -159,88 +123,90 @@ const Solutions = () => {
         </div>
 
         <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={handleScrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-3 text-white focus:outline-none -ml-4"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={28} />
-          </button>
-          
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-4 hide-scrollbar px-8 justify-center"
-            style={{ scrollBehavior: 'smooth' }}
-            onMouseEnter={() => setIsAutoScrolling(false)}
-            onMouseLeave={() => setIsAutoScrolling(true)}
-          >
-            {solutions.map((solution, index) => (
-              <div 
-                key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
-                style={{ 
-                  minWidth: "480px", 
-                  width: "480px",
-                  height: "650px" 
-                }}
-              >
-                {/* Icon section - fixed height */}
-                <div className="flex justify-center mb-6">
-                  <div className="bg-white/20 p-5 rounded-full">
-                    {solution.icon}
+          {/* Tab Navigation - Replaces the navigation arrows area */}
+          <div className="flex justify-center mb-6">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center">
+              {Object.entries(categories).map(([key, category]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  className={`px-4 md:px-6 py-3 rounded-md font-medium transition-all duration-300 flex items-center gap-2 ${
+                    activeTab === key
+                      ? 'bg-white text-gialoma-gold shadow-md'
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  {category.icon}
+                  <div className="text-center">
+                    <div className="font-semibold text-base md:text-lg">{category.name}</div>
+                    <div className="text-sm opacity-80 hidden md:block">{category.description}</div>
                   </div>
-                </div>
-                
-                {/* Title section - fixed height */}
-                <div className="h-24 flex items-center justify-center mb-6">
-                  <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
-                    {solution.title}
-                  </h3>
-                </div>
-                
-                {/* Description section - fixed height */}
-                <div className="h-28 mb-6">
-                  <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
-                    {solution.description}
-                  </p>
-                </div>
-                
-                {/* Benefits section - flexible height but contained */}
-                <div className="flex-grow mb-6">
-                  <ul className="space-y-4">
-                    {solution.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
-                        <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
-                          {benefit}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Button section - fixed at bottom */}
-                <div className="mt-auto">
-                  <Button 
-                    variant="outline" 
-                    className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
-                    onClick={() => handleSolutionClick(solution.link)}
-                  >
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
           
-          <button 
-            onClick={handleScrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-3 text-white focus:outline-none -mr-4"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={28} />
-          </button>
+          {/* Content area - Centered cards taking full space */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl w-full px-8">
+              {filteredSolutions.map((solution, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
+                  style={{ 
+                    minHeight: "650px",
+                    height: "650px" 
+                  }}
+                >
+                  {/* Icon section - fixed height */}
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-white/20 p-5 rounded-full">
+                      {solution.icon}
+                    </div>
+                  </div>
+                  
+                  {/* Title section - fixed height */}
+                  <div className="h-24 flex items-center justify-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
+                      {solution.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Description section - fixed height */}
+                  <div className="h-28 mb-6">
+                    <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                      {solution.description}
+                    </p>
+                  </div>
+                  
+                  {/* Benefits section - flexible height but contained */}
+                  <div className="flex-grow mb-6">
+                    <ul className="space-y-4">
+                      {solution.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
+                          <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                            {benefit}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Button section - fixed at bottom */}
+                  <div className="mt-auto">
+                    <Button 
+                      variant="outline" 
+                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
+                      onClick={() => handleSolutionClick(solution.link)}
+                    >
+                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         
         <div className="mt-8 text-center">
