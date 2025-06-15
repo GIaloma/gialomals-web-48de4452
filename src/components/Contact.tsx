@@ -63,8 +63,8 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Media Section */}
-            <div className="mt-10 bg-white p-8 rounded-lg shadow-sm">
+            {/* Social Media Section - Reduced top and bottom spacing */}
+            <div className="mt-8 bg-white p-8 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Connect with Our Founders</h4>
               
               {/* Paloma */}
@@ -118,7 +118,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="mt-8 bg-white p-8 rounded-lg shadow-sm">
+            <div className="mt-7 bg-white p-8 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Business Hours</h4>
               <div className="space-y-5">
                 <div className="flex justify-between text-lg">
