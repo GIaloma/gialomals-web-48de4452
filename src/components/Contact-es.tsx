@@ -37,11 +37,11 @@ const ContactEs = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information Card - Larger and more balanced */}
+          {/* Contact Information Card - Fine-tuned spacing */}
           <div className="bg-gray-50 p-10 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
-            <h3 className="text-2xl font-semibold mb-8 text-gialoma-black">Información de Contacto</h3>
+            <h3 className="text-2xl font-semibold mb-7 text-gialoma-black">Información de Contacto</h3>
             
-            <div className="space-y-8">
+            <div className="space-y-7">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-6">
                   <Phone className="h-8 w-8 text-gialoma-gold" />
@@ -92,8 +92,8 @@ const ContactEs = () => {
                 </div>
               </div>
 
-              {/* Gianro */}
-              <div className="mb-6">
+              {/* Gianro - Reduced bottom margin */}
+              <div className="mb-4">
                 <h5 className="font-medium text-gialoma-black mb-3 text-lg">Gianro Compagno - Co-Fundador y CTO</h5>
                 <div className="flex space-x-4">
                   <a 
