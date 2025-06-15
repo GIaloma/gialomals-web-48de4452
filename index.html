@@ -112,12 +112,12 @@
     <!-- GOOGLE CONSENT MODE V2 - GDPR COMPLIANT SETUP -->
     <!-- =============================================== -->
     <script>
-      // Define dataLayer and the gtag function
+      // Initialize dataLayer BEFORE GTM loads
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       
-      // Set default consent to 'denied' as a placeholder for GDPR compliance
-      // This ensures compliance in EU regions before user consent
+      // Set default consent to 'denied' BEFORE GTM loads for GDPR compliance
+      // This is CRITICAL - must be before GTM script
       gtag('consent', 'default', {
         'ad_storage': 'denied',
         'ad_user_data': 'denied',
@@ -125,7 +125,7 @@
         'analytics_storage': 'denied',
         'functionality_storage': 'denied',
         'personalization_storage': 'denied',
-        'security_storage': 'granted', // Security always granted for fraud prevention
+        'security_storage': 'granted', // Always granted for fraud prevention
         'wait_for_update': 500 // Wait 500ms for consent management platform
       });
 
@@ -134,6 +134,17 @@
       
       // Enable ads data redaction when ad_storage is denied
       gtag('set', 'ads_data_redaction', true);
+
+      // Push initial consent state to dataLayer for GTM
+      window.dataLayer.push({
+        'event': 'consent_default',
+        'consent_ad_storage': 'denied',
+        'consent_ad_user_data': 'denied', 
+        'consent_ad_personalization': 'denied',
+        'consent_analytics_storage': 'denied'
+      });
+
+      console.log('🚫 Default consent set to DENIED for all optional cookies');
     </script>
 
     <!-- =============================================== -->
@@ -147,7 +158,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- =============================================== -->
-    <!-- GOOGLE ANALYTICS 4 - CONDITIONAL LOADING       -->
+    <!-- GOOGLE ANALYTICS 4 & CONSENT FUNCTIONS        -->
     <!-- =============================================== -->
     <script>
       // Check for existing cookie consent before loading GA4
@@ -174,6 +185,16 @@
             'functionality_storage': 'granted',
             'personalization_storage': 'granted'
           });
+          
+          // Push consent update to dataLayer for GTM
+          window.dataLayer.push({
+            'event': 'consent_update_all',
+            'consent_ad_storage': 'granted',
+            'consent_ad_user_data': 'granted',
+            'consent_ad_personalization': 'granted', 
+            'consent_analytics_storage': 'granted'
+          });
+          
           console.log('✅ All Google consents granted');
         },
         
@@ -187,6 +208,16 @@
             'functionality_storage': 'granted',
             'personalization_storage': 'denied'
           });
+          
+          // Push consent update to dataLayer for GTM
+          window.dataLayer.push({
+            'event': 'consent_update_analytics',
+            'consent_ad_storage': 'denied',
+            'consent_ad_user_data': 'denied',
+            'consent_ad_personalization': 'denied',
+            'consent_analytics_storage': 'granted'
+          });
+          
           console.log('✅ Analytics consent granted, ads denied');
         },
         
@@ -200,12 +231,32 @@
             'functionality_storage': 'denied',
             'personalization_storage': 'denied'
           });
+          
+          // Push consent update to dataLayer for GTM
+          window.dataLayer.push({
+            'event': 'consent_update_denied',
+            'consent_ad_storage': 'denied',
+            'consent_ad_user_data': 'denied',
+            'consent_ad_personalization': 'denied',
+            'consent_analytics_storage': 'denied'
+          });
+          
           console.log('❌ All optional consents denied');
         },
         
         // Custom consent update (for granular control)
         update: function(consentObj) {
           gtag('consent', 'update', consentObj);
+          
+          // Push custom consent update to dataLayer for GTM
+          window.dataLayer.push({
+            'event': 'consent_update_custom',
+            'consent_ad_storage': consentObj.ad_storage || 'denied',
+            'consent_ad_user_data': consentObj.ad_user_data || 'denied',
+            'consent_ad_personalization': consentObj.ad_personalization || 'denied',
+            'consent_analytics_storage': consentObj.analytics_storage || 'denied'
+          });
+          
           console.log('🔄 Custom consent updated:', consentObj);
         }
       };
