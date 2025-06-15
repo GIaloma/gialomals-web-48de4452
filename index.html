@@ -109,42 +109,99 @@
     </script>
 
     <!-- =============================================== -->
-    <!-- GOOGLE CONSENT MODE V2 - GDPR COMPLIANT SETUP -->
+    <!-- GOOGLE CONSENT MODE V2 - REGIONAL CONFIGURATION -->
     <!-- =============================================== -->
     <script>
       // Initialize dataLayer BEFORE GTM loads
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       
-      // Set default consent to 'denied' BEFORE GTM loads for GDPR compliance
-      // This is CRITICAL - must be before GTM script
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'functionality_storage': 'denied',
-        'personalization_storage': 'denied',
-        'security_storage': 'granted', // Always granted for fraud prevention
-        'wait_for_update': 500 // Wait 500ms for consent management platform
-      });
+      // European Economic Area (EEA) countries - require explicit consent
+      const EEA_COUNTRIES = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE'];
+      
+      // Function to detect user's region (simplified - in production use a proper geolocation service)
+      function getUserRegion() {
+        // Try to get from browser language first
+        const browserLang = navigator.language || navigator.languages[0];
+        const countryCode = browserLang.split('-')[1]?.toUpperCase();
+        
+        // For Spanish users, likely from Spain or Latin America
+        if (browserLang.startsWith('es')) {
+          return countryCode || 'ES';
+        }
+        
+        // For Italian users
+        if (browserLang.startsWith('it')) {
+          return 'IT';
+        }
+        
+        // Default fallback
+        return countryCode || 'US';
+      }
+      
+      // Check if user is from EEA
+      function isEEAUser() {
+        const userRegion = getUserRegion();
+        return EEA_COUNTRIES.includes(userRegion);
+      }
+      
+      // Set consent defaults based on region
+      if (isEEAUser()) {
+        // EEA users: Require explicit consent (stricter GDPR compliance)
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'analytics_storage': 'denied',
+          'functionality_storage': 'denied',
+          'personalization_storage': 'denied',
+          'security_storage': 'granted',
+          'wait_for_update': 500,
+          'region': EEA_COUNTRIES
+        });
+        
+        console.log('🇪🇺 EEA user detected - Explicit consent required');
+        
+        // Push to dataLayer for GTM
+        window.dataLayer.push({
+          'event': 'consent_default_eea',
+          'consent_ad_storage': 'denied',
+          'consent_ad_user_data': 'denied', 
+          'consent_ad_personalization': 'denied',
+          'consent_analytics_storage': 'denied',
+          'user_region': 'EEA'
+        });
+        
+      } else {
+        // Non-EEA users: More permissive defaults (but still respecting user choice)
+        gtag('consent', 'default', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted',
+          'functionality_storage': 'granted',
+          'personalization_storage': 'granted',
+          'security_storage': 'granted'
+        });
+        
+        console.log('🌍 Non-EEA user detected - Default consent granted');
+        
+        // Push to dataLayer for GTM
+        window.dataLayer.push({
+          'event': 'consent_default_non_eea',
+          'consent_ad_storage': 'granted',
+          'consent_ad_user_data': 'granted',
+          'consent_ad_personalization': 'granted', 
+          'consent_analytics_storage': 'granted',
+          'user_region': 'non-EEA'
+        });
+      }
 
       // Enable URL passthrough for better measurement when storage is denied
       gtag('set', 'url_passthrough', true);
       
       // Enable ads data redaction when ad_storage is denied
       gtag('set', 'ads_data_redaction', true);
-
-      // Push initial consent state to dataLayer for GTM
-      window.dataLayer.push({
-        'event': 'consent_default',
-        'consent_ad_storage': 'denied',
-        'consent_ad_user_data': 'denied', 
-        'consent_ad_personalization': 'denied',
-        'consent_analytics_storage': 'denied'
-      });
-
-      console.log('🚫 Default consent set to DENIED for all optional cookies');
     </script>
 
     <!-- =============================================== -->
@@ -192,7 +249,8 @@
             'consent_ad_storage': 'granted',
             'consent_ad_user_data': 'granted',
             'consent_ad_personalization': 'granted', 
-            'consent_analytics_storage': 'granted'
+            'consent_analytics_storage': 'granted',
+            'user_action': 'accept_all'
           });
           
           console.log('✅ All Google consents granted');
@@ -215,7 +273,8 @@
             'consent_ad_storage': 'denied',
             'consent_ad_user_data': 'denied',
             'consent_ad_personalization': 'denied',
-            'consent_analytics_storage': 'granted'
+            'consent_analytics_storage': 'granted',
+            'user_action': 'accept_analytics_only'
           });
           
           console.log('✅ Analytics consent granted, ads denied');
@@ -238,7 +297,8 @@
             'consent_ad_storage': 'denied',
             'consent_ad_user_data': 'denied',
             'consent_ad_personalization': 'denied',
-            'consent_analytics_storage': 'denied'
+            'consent_analytics_storage': 'denied',
+            'user_action': 'reject_all'
           });
           
           console.log('❌ All optional consents denied');
@@ -254,47 +314,59 @@
             'consent_ad_storage': consentObj.ad_storage || 'denied',
             'consent_ad_user_data': consentObj.ad_user_data || 'denied',
             'consent_ad_personalization': consentObj.ad_personalization || 'denied',
-            'consent_analytics_storage': consentObj.analytics_storage || 'denied'
+            'consent_analytics_storage': consentObj.analytics_storage || 'denied',
+            'user_action': 'custom_selection'
           });
           
           console.log('🔄 Custom consent updated:', consentObj);
         }
       };
 
-      // Load GA4 if consent is already given
+      // Load GA4 if consent is already given OR if non-EEA user
       const consentCookie = getCookie('gialoma_cookie_consent');
-      if (consentCookie) {
+      const shouldLoadGA4 = (!isEEAUser()) || (consentCookie && JSON.parse(consentCookie).analytics);
+      
+      if (shouldLoadGA4) {
         try {
-          const consent = JSON.parse(consentCookie);
-          if (consent.analytics) {
-            // Update consent based on saved preferences
+          let consent = { analytics: true, marketing: false };
+          
+          if (consentCookie) {
+            consent = JSON.parse(consentCookie);
+          }
+          
+          if (!isEEAUser()) {
+            // Non-EEA users: Load GA4 immediately with default consent
+            console.log('🌍 Loading GA4 for non-EEA user with default consent');
+          } else if (consent.analytics) {
+            // EEA users: Only load if they explicitly consented
             if (consent.marketing) {
               window.gtagConsent.grantAll();
             } else {
               window.gtagConsent.grantAnalytics();
             }
-            
-            // Load Google Analytics 4 immediately if analytics consent is granted
-            (function() {
-              const script = document.createElement('script');
-              script.async = true;
-              script.src = 'https://www.googletagmanager.com/gtag/js?id=G-G15VKZG5HH';
-              document.head.appendChild(script);
-              
-              script.onload = function() {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-G15VKZG5HH', {
-                  'anonymize_ip': true,
-                  'cookie_flags': 'SameSite=Secure',
-                  'allow_google_signals': consent.marketing || false,
-                  'allow_ad_personalization_signals': consent.marketing || false
-                });
-                console.log('📊 Google Analytics 4 loaded with existing consent');
-              };
-            })();
           }
+          
+          // Load Google Analytics 4
+          (function() {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-G15VKZG5HH';
+            document.head.appendChild(script);
+            
+            script.onload = function() {
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-G15VKZG5HH', {
+                'anonymize_ip': true,
+                'cookie_flags': 'SameSite=Secure',
+                'allow_google_signals': consent.marketing || false,
+                'allow_ad_personalization_signals': consent.marketing || false
+              });
+              console.log('📊 Google Analytics 4 loaded');
+            };
+          })();
+          
         } catch (error) {
           console.error('❌ Error parsing cookie consent:', error);
         }
