@@ -31,8 +31,8 @@ const CookieBanner = () => {
   const [showModal, setShowModal] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<CookieConsent>({
     necessary: true,
-    analytics: false,
-    marketing: false,
+    analytics: true, // Default to true (opt-out model)
+    marketing: true, // Default to true (opt-out model)
     timestamp: null
   });
 
@@ -43,10 +43,23 @@ const CookieBanner = () => {
 
   const checkExistingConsent = () => {
     const hasConsent = getCookie('gialoma_cookie_consent');
+    const hasOptedOut = getCookie('gialoma_cookies_declined');
+    
+    // If user has explicitly opted out, respect their choice
+    if (hasOptedOut === 'true') {
+      setCookieConsent({
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      });
+      // Don't show banner if user has already opted out
+      return;
+    }
     
     if (!hasConsent) {
-      // Show banner after 1 second
-      setTimeout(() => setIsVisible(true), 1000);
+      // Show informational banner for first-time visitors (opt-out model)
+      setTimeout(() => setIsVisible(true), 2000); // Delayed to not interrupt UX
     } else {
       try {
         const consent = JSON.parse(hasConsent);
@@ -57,7 +70,13 @@ const CookieBanner = () => {
         }
       } catch (error) {
         console.error('Error parsing cookie consent:', error);
-        setIsVisible(true);
+        // Default to enabled (opt-out model)
+        setCookieConsent({
+          necessary: true,
+          analytics: true,
+          marketing: true,
+          timestamp: Date.now()
+        });
       }
     }
   };
@@ -119,7 +138,8 @@ const CookieBanner = () => {
     updateGoogleConsent(consent);
   };
 
-  const acceptAllCookies = () => {
+  const continueWithCurrentSettings = () => {
+    // User is happy with default settings (all enabled)
     const consent = {
       necessary: true,
       analytics: true,
@@ -128,12 +148,12 @@ const CookieBanner = () => {
     };
     
     saveConsent(consent);
-    loadGoogleAnalytics();
     setIsVisible(false);
-    trackEvent('cookie_consent', { consent_type: 'all' });
+    trackEvent('cookie_consent', { consent_type: 'continue_default' });
   };
 
-  const rejectOptionalCookies = () => {
+  const optOutAll = () => {
+    // User wants to opt out of all optional cookies
     const consent = {
       necessary: true,
       analytics: false,
@@ -141,9 +161,11 @@ const CookieBanner = () => {
       timestamp: Date.now()
     };
     
+    // Set opt-out cookie
+    setCookie('gialoma_cookies_declined', 'true', 365);
     saveConsent(consent);
     setIsVisible(false);
-    console.log('Only necessary cookies accepted');
+    console.log('User opted out of all optional cookies');
   };
 
   const acceptAnalyticsOnly = () => {
@@ -269,28 +291,28 @@ const CookieBanner = () => {
 
   return (
     <>
-      {/* Main Banner */}
+      {/* Main Banner - Opt-out Model */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-gialoma-black to-gray-800 text-white shadow-lg border-t-3 border-gialoma-gold">
         <div className="container mx-auto px-4 py-4 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
             <div className="flex items-center gap-3 mb-2 lg:mb-0">
               <Cookie className="text-gialoma-gold h-6 w-6 flex-shrink-0" />
-              <h3 className="text-lg font-semibold text-gialoma-gold">🍪 Cookie Settings</h3>
+              <h3 className="text-lg font-semibold text-gialoma-gold">🍪 Enhanced Experience</h3>
             </div>
             
             <div className="flex-1 min-w-0">
               <p className="text-sm text-gray-300 mb-2">
-                We use cookies to enhance your experience. You can accept all, choose only analytics, 
-                reject optional ones, or{' '}
+                We're using cookies to provide you with the best experience and analytics to improve our services. 
+                You can continue with our recommended settings or{' '}
                 <button 
                   onClick={openModal} 
                   className="text-gialoma-gold hover:text-gialoma-lightgold underline font-medium"
                 >
-                  configure your preferences
+                  customize your preferences
                 </button>.
               </p>
               <p className="text-xs text-gray-400">
-                Check our{' '}
+                View our{' '}
                 <Link to="/cookie-policy" className="text-gialoma-gold hover:text-gialoma-lightgold underline">
                   Cookie Policy
                 </Link>{' '}
@@ -303,10 +325,10 @@ const CookieBanner = () => {
             
             <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
-                onClick={acceptAllCookies}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-3 py-2"
+                onClick={continueWithCurrentSettings}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2"
               >
-                Accept All
+                ✓ Continue
               </Button>
               <Button
                 onClick={acceptAnalyticsOnly}
@@ -315,11 +337,11 @@ const CookieBanner = () => {
                 Analytics Only
               </Button>
               <Button
-                onClick={rejectOptionalCookies}
+                onClick={optOutAll}
                 variant="outline"
                 className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
               >
-                Essential Only
+                Opt Out
               </Button>
               <Button
                 onClick={openModal}
@@ -327,7 +349,7 @@ const CookieBanner = () => {
                 className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
               >
                 <Settings className="h-4 w-4 mr-1" />
-                Configure
+                Customize
               </Button>
             </div>
           </div>
@@ -341,7 +363,7 @@ const CookieBanner = () => {
             {/* Modal Header */}
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gialoma-black">Cookie Settings</h2>
+                <h2 className="text-2xl font-bold text-gialoma-black">Cookie Preferences</h2>
                 <button
                   onClick={closeModal}
                   className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
@@ -350,7 +372,7 @@ const CookieBanner = () => {
                 </button>
               </div>
               <p className="text-gialoma-darkgray mt-2">
-                Choose which cookies you want to allow. You can change these preferences at any time.
+                Customize which cookies you want to allow. Our recommended settings are already selected for the best experience.
               </p>
             </div>
 
@@ -359,16 +381,15 @@ const CookieBanner = () => {
               {/* Technical Cookies */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Technical Cookies</h3>
+                  <h3 className="font-semibold text-gialoma-black">Essential Cookies</h3>
                   <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-medium">
-                    NECESSARY
+                    ALWAYS ACTIVE
                   </span>
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray">
-                    These cookies are essential for the basic functioning of the website. They include features like 
-                    navigation, access to secure areas and basic functionalities. The website cannot function 
-                    properly without these cookies.
+                    These cookies are essential for the website to function properly. They enable basic features like 
+                    navigation, security, and accessibility. The website cannot function properly without these cookies.
                   </p>
                 </div>
               </div>
@@ -376,7 +397,10 @@ const CookieBanner = () => {
               {/* Analytics Cookies */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Analytics Cookies (Google Analytics)</h3>
+                  <div>
+                    <h3 className="font-semibold text-gialoma-black">Analytics Cookies</h3>
+                    <span className="text-xs text-green-600 font-medium">✓ Recommended</span>
+                  </div>
                   <button
                     onClick={toggleAnalytics}
                     className={`relative w-12 h-6 rounded-full transition-colors ${
@@ -392,14 +416,13 @@ const CookieBanner = () => {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray mb-3">
-                    These cookies help us understand how you interact with our website, providing us with 
-                    information about pages visited, time spent and other analytical data. 
-                    We use Google Analytics 4 for this purpose.
+                    Help us understand how visitors interact with our website by collecting information anonymously. 
+                    This data helps us improve your experience and optimize our services.
                   </p>
                   <div className="text-xs text-gialoma-darkgray space-y-1">
-                    <p><strong>Data collected:</strong> Pages visited, time on site, traffic source, general demographic data.</p>
-                    <p><strong>Purpose:</strong> Improve user experience and optimize our services.</p>
-                    <p><strong>Retention:</strong> Up to 26 months.</p>
+                    <p><strong>What we collect:</strong> Page views, time on site, traffic sources, general location (country)</p>
+                    <p><strong>Purpose:</strong> Website improvement and user experience optimization</p>
+                    <p><strong>Retention:</strong> Up to 26 months, anonymized after 14 months</p>
                   </div>
                 </div>
               </div>
@@ -407,7 +430,10 @@ const CookieBanner = () => {
               {/* Marketing Cookies */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-semibold text-gialoma-black">Marketing & Advertising Cookies</h3>
+                  <div>
+                    <h3 className="font-semibold text-gialoma-black">Marketing & Personalization</h3>
+                    <span className="text-xs text-blue-600 font-medium">◐ Optional</span>
+                  </div>
                   <button
                     onClick={toggleMarketing}
                     className={`relative w-12 h-6 rounded-full transition-colors ${
@@ -423,14 +449,13 @@ const CookieBanner = () => {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gialoma-darkgray mb-3">
-                    These cookies are used to track visitors across websites. The intention is to display ads that 
-                    are relevant and engaging for the individual user and thereby more valuable for publishers and 
-                    third party advertisers.
+                    Enable personalized content and relevant advertising. These cookies help us show you more 
+                    relevant content and measure the effectiveness of our marketing campaigns.
                   </p>
                   <div className="text-xs text-gialoma-darkgray space-y-1">
-                    <p><strong>Data collected:</strong> User behavior, ad interactions, conversion tracking.</p>
-                    <p><strong>Purpose:</strong> Personalized advertising and retargeting campaigns.</p>
-                    <p><strong>Retention:</strong> Up to 2 years.</p>
+                    <p><strong>What we collect:</strong> Interests, ad interactions, conversion tracking</p>
+                    <p><strong>Purpose:</strong> Personalized content and relevant advertising</p>
+                    <p><strong>Retention:</strong> Up to 2 years</p>
                   </div>
                 </div>
               </div>
