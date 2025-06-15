@@ -9,7 +9,20 @@ const GA_MEASUREMENT_ID = 'G-G15VKZG5HH'; // Tu ID real de Google Analytics
 interface CookieConsent {
   necessary: boolean;
   analytics: boolean;
+  marketing: boolean;
   timestamp: number | null;
+}
+
+// Declare global gtag consent functions
+declare global {
+  interface Window {
+    gtagConsent: {
+      grantAll: () => void;
+      grantAnalytics: () => void;
+      denyAll: () => void;
+      update: (consentObj: any) => void;
+    };
+  }
 }
 
 const CookieBannerEs = () => {
@@ -18,6 +31,7 @@ const CookieBannerEs = () => {
   const [cookieConsent, setCookieConsent] = useState<CookieConsent>({
     necessary: true,
     analytics: false,
+    marketing: false,
     timestamp: null
   });
 
@@ -36,6 +50,7 @@ const CookieBannerEs = () => {
       try {
         const consent = JSON.parse(hasConsent);
         setCookieConsent(consent);
+        updateGoogleConsent(consent);
         if (consent.analytics) {
           loadGoogleAnalytics();
         }
@@ -50,11 +65,24 @@ const CookieBannerEs = () => {
     if (navigator.doNotTrack === "1" || 
         navigator.doNotTrack === "yes" || 
         (navigator as any).msDoNotTrack === "1") {
-      setCookieConsent(prev => ({ ...prev, analytics: false }));
+      setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
       console.log('Do Not Track detectado - análisis deshabilitado');
       return true;
     }
     return false;
+  };
+
+  const updateGoogleConsent = (consent: CookieConsent) => {
+    // Actualizar Google Consent Mode v2
+    if (window.gtagConsent) {
+      if (consent.marketing && consent.analytics) {
+        window.gtagConsent.grantAll();
+      } else if (consent.analytics && !consent.marketing) {
+        window.gtagConsent.grantAnalytics();
+      } else {
+        window.gtagConsent.denyAll();
+      }
+    }
   };
 
   const loadGoogleAnalytics = () => {
@@ -76,22 +104,25 @@ const CookieBannerEs = () => {
       gtag('config', GA_MEASUREMENT_ID, {
         'anonymize_ip': true,
         'cookie_flags': 'SameSite=Secure',
-        'allow_google_signals': false
+        'allow_google_signals': cookieConsent.marketing || false,
+        'allow_ad_personalization_signals': cookieConsent.marketing || false
       });
       
-      console.log('Google Analytics cargado con consentimiento');
+      console.log('📊 Google Analytics cargado con consentimiento');
     };
   };
 
   const saveConsent = (consent: CookieConsent) => {
     setCookie('gialoma_cookie_consent', JSON.stringify(consent), 365);
     setCookieConsent(consent);
+    updateGoogleConsent(consent);
   };
 
   const acceptAllCookies = () => {
     const consent = {
       necessary: true,
       analytics: true,
+      marketing: true,
       timestamp: Date.now()
     };
     
@@ -105,12 +136,27 @@ const CookieBannerEs = () => {
     const consent = {
       necessary: true,
       analytics: false,
+      marketing: false,
       timestamp: Date.now()
     };
     
     saveConsent(consent);
     setIsVisible(false);
     console.log('Solo cookies necesarias aceptadas');
+  };
+
+  const acceptAnalyticsOnly = () => {
+    const consent = {
+      necessary: true,
+      analytics: true,
+      marketing: false,
+      timestamp: Date.now()
+    };
+    
+    saveConsent(consent);
+    loadGoogleAnalytics();
+    setIsVisible(false);
+    trackEvent('cookie_consent', { consent_type: 'analytics_only' });
   };
 
   const openModal = () => {
@@ -131,7 +177,11 @@ const CookieBannerEs = () => {
     
     if (consent.analytics) {
       loadGoogleAnalytics();
-      trackEvent('cookie_consent', { consent_type: 'custom_analytics' });
+      trackEvent('cookie_consent', { 
+        consent_type: 'custom',
+        analytics: consent.analytics,
+        marketing: consent.marketing
+      });
     }
     
     setShowModal(false);
@@ -142,6 +192,13 @@ const CookieBannerEs = () => {
     setCookieConsent(prev => ({
       ...prev,
       analytics: !prev.analytics
+    }));
+  };
+
+  const toggleMarketing = () => {
+    setCookieConsent(prev => ({
+      ...prev,
+      marketing: !prev.marketing
     }));
   };
 
@@ -202,7 +259,8 @@ const CookieBannerEs = () => {
       trackContactForm,
       trackServiceInquiry,
       trackResourceDownload,
-      hasAnalyticsConsent: () => cookieConsent.analytics
+      hasAnalyticsConsent: () => cookieConsent.analytics,
+      hasMarketingConsent: () => cookieConsent.marketing
     };
   }, [cookieConsent]);
 
@@ -221,8 +279,8 @@ const CookieBannerEs = () => {
             
             <div className="flex-1 min-w-0">
               <p className="text-sm text-gray-300 mb-2">
-                Utilizamos cookies necesarias para el funcionamiento del sitio y cookies analíticas para mejorar tu experiencia. 
-                Puedes aceptar todas, rechazar las opcionales o{' '}
+                Utilizamos cookies para mejorar tu experiencia. Puedes aceptar todas, elegir solo analíticas, 
+                rechazar las opcionales o{' '}
                 <button 
                   onClick={openModal} 
                   className="text-gialoma-gold hover:text-gialoma-lightgold underline font-medium"
@@ -242,26 +300,32 @@ const CookieBannerEs = () => {
               </p>
             </div>
             
-            <div className="flex flex-wrap items-center gap-3 lg:flex-nowrap">
+            <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
                 onClick={acceptAllCookies}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105"
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-3 py-2"
               >
                 Aceptar todas
               </Button>
               <Button
+                onClick={acceptAnalyticsOnly}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2"
+              >
+                Solo analíticas
+              </Button>
+              <Button
                 onClick={rejectOptionalCookies}
                 variant="outline"
-                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200"
+                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
               >
                 Solo necesarias
               </Button>
               <Button
                 onClick={openModal}
                 variant="outline"
-                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200"
+                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
               >
-                <Settings className="h-4 w-4 mr-2" />
+                <Settings className="h-4 w-4 mr-1" />
                 Configurar
               </Button>
             </div>
@@ -338,13 +402,44 @@ const CookieBannerEs = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Cookies de Marketing */}
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                  <h3 className="font-semibold text-gialoma-black">Cookies de Marketing y Publicidad</h3>
+                  <button
+                    onClick={toggleMarketing}
+                    className={`relative w-12 h-6 rounded-full transition-colors ${
+                      cookieConsent.marketing ? 'bg-gialoma-gold' : 'bg-gray-300'
+                    }`}
+                  >
+                    <div
+                      className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${
+                        cookieConsent.marketing ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+                <div className="p-4">
+                  <p className="text-sm text-gialoma-darkgray mb-3">
+                    Estas cookies se utilizan para rastrear visitantes a través de sitios web. La intención es mostrar 
+                    anuncios que sean relevantes y atractivos para el usuario individual y, por lo tanto, más valiosos 
+                    para editores y anunciantes de terceros.
+                  </p>
+                  <div className="text-xs text-gialoma-darkgray space-y-1">
+                    <p><strong>Datos recopilados:</strong> Comportamiento del usuario, interacciones con anuncios, seguimiento de conversiones.</p>
+                    <p><strong>Finalidad:</strong> Publicidad personalizada y campañas de remarketing.</p>
+                    <p><strong>Conservación:</strong> Hasta 2 años.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Footer del Modal */}
             <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
               <Button
                 onClick={() => {
-                  setCookieConsent(prev => ({ ...prev, analytics: false }));
+                  setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
                   saveAndCloseModal();
                 }}
                 variant="outline"
