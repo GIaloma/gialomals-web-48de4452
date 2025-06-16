@@ -161,7 +161,7 @@ const ContactEs = () => {
               data-fillout-dynamic-resize
             ></div>
             
-            <div className="mt-4 text-center">
+            <div className="mt-5 text-center">
               <p className="text-sm text-gialoma-darkgray">
                 Normalmente respondemos en un plazo de 24 horas durante los días laborales.
               </p>
