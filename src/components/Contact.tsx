@@ -148,8 +148,8 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Form Card */}
-          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+          {/* Form Card - Reduced bottom padding */}
+          <div className="bg-gray-50 p-8 pb-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Send Us a Message</h3>
             
             {/* Fillout English Form */}
@@ -161,7 +161,7 @@ const Contact = () => {
               data-fillout-dynamic-resize
             ></div>
             
-            <div className="mt-6 text-center">
+            <div className="mt-4 text-center">
               <p className="text-sm text-gialoma-darkgray">
                 We typically respond within 24 hours during business days.
               </p>
