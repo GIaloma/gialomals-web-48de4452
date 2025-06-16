@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { Linkedin, Mail, Instagram } from 'lucide-react';
-import OptimizedImage from './OptimizedImage';
 
 interface TeamMember {
   id: number;
@@ -53,14 +53,10 @@ const TeamEs = () => {
           {teamMembers.map((member) => (
             <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[850px] transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
               <div className="aspect-w-4 aspect-h-3 relative">
-                <OptimizedImage
-                  src={member.image}
-                  alt={member.name}
+                <img 
+                  src={member.image} 
+                  alt={member.name} 
                   className="w-full h-128 object-cover object-center"
-                  width={400}
-                  height={512}
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">

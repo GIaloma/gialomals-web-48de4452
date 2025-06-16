@@ -2,7 +2,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import OptimizedImage from './OptimizedImage';
 
 const Hero = () => {
   return (
@@ -23,31 +22,22 @@ const Hero = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl relative">
           {/* Logo as background - desktop version (right side) */}
-          <div className="hidden md:block absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in" style={{ animationDelay: "0.6s" }}>
-            <OptimizedImage
-              src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png"
-              alt="Gialoma Life Solutions Logo"
-              className="w-full h-full object-contain"
-              width={384}
-              height={384}
-              priority={true}
-              loading="eager"
-            />
-          </div>
+          <img 
+            src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+            alt="Gialoma Life Solutions Logo" 
+            className="hidden md:block absolute top-1/2 right-[-30%] transform translate-x-1/2 -translate-y-1/2 opacity-10 w-96 h-96 z-0 animate-pulse animate-fade-in object-contain" 
+            style={{ animationDelay: "0.6s" }}
+          />
           
           {/* Mobile text content with background logo */}
           <div className="relative md:static">
             {/* Logo as background - mobile version (sized to fit text only) */}
             <div className="md:hidden absolute top-0 left-0 right-0 overflow-visible pointer-events-none h-auto z-0">
               <div className="flex justify-center">
-                <OptimizedImage
-                  src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png"
-                  alt="Gialoma Life Solutions Logo"
-                  className="opacity-10 w-52 h-52 object-contain animate-pulse animate-fade-in -mt-4"
-                  width={208}
-                  height={208}
-                  priority={true}
-                  loading="eager"
+                <img 
+                  src="/lovable-uploads/34119c99-f024-4f88-9bf1-13abf64f51c6.png" 
+                  alt="Gialoma Life Solutions Logo" 
+                  className="opacity-10 w-52 h-52 object-contain animate-pulse animate-fade-in -mt-4" 
                   style={{ animationDelay: "0.2s" }}
                 />
               </div>
