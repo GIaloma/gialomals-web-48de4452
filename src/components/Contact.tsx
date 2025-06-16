@@ -161,7 +161,7 @@ const Contact = () => {
               data-fillout-dynamic-resize
             ></div>
             
-            <div className="mt-4 text-center">
+            <div className="mt-5 text-center">
               <p className="text-sm text-gialoma-darkgray">
                 We typically respond within 24 hours during business days.
               </p>
