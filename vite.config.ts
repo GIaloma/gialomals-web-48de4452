@@ -19,19 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    // Enable source maps for better debugging
-    sourcemap: true,
-    // Optimize chunk splitting for better caching
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-        },
-      },
-    },
-    // Increase chunk size warning limit for better performance
-    chunkSizeWarningLimit: 1000,
-  },
 }));

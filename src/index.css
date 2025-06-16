@@ -47,64 +47,21 @@
     }
   }
 
-  /* Viewport optimization for mobile devices */
   html {
     scroll-padding-top: var(--navbar-height);
     scroll-behavior: smooth;
-    /* Prevent horizontal overflow and ensure proper mobile scaling */
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
   }
 
   * {
     @apply border-border;
-    /* Prevent horizontal overflow on all elements */
-    box-sizing: border-box;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
-    /* Ensure body doesn't exceed viewport width */
-    width: 100%;
-    overflow-x: hidden;
-    position: relative;
-    /* Prevent zoom on iOS form inputs */
-    -webkit-text-size-adjust: 100%;
-  }
-
-  /* Prevent content from exceeding viewport width */
-  #root {
-    width: 100%;
-    overflow-x: hidden;
-    min-height: 100vh;
-    position: relative;
-  }
-
-  /* Ensure all containers respect viewport limits */
-  .container {
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
   }
 
   section {
     @apply pt-24 md:pt-28; /* Add padding to top of sections */
-    /* Prevent section overflow */
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Mobile-first responsive images */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Prevent pre and code blocks from causing horizontal scroll */
-  pre, code {
-    overflow-x: auto;
-    word-wrap: break-word;
   }
 
   .hero-gradient {
@@ -125,43 +82,5 @@
 
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-
-  /* Form input zoom prevention on iOS */
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  textarea {
-    font-size: 16px; /* Prevents zoom on iOS */
-  }
-
-  /* Touch-friendly button sizing */
-  button {
-    min-height: 44px; /* Apple's recommended touch target size */
-    min-width: 44px;
-  }
-}
-
-/* Responsive design helpers */
-@media (max-width: 767px) {
-  /* Ensure mobile content never exceeds viewport */
-  * {
-    max-width: 100vw;
-  }
-  
-  /* Adjust font sizes for mobile readability */
-  h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
-  h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
-  h3 { font-size: clamp(1.25rem, 3.5vw, 1.75rem); }
-}
-
-/* Print styles */
-@media print {
-  body {
-    overflow: visible !important;
-  }
-  
-  .no-print {
-    display: none !important;
   }
 }
