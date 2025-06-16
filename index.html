@@ -128,11 +128,11 @@
         return null;
       }
 
-      // Check for Do Not Track
+      // Check for Do Not Track - FIXED: Removed TypeScript syntax
       function respectDoNotTrack() {
         return navigator.doNotTrack === "1" || 
                navigator.doNotTrack === "yes" || 
-               (navigator as any).msDoNotTrack === "1";
+               navigator.msDoNotTrack === "1";
       }
 
       // Get user's stored preferences or apply defaults
@@ -140,7 +140,8 @@
       const userOptedOut = getCookie('gialoma_cookies_declined');
       const dntEnabled = respectDoNotTrack();
       
-      let defaultConsentState = {
+      // FIXED: Declare defaultConsentState properly
+      var defaultConsentState = {
         'ad_storage': 'granted',
         'ad_user_data': 'granted',
         'ad_personalization': 'granted',
@@ -286,7 +287,7 @@
           // Set opt-out cookie to remember user's choice
           const expires = new Date();
           expires.setTime(expires.getTime() + (365 * 24 * 60 * 60 * 1000)); // 1 year
-          document.cookie = `gialoma_cookies_declined=true;expires=${expires.toUTCString()};path=/;Secure;SameSite=Strict`;
+          document.cookie = 'gialoma_cookies_declined=true;expires=' + expires.toUTCString() + ';path=/;Secure;SameSite=Strict';
           
           // Push consent update to dataLayer for GTM
           window.dataLayer.push({
