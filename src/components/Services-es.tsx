@@ -123,13 +123,13 @@ const ServicesEs = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">La automatización sin supervisión es como un coche sin conductor</span>
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
+          <p className="text-lg text-gialoma-darkgray-accessible max-w-3xl mx-auto">
             Ofrecemos una gama de servicios especializados diseñados para optimizar las operaciones de tu negocio 
             y mejorar tu presencia digital.
           </p>
         </div>
 
-        {/* Filter Buttons - Same height as original carousel navigation area */}
+        {/* Filter Buttons */}
         <div className="relative mb-4">
           <div className="flex justify-center">
             <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap gap-1 justify-center">
@@ -140,7 +140,7 @@ const ServicesEs = () => {
                   className={`px-4 md:px-6 py-2 rounded-md font-medium transition-all duration-300 text-sm md:text-base ${
                     activeFilter === key
                       ? 'bg-gialoma-gold text-white shadow-md'
-                      : 'text-gray-600 hover:bg-gray-200'
+                      : 'text-gialoma-darkgray-accessible hover:bg-gray-200'
                   }`}
                 >
                   {label}
@@ -150,7 +150,7 @@ const ServicesEs = () => {
           </div>
         </div>
 
-        {/* Services Grid - Maintains same content area height as carousel */}
+        {/* Services Grid */}
         <div className="relative" style={{ minHeight: '560px' }}>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
             {filteredServices.map((service) => (
@@ -177,25 +177,25 @@ const ServicesEs = () => {
                     </div>
                   </div>
                   
-                  {/* Title - Justified text */}
+                  {/* Title */}
                   <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
                       style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.title}
                   </h3>
                   
-                  {/* Description - Justified text */}
-                  <p className="text-gialoma-darkgray mb-5 text-justify text-sm md:text-base overflow-visible" 
+                  {/* Description */}
+                  <p className="text-gialoma-darkgray-accessible mb-5 text-justify text-sm md:text-base overflow-visible" 
                      style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
                     {service.description}
                   </p>
                   
-                  {/* Features section - Justified text */}
+                  {/* Features section */}
                   <div className="flex-grow mb-4">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
+                          <span className="text-gialoma-darkgray-accessible text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
                             {feature}
                           </span>
                         </li>
@@ -203,14 +203,14 @@ const ServicesEs = () => {
                     </ul>
                   </div>
                   
-                  {/* Button - Same styling as original */}
+                  {/* Button */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
                       className={`transition-all duration-300 flex items-center w-full justify-center group ${
                         service.highlight 
                           ? 'bg-gialoma-gold text-white border-gialoma-gold hover:bg-gialoma-darkgold' 
-                          : 'text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white'
+                          : 'text-gialoma-gold-accessible border-gialoma-gold hover:bg-gialoma-gold hover:text-white'
                       }`}
                       onClick={() => handleServiceClick(service.link)}
                     >
@@ -224,9 +224,9 @@ const ServicesEs = () => {
           </div>
         </div>
         
-        {/* Bottom section - Exact same spacing as original */}
+        {/* Bottom section */}
         <div className="mt-8 text-center">
-          <p className="text-xl text-gialoma-darkgray mb-8 max-w-3xl mx-auto font-medium">
+          <p className="text-xl text-gialoma-darkgray-accessible mb-8 max-w-3xl mx-auto font-medium">
             ¿Necesitas una solución especializada? Ofrecemos servicios personalizados adaptados a las necesidades específicas de tu negocio.
           </p>
           
@@ -238,76 +238,6 @@ const ServicesEs = () => {
           </Button>
         </div>
       </div>
-
-      <style jsx>{`
-        /* Preserve all original CSS custom properties and classes */
-        .text-gradient {
-          background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: #d4af37;
-        }
-        
-        .text-gialoma-gold {
-          color: #d4af37;
-        }
-        
-        .text-gialoma-darkgray {
-          color: #6b7280;
-        }
-        
-        .text-gialoma-black {
-          color: #1f2937;
-        }
-        
-        .bg-gialoma-gold {
-          background-color: #d4af37;
-        }
-        
-        .bg-gialoma-darkgold {
-          background-color: #b8941f;
-        }
-        
-        .border-gialoma-gold {
-          border-color: #d4af37;
-        }
-        
-        .hover\\:bg-gialoma-gold:hover {
-          background-color: #d4af37;
-        }
-        
-        .hover\\:bg-gialoma-darkgold:hover {
-          background-color: #b8941f;
-        }
-        
-        .hover\\:bg-gray-200:hover {
-          background-color: #e5e7eb;
-        }
-        
-        /* Responsive adjustments matching original */
-        @media (max-width: 640px) {
-          .service-card-title {
-            font-size: 1.1rem;
-          }
-          .service-card-description {
-            font-size: 0.9rem;
-          }
-          .service-card-feature {
-            font-size: 0.9rem;
-          }
-          
-          .grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        
-        @media (max-width: 1024px) and (min-width: 641px) {
-          .grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-      `}</style>
     </section>
   );
 };
