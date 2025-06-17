@@ -44,7 +44,7 @@ const TeamEs = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">Nuestro Equipo Directivo</span>
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-2xl mx-auto">
+          <p className="text-lg text-gialoma-text-on-gray max-w-2xl mx-auto">
             Conoce a los fundadores que son apasionados por crear tecnología que te devuelve tu tiempo.
           </p>
         </div>
@@ -61,15 +61,15 @@ const TeamEs = () => {
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
-                <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
-                <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1 text-justify">{member.bio}</p>
+                <p className="text-gialoma-lightgold-accessible font-medium mb-3 text-sm md:text-base">{member.position}</p>
+                <p className="text-gialoma-darkgray-accessible mb-6 text-sm md:text-base flex-1 text-justify">{member.bio}</p>
                 <div className="flex space-x-4 mt-auto">
                   {member.linkedin && (
                     <a 
                       href={member.linkedin} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                      className="text-gialoma-gold-accessible hover:text-gialoma-darkgold transition-colors"
                     >
                       <Linkedin size={18} />
                     </a>
@@ -79,7 +79,7 @@ const TeamEs = () => {
                       href={member.instagram} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                      className="text-gialoma-gold-accessible hover:text-gialoma-darkgold transition-colors"
                     >
                       <Instagram size={18} />
                     </a>
@@ -87,7 +87,7 @@ const TeamEs = () => {
                   {member.email && (
                     <a 
                       href={`mailto:${member.email}`}
-                      className="text-gialoma-gold hover:text-gialoma-darkgold transition-colors"
+                      className="text-gialoma-gold-accessible hover:text-gialoma-darkgold transition-colors"
                     >
                       <Mail size={18} />
                     </a>
