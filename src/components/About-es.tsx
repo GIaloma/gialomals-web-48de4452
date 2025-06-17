@@ -11,7 +11,7 @@ const AboutEs = () => {
               Nuestro Nombre, Nuestra Visión
             </h2>
             <div className="w-24 h-1 bg-gialoma-gold mx-auto mb-8"></div>
-            <p className="text-xl text-gialoma-darkgray max-w-3xl mx-auto">
+            <p className="text-xl text-gialoma-text-on-gray max-w-3xl mx-auto">
               Descubre la historia detrás de Gialoma y cómo nuestra misión se refleja en cada aspecto de lo que hacemos
             </p>
           </div>
@@ -24,8 +24,8 @@ const AboutEs = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">Los Nombres</span>
                 </div>
-                <p className="text-gialoma-darkgray text-lg">
-                  <span className="text-gialoma-black font-bold">Gianro</span> + <span className="text-gialoma-darkgray font-bold">Paloma</span> = <span className="text-gialoma-gold font-bold text-xl">GIALOMA</span>
+                <p className="text-gialoma-darkgray-accessible text-lg">
+                  <span className="text-gialoma-black font-bold">Gianro</span> + <span className="text-gialoma-darkgray-accessible font-bold">Paloma</span> = <span className="text-gialoma-gold-accessible font-bold text-xl">GIALOMA</span>
                 </p>
               </div>
               
@@ -34,8 +34,8 @@ const AboutEs = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">La Base</span>
                 </div>
-                <p className="text-gialoma-darkgray text-lg">
-                  "<span className="text-gialoma-gold font-bold">Loma</span>" representa <span className="text-gialoma-darkgray">estabilidad</span> y <span className="text-gialoma-darkgray">crecimiento</span>
+                <p className="text-gialoma-darkgray-accessible text-lg">
+                  "<span className="text-gialoma-gold-accessible font-bold">Loma</span>" representa <span className="text-gialoma-darkgray-accessible">estabilidad</span> y <span className="text-gialoma-darkgray-accessible">crecimiento</span>
                 </p>
               </div>
               
@@ -44,8 +44,8 @@ const AboutEs = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">La Misión</span>
                 </div>
-                <p className="text-gialoma-darkgray text-lg">
-                  <span className="text-gialoma-black">IA</span> + <span className="text-gialoma-darkgray">Diseño Humano</span> = <span className="text-gialoma-gold font-bold">Soluciones de Vida</span>
+                <p className="text-gialoma-darkgray-accessible text-lg">
+                  <span className="text-gialoma-black">IA</span> + <span className="text-gialoma-darkgray-accessible">Diseño Humano</span> = <span className="text-gialoma-gold-accessible font-bold">Soluciones de Vida</span>
                 </p>
               </div>
             </div>
@@ -55,9 +55,9 @@ const AboutEs = () => {
               <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
                 <div className="text-center text-gialoma-black">
                   <div className="text-6xl font-bold mb-4 tracking-wider">
-                    G<span className="text-gialoma-gold font-bold">IA</span>LOMA
+                    G<span className="text-gialoma-gold-accessible font-bold">IA</span>LOMA
                   </div>
-                  <div className="text-2xl text-gialoma-darkgray mb-8">
+                  <div className="text-2xl text-gialoma-darkgray-accessible mb-8">
                     Life Solutions
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-sm">
@@ -65,13 +65,13 @@ const AboutEs = () => {
                       <div className="text-gialoma-black font-semibold">Tecnología IA</div>
                     </div>
                     <div className="bg-gray-50 rounded p-4 border border-gray-200">
-                      <div className="text-gialoma-darkgray font-semibold">Enfoque Humano</div>
+                      <div className="text-gialoma-darkgray-accessible font-semibold">Enfoque Humano</div>
                     </div>
                     <div className="bg-gray-50 rounded p-4 border border-gray-200">
-                      <div className="text-gialoma-darkgray font-semibold">Automatización</div>
+                      <div className="text-gialoma-darkgray-accessible font-semibold">Automatización</div>
                     </div>
                     <div className="bg-gradient-to-br from-gialoma-gold/10 to-gialoma-gold/20 rounded p-4 border border-gialoma-gold">
-                      <div className="text-gialoma-gold font-semibold">Libertad</div>
+                      <div className="text-gialoma-gold-accessible font-semibold">Libertad</div>
                     </div>
                   </div>
                 </div>
@@ -93,8 +93,8 @@ const AboutEs = () => {
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-gialoma-black mb-4">Nuestra Filosofía</h3>
-              <p className="text-xl text-gialoma-darkgray leading-relaxed">
-                Gialoma Life Solutions cree que cuando las personas recuperan su tiempo, suceden cosas increíbles: sus negocios no solo crecen, <strong className="text-gialoma-gold">explotan</strong>. No somos solo tecnología, somos el <strong className="text-gialoma-gold">catalizador</strong> que convierte el tiempo perdido en <strong className="text-gialoma-gold">ingresos multiplicados</strong> y <strong className="text-gialoma-gold">vidas plenas</strong>.
+              <p className="text-xl text-gialoma-darkgray-accessible leading-relaxed">
+                Gialoma Life Solutions cree que cuando las personas recuperan su tiempo, suceden cosas increíbles: sus negocios no solo crecen, <strong className="text-gialoma-gold-accessible">explotan</strong>. No somos solo tecnología, somos el <strong className="text-gialoma-gold-accessible">catalizador</strong> que convierte el tiempo perdido en <strong className="text-gialoma-gold-accessible">ingresos multiplicados</strong> y <strong className="text-gialoma-gold-accessible">vidas plenas</strong>.
               </p>
               <div className="mt-6 flex justify-center">
                 <div className="flex items-center space-x-2 text-gialoma-gold">
