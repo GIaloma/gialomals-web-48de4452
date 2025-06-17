@@ -19,4 +19,18 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Enable source maps for production debugging
+    sourcemap: true,
+    // Optimize build output
+    rollupOptions: {
+      output: {
+        // Split vendor chunks for better caching
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+        },
+      },
+    },
+  },
 }));
