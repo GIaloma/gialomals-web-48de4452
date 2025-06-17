@@ -72,6 +72,10 @@ const Navbar = () => {
           <button 
             className="md:hidden text-gialoma-gold hover:text-gialoma-darkgold transition-colors" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            type="button"
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -80,7 +84,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white absolute top-full left-0 right-0 shadow-md">
+        <div 
+          className="md:hidden bg-white absolute top-full left-0 right-0 shadow-md"
+          id="mobile-navigation"
+          role="navigation"
+          aria-label="Mobile navigation menu"
+        >
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
               href="#about" 
