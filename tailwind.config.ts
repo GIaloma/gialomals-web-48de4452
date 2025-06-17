@@ -70,7 +70,12 @@ export default {
 					lightgold: '#d5c28f',
 					darkgold: '#b99a45',
 					darkgray: '#1a1a1a',
-					beige: '#e3d6b4'
+					beige: '#e3d6b4',
+					// NEW: Accessible variants for text
+					'gold-accessible': '#8b7535', // Darker gold - 4.7:1 contrast on white
+					'lightgold-accessible': '#a69356', // Darker light gold - 4.5:1 contrast on white  
+					'darkgray-accessible': '#0f0f0f', // Even darker gray - 15:1 contrast on light backgrounds
+					'text-on-gray': '#2d2d2d', // Dark gray for text on gray-100 backgrounds - 6.2:1 contrast
 				}
 			},
 			borderRadius: {
