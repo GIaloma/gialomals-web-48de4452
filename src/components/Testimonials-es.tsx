@@ -216,19 +216,19 @@ const TestimonialsEs = () => {
     <section id="testimonios" className="section-padding bg-gialoma-beige overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-black">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gialoma-darkgray-accessible">
             Profesionales de Todo Tipo Confían en Nosotros
           </h2>
-          <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gialoma-text-on-gray max-w-3xl mx-auto mb-8">
             Más de 300 profesionales y pequeños negocios han transformado su gestión con nuestras soluciones. 
             Desde consultas médicas hasta hoteles rurales, descubre cómo hemos simplificado procesos manteniendo la máxima seguridad.
           </p>
-          <div className="flex justify-center items-center gap-2 text-gialoma-gold">
+          <div className="flex justify-center items-center gap-2 text-gialoma-gold-accessible">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-6 h-6 fill-current" />
             ))}
-            <span className="text-lg font-semibold text-gialoma-black ml-2">4.9/5</span>
-            <span className="text-gialoma-darkgray text-sm">(300+ opiniones)</span>
+            <span className="text-lg font-semibold text-gialoma-darkgray-accessible ml-2">4.9/5</span>
+            <span className="text-gialoma-text-on-gray text-sm">(300+ opiniones)</span>
           </div>
         </div>
 
@@ -246,11 +246,11 @@ const TestimonialsEs = () => {
                     <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <div className="text-2xl">"</div>
+                <div className="text-2xl">\"</div>
               </div>
 
               {/* Quote - justified text, flexible growth */}
-              <p className="text-gialoma-darkgray mb-6 leading-relaxed text-justify flex-grow">
+              <p className="text-gialoma-darkgray-accessible mb-6 leading-relaxed text-justify flex-grow">
                 {testimonial.quote}
               </p>
 
@@ -261,14 +261,14 @@ const TestimonialsEs = () => {
                   <div className={getCategoryColor(testimonial.category)}>
                     {testimonial.icon}
                   </div>
-                  <span className="text-sm font-semibold text-gialoma-black">
+                  <span className="text-sm font-semibold text-gialoma-darkgray-accessible">
                     {testimonial.highlight}
                   </span>
                 </div>
 
                 {/* Author */}
                 <div className="border-t pt-4">
-                  <p className="font-semibold text-gialoma-black">{testimonial.author}</p>
+                  <p className="font-semibold text-gialoma-darkgray-accessible">{testimonial.author}</p>
                   <p className="text-sm text-gray-500">{testimonial.position}</p>
                 </div>
               </div>
@@ -300,45 +300,45 @@ const TestimonialsEs = () => {
         {/* Business Categories */}
         {isExpanded && (
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-8 shadow-lg mb-12 border border-gialoma-gold/20">
-            <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
+            <h3 className="text-xl font-bold text-center mb-6 text-gialoma-darkgray-accessible">
               Sectores que Hemos Transformado
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Shield className="w-6 h-6 text-gialoma-gold" />
+                  <Shield className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Salud</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Salud</span>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Star className="w-6 h-6 text-gialoma-gold" />
+                  <Star className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Belleza</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Belleza</span>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <MapPin className="w-6 h-6 text-gialoma-gold" />
+                  <MapPin className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Hostelería</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Hostelería</span>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <CheckCircle className="w-6 h-6 text-gialoma-gold" />
+                  <CheckCircle className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Legal</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Legal</span>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Users className="w-6 h-6 text-gialoma-gold" />
+                  <Users className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Restauración</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Restauración</span>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Clock className="w-6 h-6 text-gialoma-gold" />
+                  <Clock className="w-6 h-6 text-gialoma-gold-accessible" />
                 </div>
-                <span className="text-sm font-medium text-gialoma-black">Servicios</span>
+                <span className="text-sm font-medium text-gialoma-darkgray-accessible">Servicios</span>
               </div>
             </div>
           </div>
@@ -346,30 +346,30 @@ const TestimonialsEs = () => {
 
         {/* Trust Indicators */}
         <div className="bg-white/20 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gialoma-gold/20">
-          <h3 className="text-xl font-bold text-center mb-6 text-gialoma-black">
+          <h3 className="text-xl font-bold text-center mb-6 text-gialoma-darkgray-accessible">
             Garantías para Todos los Sectores
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-gialoma-gold" />
+                <Shield className="w-6 h-6 text-gialoma-gold-accessible" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">RGPD Compliant</h4>
-              <p className="text-sm text-gialoma-darkgray">Cumplimiento estricto de normativas de protección de datos</p>
+              <h4 className="font-semibold text-gialoma-darkgray-accessible mb-2">RGPD Compliant</h4>
+              <p className="text-sm text-gialoma-text-on-gray">Cumplimiento estricto de normativas de protección de datos</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-gialoma-gold" />
+                <Clock className="w-6 h-6 text-gialoma-gold-accessible" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">Revocación &lt; 48h</h4>
-              <p className="text-sm text-gialoma-darkgray">Control total sobre accesos con revocación inmediata</p>
+              <h4 className="font-semibold text-gialoma-darkgray-accessible mb-2">Revocación &lt; 48h</h4>
+              <p className="text-sm text-gialoma-text-on-gray">Control total sobre accesos con revocación inmediata</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-gialoma-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <CheckCircle className="w-6 h-6 text-gialoma-gold" />
+                <CheckCircle className="w-6 h-6 text-gialoma-gold-accessible" />
               </div>
-              <h4 className="font-semibold text-gialoma-black mb-2">Sin Almacenamiento</h4>
-              <p className="text-sm text-gialoma-darkgray">Procesamiento en tiempo real sin guardar datos sensibles</p>
+              <h4 className="font-semibold text-gialoma-darkgray-accessible mb-2">Sin Almacenamiento</h4>
+              <p className="text-sm text-gialoma-text-on-gray">Procesamiento en tiempo real sin guardar datos sensibles</p>
             </div>
           </div>
         </div>
