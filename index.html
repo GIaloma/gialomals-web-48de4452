@@ -70,15 +70,28 @@
     <link rel="preload" href="/lovable-uploads/6471ad21-2a7e-45d8-8bf0-2585088dfe20.png" as="image" type="image/png" />
     <link rel="preload" href="/lovable-uploads/3eb6ac48-0d9c-4ff4-91aa-6cc968f1249a.png" as="image" type="image/png" />
 
-    <!-- Social Media Meta Tags -->
-    <meta property="og:title" content="Gialoma Life Solutions - Technology that frees up your time" />
-    <meta property="og:description" content="Innovative technology solutions that streamline operations and free up your valuable time." />
+    <!-- FIXED: Social Media Meta Tags - Now pointing to Gialoma branding -->
+    <meta property="og:title" content="Gialoma Life Solutions - Technology that transforms lives" />
+    <meta property="og:description" content="Automatización inteligente para profesionales sanitarios. Unifica tu agenda, simplifica tu práctica y recupera tu tiempo con tecnología avanzada." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://gialoma.com/" />
+    <meta property="og:image" content="https://gialoma.com/gialoma-social-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Gialoma Life Solutions" />
+    <meta property="og:locale" content="es_ES" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gialomalife" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="Gialoma Life Solutions - Technology that transforms lives" />
+    <meta name="twitter:description" content="Automatización inteligente para profesionales sanitarios. Unifica tu agenda, simplifica tu práctica y recupera tu tiempo." />
+    <meta name="twitter:image" content="https://gialoma.com/gialoma-social-preview.png" />
+    <meta name="twitter:creator" content="@gialomalife" />
+
+    <!-- Additional Social Media Meta Tags -->
+    <meta property="article:author" content="Gialoma Life Solutions" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://gialoma.com/" />
 
     <!-- Dynamic Language Detection Script -->
     <script>
@@ -96,13 +109,24 @@
         const detectedLang = getLanguageFromPath();
         document.documentElement.lang = detectedLang;
         
-        // Update document title based on language
+        // Update document title and meta tags based on language
         if (detectedLang === 'es') {
           document.title = 'Gialoma Life Solutions - Tecnología que libera tu tiempo';
           // Update description meta tag
           const metaDescription = document.querySelector('meta[name="description"]');
           if (metaDescription) {
             metaDescription.setAttribute('content', 'Gialoma Life Solutions ofrece soluciones tecnológicas innovadoras que optimizan operaciones y liberan tu valioso tiempo.');
+          }
+          // Update og:locale for Spanish
+          const ogLocale = document.querySelector('meta[property="og:locale"]');
+          if (ogLocale) {
+            ogLocale.setAttribute('content', 'es_ES');
+          }
+        } else {
+          // Update og:locale for English
+          const ogLocale = document.querySelector('meta[property="og:locale"]');
+          if (ogLocale) {
+            ogLocale.setAttribute('content', 'en_US');
           }
         }
       })();
