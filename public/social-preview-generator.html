@@ -3,292 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gialoma Social Preview - Screenshot Me!</title>
+    <title>Gialoma Social Preview Generator</title>
     <style>
         body {
             margin: 0;
             padding: 20px;
+            font-family: 'Inter', Arial, sans-serif;
             background: #f0f0f0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .preview-container {
             width: 1200px;
             height: 630px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             overflow: hidden;
-            border: 2px solid #dee2e6;
+            margin: 0 auto;
             border-radius: 8px;
-            margin: 20px auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
-        .background-pattern {
+        .pattern1 {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(199, 174, 106, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(199, 174, 106, 0.15) 0%, transparent 50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(199, 174, 106, 0.1) 0%, transparent 50%);
         }
         
-        .decorative-circle {
+        .pattern2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(199, 174, 106, 0.1) 0%, transparent 50%);
+        }
+        
+        .circle1 {
             position: absolute;
             top: 40px;
-            right: 80px;
+            right: 140px;
             width: 120px;
             height: 120px;
-            background: radial-gradient(circle, rgba(199, 174, 106, 0.2) 0%, rgba(199, 174, 106, 0.05) 70%, transparent 100%);
             border-radius: 50%;
+            background: rgba(199, 174, 106, 0.15);
         }
         
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            padding: 80px;
-            gap: 60px;
+        .circle2 {
+            position: absolute;
+            top: 60px;
+            right: 160px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(199, 174, 106, 0.1);
         }
         
-        .left-content {
-            flex: 1;
-            max-width: 650px;
+        .circle3 {
+            position: absolute;
+            bottom: 80px;
+            left: 110px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(199, 174, 106, 0.08);
         }
         
         .logo-section {
+            position: absolute;
+            top: 60px;
+            left: 80px;
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 40px;
         }
         
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 20px;
+        .logo-placeholder {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 32px rgba(199, 174, 106, 0.4);
-            border: 2px solid rgba(199, 174, 106, 0.2);
-            overflow: hidden;
+            filter: drop-shadow(0 8px 32px rgba(199, 174, 106, 0.3));
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
         }
         
-        .logo img {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            border-radius: 14px;
-        }
-        
-        .company-name {
-            font-size: 28px;
+        .company-info h1 {
+            margin: 0;
+            font-size: 26px;
             font-weight: 600;
             color: #1a1a1a;
-            letter-spacing: -0.5px;
         }
         
-        .main-title {
+        .company-info p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 400;
+            color: #6c757d;
+        }
+        
+        .main-headline {
+            position: absolute;
+            top: 150px;
+            left: 80px;
+        }
+        
+        .main-headline h2 {
+            margin: 0;
             font-size: 52px;
             font-weight: 700;
-            color: #1a1a1a;
             line-height: 1.1;
-            margin: 0 0 24px 0;
-            letter-spacing: -1px;
         }
         
-        .highlight {
+        .line1 {
+            color: #1a1a1a;
+        }
+        
+        .line2 {
             color: #c7ae6a;
-            background: linear-gradient(135deg, #c7ae6a, #d5c28f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .subtitle {
-            font-size: 26px;
-            color: #495057;
-            line-height: 1.4;
-            margin: 0 0 32px 0;
+            position: absolute;
+            top: 300px;
+            left: 80px;
+            font-size: 24px;
             font-weight: 400;
-        }
-        
-        .website-badge {
-            display: inline-flex;
-            align-items: center;
-            font-size: 22px;
-            color: #c7ae6a;
-            font-weight: 600;
-            background: rgba(199, 174, 106, 0.12);
-            padding: 16px 32px;
-            border-radius: 50px;
-            border: 2px solid rgba(199, 174, 106, 0.25);
-            box-shadow: 0 4px 16px rgba(199, 174, 106, 0.2);
-        }
-        
-        .right-content {
-            flex: 0 0 320px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 28px 20px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-            border: 1px solid rgba(199, 174, 106, 0.15);
-            transition: transform 0.2s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-2px);
-        }
-        
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-            display: block;
-            line-height: 1;
-        }
-        
-        .feature-text {
-            font-size: 15px;
-            font-weight: 600;
             color: #495057;
-            margin: 0;
             line-height: 1.3;
         }
         
-        .instructions {
+        .url-section {
+            position: absolute;
+            bottom: 180px;
+            left: 80px;
+            display: flex;
+            align-items: center;
+            background: rgba(199, 174, 106, 0.1);
+            border: 2px solid rgba(199, 174, 106, 0.2);
+            border-radius: 25px;
+            padding: 12px 20px;
+            gap: 15px;
+        }
+        
+        .url-logo {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .url-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #c7ae6a;
+        }
+        
+        .service-cards {
+            position: absolute;
+            top: 160px;
+            right: 120px;
+            display: grid;
+            grid-template-columns: 180px 180px;
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
-            margin: 20px 0;
+            height: 110px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 1px solid rgba(199, 174, 106, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .service-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .service-card .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            line-height: 1.2;
+        }
+        
+        .accent-line {
+            position: absolute;
+            bottom: 130px;
+            left: 80px;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        
+        .instructions {
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
             background: white;
             border-radius: 8px;
-            border: 2px dashed #c7ae6a;
-            max-width: 1200px;
-            margin: 20px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .instructions h3 {
-            color: #c7ae6a;
-            margin: 0 0 10px 0;
-        }
-        
-        .instructions p {
-            color: #666;
-            margin: 5px 0;
-        }
-
-        .logo-update-notice {
-            background: #d4edda;
-            border: 2px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 1200px;
-            text-align: center;
-        }
-
-        .logo-update-notice h3 {
-            color: #155724;
-            margin: 0 0 10px 0;
-        }
-
-        .logo-update-notice p {
-            color: #155724;
-            margin: 5px 0;
+        .logo-replace {
+            border: 3px dashed #c7ae6a;
+            background: rgba(199, 174, 106, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="logo-update-notice">
-        <h3>✅ Logo Updated!</h3>
-        <p><strong>Now using your new Gialoma logo:</strong> 66798576-8cf5-4019-a3bd-9f7a047bb1b3.png</p>
-        <p>The social preview now displays your actual logo instead of the generic "G"</p>
-    </div>
-
     <div class="instructions">
-        <h3>📸 Instructions: Take a Screenshot</h3>
-        <p><strong>1.</strong> Use your browser's screenshot tool or screenshot software</p>
-        <p><strong>2.</strong> Capture ONLY the gray bordered rectangle below (1200x630px)</p>
-        <p><strong>3.</strong> Save as: <code>gialoma-social-preview.png</code></p>
-        <p><strong>4.</strong> Upload to your <code>/public/</code> folder in GitHub (replace the old one)</p>
+        <h2>📝 Instructions to Replace Logo</h2>
+        <ol>
+            <li><strong>Take a screenshot</strong> of the preview below at exactly 1200x630 pixels</li>
+            <li><strong>Open in image editor</strong> (Photoshop, GIMP, Canva, etc.)</li>
+            <li><strong>Replace the placeholder logos</strong> (dashed border boxes) with your actual Gialoma logo</li>
+            <li><strong>Maintain the size and position</strong> - main logo should be ~70x70px, URL logo ~20x20px</li>
+            <li><strong>Save as PNG</strong> and name it <code>gialoma-social-preview.png</code></li>
+            <li><strong>Upload to your public folder</strong> and update your meta tags to use the PNG version</li>
+        </ol>
+        <p><strong>Tip:</strong> Use browser dev tools to capture the exact dimensions, or use this HTML file in a screenshot tool.</p>
     </div>
 
     <div class="preview-container">
-        <div class="background-pattern"></div>
-        <div class="decorative-circle"></div>
+        <div class="pattern1"></div>
+        <div class="pattern2"></div>
         
-        <div class="content-wrapper">
-            <div class="left-content">
-                <div class="logo-section">
-                    <div class="logo">
-                        <img src="/lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" 
-                             alt="Gialoma Logo" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%); align-items: center; justify-content: center; color: white; font-size: 36px; font-weight: bold;">G</div>
-                    </div>
-                    <div class="company-name">Gialoma Life Solutions</div>
-                </div>
-                
-                <h1 class="main-title">
-                    Technology that<br>
-                    <span class="highlight">transforms lives</span>
-                </h1>
-                
-                <p class="subtitle">
-                    Automatización inteligente para<br>
-                    profesionales sanitarios
-                </p>
-                
-                <div class="website-badge">
-                    🌐 gialoma.com
-                </div>
-            </div>
-            
-            <div class="right-content">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">⚡</span>
-                        <p class="feature-text">Automatización<br>Inteligente</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">📅</span>
-                        <p class="feature-text">Gestión de<br>Agendas</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🏥</span>
-                        <p class="feature-text">Especializado<br>en Salud</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">⏰</span>
-                        <p class="feature-text">Ahorro de<br>Tiempo</p>
-                    </div>
-                </div>
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        
+        <div class="logo-section">
+            <div class="logo-placeholder logo-replace">LOGO</div>
+            <div class="company-info">
+                <h1>Gialoma</h1>
+                <p>Life Solutions</p>
             </div>
         </div>
+        
+        <div class="main-headline">
+            <h2 class="line1">Tecnología que</h2>
+            <h2 class="line2">libera tu tiempo</h2>
+        </div>
+        
+        <div class="subtitle">
+            Automatización inteligente para<br>
+            transformar tu negocio
+        </div>
+        
+        <div class="url-section">
+            <div class="url-logo logo-replace">L</div>
+            <div class="url-text">gialoma.com</div>
+        </div>
+        
+        <div class="service-cards">
+            <div class="service-card">
+                <div class="icon">🚀</div>
+                <div class="title">Automatización<br>de Negocios</div>
+            </div>
+            <div class="service-card">
+                <div class="icon">💡</div>
+                <div class="title">Transformación<br>Digital</div>
+            </div>
+            <div class="service-card">
+                <div class="icon">⚙️</div>
+                <div class="title">Optimización<br>de Procesos</div>
+            </div>
+            <div class="service-card">
+                <div class="icon">🎯</div>
+                <div class="title">Soluciones<br>Inteligentes</div>
+            </div>
+        </div>
+        
+        <div class="accent-line"></div>
     </div>
 
     <div class="instructions">
-        <h3>✨ Perfect for Social Media!</h3>
-        <p>This image will display beautifully on Facebook, LinkedIn, Twitter, WhatsApp, and Discord</p>
-        <p>Size: 1200x630px - Optimized for all social platforms</p>
-        <p><strong>🎯 Your logo is now properly integrated!</strong></p>
+        <h3>🎨 Color Values for Reference</h3>
+        <ul>
+            <li><strong>Primary Gold:</strong> #c7ae6a</li>
+            <li><strong>Light Gold:</strong> #d5c28f</li>
+            <li><strong>Background:</strong> Linear gradient from #f8f9fa to #e9ecef</li>
+            <li><strong>Text Dark:</strong> #1a1a1a</li>
+            <li><strong>Text Medium:</strong> #495057</li>
+            <li><strong>Text Light:</strong> #6c757d</li>
+        </ul>
     </div>
 </body>
 </html>
