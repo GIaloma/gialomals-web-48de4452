@@ -69,16 +69,21 @@
         .logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
+            background: white;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             box-shadow: 0 8px 32px rgba(199, 174, 106, 0.4);
+            border: 2px solid rgba(199, 174, 106, 0.2);
+            overflow: hidden;
+        }
+        
+        .logo img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border-radius: 14px;
         }
         
         .company-name {
@@ -188,15 +193,41 @@
             color: #666;
             margin: 5px 0;
         }
+
+        .logo-update-notice {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .logo-update-notice h3 {
+            color: #155724;
+            margin: 0 0 10px 0;
+        }
+
+        .logo-update-notice p {
+            color: #155724;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
+    <div class="logo-update-notice">
+        <h3>✅ Logo Updated!</h3>
+        <p><strong>Now using your new Gialoma logo:</strong> 66798576-8cf5-4019-a3bd-9f7a047bb1b3.png</p>
+        <p>The social preview now displays your actual logo instead of the generic "G"</p>
+    </div>
+
     <div class="instructions">
         <h3>📸 Instructions: Take a Screenshot</h3>
         <p><strong>1.</strong> Use your browser's screenshot tool or screenshot software</p>
         <p><strong>2.</strong> Capture ONLY the gray bordered rectangle below (1200x630px)</p>
         <p><strong>3.</strong> Save as: <code>gialoma-social-preview.png</code></p>
-        <p><strong>4.</strong> Upload to your <code>/public/</code> folder in GitHub</p>
+        <p><strong>4.</strong> Upload to your <code>/public/</code> folder in GitHub (replace the old one)</p>
     </div>
 
     <div class="preview-container">
@@ -206,7 +237,12 @@
         <div class="content-wrapper">
             <div class="left-content">
                 <div class="logo-section">
-                    <div class="logo">G</div>
+                    <div class="logo">
+                        <img src="/lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" 
+                             alt="Gialoma Logo" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%); align-items: center; justify-content: center; color: white; font-size: 36px; font-weight: bold;">G</div>
+                    </div>
                     <div class="company-name">Gialoma Life Solutions</div>
                 </div>
                 
@@ -252,6 +288,7 @@
         <h3>✨ Perfect for Social Media!</h3>
         <p>This image will display beautifully on Facebook, LinkedIn, Twitter, WhatsApp, and Discord</p>
         <p>Size: 1200x630px - Optimized for all social platforms</p>
+        <p><strong>🎯 Your logo is now properly integrated!</strong></p>
     </div>
 </body>
 </html>
