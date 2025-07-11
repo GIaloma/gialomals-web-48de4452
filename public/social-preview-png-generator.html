@@ -52,6 +52,13 @@
         <h1>Gialoma Social Preview PNG Generator</h1>
         
         <div class="instructions">
+            <h3>✅ Updated with improvements:</h3>
+            <ul>
+                <li><strong>Larger title:</strong> "Gialoma Life Solutions" now fills more space at the top</li>
+                <li><strong>Square cards:</strong> Service cards are now more square-shaped (150x130)</li>
+                <li><strong>Logo effects:</strong> Rounded corners with shadow effects</li>
+                <li><strong>Better shadows:</strong> Enhanced drop shadows on all cards</li>
+            </ul>
             <h3>Instructions to Generate PNG:</h3>
             <ol>
                 <li>Click the "Download as PNG" button below</li>
@@ -85,6 +92,11 @@
                   <stop offset="0%" style="stop-color:#c7ae6a;stop-opacity:0.1" />
                   <stop offset="100%" style="stop-color:#c7ae6a;stop-opacity:0" />
                 </radialGradient>
+                
+                <!-- Logo container with rounded corners and shadow -->
+                <filter id="logoShadow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.15)"/>
+                </filter>
               </defs>
               
               <!-- Background with gradient -->
@@ -99,53 +111,62 @@
               <circle cx="1060" cy="100" r="40" fill="#c7ae6a" opacity="0.1"/>
               <circle cx="150" cy="550" r="40" fill="#c7ae6a" opacity="0.08"/>
               
-              <!-- Logo using the specific 66798576-8cf5-4019-a3bd-9f7a047bb1b3.png -->
-              <image x="80" y="60" width="80" height="80" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" />
+              <!-- Logo container with rounded corners and shadow effect -->
+              <rect x="80" y="60" width="80" height="80" rx="16" fill="white" filter="url(#logoShadow)" stroke="rgba(199, 174, 106, 0.2)" stroke-width="1"/>
               
-              <!-- Company name -->
-              <text x="170" y="85" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" fill="#1a1a1a">Gialoma</text>
-              <text x="170" y="110" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#6c757d">Life Solutions</text>
+              <!-- Logo using the specific 66798576-8cf5-4019-a3bd-9f7a047bb1b3.png -->
+              <clipPath id="logoClip">
+                <rect x="85" y="65" width="70" height="70" rx="12"/>
+              </clipPath>
+              <image x="85" y="65" width="70" height="70" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" clip-path="url(#logoClip)" />
+              
+              <!-- Company name - LARGER SIZE -->
+              <text x="180" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1a1a1a">Gialoma Life Solutions</text>
               
               <!-- Main headline (ORIGINAL from Foto2) -->
-              <text x="80" y="210" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#1a1a1a">Tecnología que</text>
-              <text x="80" y="270" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#c7ae6a">libera tu tiempo</text>
+              <text x="80" y="210" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#1a1a1a">Technology that</text>
+              <text x="80" y="270" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#c7ae6a">transforms lives</text>
               
               <!-- Subtitle (ORIGINAL from Foto2) -->
               <text x="80" y="320" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">Automatización inteligente para</text>
-              <text x="80" y="350" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">transformar tu negocio</text>
+              <text x="80" y="350" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">profesionales sanitarios</text>
               
-              <!-- Website URL with logo -->
-              <rect x="80" y="400" width="280" height="50" rx="25" fill="rgba(199, 174, 106, 0.1)" stroke="rgba(199, 174, 106, 0.2)" stroke-width="2"/>
+              <!-- Website URL with logo and rounded corners -->
+              <rect x="80" y="400" width="280" height="50" rx="25" fill="rgba(255, 255, 255, 0.9)" stroke="rgba(199, 174, 106, 0.3)" stroke-width="2" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.1))"/>
               
-              <!-- Small logo before URL -->
-              <image x="95" y="415" width="20" height="20" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" />
+              <!-- Small logo before URL with rounded corners -->
+              <rect x="95" y="415" width="20" height="20" rx="4" fill="white"/>
+              <clipPath id="smallLogoClip">
+                <rect x="97" y="417" width="16" height="16" rx="3"/>
+              </clipPath>
+              <image x="97" y="417" width="16" height="16" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" clip-path="url(#smallLogoClip)" />
               
               <text x="220" y="430" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#c7ae6a" text-anchor="middle">gialoma.com</text>
               
-              <!-- Service cards (from FOTO1 content) -->
+              <!-- Service cards - MORE SQUARE (150x130) with rounded corners and shadows -->
               <!-- Card 1: Top Left - Automatización Inteligente -->
-              <rect x="700" y="160" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-              <text x="790" y="200" font-family="Arial" font-size="36" text-anchor="middle">⚡</text>
-              <text x="790" y="225" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Automatización</text>
-              <text x="790" y="245" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Inteligente</text>
+              <rect x="720" y="160" width="150" height="130" rx="20" fill="white" filter="drop-shadow(0 6px 20px rgba(0,0,0,0.12))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+              <text x="795" y="200" font-family="Arial" font-size="32" text-anchor="middle">⚡</text>
+              <text x="795" y="225" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Automatización</text>
+              <text x="795" y="245" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Inteligente</text>
               
               <!-- Card 2: Top Right - Gestión de Agendas -->
-              <rect x="900" y="160" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-              <text x="990" y="200" font-family="Arial" font-size="36" text-anchor="middle">📅</text>
-              <text x="990" y="225" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Gestión de</text>
-              <text x="990" y="245" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Agendas</text>
+              <rect x="890" y="160" width="150" height="130" rx="20" fill="white" filter="drop-shadow(0 6px 20px rgba(0,0,0,0.12))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+              <text x="965" y="200" font-family="Arial" font-size="32" text-anchor="middle">📅</text>
+              <text x="965" y="225" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Gestión de</text>
+              <text x="965" y="245" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Agendas</text>
               
               <!-- Card 3: Bottom Left - Especializado en Salud -->
-              <rect x="700" y="290" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-              <text x="790" y="330" font-family="Arial" font-size="36" text-anchor="middle">🏥</text>
-              <text x="790" y="355" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Especializado</text>
-              <text x="790" y="375" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">en Salud</text>
+              <rect x="720" y="310" width="150" height="130" rx="20" fill="white" filter="drop-shadow(0 6px 20px rgba(0,0,0,0.12))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+              <text x="795" y="350" font-family="Arial" font-size="32" text-anchor="middle">🏥</text>
+              <text x="795" y="375" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Especializado</text>
+              <text x="795" y="395" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">en Salud</text>
               
               <!-- Card 4: Bottom Right - Ahorro de Tiempo -->
-              <rect x="900" y="290" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-              <text x="990" y="330" font-family="Arial" font-size="36" text-anchor="middle">⏰</text>
-              <text x="990" y="355" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Ahorro de</text>
-              <text x="990" y="375" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Tiempo</text>
+              <rect x="890" y="310" width="150" height="130" rx="20" fill="white" filter="drop-shadow(0 6px 20px rgba(0,0,0,0.12))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+              <text x="965" y="350" font-family="Arial" font-size="32" text-anchor="middle">⏰</text>
+              <text x="965" y="375" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Ahorro de</text>
+              <text x="965" y="395" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Tiempo</text>
               
               <!-- Bottom accent line -->
               <rect x="80" y="500" width="120" height="4" rx="2" fill="url(#logoGradient)" opacity="0.6"/>
@@ -175,7 +196,7 @@
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = 'gialoma-social-preview.png';
+                    a.download = 'gialoma-social-preview-improved.png';
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
