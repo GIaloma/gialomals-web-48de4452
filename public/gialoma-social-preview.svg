@@ -34,20 +34,9 @@
   <circle cx="1060" cy="100" r="40" fill="#c7ae6a" opacity="0.1"/>
   <circle cx="150" cy="550" r="40" fill="#c7ae6a" opacity="0.08"/>
   
-  <!-- Simplified Gialoma logo (top left) - inspired by the original design -->
-  <g transform="translate(80, 60)">
-    <!-- Background circle -->
-    <circle cx="35" cy="35" r="35" fill="url(#logoGradient)" filter="drop-shadow(0 8px 32px rgba(199, 174, 106, 0.3))"/>
-    
-    <!-- Simplified geometric pattern inspired by original logo -->
-    <g transform="translate(35, 35)">
-      <!-- Central geometric shape -->
-      <path d="M -15,-15 L 15,-15 L 15,0 L 0,15 L -15,0 Z" fill="white" opacity="0.9"/>
-      <path d="M -10,-10 L 10,-10 L 10,-5 L 0,5 L -10,-5 Z" fill="rgba(255,255,255,0.7)"/>
-      <!-- Accent lines -->
-      <line x1="-8" y1="-8" x2="8" y2="-8" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
-      <line x1="-6" y1="-2" x2="6" y2="-2" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
-    </g>
+  <!-- Actual Gialoma logo (embedded) -->
+  <g transform="translate(80, 60) scale(0.05)">
+    <image width="1358" height="1537" xlink:href="gialoma-logo.svg" />
   </g>
   
   <!-- Company name -->
@@ -62,16 +51,12 @@
   <text x="80" y="320" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">Automatización inteligente para</text>
   <text x="80" y="350" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">transformar tu negocio</text>
   
-  <!-- Website URL with enhanced logo -->
+  <!-- Website URL with logo -->
   <rect x="80" y="400" width="280" height="50" rx="25" fill="rgba(199, 174, 106, 0.1)" stroke="rgba(199, 174, 106, 0.2)" stroke-width="2"/>
   
-  <!-- Smaller version of the logo before URL -->
-  <g transform="translate(95, 415)">
-    <circle cx="10" cy="10" r="10" fill="url(#logoGradient)"/>
-    <g transform="translate(10, 10)">
-      <path d="M -4,-4 L 4,-4 L 4,0 L 0,4 L -4,0 Z" fill="white" opacity="0.9"/>
-      <path d="M -2.5,-2.5 L 2.5,-2.5 L 2.5,-1 L 0,1.5 L -2.5,-1 Z" fill="rgba(255,255,255,0.7)"/>
-    </g>
+  <!-- Smaller version of actual logo before URL -->
+  <g transform="translate(95, 415) scale(0.01)">
+    <image width="1358" height="1537" xlink:href="gialoma-logo.svg" />
   </g>
   
   <text x="220" y="430" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#c7ae6a" text-anchor="middle">gialoma.com</text>
