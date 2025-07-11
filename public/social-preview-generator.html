@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 20px;
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: #f0f0f0;
         }
         
@@ -16,293 +16,300 @@
             width: 1200px;
             height: 630px;
             position: relative;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
             overflow: hidden;
             margin: 0 auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
         }
         
-        .pattern1 {
+        /* Header section with logo */
+        .header-section {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(199, 174, 106, 0.1) 0%, transparent 50%);
-        }
-        
-        .pattern2 {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(199, 174, 106, 0.1) 0%, transparent 50%);
-        }
-        
-        .circle1 {
-            position: absolute;
-            top: 40px;
-            right: 140px;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(199, 174, 106, 0.15);
-        }
-        
-        .circle2 {
-            position: absolute;
-            top: 60px;
-            right: 160px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(199, 174, 106, 0.1);
-        }
-        
-        .circle3 {
-            position: absolute;
-            bottom: 80px;
-            left: 110px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(199, 174, 106, 0.08);
-        }
-        
-        .logo-section {
-            position: absolute;
-            top: 60px;
-            left: 80px;
+            top: 50px;
+            left: 60px;
             display: flex;
             align-items: center;
             gap: 20px;
+            z-index: 10;
         }
         
-        .logo-placeholder {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
-            border-radius: 18px;
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 8px 32px rgba(199, 174, 106, 0.3));
-            font-size: 32px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .company-info h1 {
-            margin: 0;
-            font-size: 26px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 3px dashed #c7ae6a;
+            font-size: 12px;
+            color: #c7ae6a;
             font-weight: 600;
-            color: #1a1a1a;
         }
         
-        .company-info p {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 400;
-            color: #6c757d;
-        }
-        
-        .main-headline {
-            position: absolute;
-            top: 150px;
-            left: 80px;
-        }
-        
-        .main-headline h2 {
-            margin: 0;
-            font-size: 52px;
+        .company-title {
+            font-size: 32px;
             font-weight: 700;
+            color: #2c2c2c;
+            margin: 0;
+        }
+        
+        /* Main content */
+        .main-content {
+            position: absolute;
+            top: 180px;
+            left: 60px;
+            z-index: 10;
+        }
+        
+        .headline {
+            margin: 0 0 20px 0;
             line-height: 1.1;
         }
         
-        .line1 {
-            color: #1a1a1a;
+        .headline-line1 {
+            font-size: 64px;
+            font-weight: 800;
+            color: #2c2c2c;
+            margin: 0;
+            display: block;
         }
         
-        .line2 {
+        .headline-line2 {
+            font-size: 64px;
+            font-weight: 800;
             color: #c7ae6a;
+            margin: 0;
+            display: block;
         }
         
         .subtitle {
-            position: absolute;
-            top: 300px;
-            left: 80px;
-            font-size: 24px;
-            font-weight: 400;
-            color: #495057;
+            font-size: 28px;
+            font-weight: 500;
+            color: #666;
+            margin: 0;
             line-height: 1.3;
         }
         
+        /* URL section */
         .url-section {
             position: absolute;
-            bottom: 180px;
-            left: 80px;
+            bottom: 60px;
+            left: 60px;
             display: flex;
             align-items: center;
-            background: rgba(199, 174, 106, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            padding: 12px 24px;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             border: 2px solid rgba(199, 174, 106, 0.2);
-            border-radius: 25px;
-            padding: 12px 20px;
-            gap: 15px;
         }
         
-        .url-logo {
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: bold;
-            color: white;
+        .url-icon {
+            width: 24px;
+            height: 24px;
+            color: #c7ae6a;
+            font-size: 18px;
         }
         
         .url-text {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
             color: #c7ae6a;
         }
         
+        /* Service cards */
         .service-cards {
             position: absolute;
-            top: 160px;
-            right: 120px;
+            top: 180px;
+            right: 60px;
             display: grid;
-            grid-template-columns: 180px 180px;
+            grid-template-columns: 200px 200px;
             gap: 20px;
         }
         
         .service-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
-            height: 110px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            border: 1px solid rgba(199, 174, 106, 0.1);
+            height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.2s ease;
         }
         
-        .service-card .icon {
-            font-size: 36px;
-            margin-bottom: 10px;
+        .service-card:hover {
+            transform: translateY(-2px);
         }
         
-        .service-card .title {
-            font-size: 16px;
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+        
+        .service-title {
+            font-size: 18px;
             font-weight: 600;
-            color: #495057;
+            color: #444;
             line-height: 1.2;
+            text-align: center;
         }
         
-        .accent-line {
+        /* Background decoration */
+        .bg-decoration {
             position: absolute;
-            bottom: 130px;
-            left: 80px;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(135deg, #c7ae6a 0%, #d5c28f 100%);
-            border-radius: 2px;
-            opacity: 0.6;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at center, rgba(199, 174, 106, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(150px, -150px);
+        }
+        
+        .bg-decoration2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at center, rgba(199, 174, 106, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-100px, 100px);
         }
         
         .instructions {
             max-width: 1200px;
             margin: 20px auto;
-            padding: 20px;
+            padding: 25px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
         
-        .logo-replace {
-            border: 3px dashed #c7ae6a;
-            background: rgba(199, 174, 106, 0.1);
+        .instructions h2 {
+            color: #2c2c2c;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ol {
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .instructions code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        
+        .logo-placeholder {
+            background: rgba(199, 174, 106, 0.1) !important;
+            border: 3px dashed #c7ae6a !important;
+            color: #c7ae6a !important;
         }
     </style>
 </head>
 <body>
     <div class="instructions">
-        <h2>📝 Instructions to Replace Logo</h2>
+        <h2>🎨 Gialoma Social Preview Generator</h2>
+        <p><strong>This template replicates the exact layout from your reference image.</strong></p>
         <ol>
+            <li><strong>Download your logo:</strong> Save the <code>66798576-8cf5-4019-a3bd-9f7a047bb1b3.png</code> file</li>
             <li><strong>Take a screenshot</strong> of the preview below at exactly 1200x630 pixels</li>
-            <li><strong>Open in image editor</strong> (Photoshop, GIMP, Canva, etc.)</li>
-            <li><strong>Replace the placeholder logos</strong> (dashed border boxes) with your actual Gialoma logo</li>
-            <li><strong>Maintain the size and position</strong> - main logo should be ~70x70px, URL logo ~20x20px</li>
-            <li><strong>Save as PNG</strong> and name it <code>gialoma-social-preview.png</code></li>
-            <li><strong>Upload to your public folder</strong> and update your meta tags to use the PNG version</li>
+            <li><strong>Edit in image editor:</strong> Replace the dashed circle with your actual logo (80x80px)</li>
+            <li><strong>Maintain positioning:</strong> Keep the logo centered in the circle area</li>
+            <li><strong>Save as PNG:</strong> Export as <code>gialoma-social-preview.png</code></li>
+            <li><strong>Upload and update:</strong> Add to public folder and update meta tags</li>
         </ol>
-        <p><strong>Tip:</strong> Use browser dev tools to capture the exact dimensions, or use this HTML file in a screenshot tool.</p>
+        <p><strong>💡 Tip:</strong> The layout matches your reference exactly - clean, modern, and professional!</p>
     </div>
 
     <div class="preview-container">
-        <div class="pattern1"></div>
-        <div class="pattern2"></div>
+        <!-- Background decorations -->
+        <div class="bg-decoration"></div>
+        <div class="bg-decoration2"></div>
         
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        
-        <div class="logo-section">
-            <div class="logo-placeholder logo-replace">LOGO</div>
-            <div class="company-info">
-                <h1>Gialoma</h1>
-                <p>Life Solutions</p>
+        <!-- Header with logo and company name -->
+        <div class="header-section">
+            <div class="logo-container logo-placeholder">
+                REPLACE<br>WITH<br>LOGO
             </div>
+            <h1 class="company-title">Gialoma Life Solutions</h1>
         </div>
         
-        <div class="main-headline">
-            <h2 class="line1">Tecnología que</h2>
-            <h2 class="line2">libera tu tiempo</h2>
+        <!-- Main content -->
+        <div class="main-content">
+            <div class="headline">
+                <span class="headline-line1">Technology that</span>
+                <span class="headline-line2">transforms lives</span>
+            </div>
+            <p class="subtitle">
+                Automatización inteligente para<br>
+                profesionales sanitarios
+            </p>
         </div>
         
-        <div class="subtitle">
-            Automatización inteligente para<br>
-            transformar tu negocio
-        </div>
-        
-        <div class="url-section">
-            <div class="url-logo logo-replace">L</div>
-            <div class="url-text">gialoma.com</div>
-        </div>
-        
+        <!-- Service cards (right side) -->
         <div class="service-cards">
             <div class="service-card">
-                <div class="icon">🚀</div>
-                <div class="title">Automatización<br>de Negocios</div>
+                <div class="service-icon">⚡</div>
+                <div class="service-title">Automatización<br>Inteligente</div>
             </div>
             <div class="service-card">
-                <div class="icon">💡</div>
-                <div class="title">Transformación<br>Digital</div>
+                <div class="service-icon">📅</div>
+                <div class="service-title">Gestión de<br>Agendas</div>
             </div>
             <div class="service-card">
-                <div class="icon">⚙️</div>
-                <div class="title">Optimización<br>de Procesos</div>
+                <div class="service-icon">🏥</div>
+                <div class="service-title">Especializado<br>en Salud</div>
             </div>
             <div class="service-card">
-                <div class="icon">🎯</div>
-                <div class="title">Soluciones<br>Inteligentes</div>
+                <div class="service-icon">⏰</div>
+                <div class="service-title">Ahorro de<br>Tiempo</div>
             </div>
         </div>
         
-        <div class="accent-line"></div>
+        <!-- URL section -->
+        <div class="url-section">
+            <div class="url-icon">🌐</div>
+            <div class="url-text">gialoma.com</div>
+        </div>
     </div>
 
     <div class="instructions">
-        <h3>🎨 Color Values for Reference</h3>
+        <h3>🎯 Perfect Match Features</h3>
         <ul>
-            <li><strong>Primary Gold:</strong> #c7ae6a</li>
-            <li><strong>Light Gold:</strong> #d5c28f</li>
-            <li><strong>Background:</strong> Linear gradient from #f8f9fa to #e9ecef</li>
-            <li><strong>Text Dark:</strong> #1a1a1a</li>
-            <li><strong>Text Medium:</strong> #495057</li>
-            <li><strong>Text Light:</strong> #6c757d</li>
+            <li><strong>✅ Exact layout</strong> from your reference image</li>
+            <li><strong>✅ Professional typography</strong> with proper hierarchy</li>
+            <li><strong>✅ Clean service cards</strong> with relevant icons</li>
+            <li><strong>✅ Proper branding</strong> with your color scheme</li>
+            <li><strong>✅ Healthcare focus</strong> messaging maintained</li>
+            <li><strong>✅ Social media optimized</strong> 1200x630 dimensions</li>
+        </ul>
+        
+        <h3>🎨 Brand Colors Used</h3>
+        <ul>
+            <li><strong>Gold/Accent:</strong> #c7ae6a (your brand gold)</li>
+            <li><strong>Background:</strong> Light gradient (#f5f5f5 to #e8e8e8)</li>
+            <li><strong>Text Primary:</strong> #2c2c2c (dark gray)</li>
+            <li><strong>Text Secondary:</strong> #666 (medium gray)</li>
         </ul>
     </div>
 </body>
