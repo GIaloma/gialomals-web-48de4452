@@ -29,51 +29,59 @@
   <rect width="1200" height="630" fill="url(#pattern1)"/>
   <rect width="1200" height="630" fill="url(#pattern2)"/>
   
-  <!-- Decorative circle -->
+  <!-- Decorative circles -->
   <circle cx="1060" cy="100" r="60" fill="#c7ae6a" opacity="0.15"/>
   <circle cx="1060" cy="100" r="40" fill="#c7ae6a" opacity="0.1"/>
+  <circle cx="150" cy="550" r="40" fill="#c7ae6a" opacity="0.08"/>
   
-  <!-- Logo -->
-  <rect x="80" y="160" width="80" height="80" rx="20" fill="url(#logoGradient)" filter="drop-shadow(0 8px 32px rgba(199, 174, 106, 0.3))"/>
-  <text x="120" y="215" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">G</text>
+  <!-- Main logo (top left) -->
+  <rect x="80" y="60" width="70" height="70" rx="18" fill="url(#logoGradient)" filter="drop-shadow(0 8px 32px rgba(199, 174, 106, 0.3))"/>
+  <text x="115" y="105" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">G</text>
   
   <!-- Company name -->
-  <text x="180" y="185" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600" fill="#1a1a1a">Gialoma Life Solutions</text>
+  <text x="170" y="85" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" fill="#1a1a1a">Gialoma</text>
+  <text x="170" y="110" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400" fill="#6c757d">Life Solutions</text>
   
-  <!-- Main title -->
-  <text x="80" y="310" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#1a1a1a">Technology that</text>
-  <text x="80" y="370" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#c7ae6a">transforms lives</text>
+  <!-- Main headline (updated) -->
+  <text x="80" y="210" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#1a1a1a">Tecnología que</text>
+  <text x="80" y="270" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#c7ae6a">libera tu tiempo</text>
   
   <!-- Subtitle -->
-  <text x="80" y="420" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">Automatización inteligente para</text>
-  <text x="80" y="450" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">profesionales sanitarios</text>
+  <text x="80" y="320" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">Automatización inteligente para</text>
+  <text x="80" y="350" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="#495057">transformar tu negocio</text>
   
-  <!-- Website URL -->
-  <rect x="80" y="490" width="200" height="44" rx="22" fill="rgba(199, 174, 106, 0.1)" stroke="rgba(199, 174, 106, 0.2)" stroke-width="2"/>
-  <text x="180" y="517" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600" fill="#c7ae6a" text-anchor="middle">gialoma.com</text>
+  <!-- Website URL with small logo -->
+  <rect x="80" y="400" width="280" height="50" rx="25" fill="rgba(199, 174, 106, 0.1)" stroke="rgba(199, 174, 106, 0.2)" stroke-width="2"/>
+  <!-- Small logo before URL -->
+  <rect x="95" y="415" width="20" height="20" rx="5" fill="url(#logoGradient)"/>
+  <text x="105" y="428" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">G</text>
+  <text x="220" y="430" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#c7ae6a" text-anchor="middle">gialoma.com</text>
   
-  <!-- Feature cards -->
-  <!-- Card 1 -->
-  <rect x="750" y="180" width="140" height="100" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-  <text x="820" y="215" font-family="Arial" font-size="32" text-anchor="middle">⚡</text>
-  <text x="820" y="240" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Automatización</text>
-  <text x="820" y="258" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Inteligente</text>
+  <!-- Updated service cards (broader offerings) -->
+  <!-- Card 1: Business Automation -->
+  <rect x="700" y="160" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
+  <text x="790" y="200" font-family="Arial" font-size="36" text-anchor="middle">🚀</text>
+  <text x="790" y="225" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Automatización</text>
+  <text x="790" y="245" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">de Negocios</text>
   
-  <!-- Card 2 -->
-  <rect x="910" y="180" width="140" height="100" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-  <text x="980" y="215" font-family="Arial" font-size="32" text-anchor="middle">📅</text>
-  <text x="980" y="240" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Gestión de</text>
-  <text x="980" y="258" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Agendas</text>
+  <!-- Card 2: Digital Transformation -->
+  <rect x="900" y="160" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
+  <text x="990" y="200" font-family="Arial" font-size="36" text-anchor="middle">💡</text>
+  <text x="990" y="225" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Transformación</text>
+  <text x="990" y="245" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Digital</text>
   
-  <!-- Card 3 -->
-  <rect x="750" y="300" width="140" height="100" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-  <text x="820" y="335" font-family="Arial" font-size="32" text-anchor="middle">🏥</text>
-  <text x="820" y="360" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Especializado</text>
-  <text x="820" y="378" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">en Salud</text>
+  <!-- Card 3: Process Optimization -->
+  <rect x="700" y="290" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
+  <text x="790" y="330" font-family="Arial" font-size="36" text-anchor="middle">⚙️</text>
+  <text x="790" y="355" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Optimización</text>
+  <text x="790" y="375" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">de Procesos</text>
   
-  <!-- Card 4 -->
-  <rect x="910" y="300" width="140" height="100" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
-  <text x="980" y="335" font-family="Arial" font-size="32" text-anchor="middle">⏰</text>
-  <text x="980" y="360" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Ahorro de</text>
-  <text x="980" y="378" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#495057" text-anchor="middle">Tiempo</text>
+  <!-- Card 4: Smart Solutions -->
+  <rect x="900" y="290" width="180" height="110" rx="16" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.1))" stroke="rgba(199, 174, 106, 0.1)"/>
+  <text x="990" y="330" font-family="Arial" font-size="36" text-anchor="middle">🎯</text>
+  <text x="990" y="355" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Soluciones</text>
+  <text x="990" y="375" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#495057" text-anchor="middle">Inteligentes</text>
+  
+  <!-- Bottom accent line -->
+  <rect x="80" y="500" width="120" height="4" rx="2" fill="url(#logoGradient)" opacity="0.6"/>
 </svg>
