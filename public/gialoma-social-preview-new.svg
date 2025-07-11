@@ -1,0 +1,122 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Background with subtle gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafbfb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f2f3;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c7ae6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d5c28f;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Subtle patterns -->
+    <radialGradient id="leftPattern" cx="10%" cy="90%" r="40%">
+      <stop offset="0%" style="stop-color:#c7ae6a;stop-opacity:0.06" />
+      <stop offset="100%" style="stop-color:#c7ae6a;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="rightPattern" cx="90%" cy="10%" r="40%">
+      <stop offset="0%" style="stop-color:#c7ae6a;stop-opacity:0.06" />
+      <stop offset="100%" style="stop-color:#c7ae6a;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#leftPattern)"/>
+  <rect width="1200" height="630" fill="url(#rightPattern)"/>
+  
+  <!-- Left side content area -->
+  <g id="leftContent">
+    <!-- Company logo and name positioned like in reference -->
+    <g transform="translate(80, 80)">
+      <!-- Logo using the specific image reference -->
+      <image width="80" height="80" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" />
+      
+      <!-- Company name positioned next to logo -->
+      <text x="100" y="35" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="32" font-weight="700" fill="#1a1a1a">Gialoma</text>
+      <text x="100" y="60" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="400" fill="#6c757d">Life Solutions</text>
+    </g>
+    
+    <!-- Main headline - following the layout style -->
+    <g transform="translate(80, 200)">
+      <text x="0" y="0" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="48" font-weight="800" fill="#1a1a1a">Technology that</text>
+      <text x="0" y="60" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="48" font-weight="800" fill="url(#accentGradient)">transforms lives</text>
+    </g>
+    
+    <!-- Subtitle -->
+    <g transform="translate(80, 330)">
+      <text x="0" y="0" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="400" fill="#495057">Automatización inteligente para</text>
+      <text x="0" y="30" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="400" fill="#495057">profesionales sanitarios</text>
+    </g>
+    
+    <!-- Website URL with enhanced styling -->
+    <g transform="translate(80, 420)">
+      <!-- URL background with rounded corners -->
+      <rect x="0" y="0" width="300" height="50" rx="25" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(199, 174, 106, 0.3)" stroke-width="1.5"/>
+      
+      <!-- Small logo before URL -->
+      <image x="15" y="15" width="20" height="20" xlink:href="lovable-uploads/66798576-8cf5-4019-a3bd-9f7a047bb1b3.png" />
+      
+      <!-- Website URL -->
+      <text x="150" y="32" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" fill="#c7ae6a" text-anchor="middle">gialoma.com</text>
+    </g>
+  </g>
+  
+  <!-- Right side - Service cards in grid layout like reference -->
+  <g id="rightSideCards">
+    <!-- Card 1: Top Left -->
+    <g transform="translate(680, 160)">
+      <rect width="200" height="120" rx="20" fill="white" filter="drop-shadow(0 8px 24px rgba(0,0,0,0.08))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+      <!-- Icon -->
+      <circle cx="100" cy="40" r="24" fill="rgba(199, 174, 106, 0.1)"/>
+      <text x="100" y="48" font-family="Arial" font-size="24" text-anchor="middle">⚡</text>
+      <!-- Text -->
+      <text x="100" y="75" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Automatización</text>
+      <text x="100" y="95" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Inteligente</text>
+    </g>
+    
+    <!-- Card 2: Top Right -->
+    <g transform="translate(900, 160)">
+      <rect width="200" height="120" rx="20" fill="white" filter="drop-shadow(0 8px 24px rgba(0,0,0,0.08))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+      <!-- Icon -->
+      <circle cx="100" cy="40" r="24" fill="rgba(199, 174, 106, 0.1)"/>
+      <text x="100" y="48" font-family="Arial" font-size="24" text-anchor="middle">📅</text>
+      <!-- Text -->
+      <text x="100" y="75" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Gestión de</text>
+      <text x="100" y="95" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Agendas</text>
+    </g>
+    
+    <!-- Card 3: Bottom Left -->
+    <g transform="translate(680, 300)">
+      <rect width="200" height="120" rx="20" fill="white" filter="drop-shadow(0 8px 24px rgba(0,0,0,0.08))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+      <!-- Icon -->
+      <circle cx="100" cy="40" r="24" fill="rgba(199, 174, 106, 0.1)"/>
+      <text x="100" y="48" font-family="Arial" font-size="24" text-anchor="middle">🏥</text>
+      <!-- Text -->
+      <text x="100" y="75" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Especializado</text>
+      <text x="100" y="95" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">en Salud</text>
+    </g>
+    
+    <!-- Card 4: Bottom Right -->
+    <g transform="translate(900, 300)">
+      <rect width="200" height="120" rx="20" fill="white" filter="drop-shadow(0 8px 24px rgba(0,0,0,0.08))" stroke="rgba(199, 174, 106, 0.15)" stroke-width="1"/>
+      <!-- Icon -->
+      <circle cx="100" cy="40" r="24" fill="rgba(199, 174, 106, 0.1)"/>
+      <text x="100" y="48" font-family="Arial" font-size="24" text-anchor="middle">⏰</text>
+      <!-- Text -->
+      <text x="100" y="75" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Ahorro de</text>
+      <text x="100" y="95" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">Tiempo</text>
+    </g>
+  </g>
+  
+  <!-- Subtle decorative elements -->
+  <circle cx="120" cy="550" r="3" fill="#c7ae6a" opacity="0.3"/>
+  <circle cx="1080" cy="80" r="4" fill="#c7ae6a" opacity="0.2"/>
+  <circle cx="650" cy="500" r="2" fill="#c7ae6a" opacity="0.4"/>
+  
+  <!-- Bottom accent line -->
+  <rect x="80" y="520" width="150" height="3" rx="1.5" fill="url(#accentGradient)" opacity="0.6"/>
+</svg>
