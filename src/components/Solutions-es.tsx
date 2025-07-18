@@ -214,7 +214,8 @@ const SolutionsEs = () => {
           <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
-          <div className="relative inline-block group">
+          
+          <div className="flex flex-col items-center gap-3">
             <Button 
               className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
               onClick={handleProgramaConsulta}
@@ -223,7 +224,7 @@ const SolutionsEs = () => {
             </Button>
             <GratisBadge 
               variant="dark" 
-              className="absolute -top-3 -right-3 z-10 group-hover:scale-110"
+              className="opacity-90 hover:opacity-100"
             />
           </div>
         </div>
