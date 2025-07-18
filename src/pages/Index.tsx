@@ -11,7 +11,7 @@ import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import CookieBanner from '../components/CookieBanner';
+// REMOVED: CookieBanner - now handled globally in App.tsx
 // BookPopup temporarily removed - import BookPopup from '../components/BookPopup';
 
 const Index = () => {
@@ -45,7 +45,7 @@ const Index = () => {
       <CTA />
       <Contact />
       <Footer />
-      <CookieBanner />
+      {/* REMOVED: <CookieBanner /> - Cookie banner now handled globally in App.tsx */}
       
       {/* Book Popup temporarily removed */}
       {/* {showBookPopup && <BookPopup onClose={() => setShowBookPopup(false)} />} */}
