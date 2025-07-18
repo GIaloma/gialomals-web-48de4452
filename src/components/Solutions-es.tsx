@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Clock, Users, BarChart3, Globe, Heart, Lightbulb, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import GratisBadge from './GratisBadge';
 
 const solutions = [
   {
@@ -213,12 +214,15 @@ const SolutionsEs = () => {
           <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
-          <Button 
-            className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
-            onClick={handleProgramaConsulta}
-          >
-            Programa una Consulta
-          </Button>
+          <div className="flex flex-col items-center gap-3">
+            <Button 
+              className="bg-white text-gialoma-gold hover:bg-white/90 text-lg md:text-xl px-8 py-4"
+              onClick={handleProgramaConsulta}
+            >
+              Programa una Consulta
+            </Button>
+            <GratisBadge variant="gold" className="opacity-90 hover:opacity-100" />
+          </div>
         </div>
       </div>
 

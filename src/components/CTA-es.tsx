@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Check, ExternalLink } from 'lucide-react';
+import GratisBadge from './GratisBadge';
 
 const CTAEs = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -68,12 +69,15 @@ const CTAEs = () => {
               >
                 Pide un Presupuesto
               </Button>
-              <Button 
-                className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
-                onClick={openDigitalizationPage}
-              >
-                Analiza tu Negocio <ExternalLink className="ml-3 h-6 w-6" />
-              </Button>
+              <div className="flex flex-col items-center gap-2">
+                <Button 
+                  className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
+                  onClick={openDigitalizationPage}
+                >
+                  Analiza tu Negocio <ExternalLink className="ml-3 h-6 w-6" />
+                </Button>
+                <GratisBadge variant="white" className="opacity-90 hover:opacity-100" />
+              </div>
             </div>
           ) : (
             <div className="bg-white p-8 rounded-lg shadow-lg text-center">

@@ -1,37 +1,37 @@
 import React from 'react';
 
 interface GratisBadgeProps {
-  variant?: 'light' | 'dark';
+  variant?: 'gold' | 'white';
   className?: string;
-  position?: 'bottom' | 'side';
 }
 
 const GratisBadge: React.FC<GratisBadgeProps> = ({ 
-  variant = 'light', 
-  className = '',
-  position = 'bottom' 
+  variant = 'gold', 
+  className = ''
 }) => {
-  const baseClasses = "inline-flex items-center font-bold text-xs tracking-widest transform transition-all duration-300 hover:scale-105 select-none";
+  const baseClasses = "relative inline-flex items-center font-bold text-sm tracking-wider transform transition-all duration-300 hover:scale-105 select-none rounded-full px-3 py-1";
   
-  const variantClasses = variant === 'light' 
-    ? "bg-white/95 text-amber-700 shadow-lg border border-amber-200" 
-    : "bg-gradient-to-r from-amber-400 to-yellow-400 text-white shadow-xl border border-yellow-300";
+  const variantClasses = variant === 'gold' 
+    ? "bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 text-white shadow-lg" 
+    : "bg-white/95 text-amber-700 shadow-lg border border-amber-200";
 
-  const glowClasses = variant === 'light'
-    ? "shadow-amber-200/50 hover:shadow-amber-300/70"
-    : "shadow-yellow-400/30 hover:shadow-yellow-500/50";
+  const glowClasses = variant === 'gold'
+    ? "shadow-yellow-400/40 hover:shadow-yellow-500/60"
+    : "shadow-amber-200/50 hover:shadow-amber-300/70";
 
   return (
     <div className={`${baseClasses} ${variantClasses} ${glowClasses} ${className}`}>
-      <span className="px-2 py-1 uppercase">
-        Gratis
+      <span className="uppercase font-extrabold">
+        GRATIS
       </span>
       <svg 
-        className="w-3 h-3 ml-1 transform transition-transform group-hover:translate-x-0.5" 
-        fill="currentColor" 
+        className="w-4 h-4 ml-2 transform transition-transform hover:translate-x-1" 
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
         viewBox="0 0 24 24"
       >
-        <path d="M7.5 18L16.5 12L7.5 6v12z"/>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
       </svg>
     </div>
   );
