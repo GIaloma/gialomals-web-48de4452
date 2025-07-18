@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 interface SEOMetaTags {
@@ -109,12 +108,12 @@ export default SEOComponent;
 
 // Predefined SEO configurations for common pages
 export const commonSEOConfigs = {
-  // Spanish configurations
+  // Spanish configurations - UPDATED with new social preview image
   homeEs: {
-    title: "Gialoma Life Solutions - Automatización y Digitalización Empresarial",
-    description: "Transformamos tu negocio con soluciones de automatización y digitalización personalizadas. Aumenta la eficiencia y reduce costos con IA y tecnología avanzada.",
+    title: "Gialoma Life Solutions - Tecnología que libera tu tiempo",
+    description: "Automatización inteligente para transformar tu negocio! Soluciones tecnológicas que optimizan operaciones y liberan tu valioso tiempo.",
     keywords: "automatización empresarial, digitalización, inteligencia artificial, IA para empresas, transformación digital, soluciones tecnológicas, eficiencia empresarial",
-    ogImage: "/lovable-uploads/gialoma-og-image-es.png",
+    ogImage: "/lovable-uploads/f3608495-1d53-4261-b98b-1d0f00c9a3c0.png",
     ogUrl: "https://gialoma.com",
     canonical: "https://gialoma.com",
     language: "es",
@@ -144,12 +143,12 @@ export const commonSEOConfigs = {
     }
   },
 
-  // English configurations
+  // English configurations - UPDATED with new social preview image
   homeEn: {
-    title: "Gialoma Life Solutions - Business Automation & Digitalization",
+    title: "Gialoma Life Solutions - Technology that frees up your time",
     description: "Transform your business with customized automation and digitalization solutions. Increase efficiency and reduce costs with AI and advanced technology.",
     keywords: "business automation, digitalization, artificial intelligence, AI for business, digital transformation, technology solutions, business efficiency",
-    ogImage: "/lovable-uploads/gialoma-og-image-en.png",
+    ogImage: "/lovable-uploads/f3608495-1d53-4261-b98b-1d0f00c9a3c0.png",
     ogUrl: "https://gialoma.com/en",
     canonical: "https://gialoma.com/en",
     language: "en",
