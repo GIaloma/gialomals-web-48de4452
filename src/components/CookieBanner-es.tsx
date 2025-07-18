@@ -137,6 +137,11 @@ const CookieBannerEs = () => {
     updateGoogleConsent(consent);
   };
 
+  const hideBanner = () => {
+    setIsVisible(false);
+    setShowModal(false);
+  };
+
   const continueWithCurrentSettings = () => {
     // Usuario está conforme con la configuración por defecto (todo habilitado)
     const consent = {
@@ -147,7 +152,7 @@ const CookieBannerEs = () => {
     };
     
     saveConsent(consent);
-    setIsVisible(false);
+    hideBanner();
     trackEvent('cookie_consent', { consent_type: 'continue_default' });
   };
 
@@ -163,7 +168,7 @@ const CookieBannerEs = () => {
     // Establecer cookie de rechazo
     setCookie('gialoma_cookies_declined', 'true', 365);
     saveConsent(consent);
-    setIsVisible(false);
+    hideBanner();
     console.log('Usuario rechazó todas las cookies opcionales');
   };
 
@@ -177,7 +182,7 @@ const CookieBannerEs = () => {
     
     saveConsent(consent);
     loadGoogleAnalytics();
-    setIsVisible(false);
+    hideBanner();
     trackEvent('cookie_consent', { consent_type: 'analytics_only' });
   };
 
@@ -187,6 +192,7 @@ const CookieBannerEs = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    // No ocultar el banner cuando solo se cierra el modal sin guardar
   };
 
   const saveAndCloseModal = () => {
@@ -206,8 +212,8 @@ const CookieBannerEs = () => {
       });
     }
     
-    setShowModal(false);
-    setIsVisible(false);
+    // Cerrar tanto modal como banner
+    hideBanner();
   };
 
   const toggleAnalytics = () => {
