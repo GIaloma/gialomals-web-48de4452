@@ -62,14 +62,15 @@ const CTAEs = () => {
           </p>
           
           {!submitted ? (
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-6 items-start">
               <Button 
                 className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
                 onClick={handlePidePresupuesto}
               >
                 Pide un Presupuesto
               </Button>
-              <div className="relative group">
+              
+              <div className="flex flex-col items-center gap-3">
                 <Button 
                   className="bg-black hover:bg-black text-white hover:text-gialoma-gold transition-colors text-xl px-10 py-7"
                   onClick={openDigitalizationPage}
@@ -78,7 +79,7 @@ const CTAEs = () => {
                 </Button>
                 <GratisBadge 
                   variant="light" 
-                  className="absolute -top-3 -right-3 z-10 group-hover:scale-110"
+                  className="opacity-90 hover:opacity-100"
                 />
               </div>
             </div>
