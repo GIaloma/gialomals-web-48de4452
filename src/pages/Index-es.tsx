@@ -11,7 +11,7 @@ import TestimonialsEs from '../components/Testimonials-es';
 import CTAEs from '../components/CTA-es';
 import ContactEs from '../components/Contact-es';
 import FooterEs from '../components/Footer-es';
-import CookieBannerEs from '../components/CookieBanner-es';
+// REMOVED: CookieBannerEs - now handled globally in App.tsx
 // BookPopup temporarily removed - import BookPopupEs from '../components/BookPopup-es';
 
 const IndexEs = () => {
@@ -45,7 +45,7 @@ const IndexEs = () => {
       <CTAEs />
       <ContactEs />
       <FooterEs />
-      <CookieBannerEs />
+      {/* REMOVED: <CookieBannerEs /> - Cookie banner now handled globally in App.tsx */}
       
       {/* Spanish Book Popup temporarily removed */}
       {/* {showBookPopup && <BookPopupEs onClose={() => setShowBookPopup(false)} />} */}
