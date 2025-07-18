@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Settings, Cookie } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -34,6 +34,9 @@ const CookieBannerEs = () => {
     marketing: true, // Por defecto habilitado (modelo opt-out)
     timestamp: null
   });
+
+  // Use ref to prevent multiple rapid clicks
+  const isProcessingRef = useRef(false);
 
   useEffect(() => {
     checkExistingConsent();
@@ -137,56 +140,74 @@ const CookieBannerEs = () => {
     updateGoogleConsent(consent);
   };
 
-  const hideBanner = () => {
+  const handleAction = (action: () => void) => {
+    // Prevent multiple rapid clicks
+    if (isProcessingRef.current) return;
+    
+    isProcessingRef.current = true;
+    
+    // Execute the action
+    action();
+    
+    // Hide banner immediately
     setIsVisible(false);
     setShowModal(false);
+    
+    // Reset processing flag after a short delay
+    setTimeout(() => {
+      isProcessingRef.current = false;
+    }, 500);
   };
 
   const continueWithCurrentSettings = () => {
-    // Usuario está conforme con la configuración por defecto (todo habilitado)
-    const consent = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    hideBanner();
-    trackEvent('cookie_consent', { consent_type: 'continue_default' });
+    handleAction(() => {
+      // Usuario está conforme con la configuración por defecto (todo habilitado)
+      const consent = {
+        necessary: true,
+        analytics: true,
+        marketing: true,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      trackEvent('cookie_consent', { consent_type: 'continue_default' });
+    });
   };
 
   const optOutAll = () => {
-    // Usuario quiere rechazar todas las cookies opcionales
-    const consent = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      timestamp: Date.now()
-    };
-    
-    // Establecer cookie de rechazo
-    setCookie('gialoma_cookies_declined', 'true', 365);
-    saveConsent(consent);
-    hideBanner();
-    console.log('Usuario rechazó todas las cookies opcionales');
+    handleAction(() => {
+      // Usuario quiere rechazar todas las cookies opcionales
+      const consent = {
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      
+      // Establecer cookie de rechazo
+      setCookie('gialoma_cookies_declined', 'true', 365);
+      saveConsent(consent);
+      console.log('Usuario rechazó todas las cookies opcionales');
+    });
   };
 
   const acceptAnalyticsOnly = () => {
-    const consent = {
-      necessary: true,
-      analytics: true,
-      marketing: false,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    loadGoogleAnalytics();
-    hideBanner();
-    trackEvent('cookie_consent', { consent_type: 'analytics_only' });
+    handleAction(() => {
+      const consent = {
+        necessary: true,
+        analytics: true,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      loadGoogleAnalytics();
+      trackEvent('cookie_consent', { consent_type: 'analytics_only' });
+    });
   };
 
   const openModal = () => {
+    if (isProcessingRef.current) return;
     setShowModal(true);
   };
 
@@ -196,24 +217,23 @@ const CookieBannerEs = () => {
   };
 
   const saveAndCloseModal = () => {
-    const consent = {
-      ...cookieConsent,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    
-    if (consent.analytics) {
-      loadGoogleAnalytics();
-      trackEvent('cookie_consent', { 
-        consent_type: 'custom',
-        analytics: consent.analytics,
-        marketing: consent.marketing
-      });
-    }
-    
-    // Cerrar tanto modal como banner
-    hideBanner();
+    handleAction(() => {
+      const consent = {
+        ...cookieConsent,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      
+      if (consent.analytics) {
+        loadGoogleAnalytics();
+        trackEvent('cookie_consent', { 
+          consent_type: 'custom',
+          analytics: consent.analytics,
+          marketing: consent.marketing
+        });
+      }
+    });
   };
 
   const toggleAnalytics = () => {
@@ -331,27 +351,31 @@ const CookieBannerEs = () => {
             <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
                 onClick={continueWithCurrentSettings}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2"
+                disabled={isProcessingRef.current}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2 disabled:opacity-50"
               >
                 ✓ Continuar
               </Button>
               <Button
                 onClick={acceptAnalyticsOnly}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2"
+                disabled={isProcessingRef.current}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 Solo Analíticas
               </Button>
               <Button
                 onClick={optOutAll}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
+                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 Rechazar
               </Button>
               <Button
                 onClick={openModal}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
+                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 <Settings className="h-4 w-4 mr-1" />
                 Personalizar
@@ -473,14 +497,16 @@ const CookieBannerEs = () => {
                   setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
                   saveAndCloseModal();
                 }}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                className="border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50"
               >
                 Solo Esenciales
               </Button>
               <Button
                 onClick={saveAndCloseModal}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black"
+                disabled={isProcessingRef.current}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black disabled:opacity-50"
               >
                 Guardar Preferencias
               </Button>
