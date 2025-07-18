@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Settings, Cookie } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -35,6 +34,9 @@ const CookieBanner = () => {
     marketing: true, // Default to true (opt-out model)
     timestamp: null
   });
+
+  // Use ref to prevent multiple rapid clicks
+  const isProcessingRef = useRef(false);
 
   useEffect(() => {
     checkExistingConsent();
@@ -138,56 +140,74 @@ const CookieBanner = () => {
     updateGoogleConsent(consent);
   };
 
-  const hideBanner = () => {
+  const handleAction = (action: () => void) => {
+    // Prevent multiple rapid clicks
+    if (isProcessingRef.current) return;
+    
+    isProcessingRef.current = true;
+    
+    // Execute the action
+    action();
+    
+    // Hide banner immediately
     setIsVisible(false);
     setShowModal(false);
+    
+    // Reset processing flag after a short delay
+    setTimeout(() => {
+      isProcessingRef.current = false;
+    }, 500);
   };
 
   const continueWithCurrentSettings = () => {
-    // User is happy with default settings (all enabled)
-    const consent = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    hideBanner();
-    trackEvent('cookie_consent', { consent_type: 'continue_default' });
+    handleAction(() => {
+      // User is happy with default settings (all enabled)
+      const consent = {
+        necessary: true,
+        analytics: true,
+        marketing: true,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      trackEvent('cookie_consent', { consent_type: 'continue_default' });
+    });
   };
 
   const optOutAll = () => {
-    // User wants to opt out of all optional cookies
-    const consent = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      timestamp: Date.now()
-    };
-    
-    // Set opt-out cookie
-    setCookie('gialoma_cookies_declined', 'true', 365);
-    saveConsent(consent);
-    hideBanner();
-    console.log('User opted out of all optional cookies');
+    handleAction(() => {
+      // User wants to opt out of all optional cookies
+      const consent = {
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      
+      // Set opt-out cookie
+      setCookie('gialoma_cookies_declined', 'true', 365);
+      saveConsent(consent);
+      console.log('User opted out of all optional cookies');
+    });
   };
 
   const acceptAnalyticsOnly = () => {
-    const consent = {
-      necessary: true,
-      analytics: true,
-      marketing: false,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    loadGoogleAnalytics();
-    hideBanner();
-    trackEvent('cookie_consent', { consent_type: 'analytics_only' });
+    handleAction(() => {
+      const consent = {
+        necessary: true,
+        analytics: true,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      loadGoogleAnalytics();
+      trackEvent('cookie_consent', { consent_type: 'analytics_only' });
+    });
   };
 
   const openModal = () => {
+    if (isProcessingRef.current) return;
     setShowModal(true);
   };
 
@@ -197,24 +217,23 @@ const CookieBanner = () => {
   };
 
   const saveAndCloseModal = () => {
-    const consent = {
-      ...cookieConsent,
-      timestamp: Date.now()
-    };
-    
-    saveConsent(consent);
-    
-    if (consent.analytics) {
-      loadGoogleAnalytics();
-      trackEvent('cookie_consent', { 
-        consent_type: 'custom',
-        analytics: consent.analytics,
-        marketing: consent.marketing
-      });
-    }
-    
-    // Close both modal and banner
-    hideBanner();
+    handleAction(() => {
+      const consent = {
+        ...cookieConsent,
+        timestamp: Date.now()
+      };
+      
+      saveConsent(consent);
+      
+      if (consent.analytics) {
+        loadGoogleAnalytics();
+        trackEvent('cookie_consent', { 
+          consent_type: 'custom',
+          analytics: consent.analytics,
+          marketing: consent.marketing
+        });
+      }
+    });
   };
 
   const toggleAnalytics = () => {
@@ -332,27 +351,31 @@ const CookieBanner = () => {
             <div className="flex flex-wrap items-center gap-2 lg:flex-nowrap">
               <Button
                 onClick={continueWithCurrentSettings}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2"
+                disabled={isProcessingRef.current}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black font-medium transition-all duration-200 hover:scale-105 text-sm px-4 py-2 disabled:opacity-50"
               >
                 ✓ Continue
               </Button>
               <Button
                 onClick={acceptAnalyticsOnly}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2"
+                disabled={isProcessingRef.current}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 Analytics Only
               </Button>
               <Button
                 onClick={optOutAll}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2"
+                className="border-gray-400 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 Opt Out
               </Button>
               <Button
                 onClick={openModal}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2"
+                className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-gialoma-black transition-all duration-200 text-sm px-3 py-2 disabled:opacity-50"
               >
                 <Settings className="h-4 w-4 mr-1" />
                 Customize
@@ -474,14 +497,16 @@ const CookieBanner = () => {
                   setCookieConsent(prev => ({ ...prev, analytics: false, marketing: false }));
                   saveAndCloseModal();
                 }}
+                disabled={isProcessingRef.current}
                 variant="outline"
-                className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                className="border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50"
               >
                 Essential Only
               </Button>
               <Button
                 onClick={saveAndCloseModal}
-                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black"
+                disabled={isProcessingRef.current}
+                className="bg-gialoma-gold hover:bg-gialoma-darkgold text-gialoma-black disabled:opacity-50"
               >
                 Save Preferences
               </Button>
