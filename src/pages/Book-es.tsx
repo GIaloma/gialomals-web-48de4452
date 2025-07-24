@@ -1,15 +1,18 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BookNavbarEs from '../components/BookNavbar-es';
 import FooterEs from '../components/Footer-es';
+import BookLeadForm from '../components/BookLeadForm';
 import { Button } from '@/components/ui/button';
-import { Check, Download, Star, Users, BookOpen, Clock, Mail } from 'lucide-react';
+import { Check, Download, Star, Users, BookOpen, Clock, Mail, Gift, Zap, Target } from 'lucide-react';
 import CookieBannerEs from '../components/CookieBanner-es';
 
 const BookEs = () => {
+  const [showLeadForm, setShowLeadForm] = useState(false);
+
   useEffect(() => {
     // SEO Meta Tags
-    document.title = "Transformación Digital Simplificada - Libro Digital | Gialoma Life Solutions";
+    document.title = "Descarga Gratis: Alquimia Digital - Capítulo 0 + Primer Capítulo | Gialoma";
     
     // Remove existing meta tags
     const existingDescription = document.querySelector('meta[name="description"]');
@@ -26,16 +29,16 @@ const BookEs = () => {
 
     // Add new meta tags
     const metaTags = [
-      { name: 'description', content: 'Guía práctica para la transformación digital empresarial. Aprende a implementar IA y automatización sin conocimientos técnicos. Descarga inmediata por solo €5.99.' },
-      { name: 'keywords', content: 'transformación digital, automatización empresarial, inteligencia artificial, IA para empresas, digitalización, tecnología empresarial, Gialoma, libro digital' },
-      { property: 'og:title', content: 'Transformación Digital Simplificada - Libro Digital | Gialoma' },
-      { property: 'og:description', content: 'Tu guía práctica para implementar tecnologías de vanguardia en tu empresa sin abrumarte técnicamente. Estrategias probadas de los fundadores de Gialoma.' },
+      { name: 'description', content: 'Descarga GRATIS los primeros capítulos de "Alquimia Digital". Aprende a transformar tu empresa con IA y automatización. Guía práctica sin tecnicismos.' },
+      { name: 'keywords', content: 'descarga gratis, alquimia digital, transformación digital, automatización empresarial, inteligencia artificial, IA para empresas, Gialoma, PDF gratis' },
+      { property: 'og:title', content: 'Descarga Gratis: Alquimia Digital - Capítulos de Introducción | Gialoma' },
+      { property: 'og:description', content: 'Obtén GRATIS la introducción y primer capítulo de nuestro libro sobre transformación digital. Estrategias probadas para implementar IA en tu empresa.' },
       { property: 'og:image', content: '/lovable-uploads/book-cover-es.png' },
       { property: 'og:url', content: 'https://gialoma.com/libro' },
-      { property: 'og:type', content: 'product' },
+      { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Transformación Digital Simplificada - Libro Digital' },
-      { name: 'twitter:description', content: 'Guía práctica para implementar IA y automatización en tu empresa. Por solo €5.99.' },
+      { name: 'twitter:title', content: 'Descarga Gratis: Alquimia Digital - Capítulos de Introducción' },
+      { name: 'twitter:description', content: 'Obtén GRATIS los primeros capítulos de nuestro libro sobre transformación digital.' },
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: 'Paloma Firgaira, Gianro Compagno' },
       { name: 'language', content: 'es' }
@@ -58,11 +61,12 @@ const BookEs = () => {
     canonical.href = 'https://gialoma.com/libro';
     document.head.appendChild(canonical);
 
-    // Structured Data (JSON-LD)
+    // Structured Data (JSON-LD) - Updated for free resource
     const structuredData = {
       "@context": "https://schema.org",
-      "@type": "Book",
-      "name": "Transformación Digital Simplificada",
+      "@type": "WebPage",
+      "name": "Alquimia Digital - Descarga Gratuita",
+      "description": "Descarga gratuita de los primeros capítulos del libro 'Alquimia Digital' sobre transformación digital empresarial.",
       "author": [
         {
           "@type": "Person",
@@ -79,21 +83,18 @@ const BookEs = () => {
       },
       "datePublished": "2025-04-01",
       "inLanguage": "es",
-      "genre": "Business Technology",
-      "numberOfPages": 320,
-      "bookFormat": "EBook",
-      "offers": {
-        "@type": "Offer",
-        "price": "5.99",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "url": "https://gialoma.com/libro"
-      },
-      "description": "Tu guía práctica para aprovechar la IA y la automatización para transformar las operaciones de tu empresa y mejorar la eficiencia.",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "74"
+      "url": "https://gialoma.com/libro",
+      "mainEntity": {
+        "@type": "DigitalDocument",
+        "name": "Alquimia Digital: Capítulo 0 + Primer Capítulo",
+        "description": "Introducción gratuita al libro sobre transformación digital empresarial",
+        "encodingFormat": "application/pdf",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
       }
     };
 
@@ -109,47 +110,77 @@ const BookEs = () => {
     };
   }, []);
 
+  const handleDownloadClick = () => {
+    setShowLeadForm(true);
+    
+    // Track the download button click
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'download_click', {
+        event_category: 'Book',
+        event_label: 'Free PDF Download Button',
+      });
+    }
+  };
+
+  const handleFormSuccess = () => {
+    // Additional success tracking if needed
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {
+        event_category: 'Lead Generation',
+        event_label: 'Book PDF Download Completed',
+        value: 1
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <BookNavbarEs />
       
       {/* Main Content */}
       <div className="flex-grow pt-32 md:pt-36">
-        {/* Hero section */}
+        {/* Hero section - Updated for free download */}
         <section className="bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold py-16">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="md:w-1/2">
+                <div className="flex items-center gap-3 mb-4">
+                  <Gift className="text-white" size={32} />
+                  <span className="bg-white text-gialoma-gold px-3 py-1 rounded-full font-bold text-sm">
+                    DESCARGA GRATUITA
+                  </span>
+                </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  Transformación Digital Simplificada
+                  Alquimia Digital: Capítulo 0
                 </h1>
                 <p className="text-xl text-white/90 mb-6">
-                  Tu guía práctica para aprovechar la IA y la automatización para transformar las operaciones de tu empresa y mejorar la eficiencia.
+                  Descarga GRATIS la introducción y el primer capítulo de nuestro libro sobre transformación digital. Aprende los fundamentos para implementar IA y automatización en tu empresa.
                 </p>
                 <div className="flex gap-2 mb-8">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} fill="white" className="text-white" size={20} />
                   ))}
-                  <span className="text-white ml-2">Basado en 74 reseñas</span>
+                  <span className="text-white ml-2">Basado en 74 lectores satisfechos</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
+                    onClick={handleDownloadClick}
+                    className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg font-bold"
                   >
-                    Comprar Ahora - €5,99
+                    <Download className="mr-2" size={18} />
+                    Descargar PDF Gratis
                   </Button>
-                  <Button 
-                    className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
-                  >
-                    <Download className="mr-2" size={18} /> Vista Previa
-                  </Button>
+                  <div className="text-white/80 text-sm flex items-center">
+                    <Zap className="mr-2" size={16} />
+                    Descarga instantánea • Sin spam • Cancela cuando quieras
+                  </div>
                 </div>
               </div>
               <div className="md:w-1/3">
                 <div className="rounded-lg shadow-2xl overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-300">
                   <img 
                     src="/placeholder.svg" 
-                    alt="Portada del libro Transformación Digital Simplificada" 
+                    alt="Portada del libro Alquimia Digital - Capítulo 0" 
                     className="w-full h-auto"
                   />
                 </div>
@@ -157,157 +188,178 @@ const BookEs = () => {
             </div>
           </div>
         </section>
-        
-        {/* Book details section */}
+
+        {/* Value Proposition section - New */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg text-center">
-                  <BookOpen className="mx-auto mb-2 text-gialoma-gold" size={32} />
-                  <h3 className="font-semibold text-lg mb-1">320 Páginas</h3>
-                  <p className="text-gray-600 text-sm">Guía Completa</p>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg text-center">
-                  <Clock className="mx-auto mb-2 text-gialoma-gold" size={32} />
-                  <h3 className="font-semibold text-lg mb-1">Publicado Abril 2025</h3>
-                  <p className="text-gray-600 text-sm">Incluye Últimas Tendencias</p>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg text-center">
-                  <Users className="mx-auto mb-2 text-gialoma-gold" size={32} />
-                  <h3 className="font-semibold text-lg mb-1">Para Todas las Empresas</h3>
-                  <p className="text-gray-600 text-sm">Desde Startups a Corporaciones</p>
-                </div>
-              </div>
-              
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-gialoma-black mb-6">Sobre Este Libro</h2>
-                <div className="prose max-w-none text-gialoma-darkgray space-y-4">
-                  <p>
-                    <span className="font-semibold">Transformación Digital Simplificada</span> es tu guía práctica para entender e implementar tecnologías de vanguardia en tu empresa sin abrumarte técnicamente.
-                  </p>
-                  <p>
-                    Escrito por los fundadores de Gialoma, Paloma Firgaira y Gianro Compagno, este libro destila años de experiencia práctica ayudando a empresas de todos los tamaños a aprovechar la tecnología para mejorar la eficiencia y aumentar la rentabilidad.
-                  </p>
-                  <p>
-                    Ya seas un empresario con conocimientos técnicos o un propietario de negocio que encuentra la tecnología intimidante, este libro ofrece explicaciones claras, ejemplos del mundo real y planes de implementación paso a paso que cualquiera puede seguir.
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-gialoma-black mb-6">
+                ¿Por Qué Más de 1,000 Empresarios Ya Descargaron Este Capítulo?
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div className="text-center">
+                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target className="text-gialoma-gold" size={24} />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">Sin Tecnicismos</h3>
+                  <p className="text-gray-600">
+                    Explicaciones claras y prácticas que cualquier empresario puede entender y aplicar inmediatamente.
                   </p>
                 </div>
-              </div>
-              
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-gialoma-black mb-6">Lo Que Aprenderás</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    "Cómo identificar las tecnologías adecuadas para las necesidades específicas de tu negocio",
-                    "Procesos paso a paso para automatizar tareas repetitivas en tu empresa",
-                    "Enfoques prácticos para usar IA sin necesidad de conocimientos técnicos",
-                    "Métodos para medir el ROI de las inversiones en tecnología",
-                    "Estrategias para ayudar a tu equipo a adaptarse a nuevas tecnologías",
-                    "Casos de estudio reales de empresas que transformaron sus operaciones",
-                    "Errores comunes que evitar en proyectos de transformación digital",
-                    "Cómo crear una hoja de ruta tecnológica sostenible para tu negocio"
-                  ].map((item, index) => (
-                    <div key={index} className="flex">
-                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={18} />
-                      <p className="text-gialoma-darkgray">{item}</p>
-                    </div>
-                  ))}
+                <div className="text-center">
+                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Zap className="text-gialoma-gold" size={24} />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">Resultados Rápidos</h3>
+                  <p className="text-gray-600">
+                    Estrategias que puedes implementar esta misma semana para empezar a automatizar tu empresa.
+                  </p>
                 </div>
-              </div>
-              
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-gialoma-black mb-6">Sobre los Autores</h2>
-                <div className="flex flex-col md:flex-row gap-8">
-                  <div className="md:w-1/2">
-                    <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"></div>
-                      <div>
-                        <h3 className="font-bold text-gialoma-black text-xl">Paloma Firgaira</h3>
-                        <p className="text-gialoma-darkgray">Co-fundadora y CEO, Gialoma Life Solutions</p>
-                      </div>
-                    </div>
-                    <p className="text-gialoma-darkgray">
-                      Paloma es la líder visionaria detrás del enfoque innovador de Gialoma hacia la tecnología empresarial. Su enfoque en crear soluciones prácticas que devuelven tiempo valioso ha transformado cómo las empresas abordan la transformación digital.
-                    </p>
+                <div className="text-center">
+                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Check className="text-gialoma-gold" size={24} />
                   </div>
-                  <div className="md:w-1/2">
-                    <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"></div>
-                      <div>
-                        <h3 className="font-bold text-gialoma-black text-xl">Gianro Compagno</h3>
-                        <p className="text-gialoma-darkgray">Co-fundador y CTO, Gialoma Life Solutions</p>
-                      </div>
-                    </div>
-                    <p className="text-gialoma-darkgray">
-                      Gianro aporta experiencia técnica en traducir conceptos complejos de IA en aplicaciones empresariales prácticas. Su talento para simplificar la tecnología hace que este libro sea accesible para lectores de todos los niveles técnicos.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-8 rounded-lg border border-gray-100">
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                  <div className="md:w-2/3">
-                    <h2 className="text-2xl font-bold text-gialoma-black mb-4">¿Listo para Transformar Tu Negocio?</h2>
-                    <p className="text-gialoma-darkgray mb-6">
-                      Obtén tu copia de <span className="font-semibold">Transformación Digital Simplificada</span> hoy y comienza a implementar estrategias tecnológicas poderosas en tu empresa inmediatamente.
-                    </p>
-                    <div className="flex items-center gap-4 mb-6">
-                      <div>
-                        <p className="text-sm text-gray-500">Precio de Lanzamiento Especial</p>
-                        <p className="text-3xl font-bold text-gialoma-gold">€5,99</p>
-                      </div>
-                      <p className="text-md text-gray-500 line-through">€15,99</p>
-                      <p className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">Ahorra 63%</p>
-                    </div>
-                    <div className="flex gap-4">
-                      <Button 
-                        className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-gialoma-gold hover:border-gialoma-gold transition-colors px-8 py-6 text-lg"
-                      >
-                        Comprar Copia Digital
-                      </Button>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-4">
-                      ¿Preguntas? Contáctanos en gialomals@gmail.com
-                    </p>
-                  </div>
-                  <div className="md:w-1/3">
-                    <div className="flex items-center justify-center bg-white p-4 rounded-lg shadow-md">
-                      <div className="flex flex-col">
-                        <p className="text-center mb-2">Formato Disponible:</p>
-                        <div className="bg-gray-100 p-2 rounded text-center">
-                          eBook PDF
-                        </div>
-                        <p className="text-xs text-center mt-4 text-gray-500">
-                          Descarga instantánea tras la compra
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <h3 className="font-bold text-xl mb-2">Casos Reales</h3>
+                  <p className="text-gray-600">
+                    Ejemplos de empresas reales que han transformado sus operaciones con nuestras estrategias.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
         
-        {/* Testimonials */}
+        {/* What's included section - Updated */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">Lo Que Dicen los Lectores</h2>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">
+                Qué Incluye Tu Descarga Gratuita
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center mb-4">
+                    <BookOpen className="text-gialoma-gold mr-3" size={24} />
+                    <h3 className="font-bold text-xl">Capítulo 0: Introducción</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      Por qué la transformación digital es inevitable
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      Los 3 mitos más grandes sobre la IA en empresas
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      El marco mental correcto para abordar la tecnología
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center mb-4">
+                    <Zap className="text-gialoma-gold mr-3" size={24} />
+                    <h3 className="font-bold text-xl">Capítulo 1: Fundamentos</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      Cómo identificar qué automatizar primero
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      El método de 4 pasos para evaluar cualquier proceso
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
+                      Plantilla para calcular el ROI de la automatización
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-gialoma-gold/10 p-6 rounded-lg border border-gialoma-gold/20 mt-8">
+                <div className="flex items-center justify-center mb-4">
+                  <Gift className="text-gialoma-gold mr-3" size={24} />
+                  <h3 className="font-bold text-xl text-gialoma-black">Bonus Incluido</h3>
+                </div>
+                <div className="text-center">
+                  <p className="text-gialoma-darkgray mb-4">
+                    También recibirás acceso a nuestro newsletter exclusivo con casos de estudio semanales 
+                    y las últimas tendencias en automatización empresarial.
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    * Puedes darte de baja en cualquier momento con un clic
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About the authors - Updated */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">
+                Conoce a los Autores
+              </h2>
+              <div className="flex flex-col md:flex-row gap-8">
+                <div className="md:w-1/2">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"></div>
+                    <div>
+                      <h3 className="font-bold text-gialoma-black text-xl">Paloma Firgaira</h3>
+                      <p className="text-gialoma-darkgray">Co-fundadora y CEO, Gialoma Life Solutions</p>
+                    </div>
+                  </div>
+                  <p className="text-gialoma-darkgray">
+                    Paloma ha ayudado a más de 200 empresas a implementar tecnologías de automatización 
+                    que les han ahorrado cientos de horas mensuales. Su enfoque práctico y sin tecnicismos 
+                    ha transformado cómo los empresarios ven la tecnología.
+                  </p>
+                </div>
+                <div className="md:w-1/2">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"></div>
+                    <div>
+                      <h3 className="font-bold text-gialoma-black text-xl">Gianro Compagno</h3>
+                      <p className="text-gialoma-darkgray">Co-fundador y CTO, Gialoma Life Solutions</p>
+                    </div>
+                  </div>
+                  <p className="text-gialoma-darkgray">
+                    Gianro traduce conceptos técnicos complejos en soluciones simples y aplicables. 
+                    Su experiencia implementando sistemas de IA en empresas reales hace que este libro 
+                    sea extraordinariamente práctico y orientado a resultados.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Testimonials - Updated for free version */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">
+              Lo Que Dicen Quienes Ya lo Descargaron
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {[
                 {
-                  quote: "Este libro transformó cómo abordo la tecnología en mi negocio. Solo el marco de ROI nos ahorró miles en inversiones tecnológicas innecesarias.",
-                  author: "Sarah J., Propietaria de Pequeña Empresa"
+                  quote: "En solo los primeros dos capítulos ya identifiqué 3 procesos que puedo automatizar. ¡Y eso que es gratis!",
+                  author: "María González, Directora de Operaciones"
                 },
                 {
-                  quote: "¡Por fin, un libro de tecnología que no requiere un título en ingeniería para entender! Claro, práctico e inmediatamente aplicable a mi negocio.",
-                  author: "Michael T., Director de Marketing"
+                  quote: "Finalmente un enfoque de IA que no requiere ser ingeniero para entender. Las plantillas son oro puro.",
+                  author: "Carlos Mendoza, CEO Startup"
                 },
                 {
-                  quote: "Como alguien que siempre se sintió intimidada por la IA, este libro desglosó conceptos complejos en pasos que todo nuestro equipo pudo implementar.",
-                  author: "Elena R., Gerente de Operaciones"
+                  quote: "Lo descargué por curiosidad y terminé implementando sus consejos. Ya ahorré 5 horas semanales en mi empresa.",
+                  author: "Laura Vázquez, Consultora"
                 },
               ].map((testimonial, index) => (
                 <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -324,31 +376,31 @@ const BookEs = () => {
           </div>
         </section>
         
-        {/* FAQ */}
+        {/* FAQ - Updated */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">Preguntas Frecuentes</h2>
             <div className="max-w-3xl mx-auto space-y-6">
               {[
                 {
-                  question: "¿Es este libro adecuado para propietarios de empresas no técnicos?",
-                  answer: "¡Absolutamente! Este libro fue escrito específicamente para propietarios de empresas y gerentes que pueden no tener conocimientos técnicos pero quieren aprovechar la tecnología de manera efectiva."
+                  question: "¿Es realmente gratis? ¿No hay costos ocultos?",
+                  answer: "Sí, es completamente gratis. Solo necesitas tu email para recibir el PDF. No hay costos ocultos, no se guardará tu tarjeta de crédito, y puedes darte de baja de nuestros emails en cualquier momento."
                 },
                 {
-                  question: "¿En qué formato está disponible el libro?",
-                  answer: "Actualmente, el libro está disponible solo como descarga digital en PDF. Esto te permite leerlo en cualquier dispositivo y tener acceso instantáneo al contenido después de la compra."
+                  question: "¿Cuánto tardaré en recibir el PDF?",
+                  answer: "Recibirás el PDF inmediatamente en tu email después de completar el formulario. Si no lo ves en tu bandeja de entrada, revisa tu carpeta de spam."
                 },
                 {
-                  question: "¿Qué pasa si tengo problemas con mi compra?",
-                  answer: "Si tienes algún problema con tu compra o descarga, por favor contáctanos en gialomals@gmail.com y estaremos encantados de ayudarte."
+                  question: "¿Es adecuado para empresas pequeñas?",
+                  answer: "Absolutamente. Los conceptos están diseñados para ser aplicables tanto en startups de 2 personas como en empresas de 200+ empleados. Los ejemplos cubren todo tipo de industrias y tamaños."
                 },
                 {
-                  question: "¿Cómo se entrega la versión digital?",
-                  answer: "Inmediatamente después de la compra, recibirás un email con enlaces de descarga para el PDF. Si tienes algún problema con la entrega, por favor contáctanos en gialomals@gmail.com."
+                  question: "¿Recibiré spam después de descargar?",
+                  answer: "No. Solo recibirás contenido relevante sobre automatización empresarial aproximadamente una vez por semana. Puedes darte de baja en cualquier momento con un solo clic."
                 },
                 {
-                  question: "¿Hay copias físicas disponibles?",
-                  answer: "No, el libro está actualmente disponible solo en formato digital (PDF). Esto nos permite ofrecerlo a un precio mucho más bajo y proporcionar acceso instantáneo."
+                  question: "¿Habrá más capítulos disponibles después?",
+                  answer: "Sí, eventualmente publicaremos el libro completo. Los lectores del capítulo gratuito serán los primeros en enterarse y recibirán ofertas especiales."
                 },
               ].map((faq, index) => (
                 <div key={index} className="border-b border-gray-200 pb-4">
@@ -370,24 +422,36 @@ const BookEs = () => {
           </div>
         </section>
         
-        {/* Final CTA */}
+        {/* Final CTA - Updated */}
         <section className="py-16 bg-gialoma-gold">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">Comienza Tu Viaje de Transformación Digital Hoy</h2>
+            <h2 className="text-3xl font-bold text-white mb-6">
+              ¡No Esperes Más! Descarga Tu Copia Gratuita Ahora
+            </h2>
             <p className="text-white/90 max-w-2xl mx-auto mb-8">
-              Únete a miles de propietarios de empresas que han transformado exitosamente sus operaciones con las estrategias prácticas de este libro.
+              Únete a los miles de empresarios que ya están transformando sus operaciones 
+              con las estrategias prácticas de "Alquimia Digital".
             </p>
             <Button 
-              className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg"
+              onClick={handleDownloadClick}
+              className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg font-bold"
             >
-              Obtén Tu Copia Ahora - €5,99
+              <Download className="mr-2" size={18} />
+              Descargar PDF Gratis Ahora
             </Button>
             <p className="text-white/80 mt-4 text-sm">
-              Formato PDF • Descarga instantánea
+              Formato PDF • Descarga instantánea • 100% Gratis
             </p>
           </div>
         </section>
       </div>
+      
+      {/* Lead Form Modal */}
+      <BookLeadForm 
+        isOpen={showLeadForm}
+        onClose={() => setShowLeadForm(false)}
+        onSuccess={handleFormSuccess}
+      />
       
       <FooterEs />
       <CookieBannerEs />
