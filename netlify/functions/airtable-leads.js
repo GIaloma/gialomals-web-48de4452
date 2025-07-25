@@ -39,11 +39,11 @@ exports.handler = async (event, context) => {
     } = JSON.parse(event.body);
 
     // Validate required fields
-    if (!leadName || !email) {
+    if (!leadName || !email || !whatsappNumber) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ message: 'Lead Name and Email are required' }),
+        body: JSON.stringify({ message: 'Lead Name, Email and WhatsApp Number are required' }),
       };
     }
 
@@ -62,6 +62,7 @@ exports.handler = async (event, context) => {
       fields: {
         'Lead Name': leadName,
         'Email': email,
+        'WhatsApp Number': whatsappNumber,
         'Download Date': downloadDate,
         'Downloaded Content Title': downloadedContentTitle || 'Alquimia Digital: Capítulo 0 - Introducción + Primer Capítulo',
         'Download Source Page': downloadSourcePage || '/libro',
@@ -72,11 +73,6 @@ exports.handler = async (event, context) => {
         'Lead Notes': leadNotes || ''
       }
     };
-
-    // Only add WhatsApp Number if it's provided
-    if (whatsappNumber && whatsappNumber.trim() !== '') {
-      airtableRecord.fields['WhatsApp Number'] = whatsappNumber;
-    }
 
     const airtableResponse = await fetch(airtableUrl, {
       method: 'POST',
