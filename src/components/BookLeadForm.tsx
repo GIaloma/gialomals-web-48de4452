@@ -161,10 +161,10 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
             <>
               <div className="flex items-center gap-3 mb-2">
                 <Download className="h-6 w-6 text-gialoma-gold" />
-                <CardTitle>Descarga Gratuita</CardTitle>
+                <CardTitle>Obten el PDF gratuito</CardTitle>
               </div>
               <CardDescription>
-                Obtén los primeros capítulos de "Alquimia Digital" completamente gratis
+                Obtén el primer capítulo de "Alquimia Digital" completamente gratis
               </CardDescription>
             </>
           )}
