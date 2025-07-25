@@ -5,7 +5,7 @@ const BookFAQ: React.FC = () => {
   const faqs = [
     {
       question: "¿Es realmente gratis? ¿No hay costos ocultos?",
-      answer: "Sí, es completamente gratis. Solo necesitas tu email para recibir el PDF. No hay costos ocultos, no se guardará tu tarjeta de crédito, y puedes darte de baja de nuestros emails en cualquier momento."
+      answer: "Sí, es completamente gratis. Solo necesitas tu email para recibir el PDF. No hay costos ocultos, no se necesitará tu tarjeta de crédito para recibir el capítulo gratuito."
     },
     {
       question: "¿Cuánto tardaré en recibir el PDF?",
@@ -14,10 +14,6 @@ const BookFAQ: React.FC = () => {
     {
       question: "¿Es adecuado para empresas pequeñas?",
       answer: "Absolutamente. Los conceptos están diseñados para ser aplicables tanto en startups de 2 personas como en empresas de 200+ empleados. Los ejemplos cubren todo tipo de industrias y tamaños."
-    },
-    {
-      question: "¿Recibiré spam después de descargar?",
-      answer: "No. Solo recibirás contenido relevante sobre automatización empresarial aproximadamente una vez por semana. Puedes darte de baja en cualquier momento con un solo clic."
     },
     {
       question: "¿Habrá más capítulos disponibles después?",
@@ -42,8 +38,8 @@ const BookFAQ: React.FC = () => {
           <p className="text-gialoma-darkgray mb-4">¿Tienes más preguntas?</p>
           <div className="flex justify-center items-center">
             <Mail className="mr-2 text-gialoma-gold" size={20} />
-            <a href="mailto:gialomals@gmail.com" className="text-gialoma-gold hover:text-gialoma-darkgold">
-              gialomals@gmail.com
+            <a href="mailto:gialoma@gialoma.com" className="text-gialoma-gold hover:text-gialoma-darkgold">
+              gialoma@gialoma.com
             </a>
           </div>
         </div>
