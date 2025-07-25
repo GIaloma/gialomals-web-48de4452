@@ -181,12 +181,8 @@ const BookEs = () => {
                     className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg font-bold"
                   >
                     <Download className="mr-2" size={18} />
-                    Descargar PDF Gratis
+                    Obtener PDF Gratis
                   </Button>
-                  <div className="text-white/80 text-sm flex items-center">
-                    <Zap className="mr-2" size={16} />
-                    Descarga instantánea • Sin spam • Cancela cuando quieras
-                  </div>
                 </div>
               </div>
               <div className="md:w-1/3">
@@ -202,39 +198,46 @@ const BookEs = () => {
           </div>
         </section>
 
-        {/* Value Proposition section - New */}
-        <section className="py-16 bg-white">
+        {/* Value Proposition section - Made bigger and more visible */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-gialoma-black mb-6">
+            <div className="max-w-5xl mx-auto text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-gialoma-black mb-8">
                 ¿Por Qué Más de 1,000 Empresarios Ya Descargaron Este Capítulo?
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Porque ofrece una perspectiva completamente nueva sobre la tecnología empresarial: 
+                una que pone la humanidad en el centro, no los algoritmos.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
                 <div className="text-center">
-                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="text-gialoma-gold" size={24} />
+                  <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Target className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-xl mb-2">Sin Tecnicismos</h3>
-                  <p className="text-gray-600">
-                    Explicaciones claras y prácticas que cualquier empresario puede entender y aplicar inmediatamente.
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Sin Tecnicismos</h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    Explicaciones claras y prácticas que cualquier empresario puede entender y aplicar inmediatamente. 
+                    Lenguaje humano para soluciones tecnológicas.
                   </p>
                 </div>
                 <div className="text-center">
-                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Zap className="text-gialoma-gold" size={24} />
+                  <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Zap className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-xl mb-2">Resultados Rápidos</h3>
-                  <p className="text-gray-600">
-                    Estrategias que puedes implementar esta misma semana para empezar a automatizar tu empresa.
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Resultados Rápidos</h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    Estrategias que puedes implementar esta misma semana para empezar a recuperar tiempo valioso 
+                    y reducir el estrés tecnológico en tu empresa.
                   </p>
                 </div>
                 <div className="text-center">
-                  <div className="bg-gialoma-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Check className="text-gialoma-gold" size={24} />
+                  <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Check className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-xl mb-2">Casos Reales</h3>
-                  <p className="text-gray-600">
-                    Ejemplos de empresas reales que han transformado sus operaciones con nuestras estrategias.
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Casos Reales</h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    Historias auténticas de transformación personal y empresarial. No teorías abstractas, 
+                    sino experiencias vividas y resultados medibles.
                   </p>
                 </div>
               </div>
@@ -242,70 +245,82 @@ const BookEs = () => {
           </div>
         </section>
         
-        {/* What's included section - Updated */}
-        <section className="py-16 bg-gray-50">
+        {/* What's included section - Made bigger and more visible */}
+        <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center text-gialoma-black mb-12">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold text-center text-gialoma-black mb-8">
                 Qué Incluye Tu Descarga Gratuita
               </h2>
+              <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto leading-relaxed">
+                Más que un simple capítulo: una guía completa para comenzar tu transformación 
+                hacia una relación más consciente con la tecnología.
+              </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                  <div className="flex items-center mb-4">
-                    <BookOpen className="text-gialoma-gold mr-3" size={24} />
-                    <h3 className="font-bold text-xl">Capítulo 0: Introducción</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                  <div className="flex items-center mb-6">
+                    <BookOpen className="text-gialoma-gold mr-4" size={32} />
+                    <h3 className="font-bold text-2xl text-gialoma-black">Capítulo 0: El Propósito</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
+                  <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      Por qué la transformación digital es inevitable
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">La historia personal de Paloma: de la resistencia a la liberación tecnológica</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      Los 3 mitos más grandes sobre la IA en empresas
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">Cómo nació Gialoma y el modelo de "Tecnología Consciente"</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      El marco mental correcto para abordar la tecnología
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">Las herramientas que realmente liberan tu tiempo (sin crear nueva esclavitud)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">El futuro de la tecnología orientada a la plenitud humana</span>
                     </li>
                   </ul>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                  <div className="flex items-center mb-4">
-                    <Zap className="text-gialoma-gold mr-3" size={24} />
-                    <h3 className="font-bold text-xl">Capítulo 1: Fundamentos</h3>
+                <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                  <div className="flex items-center mb-6">
+                    <Zap className="text-gialoma-gold mr-4" size={32} />
+                    <h3 className="font-bold text-2xl text-gialoma-black">Capítulo 1: Mentalidad</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
+                  <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      Cómo identificar qué automatizar primero
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">El caso de Sofía: cuando el mapa mental ya no coincide con el territorio</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      El método de 4 pasos para evaluar cualquier proceso
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">El principio de la plasticidad mental aplicado a la tecnología</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="text-gialoma-gold mr-2 flex-shrink-0 mt-1" size={16} />
-                      Plantilla para calcular el ROI de la automatización
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">Espejos cognitivos: cómo lo digital refleja y amplifica nuestros patrones mentales</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">El ejercicio de inversión de perspectiva para la transformación real</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="bg-gialoma-gold/10 p-6 rounded-lg border border-gialoma-gold/20 mt-8">
-                <div className="flex items-center justify-center mb-4">
-                  <Gift className="text-gialoma-gold mr-3" size={24} />
-                  <h3 className="font-bold text-xl text-gialoma-black">Bonus Incluido</h3>
+              <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-darkgold/10 p-8 rounded-lg border border-gialoma-gold/30 mt-12">
+                <div className="flex items-center justify-center mb-6">
+                  <Gift className="text-gialoma-gold mr-4" size={32} />
+                  <h3 className="font-bold text-2xl text-gialoma-black">Bonus Incluido</h3>
                 </div>
                 <div className="text-center">
-                  <p className="text-gialoma-darkgray mb-4">
-                    También recibirás acceso a nuestro newsletter exclusivo con casos de estudio semanales 
-                    y las últimas tendencias en automatización empresarial.
+                  <p className="text-lg text-gialoma-darkgray mb-6 leading-relaxed">
+                    También recibirás acceso a nuestro newsletter exclusivo "Alquimia Semanal" con casos de estudio reales, 
+                    reflexiones sobre tecnología consciente y las últimas tendencias en automatización que respeta la humanidad.
                   </p>
-                  <p className="text-sm text-gray-600">
-                    * Puedes darte de baja en cualquier momento con un clic
+                  <p className="text-base text-gray-600">
+                    * Contenido de alta calidad, una vez por semana. Puedes darte de baja en cualquier momento con un clic.
                   </p>
                 </div>
               </div>
@@ -450,7 +465,7 @@ const BookEs = () => {
               className="bg-white text-gialoma-gold hover:bg-gialoma-gold hover:text-white border border-white hover:border-white transition-colors px-8 py-6 text-lg font-bold"
             >
               <Download className="mr-2" size={18} />
-              Descargar PDF Gratis Ahora
+              Obtener PDF Gratis Ahora
             </Button>
             <p className="text-white/80 mt-4 text-sm">
               Formato PDF • Descarga instantánea • 100% Gratis
