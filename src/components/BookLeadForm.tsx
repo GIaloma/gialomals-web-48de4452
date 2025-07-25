@@ -53,10 +53,10 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.leadName || !formData.email) {
+    if (!formData.leadName || !formData.email || !formData.whatsappNumber) {
       toast({
         title: "Campos requeridos",
-        description: "Por favor completa nombre y email.",
+        description: "Por favor completa nombre, email y WhatsApp.",
         variant: "destructive"
       });
       return;
@@ -206,7 +206,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
               <div className="space-y-2">
                 <Label htmlFor="whatsappNumber" className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  WhatsApp (opcional)
+                  WhatsApp *
                 </Label>
                 <Input
                   id="whatsappNumber"
@@ -214,7 +214,11 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
                   placeholder="+34 600 000 000"
                   value={formData.whatsappNumber}
                   onChange={(e) => handleInputChange('whatsappNumber', e.target.value)}
+                  required
                 />
+                <p className="text-xs text-gray-600">
+                  Necesario para enviarte contenido exclusivo y actualizaciones del libro
+                </p>
               </div>
 
               <div className="space-y-2">
@@ -265,7 +269,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
                 />
                 <Label htmlFor="consent" className="text-xs leading-relaxed cursor-pointer">
                   Acepto recibir el PDF por email y ocasionalmente contenido relevante sobre 
-                  transformación digital. Puedes darte de baja en cualquier momento. *
+                  transformación digital por email y WhatsApp. Puedes darte de baja en cualquier momento. *
                 </Label>
               </div>
 
