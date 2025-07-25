@@ -11,8 +11,8 @@ const BookEs = () => {
   const [showLeadForm, setShowLeadForm] = useState(false);
 
   useEffect(() => {
-    // SEO Meta Tags
-    document.title = "Descarga Gratis: Alquimia Digital - Capítulo 0 + Primer Capítulo | Gialoma";
+    // SEO Meta Tags - Updated with correct book information
+    document.title = "Descarga Gratis: Alquimia Digital - El Puente entre la Sabiduría Ancestral y la Era Tecnológica | Gialoma";
     
     // Remove existing meta tags
     const existingDescription = document.querySelector('meta[name="description"]');
@@ -29,16 +29,16 @@ const BookEs = () => {
 
     // Add new meta tags
     const metaTags = [
-      { name: 'description', content: 'Descarga GRATIS los primeros capítulos de "Alquimia Digital". Aprende a transformar tu empresa con IA y automatización. Guía práctica sin tecnicismos.' },
-      { name: 'keywords', content: 'descarga gratis, alquimia digital, transformación digital, automatización empresarial, inteligencia artificial, IA para empresas, Gialoma, PDF gratis' },
-      { property: 'og:title', content: 'Descarga Gratis: Alquimia Digital - Capítulos de Introducción | Gialoma' },
-      { property: 'og:description', content: 'Obtén GRATIS la introducción y primer capítulo de nuestro libro sobre transformación digital. Estrategias probadas para implementar IA en tu empresa.' },
+      { name: 'description', content: 'Descarga GRATIS "Alquimia Digital: El Puente entre la Sabiduría Ancestral y la Era Tecnológica" - Capítulo 0: El Propósito de Gialoma. Tecnología consciente para la plenitud humana.' },
+      { name: 'keywords', content: 'descarga gratis, alquimia digital, tecnología consciente, automatización empresarial, equilibrio digital, Gialoma, transformación digital humana, PDF gratis' },
+      { property: 'og:title', content: 'Descarga Gratis: Alquimia Digital - El Puente entre la Sabiduría Ancestral y la Era Tecnológica' },
+      { property: 'og:description', content: 'Obtén GRATIS el Capítulo 0 de "Alquimia Digital" sobre tecnología consciente que libera tu tiempo y amplifica tu humanidad.' },
       { property: 'og:image', content: '/lovable-uploads/book-cover-es.png' },
       { property: 'og:url', content: 'https://gialoma.com/libro' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Descarga Gratis: Alquimia Digital - Capítulos de Introducción' },
-      { name: 'twitter:description', content: 'Obtén GRATIS los primeros capítulos de nuestro libro sobre transformación digital.' },
+      { name: 'twitter:title', content: 'Descarga Gratis: Alquimia Digital - Tecnología Consciente para la Plenitud Humana' },
+      { name: 'twitter:description', content: 'Obtén GRATIS el Capítulo 0 sobre cómo la tecnología puede liberarte para ser más humano.' },
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: 'Paloma Firgaira, Gianro Compagno' },
       { name: 'language', content: 'es' }
@@ -61,12 +61,12 @@ const BookEs = () => {
     canonical.href = 'https://gialoma.com/libro';
     document.head.appendChild(canonical);
 
-    // Structured Data (JSON-LD) - Updated for free resource
+    // Structured Data (JSON-LD) - Updated for correct book info
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Alquimia Digital - Descarga Gratuita",
-      "description": "Descarga gratuita de los primeros capítulos del libro 'Alquimia Digital' sobre transformación digital empresarial.",
+      "description": "Descarga gratuita del Capítulo 0 del libro 'Alquimia Digital: El Puente entre la Sabiduría Ancestral y la Era Tecnológica'.",
       "author": [
         {
           "@type": "Person",
@@ -86,8 +86,8 @@ const BookEs = () => {
       "url": "https://gialoma.com/libro",
       "mainEntity": {
         "@type": "DigitalDocument",
-        "name": "Alquimia Digital: Capítulo 0 + Primer Capítulo",
-        "description": "Introducción gratuita al libro sobre transformación digital empresarial",
+        "name": "Alquimia Digital: Capítulo 0 - El Propósito de Gialoma",
+        "description": "Capítulo gratuito sobre tecnología consciente que libera tu tiempo para la plenitud humana",
         "encodingFormat": "application/pdf",
         "offers": {
           "@type": "Offer",
@@ -139,7 +139,7 @@ const BookEs = () => {
       
       {/* Main Content */}
       <div className="flex-grow pt-32 md:pt-36">
-        {/* Hero section - Updated for free download */}
+        {/* Hero section - Updated with correct book information */}
         <section className="bg-gradient-to-r from-gialoma-darkgold to-gialoma-gold py-16">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -150,17 +150,30 @@ const BookEs = () => {
                     DESCARGA GRATUITA
                   </span>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  Alquimia Digital: Capítulo 0
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+                  Alquimia Digital
                 </h1>
-                <p className="text-xl text-white/90 mb-6">
-                  Descarga GRATIS la introducción y el primer capítulo de nuestro libro sobre transformación digital. Aprende los fundamentos para implementar IA y automatización en tu empresa.
+                <h2 className="text-2xl md:text-3xl text-white/90 mb-4 font-light italic">
+                  El Puente entre la Sabiduría Ancestral y la Era Tecnológica
+                </h2>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6">
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    Capítulo 0: El Propósito de Gialoma
+                  </h3>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    Descubre cómo la tecnología puede liberarte para ser más humano. Un viaje desde la resistencia 
+                    hasta la liberación, donde aprenderás a crear equilibrio entre lo digital y lo esencial.
+                  </p>
+                </div>
+                <p className="text-lg text-white/90 mb-6">
+                  Obtén GRATIS el primer capítulo donde Paloma comparte su transformación personal y 
+                  cómo nació una nueva forma de entender la tecnología: como herramienta de plenitud humana, no de esclavitud digital.
                 </p>
                 <div className="flex gap-2 mb-8">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} fill="white" className="text-white" size={20} />
                   ))}
-                  <span className="text-white ml-2">Basado en 74 lectores satisfechos</span>
+                  <span className="text-white ml-2">Más de 1,000 empresarios ya lo descargaron</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
@@ -180,7 +193,7 @@ const BookEs = () => {
                 <div className="rounded-lg shadow-2xl overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-300">
                   <img 
                     src="/placeholder.svg" 
-                    alt="Portada del libro Alquimia Digital - Capítulo 0" 
+                    alt="Portada del libro Alquimia Digital - El Puente entre la Sabiduría Ancestral y la Era Tecnológica" 
                     className="w-full h-auto"
                   />
                 </div>
