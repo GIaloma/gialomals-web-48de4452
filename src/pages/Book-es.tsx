@@ -33,7 +33,7 @@ const BookEs = () => {
       { name: 'keywords', content: 'descarga gratis, alquimia digital, tecnología consciente, automatización empresarial, equilibrio digital, Gialoma, transformación digital humana, PDF gratis' },
       { property: 'og:title', content: 'Descarga Gratis: Alquimia Digital - El Puente entre la Sabiduría Ancestral y la Era Tecnológica' },
       { property: 'og:description', content: 'Obtén GRATIS el Capítulo 0 de "Alquimia Digital" sobre tecnología consciente que libera tu tiempo y amplifica tu humanidad.' },
-      { property: 'og:image', content: '/lovable-uploads/book-cover-es.png' },
+      { property: 'og:image', content: '/lovable-uploads/Portada Libro Alquimia DIgital.png' },
       { property: 'og:url', content: 'https://gialoma.com/libro' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary_large_image' },
@@ -188,7 +188,7 @@ const BookEs = () => {
               <div className="md:w-1/3">
                 <div className="rounded-lg shadow-2xl overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-300">
                   <img 
-                    src="/placeholder.svg" 
+                    src="/lovable-uploads/Portada Libro Alquimia DIgital.png" 
                     alt="Portada del libro Alquimia Digital - El Puente entre la Sabiduría Ancestral y la Era Tecnológica" 
                     className="w-full h-auto"
                   />
