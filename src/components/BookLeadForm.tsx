@@ -73,7 +73,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
     setIsSubmitting(true);
 
     try {
-      // Create the record in Airtable
+      // Create the record in Airtable using Netlify Function
       const airtableData = {
         "Lead Name": formData.leadName,
         "Email": formData.email,
@@ -87,7 +87,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
         "Lead Notes": formData.companyName ? `Empresa: ${formData.companyName}` : ""
       };
 
-      const response = await fetch('/api/airtable-leads', {
+      const response = await fetch('/.netlify/functions/airtable-leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,9 +116,12 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
           onClose();
         }, 3000);
       } else {
-        throw new Error('Error al enviar el formulario');
+        const errorData = await response.json();
+        console.error('Server error:', errorData);
+        throw new Error(errorData.message || 'Error al enviar el formulario');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       toast({
         title: "Error",
         description: "Hubo un problema al procesar tu solicitud. Inténtalo de nuevo.",
