@@ -4,7 +4,7 @@ import BookNavbarEs from '../components/BookNavbar-es';
 import FooterEs from '../components/Footer-es';
 import BookLeadForm from '../components/BookLeadForm';
 import { Button } from '@/components/ui/button';
-import { Check, Download, Star, Users, BookOpen, Clock, Mail, Gift, Zap, Target } from 'lucide-react';
+import { Check, Download, Star, Users, BookOpen, Clock, Mail, Gift, Zap, Target, Heart, Lightbulb, Shield } from 'lucide-react';
 import CookieBannerEs from '../components/CookieBanner-es';
 
 const BookEs = () => {
@@ -198,7 +198,7 @@ const BookEs = () => {
           </div>
         </section>
 
-        {/* Value Proposition section - Made bigger and more visible */}
+        {/* Value Proposition section - Updated with book-relevant content */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center">
@@ -206,40 +206,49 @@ const BookEs = () => {
                 ¿Por Qué Más de 1,000 Empresarios Ya Descargaron Este Capítulo?
               </h2>
               <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Porque ofrece una perspectiva completamente nueva sobre la tecnología empresarial: 
-                una que pone la humanidad en el centro, no los algoritmos.
+                Porque descubrieron que existe una manera completamente nueva de relacionarse con la tecnología: 
+                una que amplifica su humanidad en lugar de comprometerla.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
                 <div className="text-center">
                   <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Target className="text-gialoma-gold" size={32} />
+                    <Heart className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Sin Tecnicismos</h3>
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Tecnología Consciente</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    Explicaciones claras y prácticas que cualquier empresario puede entender y aplicar inmediatamente. 
-                    Lenguaje humano para soluciones tecnológicas.
+                    Aprende el "Modelo de Tecnología Consciente" que pone los valores humanos en el centro. 
+                    No se trata de hacer más, sino de vivir mejor.
                   </p>
                 </div>
                 <div className="text-center">
                   <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Zap className="text-gialoma-gold" size={32} />
+                    <Lightbulb className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Resultados Rápidos</h3>
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Sabiduría Ancestral + Era Digital</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    Estrategias que puedes implementar esta misma semana para empezar a recuperar tiempo valioso 
-                    y reducir el estrés tecnológico en tu empresa.
+                    Descubre cómo fusionar principios atemporales de bienestar humano con las herramientas 
+                    más avanzadas de nuestra época.
                   </p>
                 </div>
                 <div className="text-center">
                   <div className="bg-gialoma-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Check className="text-gialoma-gold" size={32} />
+                    <Shield className="text-gialoma-gold" size={32} />
                   </div>
-                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Casos Reales</h3>
+                  <h3 className="font-bold text-2xl mb-4 text-gialoma-black">Liberación del Tiempo</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    Historias auténticas de transformación personal y empresarial. No teorías abstractas, 
-                    sino experiencias vividas y resultados medibles.
+                    Conoce las "Herramientas que Liberan tu Tiempo" y cómo Paloma recuperó la conexión 
+                    con sus hijos tras años de sacrificio innecesario.
                   </p>
                 </div>
+              </div>
+              
+              {/* Added quote section for more authenticity */}
+              <div className="mt-16 bg-gialoma-gold/5 rounded-lg p-8 border-l-4 border-gialoma-gold">
+                <blockquote className="text-xl italic text-gialoma-darkgray mb-4">
+                  "La verdadera revolución tecnológica no está en los dispositivos o algoritmos, sino en cómo 
+                  estos pueden liberarnos para ser más plenamente humanos."
+                </blockquote>
+                <cite className="text-gialoma-gold font-semibold">— Paloma Firgaira, Capítulo 0</cite>
               </div>
             </div>
           </div>
