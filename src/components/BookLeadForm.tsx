@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Download, Mail, Building, User, CheckCircle, X } from 'lucide-react';
+import { Download, Mail, Building, User, CheckCircle, X, Phone } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface BookLeadFormProps {
@@ -17,6 +17,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
   const [formData, setFormData] = useState({
     leadName: '',
     email: '',
+    whatsappNumber: '',
     companyName: '',
     interests: [] as string[],
     consentToMarketing: false
@@ -77,6 +78,7 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
       const airtableData = {
         "Lead Name": formData.leadName,
         "Email": formData.email,
+        "WhatsApp Number": formData.whatsappNumber,
         "Download Date": new Date().toISOString().split('T')[0],
         "Downloaded Content Title": "Alquimia Digital: Capítulo 0 - Introducción + Primer Capítulo",
         "Download Source Page": "/libro",
@@ -198,6 +200,20 @@ const BookLeadForm: React.FC<BookLeadFormProps> = ({ isOpen, onClose, onSuccess 
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="whatsappNumber" className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  WhatsApp (opcional)
+                </Label>
+                <Input
+                  id="whatsappNumber"
+                  type="tel"
+                  placeholder="+34 600 000 000"
+                  value={formData.whatsappNumber}
+                  onChange={(e) => handleInputChange('whatsappNumber', e.target.value)}
                 />
               </div>
 
