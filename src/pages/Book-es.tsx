@@ -9,7 +9,6 @@ import BookSEO from '../components/book/BookSEO';
 import BookHero from '../components/book/BookHero';
 import BookValueProposition from '../components/book/BookValueProposition';
 import BookContent from '../components/book/BookContent';
-import BookAuthors from '../components/book/BookAuthors';
 import BookTestimonials from '../components/book/BookTestimonials';
 import BookFAQ from '../components/book/BookFAQ';
 import BookCTA from '../components/book/BookCTA';
@@ -50,7 +49,6 @@ const BookEs = () => {
         <BookHero onDownloadClick={handleDownloadClick} />
         <BookValueProposition />
         <BookContent />
-        <BookAuthors />
         <BookTestimonials />
         <BookFAQ />
         <BookCTA onDownloadClick={handleDownloadClick} />
