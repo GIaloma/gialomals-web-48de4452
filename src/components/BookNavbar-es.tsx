@@ -20,10 +20,10 @@ const BookNavbarEs = () => {
   }, []);
   
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2 md:py-3' : 'bg-transparent py-3 md:py-5'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2 md:py-3' : 'bg-black py-3 md:py-5'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <a href="https://gialoma.com" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img 
               alt="Logo de Gialoma Life Solutions" 
               src="/lovable-uploads/4fe10b17-aa26-49e1-a9a2-e516e09ef670.png" 
@@ -34,12 +34,12 @@ const BookNavbarEs = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
-          <a href="https://gialoma.com#acerca" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Acerca</a>
-          <a href="https://gialoma.com#soluciones" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Soluciones</a>
-          <a href="https://gialoma.com#servicios" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Servicios</a>
-          <a href="https://gialoma.com#equipo" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Equipo</a>
-          <a href="https://gialoma.com#testimonios" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Clientes</a>
-          <a href="https://gialoma.com#contactos" className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium">Contactos</a>
+          <a href="/#acerca" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Acerca</a>
+          <a href="/#soluciones" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Soluciones</a>
+          <a href="/#servicios" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Servicios</a>
+          <a href="/#equipo" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Equipo</a>
+          <a href="/#testimonios" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Clientes</a>
+          <a href="/#contactos" className={`${isScrolled ? 'text-gialoma-lightgold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors font-medium`}>Contactos</a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -47,19 +47,9 @@ const BookNavbarEs = () => {
           <div className="hidden md:block">
             <LanguageSelector isCompact={true} />
           </div>
-
-          {/* Login Button - Temporarily removed (matching main navbar)
-          <div className="hidden md:block">
-            <Link to="/login">
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white px-3 py-1 h-9">
-                <LogIn size={16} className="mr-1" /> Iniciar Sesión
-              </Button>
-            </Link>
-          </div>
-          */}
             
           <div className="hidden md:block">
-            <a href="https://gialoma.com#empezar">
+            <a href="/#empezar">
               <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white">
                 Comenzar
               </Button>
@@ -68,7 +58,7 @@ const BookNavbarEs = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-gialoma-gold hover:text-gialoma-darkgold transition-colors" 
+            className={`md:hidden ${isScrolled ? 'text-gialoma-gold hover:text-gialoma-darkgold' : 'text-white hover:text-gialoma-lightgold'} transition-colors`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             aria-expanded={isMenuOpen}
@@ -90,42 +80,42 @@ const BookNavbarEs = () => {
         >
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
-              href="https://gialoma.com#acerca" 
+              href="/#acerca" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Acerca
             </a>
             <a 
-              href="https://gialoma.com#soluciones" 
+              href="/#soluciones" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Soluciones
             </a>
             <a 
-              href="https://gialoma.com#servicios" 
+              href="/#servicios" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Servicios
             </a>
             <a 
-              href="https://gialoma.com#equipo" 
+              href="/#equipo" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Equipo
             </a>
             <a 
-              href="https://gialoma.com#testimonios" 
+              href="/#testimonios" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
               Clientes
             </a>
             <a 
-              href="https://gialoma.com#contactos" 
+              href="/#contactos" 
               className="text-gialoma-lightgold hover:text-gialoma-darkgold transition-colors font-medium py-2" 
               onClick={() => setIsMenuOpen(false)}
             >
@@ -136,20 +126,9 @@ const BookNavbarEs = () => {
             <div className="py-2">
               <LanguageSelector isMobile={true} />
             </div>
-
-            {/* Mobile Login Button - Temporarily removed (matching main navbar)
-            <Link 
-              to="/login" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Button variant="outline" className="border-gialoma-gold text-gialoma-gold hover:bg-gialoma-gold hover:text-white w-full flex items-center justify-center">
-                <LogIn size={18} className="mr-2" /> Iniciar Sesión
-              </Button>
-            </Link>
-            */}
             
             <a 
-              href="https://gialoma.com#empezar" 
+              href="/#empezar" 
               onClick={() => setIsMenuOpen(false)}
             >
               <Button className="bg-gialoma-gold hover:bg-gialoma-darkgold text-white w-full">
