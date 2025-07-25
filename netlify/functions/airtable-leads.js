@@ -27,6 +27,7 @@ exports.handler = async (event, context) => {
     const {
       'Lead Name': leadName,
       'Email': email,
+      'WhatsApp Number': whatsappNumber,
       'Download Date': downloadDate,
       'Downloaded Content Title': downloadedContentTitle,
       'Download Source Page': downloadSourcePage,
@@ -71,6 +72,11 @@ exports.handler = async (event, context) => {
         'Lead Notes': leadNotes || ''
       }
     };
+
+    // Only add WhatsApp Number if it's provided
+    if (whatsappNumber && whatsappNumber.trim() !== '') {
+      airtableRecord.fields['WhatsApp Number'] = whatsappNumber;
+    }
 
     const airtableResponse = await fetch(airtableUrl, {
       method: 'POST',
