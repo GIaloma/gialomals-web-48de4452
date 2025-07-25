@@ -254,7 +254,7 @@ const BookEs = () => {
           </div>
         </section>
         
-        {/* What's included section - Made bigger and more visible */}
+        {/* What's included section - Updated with more accurate free content */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
@@ -262,8 +262,8 @@ const BookEs = () => {
                 Qué Incluye Tu Descarga Gratuita
               </h2>
               <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto leading-relaxed">
-                Más que un simple capítulo: una guía completa para comenzar tu transformación 
-                hacia una relación más consciente con la tecnología.
+                Una introducción completa más dos capítulos íntegros que transformarán tu perspectiva 
+                sobre la tecnología y su verdadero propósito en tu vida.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -275,19 +275,23 @@ const BookEs = () => {
                   <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">La historia personal de Paloma: de la resistencia a la liberación tecnológica</span>
+                      <span className="text-lg">El viaje personal de Paloma: 20 años de malabarismo hasta descubrir la liberación</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">Cómo nació Gialoma y el modelo de "Tecnología Consciente"</span>
+                      <span className="text-lg">Cómo nació Gialoma Life Solutions y el encuentro entre Paloma y Gianro</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">Las herramientas que realmente liberan tu tiempo (sin crear nueva esclavitud)</span>
+                      <span className="text-lg">Las 5 categorías de herramientas que realmente liberan tiempo (con ejemplos prácticos)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">El futuro de la tecnología orientada a la plenitud humana</span>
+                      <span className="text-lg">El Modelo de Tecnología Consciente: framework completo con 5 capas</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
+                      <span className="text-lg">Sistema de Implementación Integrada (5 fases detalladas)</span>
                     </li>
                   </ul>
                 </div>
@@ -295,24 +299,24 @@ const BookEs = () => {
                 <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
                   <div className="flex items-center mb-6">
                     <Zap className="text-gialoma-gold mr-4" size={32} />
-                    <h3 className="font-bold text-2xl text-gialoma-black">Capítulo 1: Mentalidad</h3>
+                    <h3 className="font-bold text-2xl text-gialoma-black">Capítulo 1: La Mentalidad</h3>
                   </div>
                   <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">El caso de Sofía: cuando el mapa mental ya no coincide con el territorio</span>
+                      <span className="text-lg">El caso completo de Sofía: transformación mental ante el cambio tecnológico</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">El principio de la plasticidad mental aplicado a la tecnología</span>
+                      <span className="text-lg">El Principio de Plasticidad Mental aplicado a la adopción tecnológica</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">Espejos cognitivos: cómo lo digital refleja y amplifica nuestros patrones mentales</span>
+                      <span className="text-lg">Espejos Cognitivos: cómo lo digital amplifica nuestros patrones mentales</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="text-gialoma-gold mr-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="text-lg">El ejercicio de inversión de perspectiva para la transformación real</span>
+                      <span className="text-lg">El Ejercicio de Inversión de Perspectiva (paso a paso aplicable)</span>
                     </li>
                   </ul>
                 </div>
@@ -325,11 +329,12 @@ const BookEs = () => {
                 </div>
                 <div className="text-center">
                   <p className="text-lg text-gialoma-darkgray mb-6 leading-relaxed">
-                    También recibirás acceso a nuestro newsletter exclusivo "Alquimia Semanal" con casos de estudio reales, 
-                    reflexiones sobre tecnología consciente y las últimas tendencias en automatización que respeta la humanidad.
+                    También recibirás acceso a nuestro newsletter exclusivo con casos de estudio reales, 
+                    reflexiones sobre tecnología consciente y las últimas tendencias en automatización que respeta la humanidad. 
+                    Porque creemos en el respeto mutuo, nunca saturaremos tu bandeja de entrada con contenido irrelevante.
                   </p>
                   <p className="text-base text-gray-600">
-                    * Contenido de alta calidad, una vez por semana. Puedes darte de baja en cualquier momento con un clic.
+                    * Contenido de alta calidad. Puedes darte de baja en cualquier momento con un clic cuando empezarás a recibir nuestra newsletter.
                   </p>
                 </div>
               </div>
