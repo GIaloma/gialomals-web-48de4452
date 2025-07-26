@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import BookNavbarEs from '../components/BookNavbar-es';
 import FooterEs from '../components/Footer-es';
 import BookLeadForm from '../components/BookLeadForm';
-import CookieBannerEs from '../components/CookieBanner-es';
 
 // Import modular book components
 import BookSEO from '../components/book/BookSEO';
@@ -62,7 +61,6 @@ const BookEs = () => {
       />
       
       <FooterEs />
-      <CookieBannerEs />
     </div>
   );
 };
