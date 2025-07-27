@@ -1,7 +1,31 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AboutEs = () => {
+  const [activeContent, setActiveContent] = useState(0);
+
+  const philosophyContents = [
+    {
+      title: "Nuestra Ética",
+      content: "Humanizando la tecnología: creemos que la IA está para servirnos, no para sustituirnos. Nuestro objetivo es que trabajes menos en tareas repetitivas y más en lo que importa."
+    },
+    {
+      title: "Nuestra Filosofía",
+      content: "Gialoma Life Solutions cree que cuando las personas recuperan su tiempo, suceden cosas increíbles: sus negocios no solo crecen, explotan. No somos solo tecnología, somos el catalizador que convierte el tiempo perdido en ingresos multiplicados y vidas plenas."
+    }
+  ];
+
+  const nextContent = () => {
+    setActiveContent((prev) => (prev + 1) % philosophyContents.length);
+  };
+
+  const prevContent = () => {
+    setActiveContent((prev) => (prev - 1 + philosophyContents.length) % philosophyContents.length);
+  };
+
+  const currentContent = philosophyContents[activeContent];
+
   return (
     <section id="acerca" className="section-padding bg-gray-100">
       <div className="container mx-auto px-4">
@@ -79,7 +103,7 @@ const AboutEs = () => {
             </div>
           </div>
           
-          {/* Philosophy Section */}
+          {/* Philosophy Section with Content Switcher */}
           <div className="text-center">
             <div className="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
               <div className="flex items-center justify-center mb-6">
@@ -92,16 +116,63 @@ const AboutEs = () => {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gialoma-black mb-4">Nuestra Filosofía</h3>
-              <p className="text-xl text-gialoma-darkgray-accessible leading-relaxed">
-                Gialoma Life Solutions cree que cuando las personas recuperan su tiempo, suceden cosas increíbles: sus negocios no solo crecen, <strong className="text-gialoma-gold-accessible">explotan</strong>. No somos solo tecnología, somos el <strong className="text-gialoma-gold-accessible">catalizador</strong> que convierte el tiempo perdido en <strong className="text-gialoma-gold-accessible">ingresos multiplicados</strong> y <strong className="text-gialoma-gold-accessible">vidas plenas</strong>.
+              
+              {/* Content Header with Navigation */}
+              <div className="flex items-center justify-center mb-4">
+                <button
+                  onClick={prevContent}
+                  className="bg-gialoma-gold hover:bg-yellow-600 text-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 mr-4"
+                  aria-label="Contenido anterior"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                
+                <h3 className="text-2xl font-bold text-gialoma-black">
+                  {currentContent.title}
+                </h3>
+                
+                <button
+                  onClick={nextContent}
+                  className="bg-gialoma-gold hover:bg-yellow-600 text-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 ml-4"
+                  aria-label="Siguiente contenido"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+              
+              {/* Content Area */}
+              <p className="text-xl text-gialoma-darkgray-accessible leading-relaxed transition-all duration-300">
+                {currentContent.content.includes('catalizador') ? (
+                  <>
+                    {currentContent.content.split('explotan')[0]}
+                    <strong className="text-gialoma-gold-accessible">explotan</strong>
+                    {currentContent.content.split('explotan')[1].split('catalizador')[0]}
+                    <strong className="text-gialoma-gold-accessible">catalizador</strong>
+                    {currentContent.content.split('catalizador')[1].split('ingresos multiplicados')[0]}
+                    <strong className="text-gialoma-gold-accessible">ingresos multiplicados</strong>
+                    {currentContent.content.split('ingresos multiplicados')[1].split('vidas plenas')[0]}
+                    <strong className="text-gialoma-gold-accessible">vidas plenas</strong>
+                    {currentContent.content.split('vidas plenas')[1]}
+                  </>
+                ) : (
+                  currentContent.content
+                )}
               </p>
-              <div className="mt-6 flex justify-center">
-                <div className="flex items-center space-x-2 text-gialoma-gold">
-                  <div className="w-2 h-2 bg-gialoma-gold rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-gialoma-gold rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                  <div className="w-2 h-2 bg-gialoma-gold rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-                </div>
+              
+              {/* Content Indicators */}
+              <div className="mt-6 flex justify-center space-x-2">
+                {philosophyContents.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveContent(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                      index === activeContent 
+                        ? 'bg-gialoma-gold' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Ver ${philosophyContents[index].title}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
