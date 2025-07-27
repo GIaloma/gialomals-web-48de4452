@@ -154,6 +154,17 @@ const AboutEs = () => {
                     <strong className="text-gialoma-gold-accessible">vidas plenas</strong>
                     {currentContent.content.split('vidas plenas')[1]}
                   </>
+                ) : currentContent.content.includes('Humanizando') ? (
+                  <>
+                    <strong className="text-gialoma-gold-accessible">Humanizando</strong>
+                    {currentContent.content.split('Humanizando')[1].split('servirnos')[0]}
+                    <strong className="text-gialoma-gold-accessible">servirnos</strong>
+                    {currentContent.content.split('servirnos')[1].split('sustituirnos')[0]}
+                    <strong className="text-gialoma-gold-accessible">sustituirnos</strong>
+                    {currentContent.content.split('sustituirnos')[1].split('importa')[0]}
+                    <strong className="text-gialoma-gold-accessible">importa</strong>
+                    {currentContent.content.split('importa')[1]}
+                  </>
                 ) : (
                   currentContent.content
                 )}
