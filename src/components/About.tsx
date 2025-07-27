@@ -154,6 +154,17 @@ const About = () => {
                     <strong className="text-gialoma-gold-accessible">fulfilled lives</strong>
                     {currentContent.content.split('fulfilled lives')[1]}
                   </>
+                ) : currentContent.content.includes('Humanizing') ? (
+                  <>
+                    <strong className="text-gialoma-gold-accessible">Humanizing</strong>
+                    {currentContent.content.split('Humanizing')[1].split('serve us')[0]}
+                    <strong className="text-gialoma-gold-accessible">serve us</strong>
+                    {currentContent.content.split('serve us')[1].split('replace us')[0]}
+                    <strong className="text-gialoma-gold-accessible">replace us</strong>
+                    {currentContent.content.split('replace us')[1].split('matters')[0]}
+                    <strong className="text-gialoma-gold-accessible">matters</strong>
+                    {currentContent.content.split('matters')[1]}
+                  </>
                 ) : (
                   currentContent.content
                 )}
