@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface ContactFormProps {
   language: 'es' | 'en';
@@ -10,188 +9,231 @@ interface FormData {
   email: string;
   subject: string;
   message: string;
-  acceptCookies: boolean;
+  consentToMarketing: boolean;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ language = 'es' }) => {
+interface FormErrors {
+  fullName?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+  consentToMarketing?: string;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     subject: '',
     message: '',
-    acceptCookies: false
+    consentToMarketing: false,
   });
 
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const texts = {
+  const text = {
     es: {
+      title: 'Envíanos un Mensaje',
       fullName: 'Tu Nombre',
       email: 'Correo Electrónico',
       subject: 'Asunto',
       message: 'Mensaje',
-      acceptCookies: 'Acepto la política de cookies y privacidad',
+      consent: 'Confirma que has leído nuestros:',
+      termsOfService: 'Términos de Servicio',
+      cookiePolicy: 'Política de cookies',
+      privacyPolicy: 'Política de Privacidad',
       submit: 'Enviar mensaje',
       submitting: 'Enviando...',
-      success: '¡Mensaje enviado con éxito! Te contactaremos pronto.',
+      success: '¡Mensaje enviado correctamente! Te responderemos pronto.',
       error: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.',
       required: 'Este campo es obligatorio',
-      emailInvalid: 'Por favor, introduce un email válido',
-      cookiesRequired: 'Debes aceptar la política de cookies para continuar',
+      invalidEmail: 'Por favor, introduce un email válido',
+      consentRequired: 'Debes aceptar nuestros términos para continuar',
       placeholders: {
-        fullName: 'Juanjo Pérez',
-        email: 'juan@ejemplo.com',
+        fullName: 'Tu nombre completo',
+        email: 'tu@email.com',
         subject: '¿Cómo Podemos Ayudarte?',
         message: 'Tu Mensaje...'
       }
     },
     en: {
+      title: 'Send us a Message',
       fullName: 'Your Name',
       email: 'Email Address',
       subject: 'Subject',
       message: 'Message',
-      acceptCookies: 'I accept the cookies and privacy policy',
+      consent: 'Confirm that you have read our:',
+      termsOfService: 'Terms of Service',
+      cookiePolicy: 'Cookie Policy',
+      privacyPolicy: 'Privacy Policy',
       submit: 'Send message',
       submitting: 'Sending...',
-      success: 'Message sent successfully! We will contact you soon.',
+      success: 'Message sent successfully! We\'ll get back to you soon.',
       error: 'Error sending message. Please try again.',
       required: 'This field is required',
-      emailInvalid: 'Please enter a valid email',
-      cookiesRequired: 'You must accept the cookies policy to continue',
+      invalidEmail: 'Please enter a valid email',
+      consentRequired: 'You must accept our terms to continue',
       placeholders: {
-        fullName: 'John Doe',
-        email: 'john@example.com',
+        fullName: 'Your full name',
+        email: 'your@email.com',
         subject: 'How Can We Help You?',
         message: 'Your Message...'
       }
     }
   };
 
-  const t = texts[language];
+  const t = text[language];
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    
-    if (type === 'checkbox') {
-      const checkbox = e.target as HTMLInputElement;
-      setFormData(prev => ({
-        ...prev,
-        [name]: checkbox.checked
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    }
-  };
-
-  const validateForm = () => {
     if (!formData.fullName.trim()) {
-      setErrorMessage(t.required + ' - ' + t.fullName);
-      return false;
+      newErrors.fullName = t.required;
     }
+
     if (!formData.email.trim()) {
-      setErrorMessage(t.required + ' - ' + t.email);
-      return false;
+      newErrors.email = t.required;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = t.invalidEmail;
     }
-    if (!validateEmail(formData.email)) {
-      setErrorMessage(t.emailInvalid);
-      return false;
-    }
+
     if (!formData.subject.trim()) {
-      setErrorMessage(t.required + ' - ' + t.subject);
-      return false;
+      newErrors.subject = t.required;
     }
+
     if (!formData.message.trim()) {
-      setErrorMessage(t.required + ' - ' + t.message);
-      return false;
+      newErrors.message = t.required;
     }
-    if (!formData.acceptCookies) {
-      setErrorMessage(t.cookiesRequired);
-      return false;
+
+    if (!formData.consentToMarketing) {
+      newErrors.consentToMarketing = t.consentRequired;
     }
-    return true;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
-      setSubmitStatus('error');
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus('idle');
-    setErrorMessage('');
+    setSubmitError(null);
 
     try {
-      const response = await fetch('/api/contact-form', {
+      const submissionData = {
+        'Full Name': formData.fullName,
+        'Email': formData.email,
+        'Subject': formData.subject,
+        'Message': formData.message,
+        'Submission Date': new Date().toISOString(),
+        'Language': language === 'es' ? 'Español' : 'English',
+        'Status': 'New',
+        'Source Page': window.location.pathname,
+        'User Agent': navigator.userAgent,
+        'IP Address': '', // This will be empty for privacy
+        'Consent to Marketing': formData.consentToMarketing
+      };
+
+      const response = await fetch('/.netlify/functions/contact-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          fullName: formData.fullName.trim(),
-          email: formData.email.trim(),
-          subject: formData.subject.trim(),
-          message: formData.message.trim(),
-          language: language === 'es' ? 'Español' : 'English',
-          sourcePage: window.location.pathname,
-          acceptCookies: formData.acceptCookies
-        }),
+        body: JSON.stringify(submissionData),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(result.message || 'Error submitting form');
       }
 
-      const result = await response.json();
-      
-      if (result.success) {
-        setSubmitStatus('success');
-        setFormData({
-          fullName: '',
-          email: '',
-          subject: '',
-          message: '',
-          acceptCookies: false
+      // Track successful submission
+      if (window.gtag) {
+        window.gtag('event', 'contact_form_submission', {
+          event_category: 'engagement',
+          event_label: language,
+          value: 1
         });
-        
-        // Track successful form submission
-        if (typeof window.gtag !== 'undefined') {
-          window.gtag('event', 'contact_form_submit', {
-            'event_category': 'engagement',
-            'event_label': language,
-            'value': 1
-          });
-        }
-      } else {
-        throw new Error(result.error || 'Unknown error');
       }
+
+      setIsSubmitted(true);
+      setFormData({
+        fullName: '',
+        email: '',
+        subject: '',
+        message: '',
+        consentToMarketing: false,
+      });
+
     } catch (error) {
-      console.error('Contact form submission error:', error);
-      setSubmitStatus('error');
-      setErrorMessage(t.error);
+      console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : t.error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, consentToMarketing: e.target.checked }));
+    
+    if (errors.consentToMarketing) {
+      setErrors(prev => ({ ...prev, consentToMarketing: undefined }));
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="bg-gray-50 p-8 rounded-lg h-full flex flex-col justify-center items-center text-center">
+        <div className="text-green-600 text-5xl mb-4">✓</div>
+        <h3 className="text-xl font-semibold text-gialoma-darkgray mb-2">
+          {t.success}
+        </h3>
+        <button
+          onClick={() => setIsSubmitted(false)}
+          className="mt-4 text-gialoma-gold hover:text-gialoma-darkgold underline"
+        >
+          {language === 'es' ? 'Enviar otro mensaje' : 'Send another message'}
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="h-full flex flex-col">
-      <form onSubmit={handleSubmit} className="space-y-5 flex-grow flex flex-col">
+    <div className="bg-gray-50 p-8 rounded-lg h-full flex flex-col">
+      <h3 className="text-2xl font-bold text-gialoma-darkgray mb-6">
+        {t.title}
+      </h3>
+      
+      {submitError && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          {submitError}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="flex-grow flex flex-col space-y-5">
         {/* Full Name */}
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gialoma-black mb-2">
+          <label htmlFor="fullName" className="block text-sm font-medium text-gialoma-darkgray mb-2">
             {t.fullName} *
           </label>
           <input
@@ -201,38 +243,41 @@ const ContactForm: React.FC<ContactFormProps> = ({ language = 'es' }) => {
             value={formData.fullName}
             onChange={handleInputChange}
             placeholder={t.placeholders.fullName}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-            required
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent ${
+              errors.fullName ? 'border-red-300' : 'border-gray-300'
+            }`}
+            disabled={isSubmitting}
           />
+          {errors.fullName && (
+            <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
+          )}
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gialoma-black mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gialoma-darkgray mb-2">
             {t.email} *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-              </svg>
-            </div>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder={t.placeholders.email}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-              required
-            />
-          </div>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder={t.placeholders.email}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent ${
+              errors.email ? 'border-red-300' : 'border-gray-300'
+            }`}
+            disabled={isSubmitting}
+          />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+          )}
         </div>
 
         {/* Subject */}
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gialoma-black mb-2">
+          <label htmlFor="subject" className="block text-sm font-medium text-gialoma-darkgray mb-2">
             {t.subject} *
           </label>
           <input
@@ -242,14 +287,19 @@ const ContactForm: React.FC<ContactFormProps> = ({ language = 'es' }) => {
             value={formData.subject}
             onChange={handleInputChange}
             placeholder={t.placeholders.subject}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-            required
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent ${
+              errors.subject ? 'border-red-300' : 'border-gray-300'
+            }`}
+            disabled={isSubmitting}
           />
+          {errors.subject && (
+            <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
+          )}
         </div>
 
-        {/* Message - Made bigger to fill more space */}
+        {/* Message */}
         <div className="flex-grow flex flex-col">
-          <label htmlFor="message" className="block text-sm font-medium text-gialoma-black mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-gialoma-darkgray mb-2">
             {t.message} *
           </label>
           <textarea
@@ -259,90 +309,54 @@ const ContactForm: React.FC<ContactFormProps> = ({ language = 'es' }) => {
             onChange={handleInputChange}
             placeholder={t.placeholders.message}
             rows={8}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black resize-vertical flex-grow min-h-[120px]"
-            required
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent flex-grow min-h-[120px] resize-none ${
+              errors.message ? 'border-red-300' : 'border-gray-300'
+            }`}
+            disabled={isSubmitting}
           />
+          {errors.message && (
+            <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+          )}
         </div>
 
-        {/* Accept Cookies Checkbox - Reformatted as requested */}
-        <div className="flex items-start pt-2">
-          <div className="flex items-center h-5 mt-1">
+        {/* Consent */}
+        <div className="pt-2">
+          <label className="flex items-start space-x-3">
             <input
-              id="acceptCookies"
-              name="acceptCookies"
               type="checkbox"
-              checked={formData.acceptCookies}
-              onChange={handleInputChange}
-              className="w-4 h-4 text-gialoma-gold bg-gray-100 border-gray-300 rounded focus:ring-gialoma-gold focus:ring-2"
-              required
+              checked={formData.consentToMarketing}
+              onChange={handleCheckboxChange}
+              className="mt-1 h-4 w-4 text-gialoma-gold focus:ring-gialoma-gold border-gray-300 rounded"
+              disabled={isSubmitting}
             />
-          </div>
-          <div className="ml-3 text-sm">
-            <label htmlFor="acceptCookies" className="text-gialoma-darkgray leading-relaxed">
-              {language === 'es' ? (
-                <>
-                  Confirma que has leído nuestros:<br />
-                  <a href="/terminos-de-servicio" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Términos de Servicio
-                  </a><br />
-                  <a href="/politica-de-cookies" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Política de cookies
-                  </a><br />
-                  <a href="/politica-de-privacidad" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Política de Privacidad
-                  </a>{' '}*
-                </>
-              ) : (
-                <>
-                  Confirm that you have read our:<br />
-                  <a href="/en/terms-of-service" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Terms of Service
-                  </a><br />
-                  <a href="/en/cookie-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Cookie Policy
-                  </a><br />
-                  <a href="/en/privacy-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                    Privacy Policy
-                  </a>{' '}*
-                </>
-              )}
-            </label>
-          </div>
+            <span className="text-sm text-gialoma-darkgray leading-relaxed">
+              {t.consent}<br />
+              <a href="/terminos-de-servicio" target="_blank" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                {t.termsOfService}
+              </a><br />
+              <a href="/politica-de-cookies" target="_blank" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                {t.cookiePolicy}
+              </a><br />
+              <a href="/politica-de-privacidad" target="_blank" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                {t.privacyPolicy}
+              </a> *
+            </span>
+          </label>
+          {errors.consentToMarketing && (
+            <p className="mt-1 text-sm text-red-600">{errors.consentToMarketing}</p>
+          )}
         </div>
-
-        {/* Status Messages */}
-        {submitStatus === 'success' && (
-          <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-lg">
-            <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-            <p className="text-green-700 text-sm">{t.success}</p>
-          </div>
-        )}
-
-        {submitStatus === 'error' && (
-          <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-lg">
-            <AlertCircle className="h-5 w-5 text-red-500 mr-3" />
-            <p className="text-red-700 text-sm">{errorMessage || t.error}</p>
-          </div>
-        )}
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-gialoma-gold hover:bg-gialoma-darkgold disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center mt-auto"
-        >
-          {isSubmitting ? (
-            <>
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-              {t.submitting}
-            </>
-          ) : (
-            <>
-              <Send className="h-5 w-5 mr-2" />
-              {t.submit}
-            </>
-          )}
-        </button>
+        <div className="mt-auto pt-4">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-gialoma-gold text-white py-4 px-6 rounded-lg font-semibold hover:bg-gialoma-darkgold focus:ring-2 focus:ring-gialoma-gold focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? t.submitting : t.submit}
+          </button>
+        </div>
       </form>
     </div>
   );
