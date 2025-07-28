@@ -5,57 +5,102 @@ interface ContactFormData {
   email: string;
   subject: string;
   message: string;
-  acceptTerms: boolean;
-  language: 'English' | 'Español';
+  language: string;
   sourcePage: string;
+  acceptCookies: boolean;
 }
+
+interface ApiResponse {
+  success: boolean;
+  error?: string;
+  recordId?: string;
+}
+
+const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
+const AIRTABLE_BASE_ID = 'appm1vsnLsbKwoEHC';
+const AIRTABLE_TABLE_ID = 'tblETJBTKXn3Y5yy1';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<ApiResponse>
 ) {
+  // Only allow POST requests
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ 
+      success: false, 
+      error: 'Method not allowed' 
+    });
+  }
+
+  // Check if Airtable API key is configured
+  if (!AIRTABLE_API_KEY) {
+    console.error('AIRTABLE_API_KEY not found in environment variables');
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Server configuration error' 
+    });
   }
 
   try {
     const formData: ContactFormData = req.body;
 
     // Validate required fields
-    if (!formData.fullName || !formData.email || !formData.subject || !formData.message) {
-      return res.status(400).json({ 
-        message: 'Todos los campos marcados con * son obligatorios' 
-      });
-    }
-
-    if (!formData.acceptTerms) {
-      return res.status(400).json({ 
-        message: 'Debes aceptar nuestros términos de servicio y política de privacidad' 
-      });
-    }
-
-    // Create Airtable record
-    const airtableData = {
-      fields: {
-        'Full Name': formData.fullName,
-        'Email': formData.email,
-        'Subject': formData.subject,
-        'Message': formData.message,
-        'Submission Date': new Date().toISOString(),
-        'Language': formData.language,
-        'Status': 'New',
-        'Source Page': formData.sourcePage || 'Website Contact Form',
-        'ID': `CONTACT-${Date.now()}`,
-        'Accept Cookies': formData.acceptTerms
+    const requiredFields = ['fullName', 'email', 'subject', 'message'];
+    for (const field of requiredFields) {
+      if (!formData[field] || typeof formData[field] !== 'string' || !formData[field].trim()) {
+        return res.status(400).json({
+          success: false,
+          error: `Missing or invalid field: ${field}`
+        });
       }
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid email format'
+      });
+    }
+
+    // Check cookies acceptance
+    if (!formData.acceptCookies) {
+      return res.status(400).json({
+        success: false,
+        error: 'Cookies acceptance is required'
+      });
+    }
+
+    // Prepare data for Airtable
+    const airtableData = {
+      records: [
+        {
+          fields: {
+            'Full Name': formData.fullName.trim(),
+            'Email': formData.email.trim().toLowerCase(),
+            'Subject': formData.subject.trim(),
+            'Message': formData.message.trim(),
+            'Submission Date': new Date().toISOString(),
+            'Language': formData.language || 'Español',
+            'Status': 'New',
+            'Source Page': formData.sourcePage || '/contacto',
+            'Accept Cookies': formData.acceptCookies,
+            'ID': `contact_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+          }
+        }
+      ]
     };
 
+    console.log('Sending to Airtable:', JSON.stringify(airtableData, null, 2));
+
+    // Send to Airtable
     const airtableResponse = await fetch(
-      `https://api.airtable.com/v0/appm1vsnLsbKwoEHC/tblETJBTKXn3Y5yy1`,
+      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`,
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
+          'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(airtableData),
@@ -63,31 +108,32 @@ export default async function handler(
     );
 
     if (!airtableResponse.ok) {
-      const errorData = await airtableResponse.json();
-      console.error('Airtable error:', errorData);
-      throw new Error('Error al guardar en Airtable');
+      const errorText = await airtableResponse.text();
+      console.error('Airtable API error:', {
+        status: airtableResponse.status,
+        statusText: airtableResponse.statusText,
+        body: errorText
+      });
+      
+      throw new Error(`Airtable API error: ${airtableResponse.status} ${airtableResponse.statusText}`);
     }
 
     const airtableResult = await airtableResponse.json();
+    console.log('Airtable success:', airtableResult);
 
-    // Track form submission in Google Analytics if available
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'form_submit', {
-        event_category: 'Contact',
-        event_label: 'Contact Form Submission',
-        value: 1
-      });
-    }
+    const recordId = airtableResult.records?.[0]?.id;
 
-    return res.status(200).json({ 
-      message: 'Mensaje enviado exitosamente. Te responderemos en un plazo de 24 horas durante los días laborales.',
-      id: airtableResult.id 
+    return res.status(200).json({
+      success: true,
+      recordId: recordId
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
-    return res.status(500).json({ 
-      message: 'Error interno del servidor. Por favor, inténtalo de nuevo.' 
+    console.error('Contact form API error:', error);
+    
+    return res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Internal server error'
     });
   }
 }
