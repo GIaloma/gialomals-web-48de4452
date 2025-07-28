@@ -17,7 +17,7 @@ interface ApiResponse {
 }
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const AIRTABLE_BASE_ID = 'appm1vsnLsbKwoEHC';
+const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID; // Use existing env variable
 const AIRTABLE_TABLE_ID = 'tblETJBTKXn3Y5yy1';
 
 export default async function handler(
@@ -32,17 +32,33 @@ export default async function handler(
     });
   }
 
-  // Check if Airtable API key is configured
+  // Check if environment variables are configured
   if (!AIRTABLE_API_KEY) {
     console.error('AIRTABLE_API_KEY not found in environment variables');
     return res.status(500).json({ 
       success: false, 
-      error: 'Server configuration error' 
+      error: 'Server configuration error - API key missing' 
+    });
+  }
+
+  if (!AIRTABLE_BASE_ID) {
+    console.error('AIRTABLE_BASE_ID not found in environment variables');
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Server configuration error - base ID missing' 
     });
   }
 
   try {
     const formData: ContactFormData = req.body;
+
+    console.log('Contact form submission received:', {
+      fullName: formData.fullName,
+      email: formData.email,
+      subject: formData.subject,
+      language: formData.language,
+      sourcePage: formData.sourcePage
+    });
 
     // Validate required fields
     const requiredFields = ['fullName', 'email', 'subject', 'message'];
