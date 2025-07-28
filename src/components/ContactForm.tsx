@@ -36,7 +36,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
 
   const text = {
     es: {
-      title: 'Envíanos un Mensaje',
       fullName: 'Tu Nombre',
       email: 'Correo Electrónico',
       subject: 'Asunto',
@@ -60,7 +59,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
       }
     },
     en: {
-      title: 'Send us a Message',
       fullName: 'Your Name',
       email: 'Email Address',
       subject: 'Subject',
@@ -141,6 +139,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
         'Consent to Marketing': formData.consentToMarketing
       };
 
+      console.log('Submitting contact form:', submissionData);
+
       const response = await fetch('/.netlify/functions/contact-form', {
         method: 'POST',
         headers: {
@@ -150,6 +150,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
       });
 
       const result = await response.json();
+      console.log('Contact form response:', result);
 
       if (!response.ok) {
         throw new Error(result.message || 'Error submitting form');
@@ -203,7 +204,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-gray-50 p-8 rounded-lg h-full flex flex-col justify-center items-center text-center">
+      <div className="h-full flex flex-col justify-center items-center text-center">
         <div className="text-green-600 text-5xl mb-4">✓</div>
         <h3 className="text-xl font-semibold text-gialoma-darkgray mb-2">
           {t.success}
@@ -219,11 +220,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ language }) => {
   }
 
   return (
-    <div className="bg-gray-50 p-8 rounded-lg h-full flex flex-col">
-      <h3 className="text-2xl font-bold text-gialoma-darkgray mb-6">
-        {t.title}
-      </h3>
-      
+    <div className="h-full flex flex-col">
       {submitError && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
           {submitError}
