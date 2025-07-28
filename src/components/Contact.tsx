@@ -1,29 +1,9 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Phone, Mail, Bot, Linkedin, Instagram } from 'lucide-react';
+import ContactForm from './ContactForm';
 
 const Contact = () => {
-  useEffect(() => {
-    // Load Fillout script if not already loaded
-    if (!document.querySelector('script[src="https://server.fillout.com/embed/v1/"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://server.fillout.com/embed/v1/';
-      script.async = true;
-      script.onload = () => {
-        console.log('Fillout script loaded successfully');
-      };
-      script.onerror = () => {
-        console.error('Failed to load Fillout script');
-      };
-      document.body.appendChild(script);
-    } else {
-      // Trigger reinit if script already exists
-      if ((window as any).Fillout && (window as any).Fillout.initializeWidgets) {
-        (window as any).Fillout.initializeWidgets();
-      }
-    }
-  }, []);
-
   return (
     <section id="contact" className="section-padding bg-white">
       <div className="container mx-auto">
@@ -148,18 +128,12 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Form Card - Reduced bottom padding */}
+          {/* Form Card - Now using custom ContactForm component */}
           <div className="bg-gray-50 p-8 pb-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Send Us a Message</h3>
             
-            {/* Fillout English Form */}
-            <div 
-              style={{width:'100%', height:'500px'}} 
-              data-fillout-id="mFkKCM3vryus" 
-              data-fillout-embed-type="standard" 
-              data-fillout-inherit-parameters 
-              data-fillout-dynamic-resize
-            ></div>
+            {/* Custom Contact Form */}
+            <ContactForm language="en" />
             
             <div className="mt-5 text-center">
               <p className="text-sm text-gialoma-darkgray">
