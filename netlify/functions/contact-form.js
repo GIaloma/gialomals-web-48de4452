@@ -38,6 +38,15 @@ exports.handler = async (event, context) => {
       'Consent to Marketing': consentToMarketing
     } = JSON.parse(event.body);
 
+    console.log('Contact form data received:', {
+      fullName,
+      email,
+      subject,
+      language,
+      sourcePage,
+      consentToMarketing
+    });
+
     // Validate required fields
     if (!fullName || !email || !subject || !message) {
       return {
@@ -55,7 +64,10 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Create record in Airtable
+    // Create unique ID for the submission
+    const uniqueId = `contact_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    // Create record in Airtable with correct field names
     const airtableUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/tblETJBTKXn3Y5yy1`;
     
     const airtableRecord = {
@@ -68,11 +80,12 @@ exports.handler = async (event, context) => {
         'Language': language || 'Español',
         'Status': status || 'New',
         'Source Page': sourcePage || '/contacto',
-        'User Agent': userAgent || '',
-        'IP Address': ipAddress || '',
-        'Consent to Marketing': consentToMarketing
+        'ID': uniqueId,
+        'Accept Cookies': consentToMarketing // Map consent to Accept Cookies field
       }
     };
+
+    console.log('Sending to Airtable:', JSON.stringify(airtableRecord, null, 2));
 
     const airtableResponse = await fetch(airtableUrl, {
       method: 'POST',
@@ -84,19 +97,25 @@ exports.handler = async (event, context) => {
     });
 
     if (!airtableResponse.ok) {
-      const errorData = await airtableResponse.json();
-      console.error('Airtable error:', errorData);
+      const errorData = await airtableResponse.text();
+      console.error('Airtable API error:', {
+        status: airtableResponse.status,
+        statusText: airtableResponse.statusText,
+        body: errorData
+      });
+      
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({ 
           message: 'Failed to create record in Airtable',
-          error: errorData
+          error: `${airtableResponse.status}: ${errorData}`
         }),
       };
     }
 
     const createdRecord = await airtableResponse.json();
+    console.log('Airtable success:', createdRecord);
 
     return {
       statusCode: 200,
