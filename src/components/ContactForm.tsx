@@ -187,166 +187,164 @@ const ContactForm: React.FC<ContactFormProps> = ({ language = 'es' }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Full Name */}
-      <div>
-        <label htmlFor="fullName" className="block text-sm font-medium text-gialoma-black mb-2">
-          {t.fullName} *
-        </label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleInputChange}
-          placeholder={t.placeholders.fullName}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-          required
-        />
-      </div>
-
-      {/* Email */}
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gialoma-black mb-2">
-          {t.email} *
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-            </svg>
-          </div>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder={t.placeholders.email}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-            required
-          />
-        </div>
-      </div>
-
-      {/* Subject */}
-      <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gialoma-black mb-2">
-          {t.subject} *
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleInputChange}
-          placeholder={t.placeholders.subject}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
-          required
-        />
-      </div>
-
-      {/* Message */}
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gialoma-black mb-2">
-          {t.message} *
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleInputChange}
-          placeholder={t.placeholders.message}
-          rows={5}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black resize-vertical"
-          required
-        />
-      </div>
-
-      {/* Accept Cookies Checkbox */}
-      <div className="flex items-start">
-        <div className="flex items-center h-5">
-          <input
-            id="acceptCookies"
-            name="acceptCookies"
-            type="checkbox"
-            checked={formData.acceptCookies}
-            onChange={handleInputChange}
-            className="w-4 h-4 text-gialoma-gold bg-gray-100 border-gray-300 rounded focus:ring-gialoma-gold focus:ring-2"
-            required
-          />
-        </div>
-        <div className="ml-3 text-sm">
-          <label htmlFor="acceptCookies" className="text-gialoma-darkgray">
-            {language === 'es' ? (
-              <>
-                Confirma que has leído nuestros{' '}
-                <a href="/terminos-de-servicio" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Términos de Servicio
-                </a>
-                ,{' '}
-                <a href="/politica-de-cookies" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Política de cookies
-                </a>
-                {' '}y{' '}
-                <a href="/politica-de-privacidad" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Política de Privacidad
-                </a>{' '}*
-              </>
-            ) : (
-              <>
-                Confirm that you have read our{' '}
-                <a href="/en/terms-of-service" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Terms of Service
-                </a>
-                ,{' '}
-                <a href="/en/cookie-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Cookie Policy
-                </a>
-                {' '}and{' '}
-                <a href="/en/privacy-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
-                  Privacy Policy
-                </a>{' '}*
-              </>
-            )}
+    <div className="h-full flex flex-col">
+      <form onSubmit={handleSubmit} className="space-y-5 flex-grow flex flex-col">
+        {/* Full Name */}
+        <div>
+          <label htmlFor="fullName" className="block text-sm font-medium text-gialoma-black mb-2">
+            {t.fullName} *
           </label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleInputChange}
+            placeholder={t.placeholders.fullName}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
+            required
+          />
         </div>
-      </div>
 
-      {/* Status Messages */}
-      {submitStatus === 'success' && (
-        <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-lg">
-          <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-          <p className="text-green-700 text-sm">{t.success}</p>
+        {/* Email */}
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gialoma-black mb-2">
+            {t.email} *
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              </svg>
+            </div>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder={t.placeholders.email}
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
+              required
+            />
+          </div>
         </div>
-      )}
 
-      {submitStatus === 'error' && (
-        <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-lg">
-          <AlertCircle className="h-5 w-5 text-red-500 mr-3" />
-          <p className="text-red-700 text-sm">{errorMessage || t.error}</p>
+        {/* Subject */}
+        <div>
+          <label htmlFor="subject" className="block text-sm font-medium text-gialoma-black mb-2">
+            {t.subject} *
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleInputChange}
+            placeholder={t.placeholders.subject}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black"
+            required
+          />
         </div>
-      )}
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-gialoma-gold hover:bg-gialoma-darkgold disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
-      >
-        {isSubmitting ? (
-          <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            {t.submitting}
-          </>
-        ) : (
-          <>
-            <Send className="h-5 w-5 mr-2" />
-            {t.submit}
-          </>
+        {/* Message - Made bigger to fill more space */}
+        <div className="flex-grow flex flex-col">
+          <label htmlFor="message" className="block text-sm font-medium text-gialoma-black mb-2">
+            {t.message} *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            placeholder={t.placeholders.message}
+            rows={8}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gialoma-gold focus:border-transparent transition-all duration-200 text-gialoma-black resize-vertical flex-grow min-h-[120px]"
+            required
+          />
+        </div>
+
+        {/* Accept Cookies Checkbox - Reformatted as requested */}
+        <div className="flex items-start pt-2">
+          <div className="flex items-center h-5 mt-1">
+            <input
+              id="acceptCookies"
+              name="acceptCookies"
+              type="checkbox"
+              checked={formData.acceptCookies}
+              onChange={handleInputChange}
+              className="w-4 h-4 text-gialoma-gold bg-gray-100 border-gray-300 rounded focus:ring-gialoma-gold focus:ring-2"
+              required
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label htmlFor="acceptCookies" className="text-gialoma-darkgray leading-relaxed">
+              {language === 'es' ? (
+                <>
+                  Confirma que has leído nuestros:<br />
+                  <a href="/terminos-de-servicio" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Términos de Servicio
+                  </a><br />
+                  <a href="/politica-de-cookies" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Política de cookies
+                  </a><br />
+                  <a href="/politica-de-privacidad" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Política de Privacidad
+                  </a>{' '}*
+                </>
+              ) : (
+                <>
+                  Confirm that you have read our:<br />
+                  <a href="/en/terms-of-service" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Terms of Service
+                  </a><br />
+                  <a href="/en/cookie-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Cookie Policy
+                  </a><br />
+                  <a href="/en/privacy-policy" className="text-gialoma-gold hover:text-gialoma-darkgold underline">
+                    Privacy Policy
+                  </a>{' '}*
+                </>
+              )}
+            </label>
+          </div>
+        </div>
+
+        {/* Status Messages */}
+        {submitStatus === 'success' && (
+          <div className="flex items-center p-4 bg-green-50 border border-green-200 rounded-lg">
+            <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+            <p className="text-green-700 text-sm">{t.success}</p>
+          </div>
         )}
-      </button>
-    </form>
+
+        {submitStatus === 'error' && (
+          <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-lg">
+            <AlertCircle className="h-5 w-5 text-red-500 mr-3" />
+            <p className="text-red-700 text-sm">{errorMessage || t.error}</p>
+          </div>
+        )}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-gialoma-gold hover:bg-gialoma-darkgold disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center mt-auto"
+        >
+          {isSubmitting ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+              {t.submitting}
+            </>
+          ) : (
+            <>
+              <Send className="h-5 w-5 mr-2" />
+              {t.submit}
+            </>
+          )}
+        </button>
+      </form>
+    </div>
   );
 };
 
