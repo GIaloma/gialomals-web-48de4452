@@ -16,12 +16,12 @@ const ContactEs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information Card - Match margins with form card */}
-          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+          {/* Contact Information Card - Ensure consistent height */}
+          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Información de Contacto</h3>
             
-            <div className="space-y-7">
+            <div className="space-y-7 flex-grow">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-6">
                   <Phone className="h-8 w-8 text-gialoma-gold" />
@@ -43,7 +43,7 @@ const ContactEs = () => {
               </div>
             </div>
 
-            {/* Social Media Section - Slightly reduced top margin */}
+            {/* Social Media Section */}
             <div className="mt-7 bg-white p-8 rounded-lg shadow-sm">
               <h4 className="font-semibold text-gialoma-black mb-6 text-center text-xl">Conecta con Nuestros Fundadores</h4>
               
@@ -72,7 +72,7 @@ const ContactEs = () => {
                 </div>
               </div>
 
-              {/* Gianro - Reduced bottom margin */}
+              {/* Gianro */}
               <div className="mb-4">
                 <h5 className="font-medium text-gialoma-black mb-3 text-lg">Gianro Compagno - Co-Fundador y CTO</h5>
                 <div className="flex space-x-4">
@@ -128,12 +128,14 @@ const ContactEs = () => {
             </div>
           </div>
 
-          {/* Form Card - Now using custom ContactForm component */}
-          <div className="bg-gray-50 p-8 pb-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80">
+          {/* Form Card - Matching height with contact info card */}
+          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Envíanos un Mensaje</h3>
             
-            {/* Custom Contact Form */}
-            <ContactForm language="es" />
+            {/* Custom Contact Form - Takes up available space */}
+            <div className="flex-grow flex flex-col">
+              <ContactForm language="es" />
+            </div>
             
             <div className="mt-5 text-center">
               <p className="text-sm text-gialoma-darkgray">
