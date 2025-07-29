@@ -123,69 +123,69 @@ const Solutions = () => {
         </div>
 
         <div className="relative">
-          {/* Tab Navigation - Replaces the navigation arrows area */}
-          <div className="flex justify-center mb-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center">
+          {/* Tab Navigation - Mobile Responsive */}
+          <div className="flex justify-center mb-6 px-2">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 flex flex-wrap gap-1 justify-center max-w-full">
               {Object.entries(categories).map(([key, category]) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`px-4 md:px-6 py-3 rounded-md font-medium transition-all duration-300 flex items-center gap-2 ${
+                  className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-md font-medium transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base ${
                     activeTab === key
                       ? 'bg-white text-gialoma-gold shadow-md'
                       : 'text-white hover:bg-white/10'
                   }`}
                 >
-                  {category.icon}
+                  <div className="h-4 w-4 sm:h-5 sm:w-5">
+                    {category.icon}
+                  </div>
                   <div className="text-center">
-                    <div className="font-semibold text-base md:text-lg">{category.name}</div>
-                    <div className="text-sm opacity-80 hidden md:block">{category.description}</div>
+                    <div className="font-semibold text-sm sm:text-base md:text-lg whitespace-nowrap">{category.name}</div>
+                    <div className="text-xs sm:text-sm opacity-80 hidden md:block">{category.description}</div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
           
-          {/* Content area - Centered cards taking full space */}
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl w-full px-8">
+          {/* Content area - Mobile Responsive Cards */}
+          <div className="flex justify-center px-2 sm:px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-7xl w-full">
               {filteredSolutions.map((solution, index) => (
                 <div 
                   key={index} 
-                  className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col"
-                  style={{ 
-                    minHeight: "650px",
-                    height: "650px" 
-                  }}
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 lg:p-8 shadow-md border border-white/20 hover:bg-white/15 transition-all duration-300 flex flex-col min-h-[500px] sm:min-h-[600px] lg:h-[650px]"
                 >
-                  {/* Icon section - fixed height */}
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-white/20 p-5 rounded-full">
-                      {solution.icon}
+                  {/* Icon section */}
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="bg-white/20 p-3 sm:p-4 lg:p-5 rounded-full">
+                      <div className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-white">
+                        {solution.icon}
+                      </div>
                     </div>
                   </div>
                   
-                  {/* Title section - fixed height */}
-                  <div className="h-24 flex items-center justify-center mb-6">
-                    <h3 className="text-2xl md:text-3xl font-semibold text-white text-center leading-tight">
+                  {/* Title section */}
+                  <div className="flex items-center justify-center mb-4 sm:mb-6">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-semibold text-white text-center leading-tight px-2">
                       {solution.title}
                     </h3>
                   </div>
                   
-                  {/* Description section - fixed height */}
-                  <div className="h-28 mb-6">
-                    <p className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                  {/* Description section */}
+                  <div className="mb-4 sm:mb-6">
+                    <p className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
                       {solution.description}
                     </p>
                   </div>
                   
-                  {/* Benefits section - flexible height but contained */}
-                  <div className="flex-grow mb-6">
-                    <ul className="space-y-4">
+                  {/* Benefits section */}
+                  <div className="flex-grow mb-4 sm:mb-6">
+                    <ul className="space-y-2 sm:space-y-3 lg:space-y-4">
                       {solution.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-white mr-3 flex-shrink-0 text-lg">•</span>
-                          <span className="text-white/90 text-base md:text-lg text-justify leading-relaxed">
+                          <span className="text-white mr-2 sm:mr-3 flex-shrink-0 text-base sm:text-lg">•</span>
+                          <span className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
                             {benefit}
                           </span>
                         </li>
@@ -193,14 +193,14 @@ const Solutions = () => {
                     </ul>
                   </div>
                   
-                  {/* Button section - fixed at bottom */}
+                  {/* Button section */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
-                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-base py-6"
+                      className="bg-white text-black hover:text-gialoma-gold border-white hover:border-white flex items-center w-full justify-center transition-colors text-sm sm:text-base py-4 sm:py-6"
                       onClick={() => handleSolutionClick(solution.link)}
                     >
-                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                      Learn More <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                     </Button>
                   </div>
                 </div>
@@ -222,15 +222,6 @@ const Solutions = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* Internet Explorer and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari, Opera */
-        }
-      `}</style>
     </section>
   );
 };

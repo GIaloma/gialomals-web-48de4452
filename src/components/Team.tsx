@@ -49,21 +49,21 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[850px] transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
-              <div className="aspect-w-4 aspect-h-3 relative">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[700px] sm:min-h-[750px] lg:min-h-[850px] transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
+              <div className="aspect-w-4 aspect-h-3 relative overflow-hidden">
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-128 object-cover object-center"
+                  className="w-full h-48 sm:h-64 lg:h-80 object-cover object-center"
                 />
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
-                <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
-                <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1 text-justify">{member.bio}</p>
-                <div className="flex space-x-4 mt-auto">
+              <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gialoma-black text-center mb-2">{member.name}</h3>
+                <p className="text-gialoma-lightgold font-medium mb-3 sm:mb-4 text-sm sm:text-base text-center">{member.position}</p>
+                <p className="text-gialoma-darkgray mb-4 sm:mb-6 text-sm sm:text-base flex-1 text-center sm:text-justify leading-relaxed">{member.bio}</p>
+                <div className="flex justify-center space-x-4 mt-auto">
                   {member.linkedin && (
                     <a 
                       href={member.linkedin} 

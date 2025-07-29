@@ -129,15 +129,15 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Filter Buttons - Same height as original carousel navigation area */}
+        {/* Filter Buttons - Mobile Responsive */}
         <div className="relative mb-4">
-          <div className="flex justify-center">
-            <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap gap-1 justify-center">
+          <div className="flex justify-center px-2">
+            <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap gap-1 justify-center max-w-full">
               {Object.entries(categories).map(([key, label]) => (
                 <button
                   key={key}
                   onClick={() => setActiveFilter(key)}
-                  className={`px-4 md:px-6 py-2 rounded-md font-medium transition-all duration-300 text-sm md:text-base ${
+                  className={`px-3 sm:px-4 md:px-6 py-2 rounded-md font-medium transition-all duration-300 text-xs sm:text-sm md:text-base whitespace-nowrap ${
                     activeFilter === key
                       ? 'bg-gialoma-gold text-white shadow-md'
                       : 'text-gray-600 hover:bg-gray-200'
@@ -150,52 +150,52 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Services Grid - Maintains same content area height as carousel */}
-        <div className="relative" style={{ minHeight: '560px' }}>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
+        {/* Services Grid - Mobile Responsive */}
+        <div className="relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-4 px-2 sm:px-0">
             {filteredServices.map((service) => (
               <div 
                 key={service.id} 
-                className={`bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-[560px] ${
+                className={`bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col min-h-[480px] sm:min-h-[520px] lg:h-[560px] ${
                   service.highlight ? 'border-2 border-gialoma-gold bg-white' : ''
                 }`}
                 onMouseEnter={() => setHoveredCard(service.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 {service.highlight && (
-                  <div className="absolute top-0 right-0 bg-gialoma-gold text-white text-xs px-3 py-1 rounded-bl-lg font-medium relative">
+                  <div className="absolute top-0 right-0 bg-gialoma-gold text-white text-xs px-2 sm:px-3 py-1 rounded-bl-lg font-medium relative">
                     Popular
                   </div>
                 )}
                 
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex justify-center mb-6">
+                <div className="p-4 sm:p-6 flex flex-col h-full">
+                  <div className="flex justify-center mb-4 sm:mb-6">
                     <div className={`transition-all duration-300 ${
                       hoveredCard === service.id ? 'transform scale-110' : ''
                     }`}>
-                      {service.icon}
+                      <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 text-gialoma-gold">
+                        {service.icon}
+                      </div>
                     </div>
                   </div>
                   
-                  {/* Title - Justified text */}
-                  <h3 className="text-xl font-semibold text-center mb-4 text-gialoma-black flex items-center justify-center" 
-                      style={{ minHeight: '60px', height: 'auto', wordBreak: 'break-word' }}>
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-semibold text-center mb-3 sm:mb-4 text-gialoma-black leading-tight px-1">
                     {service.title}
                   </h3>
                   
-                  {/* Description - Justified text */}
-                  <p className="text-gialoma-darkgray mb-5 text-justify text-sm md:text-base overflow-visible" 
-                     style={{ minHeight: '100px', height: 'auto', wordBreak: 'break-word' }}>
+                  {/* Description */}
+                  <p className="text-gialoma-darkgray mb-4 sm:mb-5 text-center sm:text-justify text-sm leading-relaxed">
                     {service.description}
                   </p>
                   
-                  {/* Features section - Justified text */}
-                  <div className="flex-grow mb-4">
+                  {/* Features section */}
+                  <div className="flex-grow mb-3 sm:mb-4">
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-2">•</span>
-                          <span className="text-gialoma-darkgray text-sm md:text-base text-justify" style={{ wordBreak: 'break-word' }}>
+                          <span className="text-gialoma-gold mr-2 flex-shrink-0">•</span>
+                          <span className="text-gialoma-darkgray text-sm text-center sm:text-justify leading-relaxed">
                             {feature}
                           </span>
                         </li>
@@ -203,11 +203,11 @@ const Services = () => {
                     </ul>
                   </div>
                   
-                  {/* Button - Same styling as original */}
+                  {/* Button */}
                   <div className="mt-auto">
                     <Button 
                       variant="outline" 
-                      className={`transition-all duration-300 flex items-center w-full justify-center group ${
+                      className={`transition-all duration-300 flex items-center w-full justify-center group text-sm py-3 ${
                         service.highlight 
                           ? 'bg-gialoma-gold text-white border-gialoma-gold hover:bg-gialoma-darkgold' 
                           : 'text-gialoma-gold border-gialoma-gold hover:bg-gialoma-gold hover:text-white'
@@ -215,7 +215,7 @@ const Services = () => {
                       onClick={() => handleServiceClick(service.link)}
                     >
                       Learn More 
-                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={14} />
                     </Button>
                   </div>
                 </div>
@@ -239,75 +239,6 @@ const Services = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        /* Preserve all original CSS custom properties and classes */
-        .text-gradient {
-          background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: #d4af37;
-        }
-        
-        .text-gialoma-gold {
-          color: #d4af37;
-        }
-        
-        .text-gialoma-darkgray {
-          color: #6b7280;
-        }
-        
-        .text-gialoma-black {
-          color: #1f2937;
-        }
-        
-        .bg-gialoma-gold {
-          background-color: #d4af37;
-        }
-        
-        .bg-gialoma-darkgold {
-          background-color: #b8941f;
-        }
-        
-        .border-gialoma-gold {
-          border-color: #d4af37;
-        }
-        
-        .hover\\:bg-gialoma-gold:hover {
-          background-color: #d4af37;
-        }
-        
-        .hover\\:bg-gialoma-darkgold:hover {
-          background-color: #b8941f;
-        }
-        
-        .hover\\:bg-gray-200:hover {
-          background-color: #e5e7eb;
-        }
-        
-        /* Responsive adjustments matching original */
-        @media (max-width: 640px) {
-          .service-card-title {
-            font-size: 1.1rem;
-          }
-          .service-card-description {
-            font-size: 0.9rem;
-          }
-          .service-card-feature {
-            font-size: 0.9rem;
-          }
-          
-          .grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        
-        @media (max-width: 1024px) and (min-width: 641px) {
-          .grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-      `}</style>
     </section>
   );
 };

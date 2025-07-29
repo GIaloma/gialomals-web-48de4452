@@ -16,9 +16,9 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-          {/* Contact Information Card - Ensure consistent height */}
-          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-stretch px-4 sm:px-0">
+          {/* Contact Information Card - Mobile Responsive */}
+          <div className="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Contact Information</h3>
             
             <div className="space-y-7 flex-grow">
@@ -128,8 +128,8 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Form Card - Matching height with contact info card */}
-          <div className="bg-gray-50 p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
+          {/* Form Card - Mobile Responsive */}
+          <div className="bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-100/80 flex flex-col">
             <h3 className="text-2xl font-semibold mb-6 text-gialoma-black">Send Us a Message</h3>
             
             {/* Custom Contact Form - Takes up available space */}
