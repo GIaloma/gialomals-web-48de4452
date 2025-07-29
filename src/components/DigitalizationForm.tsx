@@ -120,9 +120,27 @@ const DigitalizationForm: React.FC<{
     return Object.keys(newErrors).length === 0;
   };
 
+  const validateStep2 = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData['P1 - Procesos Manuales Diarios']) newErrors['P1 - Procesos Manuales Diarios'] = 'Campo obligatorio';
+    if (!formData['P2 - Frecuencia de Errores']) newErrors['P2 - Frecuencia de Errores'] = 'Campo obligatorio';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleNext = () => {
-    if (currentStep === 1 && validateStep1()) {
-      setCurrentStep(2);
+    let canProceed = false;
+    
+    if (currentStep === 1) {
+      canProceed = validateStep1();
+    } else if (currentStep === 2) {
+      canProceed = validateStep2();
+    }
+    
+    if (canProceed && currentStep < totalSteps) {
+      setCurrentStep(prev => prev + 1);
     }
   };
 
@@ -342,6 +360,77 @@ const DigitalizationForm: React.FC<{
     </div>
   );
 
+  const renderStep2 = () => (
+    <div className="space-y-6">
+      {/* Logo y título */}
+      <div className="text-center mb-8">
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[#C7AE6A] rounded-full flex items-center justify-center mr-3">
+            <div className="w-6 h-6 bg-white rounded opacity-80"></div>
+          </div>
+          <div>
+            <div className="text-[#C7AE6A] font-medium text-lg">GIALOMA LIFE SOLUTIONS</div>
+            <div className="text-xs text-gray-500 tracking-wider">TECNOLOGÍA QUE LIBERA TU TIEMPO</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-800">
+        Procesos y Automatización
+      </h2>
+
+      {/* Pregunta 1 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          1. ¿Cuántos procesos manuales repetitivos realizas tú y tu equipo diariamente? *
+        </label>
+        <div className="grid grid-cols-3 gap-3">
+          {['0-3', '4-7', '8+'].map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="P1"
+                value={option}
+                checked={formData['P1 - Procesos Manuales Diarios'] === option}
+                onChange={(e) => handleInputChange('P1 - Procesos Manuales Diarios', e.target.value)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['P1 - Procesos Manuales Diarios'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['P1 - Procesos Manuales Diarios']}</p>
+        )}
+      </div>
+
+      {/* Pregunta 2 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          2. ¿Con qué frecuencia se producen errores en los procesos manuales de tu equipo? *
+        </label>
+        <div className="grid grid-cols-3 gap-3">
+          {['Raramente', 'Ocasionalmente', 'Frecuentemente'].map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="P2"
+                value={option}
+                checked={formData['P2 - Frecuencia de Errores'] === option}
+                onChange={(e) => handleInputChange('P2 - Frecuencia de Errores', e.target.value)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['P2 - Frecuencia de Errores'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['P2 - Frecuencia de Errores']}</p>
+        )}
+      </div>
+    </div>
+  );
+
   if (!isOpen) return null;
 
   return (
@@ -368,6 +457,7 @@ const DigitalizationForm: React.FC<{
         {/* Form Content */}
         <div className="p-6">
           {currentStep === 1 && renderStep1()}
+          {currentStep === 2 && renderStep2()}
           
           {/* Navigation Buttons */}
           <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
