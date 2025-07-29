@@ -99,9 +99,39 @@ const DigitalizationForm: React.FC<{
     'Otros'
   ];
 
+  const digitalToolsOptions = [
+    'Email/Calendar',
+    'CRM',
+    'Project Management',
+    'Automatización',
+    'IA',
+    'ERP',
+    'Comunicación internacional',
+    'Gestión documental',
+    'Otro'
+  ];
+
   const handleInputChange = (field: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  const handleCheckboxChange = (field: keyof FormData, option: string, checked: boolean) => {
+    const currentArray = formData[field] as string[];
+    let newArray: string[];
+    
+    if (checked) {
+      newArray = [...currentArray, option];
+    } else {
+      newArray = currentArray.filter(item => item !== option);
+    }
+    
+    setFormData(prev => ({ ...prev, [field]: newArray }));
+    
+    // Clear error if we now have selections
+    if (newArray.length > 0 && errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
   };
@@ -130,6 +160,16 @@ const DigitalizationForm: React.FC<{
     return Object.keys(newErrors).length === 0;
   };
 
+  const validateStep3 = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (formData['P3 - Herramientas Digitales'].length === 0) newErrors['P3 - Herramientas Digitales'] = 'Selecciona al menos una herramienta';
+    if (!formData['P4 - Integración de Herramientas']) newErrors['P4 - Integración de Herramientas'] = 'Campo obligatorio';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleNext = () => {
     let canProceed = false;
     
@@ -137,6 +177,8 @@ const DigitalizationForm: React.FC<{
       canProceed = validateStep1();
     } else if (currentStep === 2) {
       canProceed = validateStep2();
+    } else if (currentStep === 3) {
+      canProceed = validateStep3();
     }
     
     if (canProceed && currentStep < totalSteps) {
@@ -431,6 +473,87 @@ const DigitalizationForm: React.FC<{
     </div>
   );
 
+  const renderStep3 = () => (
+    <div className="space-y-6">
+      {/* Logo y título */}
+      <div className="text-center mb-8">
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[#C7AE6A] rounded-full flex items-center justify-center mr-3">
+            <div className="w-6 h-6 bg-white rounded opacity-80"></div>
+          </div>
+          <div>
+            <div className="text-[#C7AE6A] font-medium text-lg">GIALOMA LIFE SOLUTIONS</div>
+            <div className="text-xs text-gray-500 tracking-wider">TECNOLOGÍA QUE LIBERA TU TIEMPO</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-800">
+        Herramientas Digitales
+      </h2>
+
+      {/* Pregunta 3 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          3. ¿Qué herramientas digitales utilizáis tú y tu equipo actualmente? *
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          {digitalToolsOptions.map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="checkbox"
+                checked={formData['P3 - Herramientas Digitales'].includes(option)}
+                onChange={(e) => handleCheckboxChange('P3 - Herramientas Digitales', option, e.target.checked)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300 rounded"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['P3 - Herramientas Digitales'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['P3 - Herramientas Digitales']}</p>
+        )}
+      </div>
+
+      {/* Pregunta 4 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          4. ¿Cómo calificarías la integración entre vuestras herramientas digitales? *
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          {['Fragmentada', 'Parcialmente integrada', 'Totalmente integrada'].map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="P4"
+                value={option}
+                checked={formData['P4 - Integración de Herramientas'] === option}
+                onChange={(e) => handleInputChange('P4 - Integración de Herramientas', e.target.value)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['P4 - Integración de Herramientas'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['P4 - Integración de Herramientas']}</p>
+        )}
+      </div>
+
+      {/* Ejemplo explicativo */}
+      <div className="bg-gray-50 p-4 rounded-lg border">
+        <p className="text-sm text-gray-700">
+          <strong>Ejemplo:</strong> Imagine una cocina con varios electrodomésticos. En una cocina con 
+          sistemas "fragmentados", cada aparato funciona por separado y debe transferir manualmente 
+          los ingredientes entre ellos. En una cocina "parcialmente integrada", algunos aparatos se 
+          conectan entre sí, pero otros requieren intervención manual. En una cocina "totalmente 
+          integrada", todos los aparatos están conectados, permitiendo que los ingredientes fluyan 
+          automáticamente de un proceso a otro sin intervención manual.
+        </p>
+      </div>
+    </div>
+  );
+
   if (!isOpen) return null;
 
   return (
@@ -458,6 +581,7 @@ const DigitalizationForm: React.FC<{
         <div className="p-6">
           {currentStep === 1 && renderStep1()}
           {currentStep === 2 && renderStep2()}
+          {currentStep === 3 && renderStep3()}
           
           {/* Navigation Buttons */}
           <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
