@@ -38,8 +38,7 @@ interface FormErrors {
 const DigitalizationForm: React.FC<{
   isOpen: boolean;
   onClose: () => void;
-  language?: 'es' | 'en';
-}> = ({ isOpen, onClose, language = 'es' }) => {
+}> = ({ isOpen, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     'Nombre Completo': '',
@@ -69,105 +68,36 @@ const DigitalizationForm: React.FC<{
   });
   
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const text = {
-    es: {
-      title: 'Evaluación de Madurez Digital y Bienestar Laboral',
-      basicInfo: 'Información Básica',
-      fullName: 'Nombre Completo',
-      companyName: 'Nombre de tu Empresa',
-      position: 'Cargo en la Empresa',
-      email: 'Correo Electrónico',
-      phone: 'Whatsapp',
-      companySize: '¿Cuál es el tamaño de tu empresa?',
-      companySizeOptions: [
-        '1-5 empleados',
-        '6-20 empleados', 
-        '21-50 empleados',
-        '51-100 empleados',
-        '101-250 empleados',
-        '251-500 empleados',
-        '500+ empleados'
-      ],
-      sector: '¿En qué sector opera tu empresa?',
-      sectorOptions: [
-        'Salud',
-        'Educación', 
-        'Tecnología',
-        'Finanzas',
-        'Retail/Comercio',
-        'Manufactura',
-        'Servicios Profesionales',
-        'Hostelería y Turismo',
-        'Construcción',
-        'Logística y Transporte',
-        'Marketing y Publicidad',
-        'Inmobiliario',
-        'Energía',
-        'Agricultura',
-        'Otros'
-      ],
-      processesTitle: 'Procesos y Automatización',
-      digitalToolsTitle: 'Herramientas Digitales',
-      productivityTitle: 'Productividad',
-      wellbeingTitle: 'Bienestar Laboral',
-      digitalMaturityTitle: 'Madurez Digital',
-      workLifeBalanceTitle: 'Balance Trabajo-Vida',
-      prioritiesTitle: 'Prioridades',
-      objectivesTitle: 'Objetivos',
-      next: 'Siguiente',
-      previous: 'Anterior',
-      submit: 'Finalizar',
-      submitComplete: 'Enviando...',
-      consentText: 'Confirma que has leído nuestros',
-      termsService: 'Términos de Servicio',
-      cookiePolicy: 'Política de cookies',
-      privacyPolicy: 'Política de Privacidad',
-      required: 'Campo obligatorio',
-      thankYou: '¡Gracias!',
-      submissionComplete: 'El equipo de Gialoma Life Solutions analizará las respuestas y te enviará el resultado de tu',
-      evaluationTitle: 'Evaluación de Madurez Digital y Bienestar Laboral',
-      asapText: 'al correo electrónico lo antes posible.',
-      nextStep: 'El siguiente paso:',
-      // Questions
-      q1: '¿Cuántos procesos manuales repetitivos realizas tú y tu equipo diariamente?',
-      q1Options: ['0-3', '4-7', '8+'],
-      q2: '¿Con qué frecuencia se producen errores en los procesos manuales de tu equipo?',
-      q2Options: ['Raramente', 'Ocasionalmente', 'Frecuentemente'],
-      q3: '¿Qué herramientas digitales utilizáis tú y tu equipo actualmente?',
-      q3Options: ['Email/Calendar', 'CRM', 'Project Management', 'Automatización', 'IA', 'ERP', 'Comunicación internacional', 'Gestión documental', 'Otro'],
-      q4: '¿Cómo calificarías la integración entre vuestras herramientas digitales?',
-      q4Options: ['Fragmentada', 'Parcialmente integrada', 'Totalmente integrada'],
-      q5: '¿Cuántas horas al día dedicáis tú y tu equipo a tareas que podrían automatizarse?',
-      q5Options: ['1-2', '3-4', '5+'],
-      q6: '¿Cuánto tiempo tardáis tú y tu equipo en completar los procesos administrativos más frecuentes?',
-      q6Options: ['Minutos', 'Horas', 'Días'],
-      q7: '¿Cómo calificarías el nivel de estrés en tu equipo?',
-      q7Options: ['Bajo', 'Medio', 'Alto'],
-      q8: '¿Qué porcentaje de tus empleados ha reportado agotamiento digital en el último año?',
-      q8Options: ['0-10%', '11-25%', '26-50%', '51%+'],
-      q9: '¿Qué porcentaje de vuestros procesos están digitalizados?',
-      q9Options: ['0-25%', '26-50%', '51-75%', '76-100%'],
-      q10: '¿En tu empresa utilizáis análisis de datos para la toma de decisiones?',
-      q10Options: ['Nunca', 'Ocasionalmente', 'Regularmente'],
-      q11: '¿Con qué frecuencia tú y tu equipo trabajáis horas extra?',
-      q11Options: ['Nunca', 'Ocasionalmente', 'Frecuentemente'],
-      q12: '¿Tu empresa tiene políticas formales de desconexión digital?',
-      q12Options: ['No existen', 'Existen pero no se aplican', 'Existen y se aplican efectivamente'],
-      q13: '¿Qué áreas consideras prioritarias para automatizar?',
-      q13Options: ['Administración', 'Ventas', 'Marketing', 'Servicio al cliente', 'RRHH', 'Finanzas', 'Logística', 'Producción'],
-      q14: '¿Qué tipo de tareas generan mayor frustración en tu equipo?',
-      q14Options: ['Entrada manual de datos', 'Generación de informes', 'Comunicación entre departamentos', 'Seguimiento de proyectos', 'Gestión documental'],
-      q15: '¿Cuál es vuestro principal objetivo con la digitalización?',
-      q15Options: ['Reducir costos', 'Aumentar productividad', 'Mejorar satisfacción laboral', 'Reducir errores', 'Acelerar tiempo de respuesta', 'Mejorar experiencia del cliente'],
-      q16: '¿Qué presupuesto anual destináis a transformación digital? (como % de ingresos)',
-      q16Options: ['0-2%', '3-5%', '6-10%', '+10%']
-    }
-  };
+  const totalSteps = 5;
 
-  const totalSteps = 6; // Adjusting to match Fillout design (6 main sections)
+  const companySizeOptions = [
+    '1-5 empleados',
+    '6-20 empleados', 
+    '21-50 empleados',
+    '51-100 empleados',
+    '101-250 empleados',
+    '251-500 empleados',
+    '500+ empleados'
+  ];
+
+  const sectorOptions = [
+    'Salud',
+    'Educación', 
+    'Tecnología',
+    'Finanzas',
+    'Retail/Comercio',
+    'Manufactura',
+    'Servicios Profesionales',
+    'Hostelería y Turismo',
+    'Construcción',
+    'Logística y Transporte',
+    'Marketing y Publicidad',
+    'Inmobiliario',
+    'Energía',
+    'Agricultura',
+    'Otros'
+  ];
 
   const handleInputChange = (field: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -176,67 +106,23 @@ const DigitalizationForm: React.FC<{
     }
   };
 
-  const handleCheckboxChange = (field: keyof FormData, option: string, checked: boolean) => {
-    const currentArray = formData[field] as string[];
-    let newArray: string[];
-    
-    if (checked) {
-      newArray = [...currentArray, option];
-    } else {
-      newArray = currentArray.filter(item => item !== option);
-    }
-    
-    setFormData(prev => ({ ...prev, [field]: newArray }));
-  };
-
-  const validateStep = (step: number): boolean => {
+  const validateStep1 = (): boolean => {
     const newErrors: FormErrors = {};
     
-    switch (step) {
-      case 1: // Basic Information
-        if (!formData['Nombre Completo']) newErrors['Nombre Completo'] = text[language].required;
-        if (!formData['Email']) newErrors['Email'] = text[language].required;
-        if (!formData['Empresa']) newErrors['Empresa'] = text[language].required;
-        if (!formData['Cargo']) newErrors['Cargo'] = text[language].required;
-        if (!formData['Cual es el tamaño de tu empresa?']) newErrors['Cual es el tamaño de tu empresa?'] = text[language].required;
-        if (!formData['En qué sector opera tu empresa?']) newErrors['En qué sector opera tu empresa?'] = text[language].required;
-        break;
-      case 2: // Processes and Automation
-        if (!formData['P1 - Procesos Manuales Diarios']) newErrors['P1 - Procesos Manuales Diarios'] = text[language].required;
-        if (!formData['P2 - Frecuencia de Errores']) newErrors['P2 - Frecuencia de Errores'] = text[language].required;
-        break;
-      case 3: // Digital Tools + Productivity
-        if (formData['P3 - Herramientas Digitales'].length === 0) newErrors['P3 - Herramientas Digitales'] = text[language].required;
-        if (!formData['P4 - Integración de Herramientas']) newErrors['P4 - Integración de Herramientas'] = text[language].required;
-        if (!formData['P5 - Horas Automatizables']) newErrors['P5 - Horas Automatizables'] = text[language].required;
-        if (!formData['P6 - Tiempo Procesos']) newErrors['P6 - Tiempo Procesos'] = text[language].required;
-        break;
-      case 4: // Wellbeing + Digital Maturity
-        if (!formData['P7 - Nivel de Estrés']) newErrors['P7 - Nivel de Estrés'] = text[language].required;
-        if (!formData['P8 - Agotamiento Digital']) newErrors['P8 - Agotamiento Digital'] = text[language].required;
-        if (!formData['P9 - Procesos Digitalizados']) newErrors['P9 - Procesos Digitalizados'] = text[language].required;
-        if (!formData['P10 - Análisis de Datos']) newErrors['P10 - Análisis de Datos'] = text[language].required;
-        break;
-      case 5: // Work-Life Balance + Priorities
-        if (!formData['P11 - Horas Extra']) newErrors['P11 - Horas Extra'] = text[language].required;
-        if (!formData['P12 - Desconexión Digital']) newErrors['P12 - Desconexión Digital'] = text[language].required;
-        if (formData['P13 - Áreas Prioritarias'].length === 0) newErrors['P13 - Áreas Prioritarias'] = text[language].required;
-        if (formData['P14 - Tareas Frustrantes'].length === 0) newErrors['P14 - Tareas Frustrantes'] = text[language].required;
-        break;
-      case 6: // Objectives + Consent
-        if (formData['P15 - Objetivos Digitalización'].length === 0) newErrors['P15 - Objetivos Digitalización'] = text[language].required;
-        if (!formData['P16 - Presupuesto']) newErrors['P16 - Presupuesto'] = text[language].required;
-        if (!formData['Accept Cookies']) newErrors['Accept Cookies'] = text[language].required;
-        break;
-    }
+    if (!formData['Nombre Completo']) newErrors['Nombre Completo'] = 'Campo obligatorio';
+    if (!formData['Email']) newErrors['Email'] = 'Campo obligatorio';
+    if (!formData['Empresa']) newErrors['Empresa'] = 'Campo obligatorio';
+    if (!formData['Cargo']) newErrors['Cargo'] = 'Campo obligatorio';
+    if (!formData['Cual es el tamaño de tu empresa?']) newErrors['Cual es el tamaño de tu empresa?'] = 'Campo obligatorio';
+    if (!formData['En qué sector opera tu empresa?']) newErrors['En qué sector opera tu empresa?'] = 'Campo obligatorio';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleNext = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+    if (currentStep === 1 && validateStep1()) {
+      setCurrentStep(2);
     }
   };
 
@@ -244,196 +130,269 @@ const DigitalizationForm: React.FC<{
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = async () => {
-    if (!validateStep(currentStep)) return;
-    
-    setIsSubmitting(true);
-    
-    try {
-      const submissionData = {
-        ...formData,
-        'P3 - Herramientas Digitales': formData['P3 - Herramientas Digitales'].join(', '),
-        'P13 - Áreas Prioritarias': formData['P13 - Áreas Prioritarias'].join(', '),
-        'P14 - Tareas Frustrantes': formData['P14 - Tareas Frustrantes'].join(', '),
-        'P15 - Objetivos Digitalización': formData['P15 - Objetivos Digitalización'].join(', '),
-        'Fecha Evaluación': new Date().toISOString(),
-        'ID Evaluación': `eval_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        language: language
-      };
+  const renderProgressBar = () => (
+    <div className="flex items-center justify-center mb-8">
+      {[1, 2, 3, 4, 5].map((step, index) => (
+        <React.Fragment key={step}>
+          <div 
+            className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+              ${step === currentStep 
+                ? 'bg-[#C7AE6A] text-white' 
+                : step < currentStep 
+                  ? 'bg-green-500 text-white'
+                  : 'bg-gray-300 text-gray-600'
+              }`}
+          >
+            {step < currentStep ? '✓' : step}
+          </div>
+          {index < 4 && (
+            <div className={`w-16 h-1 ${step < currentStep ? 'bg-green-500' : 'bg-gray-300'}`} />
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  );
 
-      const response = await fetch('/.netlify/functions/digitalization-form', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(submissionData),
-      });
+  const renderStep1 = () => (
+    <div className="space-y-6">
+      {/* Logo y título */}
+      <div className="text-center mb-8">
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[#C7AE6A] rounded-full flex items-center justify-center mr-3">
+            <div className="w-6 h-6 bg-white rounded opacity-80"></div>
+          </div>
+          <div>
+            <div className="text-[#C7AE6A] font-medium text-lg">GIALOMA LIFE SOLUTIONS</div>
+            <div className="text-xs text-gray-500 tracking-wider">TECNOLOGÍA QUE LIBERA TU TIEMPO</div>
+          </div>
+        </div>
+      </div>
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit form');
-      }
+      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-800">
+        Información Básica
+      </h2>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Nombre Completo: *
+        </label>
+        <input
+          type="text"
+          value={formData['Nombre Completo']}
+          onChange={(e) => handleInputChange('Nombre Completo', e.target.value)}
+          className={`w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-[#C7AE6A] focus:border-transparent ${
+            errors['Nombre Completo'] ? 'border-red-300' : 'border-gray-200'
+          }`}
+          placeholder=""
+        />
+        {errors['Nombre Completo'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Nombre Completo']}</p>
+        )}
+      </div>
 
-      // Analytics tracking
-      if (window.gtag) {
-        window.gtag('event', 'form_submission', {
-          event_category: 'engagement',
-          event_label: 'digitalization_assessment',
-          value: 1
-        });
-      }
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Nombre de tu Empresa: *
+        </label>
+        <input
+          type="text"
+          value={formData['Empresa']}
+          onChange={(e) => handleInputChange('Empresa', e.target.value)}
+          className={`w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-[#C7AE6A] focus:border-transparent ${
+            errors['Empresa'] ? 'border-red-300' : 'border-gray-200'
+          }`}
+          placeholder=""
+        />
+        {errors['Empresa'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Empresa']}</p>
+        )}
+      </div>
 
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Cargo en la Empresa: *
+        </label>
+        <input
+          type="text"
+          value={formData['Cargo']}
+          onChange={(e) => handleInputChange('Cargo', e.target.value)}
+          className={`w-full p-3 border-2 rounded-lg focus:ring-2 focus:ring-[#C7AE6A] focus:border-transparent ${
+            errors['Cargo'] ? 'border-red-300' : 'border-gray-200'
+          }`}
+          placeholder=""
+        />
+        {errors['Cargo'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Cargo']}</p>
+        )}
+      </div>
 
-  // Progress calculation
-  const progress = (currentStep / totalSteps) * 100;
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Correo Electrónico: *
+        </label>
+        <div className="relative">
+          <input
+            type="email"
+            value={formData['Email']}
+            onChange={(e) => handleInputChange('Email', e.target.value)}
+            className={`w-full p-3 pl-10 border-2 rounded-lg focus:ring-2 focus:ring-[#C7AE6A] focus:border-transparent ${
+              errors['Email'] ? 'border-red-300' : 'border-gray-200'
+            }`}
+            placeholder=""
+          />
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg className="h-5 w-5 text-gray-400" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 001-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 005 19z"></path>
+            </svg>
+          </div>
+        </div>
+        {errors['Email'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Email']}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Whatsapp: *
+        </label>
+        <div className="relative">
+          <input
+            type="tel"
+            value={formData['Teléfono']}
+            onChange={(e) => handleInputChange('Teléfono', e.target.value)}
+            className="w-full p-3 pl-16 border-2 rounded-lg focus:ring-2 focus:ring-[#C7AE6A] focus:border-transparent border-gray-200"
+            placeholder=""
+          />
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="flex items-center">
+              <span className="text-sm">🇪🇸</span>
+              <span className="ml-1 text-sm text-gray-500">+34</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          ¿Cuál es el tamaño de tu empresa? *
+        </label>
+        <div className="space-y-3">
+          {companySizeOptions.map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="companySize"
+                value={option}
+                checked={formData['Cual es el tamaño de tu empresa?'] === option}
+                onChange={(e) => handleInputChange('Cual es el tamaño de tu empresa?', e.target.value)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['Cual es el tamaño de tu empresa?'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Cual es el tamaño de tu empresa?']}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          ¿En qué sector opera tu empresa? *
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          {sectorOptions.map((option) => (
+            <label key={option} className="flex items-center cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="sector"
+                value={option}
+                checked={formData['En qué sector opera tu empresa?'] === option}
+                onChange={(e) => handleInputChange('En qué sector opera tu empresa?', e.target.value)}
+                className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300"
+              />
+              <span className="ml-3 text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors['En qué sector opera tu empresa?'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['En qué sector opera tu empresa?']}</p>
+        )}
+      </div>
+
+      <div className="mt-8">
+        <label className="flex items-start cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formData['Accept Cookies']}
+            onChange={(e) => handleInputChange('Accept Cookies', e.target.checked)}
+            className="w-4 h-4 text-[#C7AE6A] focus:ring-[#C7AE6A] border-gray-300 rounded mt-1"
+          />
+          <span className="ml-3 text-sm text-gray-700">
+            Confirma que has leído nuestros{' '}
+            <a href="/terms-of-service" className="text-[#C7AE6A] hover:underline">Términos de Servicio</a>,{' '}
+            <a href="/cookie-policy" className="text-[#C7AE6A] hover:underline">Política de cookies</a>,{' '}
+            <a href="/privacy-policy" className="text-[#C7AE6A] hover:underline">Política de Privacidad</a> *
+          </span>
+        </label>
+        {errors['Accept Cookies'] && (
+          <p className="text-red-500 text-sm mt-1">{errors['Accept Cookies']}</p>
+        )}
+      </div>
+    </div>
+  );
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-[#E8D5B7] w-full max-w-4xl h-[90vh] rounded-lg shadow-2xl flex flex-col relative">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-800 z-10"
-        >
-          <X className="w-6 h-6" />
-        </button>
-
-        {/* Header with logo and progress */}
-        <div className="p-6 border-b border-gray-300">
-          {/* Progress indicators */}
-          <div className="flex justify-center mb-6">
-            {Array.from({ length: totalSteps }, (_, i) => (
-              <div key={i} className="flex items-center">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${
-                    i + 1 === currentStep
-                      ? 'bg-[#C7AE6A] border-[#C7AE6A] text-white'
-                      : i + 1 < currentStep
-                      ? 'bg-[#C7AE6A] border-[#C7AE6A] text-white'
-                      : 'bg-white border-gray-300 text-gray-400'
-                  }`}
-                >
-                  {i + 1 < currentStep ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  ) : (
-                    <span className="text-sm font-medium">{i + 1}</span>
-                  )}
-                </div>
-                {i < totalSteps - 1 && (
-                  <div
-                    className={`w-16 h-0.5 ${
-                      i + 1 < currentStep ? 'bg-[#C7AE6A]' : 'bg-gray-300'
-                    }`}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Logo */}
-          <div className="flex justify-center mb-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-[#C7AE6A] rounded-full flex items-center justify-center mr-3">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z"/>
-                </svg>
-              </div>
-              <div>
-                <div className="text-lg font-semibold text-gray-800">GIALOMA LIFE SOLUTIONS</div>
-                <div className="text-sm text-gray-600">TECNOLOGÍA QUE LIBERA TU TIEMPO</div>
-              </div>
-            </div>
-          </div>
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <h1 className="text-xl font-semibold text-gray-800">
+            Evaluación de Madurez Digital y Bienestar Laboral
+          </h1>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </div>
 
-        {/* Form content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {isSubmitted ? (
-            <div className="text-center py-16">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                {text[language].thankYou}
-              </h2>
-              <div className="text-lg text-gray-700 mb-2">
-                {text[language].nextStep}
-              </div>
-              <p className="text-gray-600 max-w-md mx-auto">
-                {text[language].submissionComplete}{' '}
-                <strong>{text[language].evaluationTitle}</strong>{' '}
-                {text[language].asapText}
-              </p>
-            </div>
-          ) : (
-            <>
-              {/* Step content will be rendered here */}
-              <div className="min-h-[400px]">
-                {/* Step content components will be added in the next phases */}
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Paso {currentStep} de {totalSteps}
-                  </h2>
-                  <p className="text-gray-600">
-                    Contenido del formulario se implementará en las siguientes fases
-                  </p>
-                </div>
-              </div>
-            </>
-          )}
+        {/* Progress Bar */}
+        <div className="p-6 pb-0">
+          {renderProgressBar()}
         </div>
 
-        {/* Footer with navigation */}
-        {!isSubmitted && (
-          <div className="p-6 border-t border-gray-300 bg-white rounded-b-lg">
-            <div className="flex justify-between items-center">
-              {currentStep > 1 ? (
-                <button
-                  onClick={handlePrevious}
-                  className="flex items-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  {text[language].previous}
-                </button>
-              ) : (
-                <div></div>
-              )}
+        {/* Form Content */}
+        <div className="p-6">
+          {currentStep === 1 && renderStep1()}
+          
+          {/* Navigation Buttons */}
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+            <button
+              onClick={handlePrevious}
+              disabled={currentStep === 1}
+              className={`flex items-center px-6 py-2 rounded-lg font-medium transition-colors ${
+                currentStep === 1
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Anterior
+            </button>
 
-              {currentStep < totalSteps ? (
-                <button
-                  onClick={handleNext}
-                  className="flex items-center px-8 py-3 bg-[#C7AE6A] text-white rounded-lg hover:bg-[#B5A060] transition-colors font-medium"
-                >
-                  {text[language].next}
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
-              ) : (
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="px-8 py-3 bg-[#C7AE6A] text-white rounded-lg hover:bg-[#B5A060] transition-colors font-medium disabled:opacity-50"
-                >
-                  {isSubmitting ? text[language].submitComplete : text[language].submit}
-                </button>
-              )}
-            </div>
-
-            {/* Made with credit */}
-            <div className="text-center mt-4">
-              <span className="text-xs text-gray-400">
-                Made with{' '}
-                <span className="font-semibold text-gray-600">Gialoma</span>
-              </span>
-            </div>
+            <button
+              onClick={handleNext}
+              className="flex items-center px-6 py-2 bg-[#C7AE6A] text-white rounded-lg font-medium hover:bg-[#B8A060] transition-colors"
+            >
+              Siguiente
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
