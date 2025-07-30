@@ -51,7 +51,7 @@ const Team = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
           {teamMembers.map((member) => (
-            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[700px] sm:min-h-[750px] lg:min-h-[850px] transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
+            <div key={member.id} className="bg-white rounded-lg shadow-md overflow-hidden w-full mx-auto max-w-md flex flex-col min-h-[800px] sm:min-h-[850px] lg:min-h-[900px] transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gray-50/50">
               <div className="aspect-w-4 aspect-h-3 relative overflow-hidden">
                 <img 
                   src={member.image} 
