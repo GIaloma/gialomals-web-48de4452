@@ -117,7 +117,7 @@ const SolutionsEs = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Hemos automatizado lo que se puede automatizar para humanizar lo que es humano
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto text-center md:text-justify">
             Nuestras soluciones generan un impacto real al resolver problemas concretos y proporcionar beneficios tangibles que transforman cómo trabajas y vives.
           </p>
         </div>
@@ -174,7 +174,7 @@ const SolutionsEs = () => {
                   
                   {/* Description section */}
                   <div className="mb-4 sm:mb-6">
-                    <p className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
+                    <p className="text-white/90 text-sm sm:text-base lg:text-lg text-justify leading-relaxed">
                       {solution.description}
                     </p>
                   </div>
@@ -185,7 +185,7 @@ const SolutionsEs = () => {
                       {solution.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-white mr-2 sm:mr-3 flex-shrink-0 text-base sm:text-lg">•</span>
-                          <span className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
+                          <span className="text-white/90 text-sm sm:text-base lg:text-lg text-justify leading-relaxed">
                             {benefit}
                           </span>
                         </li>
@@ -210,7 +210,7 @@ const SolutionsEs = () => {
         </div>
         
         <div className="mt-8 text-center">
-          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
+          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium text-center md:text-justify">
             ¿Listo para experimentar estos beneficios en tu negocio? Comencemos con una conversación sobre tus necesidades.
           </p>
           <Button 
