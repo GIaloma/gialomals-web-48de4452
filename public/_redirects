@@ -12,3 +12,6 @@
 
 # Marketing redirect - easily changeable
 /regalo    /libro   302
+
+# Handle 404 errors with custom page
+# This must be at the bottom to not interfere with other routes
