@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Index from "./pages/Index";
 import IndexEs from "./pages/Index-es";
@@ -124,6 +124,9 @@ const App = () => (
           <Route path="/es/libro" element={<BookEs />} />
           <Route path="/book" element={<Book />} />
           <Route path="/en/book" element={<Book />} />
+          
+          {/* Redirect /regalo to /libro */}
+          <Route path="/regalo" element={<Navigate to="/libro" replace />} />
           
           {/* Login pages - with language support */}
           <Route path="/acceso" element={<LoginEs />} />
