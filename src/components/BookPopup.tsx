@@ -84,7 +84,7 @@ const BookPopup: React.FC<BookPopupProps> = ({ onClose }) => {
       </div>
 
       {/* CSS for animation */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;

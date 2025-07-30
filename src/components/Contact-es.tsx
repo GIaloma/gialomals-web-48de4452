@@ -49,7 +49,10 @@ const ContactEs = () => {
               
               {/* Paloma */}
               <div className="mb-6">
-                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Paloma Firgaira - Co-Fundadora y CEO</h5>
+                <h5 className="font-medium text-gialoma-black mb-3 text-lg">
+                  <span className="hidden sm:inline">Paloma Firgaira - Co-Fundadora y CEO</span>
+                  <span className="sm:hidden">Paloma Firgaira<br/>Co-Fundadora y CEO</span>
+                </h5>
                 <div className="flex space-x-4">
                   <a 
                     href="https://www.linkedin.com/in/paloma-firgaira-840b50a3" 
@@ -74,7 +77,10 @@ const ContactEs = () => {
 
               {/* Gianro */}
               <div className="mb-4">
-                <h5 className="font-medium text-gialoma-black mb-3 text-lg">Gianro Compagno - Co-Fundador y CTO</h5>
+                <h5 className="font-medium text-gialoma-black mb-3 text-lg">
+                  <span className="hidden sm:inline">Gianro Compagno - Co-Fundador y CTO</span>
+                  <span className="sm:hidden">Gianro Compagno<br/>Co-Fundador y CTO</span>
+                </h5>
                 <div className="flex space-x-4">
                   <a 
                     href="https://www.linkedin.com/in/giovanni-roberto-compagno-aa7494110" 

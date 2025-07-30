@@ -158,8 +158,8 @@ const Solutions = () => {
                 >
                   {/* Icon section */}
                   <div className="flex justify-center mb-4 sm:mb-6">
-                    <div className="bg-white/20 p-3 sm:p-4 lg:p-5 rounded-full">
-                      <div className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-white">
+                    <div className="bg-white/20 p-3 sm:p-4 lg:p-5 rounded-full flex items-center justify-center">
+                      <div className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-white flex items-center justify-center">
                         {solution.icon}
                       </div>
                     </div>

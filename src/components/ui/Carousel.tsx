@@ -108,7 +108,7 @@ export function Carousel({
       )}
       
       {/* CSS for hiding scrollbar */}
-      <style jsx>{`
+      <style>{`
         .hide-scrollbar {
           -ms-overflow-style: none;  /* Internet Explorer and Edge */
           scrollbar-width: none;  /* Firefox */

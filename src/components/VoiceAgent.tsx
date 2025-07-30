@@ -105,7 +105,7 @@ export const VoiceAgent: React.FC<VoiceAgentProps> = ({ isOpen, onClose, languag
       
       // Add to page
       document.body.appendChild(widgetElement);
-      widgetContainerRef.current = widgetElement;
+      widgetContainerRef.current = widgetElement as HTMLDivElement;
       
       // Add close button after a delay
       setTimeout(addCloseButton, 2000);

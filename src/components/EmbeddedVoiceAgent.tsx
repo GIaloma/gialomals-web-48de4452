@@ -139,7 +139,7 @@ export const EmbeddedVoiceAgent: React.FC<EmbeddedVoiceAgentProps> = ({
       // Clear container and add widget
       embedContainerRef.current.innerHTML = '';
       embedContainerRef.current.appendChild(widgetElement);
-      widgetContainerRef.current = widgetElement;
+      widgetContainerRef.current = widgetElement as HTMLDivElement;
       
       setIsLoading(false);
       setIsAgentActive(true);

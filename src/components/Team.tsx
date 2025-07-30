@@ -56,7 +56,7 @@ const Team = () => {
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-48 sm:h-64 lg:h-80 object-cover object-center"
+                  className="w-full h-48 sm:h-64 lg:h-80 object-cover object-top"
                 />
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col">

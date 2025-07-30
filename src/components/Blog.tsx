@@ -222,7 +222,7 @@ const Blog = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hide-scrollbar {
           -ms-overflow-style: none;  /* Internet Explorer and Edge */
           scrollbar-width: none;  /* Firefox */
