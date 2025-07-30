@@ -56,80 +56,80 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
+      {/* Navbar - using exact same components as main pages */}
       {language === 'en' ? <Navbar /> : <NavbarEs />}
       
-      {/* Main Content */}
-      <main className="flex-grow bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 pt-20">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* 404 Content */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8">
-            <div className="mb-6">
-              <h1 className="text-6xl md:text-8xl font-bold text-gialoma-gold mb-4">
+      {/* Main Content - increased spacing and section size */}
+      <main className="flex-grow bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-20 md:py-32">
+        <div className="max-w-4xl mx-auto text-center w-full">
+          {/* 404 Content - larger and more spacious */}
+          <div className="bg-white rounded-2xl shadow-xl p-12 md:p-16 lg:p-20 mb-12">
+            <div className="mb-12">
+              <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-bold text-gialoma-gold mb-8">
                 {text.subtitle}
               </h1>
-              <h2 className="text-2xl md:text-3xl font-bold text-gialoma-black mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gialoma-black mb-8">
                 {text.title}
               </h2>
-              <p className="text-lg text-gialoma-darkgray mb-8">
+              <p className="text-xl md:text-2xl text-gialoma-darkgray mb-12 max-w-3xl mx-auto leading-relaxed">
                 {text.description}
               </p>
             </div>
 
-            {/* Help Section */}
-            <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 rounded-lg p-6 mb-8 border border-gialoma-gold/20">
-              <h3 className="text-lg font-semibold text-gialoma-black mb-2">
+            {/* Help Section - more spacious */}
+            <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 rounded-xl p-8 md:p-10 mb-12 border border-gialoma-gold/20">
+              <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black mb-4">
                 {text.helpText}
               </h3>
-              <p className="text-gialoma-darkgray mb-6">
+              <p className="text-lg md:text-xl text-gialoma-darkgray mb-10">
                 {text.options}
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* Action Buttons - larger and more spaced */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                  className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
                 >
-                  <MessageCircle size={20} />
+                  <MessageCircle size={24} />
                   {text.contactAgent}
                 </a>
                 
-                <span className="text-gialoma-darkgray font-medium">
+                <span className="text-gialoma-darkgray font-medium text-lg">
                   {text.or}
                 </span>
 
                 <a
                   href={contactUrl}
-                  className="flex items-center gap-2 bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                  className="flex items-center gap-3 bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
                 >
-                  <Mail size={20} />
+                  <Mail size={24} />
                   {text.sendMessage}
                 </a>
               </div>
             </div>
 
-            {/* Navigation Button */}
+            {/* Navigation Button - larger */}
             <div className="flex justify-center">
               <a
                 href={homeUrl}
-                className="inline-flex items-center gap-2 text-gialoma-gold hover:text-gialoma-darkgold font-medium transition-colors duration-200"
+                className="inline-flex items-center gap-3 text-gialoma-gold hover:text-gialoma-darkgold font-medium text-lg transition-colors duration-200"
               >
-                <ArrowLeft size={20} />
+                <ArrowLeft size={24} />
                 {text.backHome}
               </a>
             </div>
           </div>
 
-          {/* Language Toggle */}
-          <div className="flex justify-center gap-2">
+          {/* Language Toggle - more spaced */}
+          <div className="flex justify-center gap-4">
             <button
               onClick={() => setLanguage('es')}
-              className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                 language === 'es'
-                  ? 'bg-gialoma-gold text-white'
+                  ? 'bg-gialoma-gold text-white shadow-md'
                   : 'text-gialoma-gold hover:bg-gialoma-gold/10'
               }`}
             >
@@ -137,9 +137,9 @@ const NotFound = () => {
             </button>
             <button
               onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                 language === 'en'
-                  ? 'bg-gialoma-gold text-white'
+                  ? 'bg-gialoma-gold text-white shadow-md'
                   : 'text-gialoma-gold hover:bg-gialoma-gold/10'
               }`}
             >
@@ -149,7 +149,7 @@ const NotFound = () => {
         </div>
       </main>
 
-      {/* Footer */}
+      {/* Footer - exactly same as main pages */}
       <Footer />
     </div>
   );
