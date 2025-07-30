@@ -147,7 +147,7 @@ const ServicesAndSolutions = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="text-gradient">What we do for you</span>
             </h2>
-            <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto">
+            <p className="text-lg text-gialoma-darkgray max-w-3xl mx-auto service-description text-justify">
               We offer a range of specialized services designed to streamline your business operations 
               and enhance your digital presence.
             </p>
@@ -169,7 +169,7 @@ const ServicesAndSolutions = () => {
                   {service.items.map((item, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-gialoma-gold mr-2">•</span>
-                      <span className="text-gialoma-darkgray">{item}</span>
+                      <span className="text-gialoma-darkgray feature-text text-justify">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -186,7 +186,7 @@ const ServicesAndSolutions = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               How we free up your time and improve your life
             </h2>
-            <p className="text-lg text-white max-w-3xl mx-auto opacity-90">
+            <p className="text-lg text-white max-w-3xl mx-auto opacity-90 solution-description text-justify">
               We don't just provide services - we deliver tangible solutions that make a real difference in your business and life.
             </p>
           </div>
@@ -207,7 +207,7 @@ const ServicesAndSolutions = () => {
                   {solution.items.map((item, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-white mr-2">•</span>
-                      <span className="text-white/90">{item}</span>
+                      <span className="text-white/90 benefit-description text-justify">{item}</span>
                     </li>
                   ))}
                 </ul>
