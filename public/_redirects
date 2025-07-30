@@ -9,3 +9,6 @@
 # Redirect old paths (if any)
 /home      /en   301
 /inicio    /es   301
+
+# Marketing redirect - easily changeable
+/regalo    /digitalizacion   302
