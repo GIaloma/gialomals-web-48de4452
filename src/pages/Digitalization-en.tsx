@@ -52,7 +52,7 @@ const DigitalizationEn = () => {
                   Digitalize Your Business
                 </h1>
                 <div className="w-24 h-1 bg-gialoma-gold mx-auto mb-8"></div>
-                <p className="text-xl text-gray-700">
+                <p className="text-xl text-gray-700 service-description text-justify">
                   Transform your company operations with personalized digital solutions tailored to your needs
                 </p>
               </div>
@@ -61,10 +61,10 @@ const DigitalizationEn = () => {
                 <h2 className="text-3xl font-semibold mb-6 text-gialoma-gold">
                   🚀 Digital Maturity and Work-Life Balance Assessment
                 </h2>
-                <p className="text-lg text-gray-700 mb-6">
+                <p className="text-lg text-gray-700 mb-6 service-description text-justify">
                   Discover your company's level of digitalization. <strong>Complete this questionnaire</strong> and get a personalized diagnosis about automation opportunities and improvement of your team's work-life balance.
                 </p>
-                <p className="text-lg text-gray-700 mb-8">
+                <p className="text-lg text-gray-700 mb-8 service-description text-justify">
                   Our interactive questionnaire will provide you with:
                 </p>
                 
@@ -77,7 +77,7 @@ const DigitalizationEn = () => {
                     </div>
                     <div>
                       <strong className="text-lg">Digital Maturity Index</strong>
-                      <p className="text-base text-gray-600">Assess your current automation level</p>
+                      <p className="text-base text-gray-600 feature-text text-justify">Assess your current automation level</p>
                     </div>
                   </div>
                   
@@ -89,7 +89,7 @@ const DigitalizationEn = () => {
                     </div>
                     <div>
                       <strong className="text-lg">Work-Life Balance Analysis</strong>
-                      <p className="text-base text-gray-600">Measure your team's work-life balance</p>
+                      <p className="text-base text-gray-600 feature-text text-justify">Measure your team's work-life balance</p>
                     </div>
                   </div>
                   
@@ -101,7 +101,7 @@ const DigitalizationEn = () => {
                     </div>
                     <div>
                       <strong className="text-lg">Personalized Recommendations</strong>
-                      <p className="text-base text-gray-600">Get specific strategies for your company</p>
+                      <p className="text-base text-gray-600 feature-text text-justify">Get specific strategies for your company</p>
                     </div>
                   </div>
                   
@@ -113,7 +113,7 @@ const DigitalizationEn = () => {
                     </div>
                     <div>
                       <strong className="text-lg">Estimated ROI</strong>
-                      <p className="text-base text-gray-600">Calculate expected return on investment</p>
+                      <p className="text-base text-gray-600 feature-text text-justify">Calculate expected return on investment</p>
                     </div>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ const DigitalizationEn = () => {
                       <span className="text-3xl font-bold text-gialoma-gold">1</span>
                     </div>
                     <h4 className="font-semibold text-gialoma-black mb-3 text-lg">Answer the Questions</h4>
-                    <p className="text-gialoma-darkgray text-base">
+                    <p className="text-gialoma-darkgray text-base step-description text-justify">
                       Complete the questionnaire about your current processes and digital objectives
                     </p>
                   </div>
@@ -159,7 +159,7 @@ const DigitalizationEn = () => {
                       <span className="text-3xl font-bold text-gialoma-gold">2</span>
                     </div>
                     <h4 className="font-semibold text-gialoma-black mb-3 text-lg">Receive Your Analysis</h4>
-                    <p className="text-gialoma-darkgray text-base">
+                    <p className="text-gialoma-darkgray text-base step-description text-justify">
                       Get a detailed report with your current digital maturity level
                     </p>
                   </div>
@@ -169,7 +169,7 @@ const DigitalizationEn = () => {
                       <span className="text-3xl font-bold text-gialoma-gold">3</span>
                     </div>
                     <h4 className="font-semibold text-gialoma-black mb-3 text-lg">Act According to the Plan</h4>
-                    <p className="text-gialoma-darkgray text-base">
+                    <p className="text-gialoma-darkgray text-base step-description text-justify">
                       Implement the personalized recommendations for your company
                     </p>
                   </div>
@@ -179,7 +179,7 @@ const DigitalizationEn = () => {
                       <span className="text-3xl font-bold text-gialoma-gold">4</span>
                     </div>
                     <h4 className="font-semibold text-gialoma-black mb-3 text-lg">Start Saving Time and Money</h4>
-                    <p className="text-gialoma-darkgray text-base">
+                    <p className="text-gialoma-darkgray text-base step-description text-justify">
                       Enjoy the benefits of automation in your daily operations
                     </p>
                   </div>
@@ -201,7 +201,7 @@ const DigitalizationEn = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gialoma-black mb-2">Process Automation</h3>
-                    <p className="text-lg text-gray-700">We identify repetitive tasks and automate them to save time and reduce errors</p>
+                    <p className="text-lg text-gray-700 process-text text-justify">We identify repetitive tasks and automate them to save time and reduce errors</p>
                   </div>
                 </div>
 
@@ -215,7 +215,7 @@ const DigitalizationEn = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gialoma-black mb-2">Custom Software Development</h3>
-                    <p className="text-lg text-gray-700">We create tailor-made solutions that address your business's specific challenges</p>
+                    <p className="text-lg text-gray-700 process-text text-justify">We create tailor-made solutions that address your business's specific challenges</p>
                   </div>
                 </div>
 
@@ -235,7 +235,7 @@ const DigitalizationEn = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gialoma-black mb-2">AI Virtual Assistants</h3>
-                    <p className="text-lg text-gray-700">We implement intelligent chatbots that enhance customer experience 24/7</p>
+                    <p className="text-lg text-gray-700 process-text text-justify">We implement intelligent chatbots that enhance customer experience 24/7</p>
                   </div>
                 </div>
 
@@ -248,7 +248,7 @@ const DigitalizationEn = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gialoma-black mb-2">System Integration</h3>
-                    <p className="text-lg text-gray-700">We connect your existing tools to create a unified digital ecosystem</p>
+                    <p className="text-lg text-gray-700 process-text text-justify">We connect your existing tools to create a unified digital ecosystem</p>
                   </div>
                 </div>
               </div>
@@ -257,7 +257,7 @@ const DigitalizationEn = () => {
                 <h3 className="text-xl font-semibold text-blue-800 mb-3">
                   💡 Did you know...?
                 </h3>
-                <p className="text-lg text-blue-700">
+                <p className="text-lg text-blue-700 methodology-content text-justify">
                   Companies that implement intelligent automation can reduce operational costs by 25%, 
                   increase productivity by 30%, and improve employee job satisfaction by 40%.
                 </p>
