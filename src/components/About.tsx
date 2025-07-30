@@ -35,7 +35,7 @@ const About = () => {
               Our Name, Our Vision
             </h2>
             <div className="w-24 h-1 bg-gialoma-gold mx-auto mb-8"></div>
-            <p className="text-xl text-gialoma-text-on-gray max-w-3xl mx-auto">
+            <p className="text-xl text-gialoma-text-on-gray max-w-3xl mx-auto text-justify">
               Discover the story behind Gialoma and how our mission is reflected in every aspect of what we do
             </p>
           </div>
@@ -48,7 +48,7 @@ const About = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">The Names</span>
                 </div>
-                <p className="text-gialoma-darkgray-accessible text-lg">
+                <p className="text-gialoma-darkgray-accessible text-lg text-justify">
                   <span className="text-gialoma-black font-bold">Gianro</span> + <span className="text-gialoma-darkgray-accessible font-bold">Paloma</span> = <span className="text-gialoma-gold-accessible font-bold text-xl">GIALOMA</span>
                 </p>
               </div>
@@ -58,7 +58,7 @@ const About = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">The Foundation</span>
                 </div>
-                <p className="text-gialoma-darkgray-accessible text-lg">
+                <p className="text-gialoma-darkgray-accessible text-lg text-justify">
                   "<span className="text-gialoma-gold-accessible font-bold">Loma</span>" represents <span className="text-gialoma-darkgray-accessible">stability</span> and <span className="text-gialoma-darkgray-accessible">growth</span>
                 </p>
               </div>
@@ -68,7 +68,7 @@ const About = () => {
                   <div className="w-3 h-3 bg-gialoma-gold rounded-full animate-pulse"></div>
                   <span className="text-gialoma-black font-semibold text-lg">The Mission</span>
                 </div>
-                <p className="text-gialoma-darkgray-accessible text-lg">
+                <p className="text-gialoma-darkgray-accessible text-lg text-justify">
                   <span className="text-gialoma-black">AI</span> + <span className="text-gialoma-darkgray-accessible">Human Design</span> = <span className="text-gialoma-gold-accessible font-bold">Life Solutions</span>
                 </p>
               </div>
@@ -141,7 +141,7 @@ const About = () => {
               </div>
               
               {/* Content Area */}
-              <p className="text-xl text-gialoma-darkgray-accessible leading-relaxed transition-all duration-300">
+              <p className="text-xl text-gialoma-darkgray-accessible leading-relaxed transition-all duration-300 text-justify">
                 {currentContent.content.includes('catalyst') ? (
                   <>
                     {currentContent.content.split('explode')[0]}
