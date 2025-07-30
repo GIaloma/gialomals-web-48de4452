@@ -117,7 +117,7 @@ const Solutions = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             We have automated what can be automated to humanize what is human
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto text-center md:text-justify">
             Our solutions deliver real impact by solving concrete problems and providing tangible benefits that transform how you work and live.
           </p>
         </div>
@@ -174,7 +174,7 @@ const Solutions = () => {
                   
                   {/* Description section */}
                   <div className="mb-4 sm:mb-6">
-                    <p className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
+                    <p className="text-white/90 text-sm sm:text-base lg:text-lg text-justify leading-relaxed">
                       {solution.description}
                     </p>
                   </div>
@@ -185,7 +185,7 @@ const Solutions = () => {
                       {solution.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-white mr-2 sm:mr-3 flex-shrink-0 text-base sm:text-lg">•</span>
-                          <span className="text-white/90 text-sm sm:text-base lg:text-lg text-center sm:text-justify leading-relaxed">
+                          <span className="text-white/90 text-sm sm:text-base lg:text-lg text-justify leading-relaxed">
                             {benefit}
                           </span>
                         </li>
@@ -210,7 +210,7 @@ const Solutions = () => {
         </div>
         
         <div className="mt-8 text-center">
-          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium">
+          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto font-medium text-center md:text-justify">
             Ready to experience these benefits in your business? Let's start with a conversation about your needs.
           </p>
           <Button 
