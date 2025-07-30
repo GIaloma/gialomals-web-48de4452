@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Mail, ArrowLeft } from 'lucide-react';
+import { Mail, ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import NavbarEs from '../components/Navbar-es';
 import Footer from '../components/Footer';
@@ -24,24 +24,20 @@ const NotFound = () => {
       title: "¡Página no encontrada!",
       subtitle: "404",
       description: "Lo sentimos, la página que buscas no existe o ha sido movida.",
-      options: "Puedes hablar con nuestro agente o escribirnos un mensaje:",
-      contactAgent: "Hablar con Agente",
+      helpText: "¿Necesitas ayuda? Estamos aquí para ti",
+      agentText: "Puedes hablar con nuestro agente haciendo clic en el botón de chat que aparece en la página principal, o envíanos un mensaje:",
       sendMessage: "Enviar Mensaje",
       backHome: "Volver al Inicio",
-      or: "o",
-      helpText: "¿Necesitas ayuda? Estamos aquí para ti",
       whatsappText: "Hola, llegué a una página 404 en gialoma.com y necesito ayuda para encontrar lo que busco."
     },
     en: {
       title: "Page not found!",
       subtitle: "404",
       description: "Sorry, the page you're looking for doesn't exist or has been moved.",
-      options: "You can talk to our agent or send us a message:",
-      contactAgent: "Talk to Agent",
+      helpText: "Need help? We're here for you",
+      agentText: "You can talk to our agent by clicking the chat button that appears on the main page, or send us a message:",
       sendMessage: "Send Message",
       backHome: "Back to Home",
-      or: "or",
-      helpText: "Need help? We're here for you",
       whatsappText: "Hi, I reached a 404 page on gialoma.com and need help finding what I'm looking for."
     }
   };
@@ -50,10 +46,6 @@ const NotFound = () => {
   const homeUrl = language === 'en' ? '/en' : '/es';
   const contactUrl = language === 'en' ? '/en#contact' : '/es#contact';
 
-  // WhatsApp number - replace with your actual WhatsApp business number
-  const whatsappNumber = "+34900000000"; // Update this with your real WhatsApp number
-  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(text.whatsappText)}`;
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero section to provide proper navbar background - matching main page structure */}
@@ -61,8 +53,8 @@ const NotFound = () => {
         {/* Navbar - using exact same components as main pages */}
         {language === 'en' ? <Navbar /> : <NavbarEs />}
         
-        {/* Main Content - positioned in the center with proper spacing for navbar */}
-        <main className="flex-grow flex items-center justify-center px-4 pt-20 md:pt-24">
+        {/* Main Content - positioned in the center with extra spacing from navbar */}
+        <main className="flex-grow flex items-center justify-center px-4 pt-32 md:pt-40 pb-16">
           <div className="max-w-4xl mx-auto text-center w-full">
             {/* 404 Content - larger and more spacious */}
             <div className="bg-white rounded-2xl shadow-xl p-12 md:p-16 lg:p-20 mb-12">
@@ -83,26 +75,12 @@ const NotFound = () => {
                 <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black mb-4">
                   {text.helpText}
                 </h3>
-                <p className="text-lg md:text-xl text-gialoma-darkgray mb-10">
-                  {text.options}
+                <p className="text-lg md:text-xl text-gialoma-darkgray mb-10 max-w-3xl mx-auto leading-relaxed">
+                  {text.agentText}
                 </p>
 
-                {/* Action Buttons - larger and more spaced */}
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
-                  >
-                    <MessageCircle size={24} />
-                    {text.contactAgent}
-                  </a>
-                  
-                  <span className="text-gialoma-darkgray font-medium text-lg">
-                    {text.or}
-                  </span>
-
+                {/* Action Button - centered and single */}
+                <div className="flex justify-center">
                   <a
                     href={contactUrl}
                     className="flex items-center gap-3 bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
