@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Home, MessageCircle, Mail, ArrowLeft } from 'lucide-react';
+import { MessageCircle, Mail, ArrowLeft } from 'lucide-react';
+import Navbar from '../components/Navbar';
+import NavbarEs from '../components/Navbar-es';
+import Footer from '../components/Footer';
 
 const NotFound = () => {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
@@ -52,102 +55,102 @@ const NotFound = () => {
   const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(text.whatsappText)}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center">
-        {/* Logo/Brand Section */}
-        <div className="mb-8">
-          <div className="w-24 h-24 bg-gradient-to-br from-gialoma-gold to-gialoma-darkgold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <span className="text-2xl font-bold text-white">GL</span>
-          </div>
-          <h3 className="text-xl font-semibold text-gialoma-black">Gialoma Life Solutions</h3>
-          <p className="text-sm text-gialoma-darkgray">Tecnología que libera tu tiempo</p>
-        </div>
+    <div className="min-h-screen flex flex-col">
+      {/* Navbar */}
+      {language === 'en' ? <Navbar /> : <NavbarEs />}
+      
+      {/* Main Content */}
+      <main className="flex-grow bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 pt-20">
+        <div className="max-w-2xl mx-auto text-center">
+          {/* 404 Content */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8">
+            <div className="mb-6">
+              <h1 className="text-6xl md:text-8xl font-bold text-gialoma-gold mb-4">
+                {text.subtitle}
+              </h1>
+              <h2 className="text-2xl md:text-3xl font-bold text-gialoma-black mb-4">
+                {text.title}
+              </h2>
+              <p className="text-lg text-gialoma-darkgray mb-8">
+                {text.description}
+              </p>
+            </div>
 
-        {/* 404 Content */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8">
-          <div className="mb-6">
-            <h1 className="text-6xl md:text-8xl font-bold text-gialoma-gold mb-4">
-              {text.subtitle}
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-bold text-gialoma-black mb-4">
-              {text.title}
-            </h2>
-            <p className="text-lg text-gialoma-darkgray mb-8">
-              {text.description}
-            </p>
-          </div>
+            {/* Help Section */}
+            <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 rounded-lg p-6 mb-8 border border-gialoma-gold/20">
+              <h3 className="text-lg font-semibold text-gialoma-black mb-2">
+                {text.helpText}
+              </h3>
+              <p className="text-gialoma-darkgray mb-6">
+                {text.options}
+              </p>
 
-          {/* Help Section */}
-          <div className="bg-gradient-to-r from-gialoma-gold/10 to-gialoma-gold/5 rounded-lg p-6 mb-8 border border-gialoma-gold/20">
-            <h3 className="text-lg font-semibold text-gialoma-black mb-2">
-              {text.helpText}
-            </h3>
-            <p className="text-gialoma-darkgray mb-6">
-              {text.options}
-            </p>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                >
+                  <MessageCircle size={20} />
+                  {text.contactAgent}
+                </a>
+                
+                <span className="text-gialoma-darkgray font-medium">
+                  {text.or}
+                </span>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href={contactUrl}
+                  className="flex items-center gap-2 bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                >
+                  <Mail size={20} />
+                  {text.sendMessage}
+                </a>
+              </div>
+            </div>
+
+            {/* Navigation Button */}
+            <div className="flex justify-center">
               <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
+                href={homeUrl}
+                className="inline-flex items-center gap-2 text-gialoma-gold hover:text-gialoma-darkgold font-medium transition-colors duration-200"
               >
-                <MessageCircle size={20} />
-                {text.contactAgent}
-              </a>
-              
-              <span className="text-gialoma-darkgray font-medium">
-                {text.or}
-              </span>
-
-              <a
-                href={contactUrl}
-                className="flex items-center gap-2 bg-gialoma-gold hover:bg-gialoma-darkgold text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg"
-              >
-                <Mail size={20} />
-                {text.sendMessage}
+                <ArrowLeft size={20} />
+                {text.backHome}
               </a>
             </div>
           </div>
 
-          {/* Navigation Button */}
-          <div className="flex justify-center">
-            <a
-              href={homeUrl}
-              className="inline-flex items-center gap-2 text-gialoma-gold hover:text-gialoma-darkgold font-medium transition-colors duration-200"
+          {/* Language Toggle */}
+          <div className="flex justify-center gap-2">
+            <button
+              onClick={() => setLanguage('es')}
+              className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                language === 'es'
+                  ? 'bg-gialoma-gold text-white'
+                  : 'text-gialoma-gold hover:bg-gialoma-gold/10'
+              }`}
             >
-              <ArrowLeft size={20} />
-              {text.backHome}
-            </a>
+              Español
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                language === 'en'
+                  ? 'bg-gialoma-gold text-white'
+                  : 'text-gialoma-gold hover:bg-gialoma-gold/10'
+              }`}
+            >
+              English
+            </button>
           </div>
         </div>
+      </main>
 
-        {/* Language Toggle */}
-        <div className="flex justify-center gap-2">
-          <button
-            onClick={() => setLanguage('es')}
-            className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-              language === 'es'
-                ? 'bg-gialoma-gold text-white'
-                : 'text-gialoma-gold hover:bg-gialoma-gold/10'
-            }`}
-          >
-            Español
-          </button>
-          <button
-            onClick={() => setLanguage('en')}
-            className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-              language === 'en'
-                ? 'bg-gialoma-gold text-white'
-                : 'text-gialoma-gold hover:bg-gialoma-gold/10'
-            }`}
-          >
-            English
-          </button>
-        </div>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
