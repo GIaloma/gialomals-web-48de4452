@@ -61,7 +61,7 @@ const TeamEs = () => {
               <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl md:text-2xl font-semibold text-gialoma-black">{member.name}</h3>
                 <p className="text-gialoma-lightgold font-medium mb-3 text-sm md:text-base">{member.position}</p>
-                <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1">{member.bio}</p>
+                <p className="text-gialoma-darkgray mb-6 text-sm md:text-base flex-1 text-justify">{member.bio}</p>
                 <div className="flex space-x-4 mt-auto">
                   {member.linkedin && (
                     <a 

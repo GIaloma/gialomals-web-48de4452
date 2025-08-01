@@ -168,8 +168,8 @@ const ServicesEs = () => {
                   </div>
                 )}
                 
-                <div className="p-4 sm:p-6 flex flex-col h-full">
-                  <div className="flex justify-center mb-4 sm:mb-6">
+                <div className="p-5 sm:p-6 flex flex-col h-full">
+                  <div className="flex justify-center mb-6 sm:mb-6">
                     <div className={`transition-all duration-300 ${
                       hoveredCard === service.id ? 'transform scale-110' : ''
                     }`}>
@@ -180,22 +180,22 @@ const ServicesEs = () => {
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-lg sm:text-xl font-semibold text-center mb-3 sm:mb-4 text-gialoma-black leading-tight px-1">
+                  <h3 className="text-lg sm:text-xl font-semibold text-center mb-4 sm:mb-4 text-gialoma-black leading-tight px-1">
                     {service.title}
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-gialoma-darkgray-accessible mb-4 sm:mb-5 text-center sm:text-justify text-sm leading-relaxed">
+                  <p className="text-gialoma-darkgray-accessible mb-5 sm:mb-5 text-justify text-sm leading-relaxed px-1">
                     {service.description}
                   </p>
                   
                   {/* Features section */}
-                  <div className="flex-grow mb-3 sm:mb-4">
-                    <ul className="space-y-2">
+                  <div className="flex-grow mb-4 sm:mb-4">
+                    <ul className="space-y-3">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-2 flex-shrink-0">•</span>
-                          <span className="text-gialoma-darkgray-accessible text-sm text-center sm:text-justify leading-relaxed">
+                          <span className="text-gialoma-gold mr-3 flex-shrink-0 mt-0.5">•</span>
+                          <span className="text-gialoma-darkgray-accessible text-sm text-justify leading-relaxed">
                             {feature}
                           </span>
                         </li>
