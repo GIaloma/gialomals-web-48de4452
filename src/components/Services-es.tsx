@@ -169,32 +169,35 @@ const ServicesEs = () => {
                 )}
                 
                 <div className="p-5 sm:p-6 flex flex-col h-full">
-                  <div className="flex justify-center mb-6 sm:mb-6">
+                  {/* Icon section - fixed height */}
+                  <div className="flex justify-center h-16 sm:h-20 items-center mb-4">
                     <div className={`transition-all duration-300 ${
                       hoveredCard === service.id ? 'transform scale-110' : ''
                     }`}>
-                      <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 text-gialoma-gold">
+                      <div className="h-12 w-12 sm:h-14 sm:w-14 text-gialoma-gold">
                         {service.icon}
                       </div>
                     </div>
                   </div>
                   
-                  {/* Title */}
-                  <h3 className="text-lg sm:text-xl font-semibold text-center mb-4 sm:mb-4 text-gialoma-black leading-tight px-1">
-                    {service.title}
-                  </h3>
+                  {/* Title - fixed height area */}
+                  <div className="h-16 sm:h-20 flex items-center justify-center mb-4">
+                    <h3 className="text-lg sm:text-xl font-semibold text-center text-gialoma-black leading-tight px-1">
+                      {service.title}
+                    </h3>
+                  </div>
                   
                   {/* Description */}
-                  <p className="text-gialoma-darkgray-accessible mb-5 sm:mb-5 text-justify text-sm leading-relaxed px-1">
+                  <p className="text-gialoma-darkgray-accessible mb-5 text-justify text-sm leading-relaxed px-1">
                     {service.description}
                   </p>
                   
                   {/* Features section */}
-                  <div className="flex-grow mb-4 sm:mb-4">
+                  <div className="flex-grow mb-4">
                     <ul className="space-y-3">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-gialoma-gold mr-3 flex-shrink-0 mt-0.5">•</span>
+                          <span className="text-gialoma-gold mr-3 flex-shrink-0 leading-relaxed">•</span>
                           <span className="text-gialoma-darkgray-accessible text-sm text-justify leading-relaxed">
                             {feature}
                           </span>
