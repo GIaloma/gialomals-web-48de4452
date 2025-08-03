@@ -21,6 +21,7 @@ import Book from "./pages/Book";
 import BookEs from "./pages/Book-es";
 import Digitalization from "./pages/Digitalization";
 import DigitalizationEn from "./pages/Digitalization-en";
+import DigitalizationTest from "./pages/DigitalizationTest";
 import NotFound from "./pages/NotFound";
 import FloatingAgentButton from "./components/FloatingAgentButton";
 import VoiceAgent from "./components/VoiceAgent";
@@ -161,6 +162,9 @@ const App = () => (
           <Route path="/en/digitalization" element={<DigitalizationEn />} />
           <Route path="/digitalizacion" element={<Digitalization />} />
           <Route path="/es/digitalizacion" element={<Digitalization />} />
+          
+          {/* Test page for new digitalization form */}
+          <Route path="/digitalization-test" element={<DigitalizationTest />} />
           
           {/* Legacy redirects for SEO */}
           <Route path="/inicio" element={<IndexEs />} />
